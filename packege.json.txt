@@ -1,0 +1,7 @@
+{
+  "name": "com.hum9183.humtoon",
+  "version": "1.0.0",
+  "displayName": "Hum Toon",
+  "description": "Toon shader.",
+  "unity": "2022.3"
+}
