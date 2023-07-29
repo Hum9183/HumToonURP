@@ -4,13 +4,13 @@ Shader "HumToon"
     {
         [MainTexture] _BaseMap("Texture", 2D) = "white" {}
         [MainColor] _BaseColor("Color", Color) = (1, 1, 1, 1)
-        _Cutoff("AlphaCutout", Range(0.0, 1.0)) = 0.5
+        _AlphaCutoff("AlphaCutout", Range(0.0, 1.0)) = 0.5
 
         // BlendMode
-        _Surface("__surface", Float) = 0.0
-        _Blend("__mode", Float) = 0.0
-        _Cull("__cull", Float) = 2.0
-        [ToggleUI] _AlphaClip("__clip", Float) = 0.0
+        _SurfaceType("__surface", Float) = 0.0
+        _BlendMode("__mode", Float) = 0.0
+        _CullMode("__cull", Float) = 2.0
+        [HumToggle] _AlphaClip("__clip", Float) = 0.0 // NOTE: キーワード定義は必要
         [HideInInspector] _BlendOp("__blendop", Float) = 0.0
         [HideInInspector] _SrcBlend("__src", Float) = 1.0
         [HideInInspector] _DstBlend("__dst", Float) = 0.0
@@ -40,7 +40,7 @@ Shader "HumToon"
         // Render state
         Blend [_SrcBlend][_DstBlend], [_SrcBlendAlpha][_DstBlendAlpha]
         ZWrite [_ZWrite]
-        Cull [_Cull]
+        Cull [_CullMode]
 
         Pass
         {

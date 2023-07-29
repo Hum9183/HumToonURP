@@ -107,7 +107,7 @@ void frag(
     half3 color = texColor.rgb * _BaseColor.rgb;
     half alpha = texColor.a * _BaseColor.a;
 
-    alpha = AlphaDiscard(alpha, _Cutoff);
+    alpha = AlphaDiscard(alpha, _AlphaCutoff);
     color = AlphaModulate(color, alpha);
 
 #ifdef LOD_FADE_CROSSFADE
@@ -142,7 +142,7 @@ void frag(
     half fogFactor = input.fogCoord;
 #endif
     finalColor.rgb = MixFog(finalColor.rgb, fogFactor);
-    finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_Surface));
+    finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
 
     outColor = finalColor;
 

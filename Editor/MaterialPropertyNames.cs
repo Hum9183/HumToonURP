@@ -1,8 +1,8 @@
 namespace HumToon.Editor
 {
-    internal static class Property
+    internal static class MaterialPropertyNames
     {
-        public static readonly string SpecularWorkflowMode = "_WorkflowMode";
+        // public static readonly string SpecularWorkflowMode = "_WorkflowMode";
         public static readonly string SurfaceType = "_Surface";
         public static readonly string BlendMode = "_Blend";
         public static readonly string AlphaClip = "_AlphaClip";

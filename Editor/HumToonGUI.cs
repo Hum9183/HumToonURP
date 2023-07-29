@@ -9,251 +9,319 @@ using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using static Unity.Rendering.Universal.ShaderUtils;
+// using static Unity.Rendering.Universal.ShaderUtils;
 using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
 namespace HumToon.Editor
 {
-    public class HumToonGUI : ShaderGUI
+    internal partial class HumToonGUI : ShaderGUI
     {
-        protected virtual uint _materialFilter => uint.MaxValue;
-        public bool FirstTimeApply = true;
-        private MaterialEditor _materialEditor;
-        private readonly MaterialHeaderScopeList _materialScopeList = new MaterialHeaderScopeList(uint.MaxValue & ~(uint)Expandable.Advanced);
-        private MaterialProperty _surfaceTypeProp;
-        private MaterialProperty _blendModeProp;
+        private uint                             MaterialFilter => uint.MaxValue;
+        private bool                             _firstTimeApply = true;
+        private MaterialEditor                   _materialEditor;
+        private readonly MaterialProperties      _matProps = new MaterialProperties();
+        private readonly MaterialHeaderScopeList _materialHeaderScopeList = new MaterialHeaderScopeList(uint.MaxValue & ~(uint)Expandable.Advanced);
+        private const int                        QueueOffsetRange = 50;
 
-        private MaterialProperty _preserveSpecProp;
-
-        private MaterialProperty _cullingProp;
-
-        private MaterialProperty _ztestProp;
-
-        private MaterialProperty _zwriteProp;
-
-        private MaterialProperty _alphaClipProp;
-
-        private MaterialProperty _alphaCutoffProp;
-
-        private MaterialProperty _castShadowsProp;
-
-        private MaterialProperty _receiveShadowsProp;
-
-        private MaterialProperty _baseMapProp;
-
-        private MaterialProperty _baseColorProp;
-
-        private MaterialProperty _emissionMapProp;
-        
-        private MaterialProperty _emissionColorProp;
-
-        private MaterialProperty _queueOffsetProp;
-
-        private MaterialProperty _queueControlProp;
-        
-        private const int QueueOffsetRange = 50;
-        
-
-        public override void OnGUI(MaterialEditor materialEditorIn, MaterialProperty[] properties)
+        public override void OnGUI(MaterialEditor materialEditorIn, MaterialProperty[] matProps)
         {
-            if (materialEditorIn == null)
-                throw new ArgumentNullException("materialEditorIn");
-
-            _materialEditor = materialEditorIn;
+            _materialEditor = materialEditorIn ? materialEditorIn : throw new ArgumentNullException(nameof(materialEditorIn));
             Material material = _materialEditor.target as Material;
 
-            FindProperties(properties);   // MaterialProperties can be animated so we do not cache them but fetch them every event to ensure animated values are updated correctly
+            _matProps.Set(matProps);
 
-            // Make sure that needed setup (ie keywords/renderqueue) are set up if we're switching some existing
-            // material to a universal shader.
-            if (FirstTimeApply)
+            if (_firstTimeApply)
             {
-                OnOpenGUI(material, materialEditorIn);
-                FirstTimeApply = false;
+                OnOpenGUI();
+                _firstTimeApply = false;
             }
 
-            ShaderPropertiesGUI(material);
+            _materialHeaderScopeList.DrawHeaders(_materialEditor, material);
+
+            FinalSetting(material);
         }
         
-        private void FindProperties(MaterialProperty[] properties)
+        private void OnOpenGUI()
         {
-            var material = _materialEditor.target as Material;
+            _materialHeaderScopeList.RegisterHeaderScope(Styles.SurfaceOptions, Expandable.SurfaceOptions, DrawSurfaceOptions);
+            _materialHeaderScopeList.RegisterHeaderScope(Styles.SurfaceInputs,  Expandable.SurfaceInputs,  DrawSurfaceInputs);
+            _materialHeaderScopeList.RegisterHeaderScope(Styles.AdvancedLabel,  Expandable.Advanced,       DrawAdvancedOptions);
+        }
+        
+        private void FinalSetting(Material material)
+        {
+            SetupMaterialBlendModeInternal(material, out int renderQueue);
+            UpdateMaterialSurfaceOptions(material, automaticRenderQueue: true, renderQueue);
+            SetMaterialKeywords(material);
+        }
+
+        private void SetMaterialKeywords(Material material, Action<Material> shadingModelFunc = null, Action<Material> shaderFunc = null)
+        {
+
+            // Setup double sided GI based on Cull state
+            // if (material.HasProperty(MaterialPropertyNames.CullMode))
+            material.doubleSidedGI = (RenderFace)_matProps.CullMode.floatValue != RenderFace.Front;
+
+            // Temporary fix for lightmapping. TODO: to be replaced with attribute tag.
+            if (material.HasProperty("_MainTex"))
+            {
+                material.SetTexture("_MainTex", material.GetTexture("_BaseMap"));
+                material.SetTextureScale("_MainTex", material.GetTextureScale("_BaseMap"));
+                material.SetTextureOffset("_MainTex", material.GetTextureOffset("_BaseMap"));
+            }
+            if (material.HasProperty("_Color"))
+                material.SetColor("_Color", material.GetColor("_BaseColor"));
+
+            // Emission
+            // if (material.HasProperty(MaterialPropertyNames.EmissionColor))
+            //     MaterialEditor.FixupEmissiveFlag(material);
+
+            bool shouldEmissionBeEnabled =
+                (material.globalIlluminationFlags & MaterialGlobalIlluminationFlags.EmissiveIsBlack) == 0;
+
+            // Not sure what this is used for, I don't see this property declared by any Unity shader in our repo...
+            // I'm guessing it is some kind of legacy material upgrade support thing?  Or maybe just dead code now...
+            if (material.HasProperty("_EmissionEnabled") && !shouldEmissionBeEnabled)
+                shouldEmissionBeEnabled = material.GetFloat("_EmissionEnabled") >= 0.5f;
+
+            CoreUtils.SetKeyword(material, ShaderKeywordStrings._EMISSION, shouldEmissionBeEnabled);
+
+            // Normal Map
+            if (material.HasProperty("_BumpMap"))
+                CoreUtils.SetKeyword(material, ShaderKeywordStrings._NORMALMAP, material.GetTexture("_BumpMap"));
+
+            // Shader specific keyword functions
+            shadingModelFunc?.Invoke(material);
+            shaderFunc?.Invoke(material);
+        }
+
+        private void SetupMaterialBlendModeInternal(Material material, out int automaticRenderQueue)
+        {
             if (material == null)
-                return;
+                throw new ArgumentNullException("material");
+
+            material.SetOverrideTag("RenderType", "");      // clear override tag
             
-            _surfaceTypeProp = FindProperty(Property.SurfaceType, properties, false);
-            _blendModeProp = FindProperty(Property.BlendMode, properties, false);
-            _preserveSpecProp = FindProperty(Property.BlendModePreserveSpecular, properties, false);  // Separate blend for diffuse and specular.
-            _cullingProp = FindProperty(Property.CullMode, properties, false);
-            _zwriteProp = FindProperty(Property.ZWriteControl, properties, false);
-            _ztestProp = FindProperty(Property.ZTest, properties, false);
-            _alphaClipProp = FindProperty(Property.AlphaClip, properties, false);
+            // alpha clip
+            bool alphaClip = false;
+            alphaClip = (HumToggle)_matProps.AlphaClip.floatValue is HumToggle.On;
+            CoreUtils.SetKeyword(material, ShaderKeywordStrings._ALPHATEST_ON, alphaClip);
 
-            // ShaderGraph Lit and Unlit Subtargets only
-            _castShadowsProp = FindProperty(Property.CastShadows, properties, false);
-            _queueControlProp = FindProperty(Property.QueueControl, properties, false);
+            int renderQueue = material.shader.renderQueue;
+            bool zwrite = false;
+            bool alphaToMask = false;
 
-            // ShaderGraph Lit, and Lit.shader
-            _receiveShadowsProp = FindProperty(Property.ReceiveShadows, properties, false);
-
-            // The following are not mandatory for shadergraphs (it's up to the user to add them to their graph)
-            _alphaCutoffProp = FindProperty("_Cutoff", properties, false);
-            _baseMapProp = FindProperty("_BaseMap", properties, false);
-            _baseColorProp = FindProperty("_BaseColor", properties, false);
-            _emissionMapProp = FindProperty(Property.EmissionMap, properties, false);
-            _emissionColorProp = FindProperty(Property.EmissionColor, properties, false);
-            _queueOffsetProp = FindProperty(Property.QueueOffset, properties, false);
-        }
-
-        private void DrawSurfaceInputs(Material material)
-        {
-            DrawBaseProperties(material);
-        }
-        
-        private void DrawBaseProperties(Material material)
-        {
-            if (_baseMapProp != null && _baseColorProp != null) // Draw the baseMap, most shader will have at least a baseMap
+            // transparent
+            SurfaceType surfaceType = (SurfaceType)_matProps.SurfaceType.floatValue;
+            CoreUtils.SetKeyword(material, ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT, surfaceType is SurfaceType.Transparent);
+            
+            if (surfaceType == SurfaceType.Opaque)
             {
-                _materialEditor.TexturePropertySingleLine(Styles.baseMap, _baseMapProp, _baseColorProp);
-            }
-        }
-        
-        private void DrawAdvancedOptions(Material material)
-        {
-            // Only draw the sorting priority field if queue control is set to "auto"
-            bool autoQueueControl = GetAutomaticQueueControlSetting(material);
-            if (autoQueueControl)
-                DrawQueueOffsetField();
-            _materialEditor.EnableInstancingField();
-        }
-        private void DrawQueueOffsetField()
-        {
-            if (_queueOffsetProp != null)
-                _materialEditor.IntSliderShaderProperty(_queueOffsetProp, -QueueOffsetRange, QueueOffsetRange, Styles.queueSlider);
-        }
-        internal static bool GetAutomaticQueueControlSetting(Material material)
-        {
-            // If a Shader Graph material doesn't yet have the queue control property,
-            // we should not engage automatic behavior until the shader gets reimported.
-            bool automaticQueueControl = !material.IsShaderGraph();
-            if (material.HasProperty(Property.QueueControl))
-            {
-                var queueControl = material.GetFloat(Property.QueueControl);
-                if (queueControl < 0.0f)
+                if (alphaClip)
                 {
-                    // The property was added with a negative value, indicating it needs to be validated for this material
-                    UpdateMaterialRenderQueueControl(material);
+                    renderQueue = (int)RenderQueue.AlphaTest;
+                    material.SetOverrideTag("RenderType", "TransparentCutout");
+                    alphaToMask = true;
                 }
-                automaticQueueControl = (material.GetFloat(Property.QueueControl) == (float)QueueControl.Auto);
+                else
+                {
+                    renderQueue = (int)RenderQueue.Geometry;
+                    material.SetOverrideTag("RenderType", "Opaque");
+                }
+
+                SetMaterialSrcDstBlendProperties(material, UnityEngine.Rendering.BlendMode.One, UnityEngine.Rendering.BlendMode.Zero);
+                zwrite = true;
+                material.DisableKeyword(ShaderKeywordStrings._ALPHAPREMULTIPLY_ON);
+                material.DisableKeyword(ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT);
+                material.DisableKeyword(ShaderKeywordStrings._ALPHAMODULATE_ON);
             }
-            return automaticQueueControl;
-        }
-        private static void UpdateMaterialRenderQueueControl(Material material)
-        {
-            //
-            // Render Queue Control handling
-            //
-            // Check for a raw render queue (the actual serialized setting - material.renderQueue has already been converted)
-            // setting of -1, indicating that the material property should be inherited from the shader.
-            // If we find this, add a new property "render queue control" set to 0 so we will
-            // always know to follow the surface type of the material (this matches the hand-written behavior)
-            // If we find another value, add the the property set to 1 so we will know that the
-            // user has explicitly selected a render queue and we should not override it.
-            //
-            bool isShaderGraph = material.IsShaderGraph(); // Non-shadergraph materials use automatic behavior
-            
-            // int rawRenderQueue = MaterialAccess.ReadMaterialRawRenderQueue(material);
-            int rawRenderQueue = material.renderQueue; // TODO: 生のrenderQueueはinternalで取れそうにないのでとりあえず普通のやつ
-            
-            if (!isShaderGraph || rawRenderQueue == -1)
+            else // SurfaceType Transparent
             {
-                material.SetFloat(Property.QueueControl, (float)QueueControl.Auto); // Automatic behavior - surface type override
+                BlendMode blendMode = (BlendMode)_matProps.BlendMode.floatValue;
+
+                // Clear blend keyword state.
+                material.DisableKeyword(ShaderKeywordStrings._ALPHAPREMULTIPLY_ON);
+                material.DisableKeyword(ShaderKeywordStrings._ALPHAMODULATE_ON);
+
+                var srcBlendRGB = UnityEngine.Rendering.BlendMode.One;
+                var dstBlendRGB = UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
+                var srcBlendA = UnityEngine.Rendering.BlendMode.One;
+                var dstBlendA = UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
+
+                // Specific Transparent Mode Settings
+                switch (blendMode)
+                {
+                    // srcRGB * srcAlpha + dstRGB * (1 - srcAlpha)
+                    // preserve spec:
+                    // srcRGB * (<in shader> ? 1 : srcAlpha) + dstRGB * (1 - srcAlpha)
+                    case BlendMode.Alpha:
+                        srcBlendRGB = UnityEngine.Rendering.BlendMode.SrcAlpha;
+                        dstBlendRGB = UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
+                        srcBlendA = UnityEngine.Rendering.BlendMode.One;
+                        dstBlendA = dstBlendRGB;
+                        break;
+
+                    // srcRGB < srcAlpha, (alpha multiplied in asset)
+                    // srcRGB * 1 + dstRGB * (1 - srcAlpha)
+                    case BlendMode.Premultiply:
+                        srcBlendRGB = UnityEngine.Rendering.BlendMode.One;
+                        dstBlendRGB = UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
+                        srcBlendA = srcBlendRGB;
+                        dstBlendA = dstBlendRGB;
+                        break;
+
+                    // srcRGB * srcAlpha + dstRGB * 1, (alpha controls amount of addition)
+                    // preserve spec:
+                    // srcRGB * (<in shader> ? 1 : srcAlpha) + dstRGB * (1 - srcAlpha)
+                    case BlendMode.Additive:
+                        srcBlendRGB = UnityEngine.Rendering.BlendMode.SrcAlpha;
+                        dstBlendRGB = UnityEngine.Rendering.BlendMode.One;
+                        srcBlendA = UnityEngine.Rendering.BlendMode.One;
+                        dstBlendA = dstBlendRGB;
+                        break;
+
+                    // srcRGB * 0 + dstRGB * srcRGB
+                    // in shader alpha controls amount of multiplication, lerp(1, srcRGB, srcAlpha)
+                    // Multiply affects color only, keep existing alpha.
+                    case BlendMode.Multiply:
+                        srcBlendRGB = UnityEngine.Rendering.BlendMode.DstColor;
+                        dstBlendRGB = UnityEngine.Rendering.BlendMode.Zero;
+                        srcBlendA = UnityEngine.Rendering.BlendMode.Zero;
+                        dstBlendA = UnityEngine.Rendering.BlendMode.One;
+
+                        material.EnableKeyword(ShaderKeywordStrings._ALPHAMODULATE_ON);
+                        break;
+                }
+
+                // Lift alpha multiply from ROP to shader by setting pre-multiplied _SrcBlend mode.
+                // The intent is to do different blending for diffuse and specular in shader.
+                // ref: http://advances.realtimerendering.com/other/2016/naughty_dog/NaughtyDog_TechArt_Final.pdf
+
+                SetMaterialSrcDstBlendProperties(material, srcBlendRGB, dstBlendRGB, // RGB
+                    srcBlendA, dstBlendA); // Alpha
+
+                // General Transparent Material Settings
+                material.SetOverrideTag("RenderType", "Transparent");
+                zwrite = false;
+                material.EnableKeyword(ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT);
+                renderQueue = (int)RenderQueue.Transparent;
+            }
+
+            if (material.HasProperty(MaterialPropertyNames.AlphaToMask))
+            {
+                material.SetFloat(MaterialPropertyNames.AlphaToMask, alphaToMask ? 1.0f : 0.0f);
+            }
+
+            // check for override enum
+            if (material.HasProperty(MaterialPropertyNames.ZWriteControl))
+            {
+                var zwriteControl = (ZWriteControl)material.GetFloat(MaterialPropertyNames.ZWriteControl);
+                if (zwriteControl == ZWriteControl.ForceEnabled)
+                    zwrite = true;
+                else if (zwriteControl == ZWriteControl.ForceDisabled)
+                    zwrite = false;
+            }
+            SetMaterialZWriteProperty(material, zwrite);
+            material.SetShaderPassEnabled("DepthOnly", zwrite);
+
+
+            // must always apply queue offset, even if not set to material control
+            if (material.HasProperty(MaterialPropertyNames.QueueOffset))
+                renderQueue += (int)material.GetFloat(MaterialPropertyNames.QueueOffset);
+
+            automaticRenderQueue = renderQueue;
+        }
+        
+        private void SetMaterialSrcDstBlendProperties(Material material, UnityEngine.Rendering.BlendMode srcBlend, UnityEngine.Rendering.BlendMode dstBlend)
+        {
+            material.SetFloat(MaterialPropertyNames.SrcBlend, (float)srcBlend);
+            material.SetFloat(MaterialPropertyNames.DstBlend, (float)dstBlend);
+            material.SetFloat(MaterialPropertyNames.SrcBlendAlpha, (float)srcBlend);
+            material.SetFloat(MaterialPropertyNames.DstBlendAlpha, (float)dstBlend);
+        }
+        
+        private void UpdateMaterialSurfaceOptions(Material material, bool automaticRenderQueue, int renderQueue)
+        {
+            // Setup blending - consistent across all Universal RP shaders
+
+            // apply automatic render queue
+            if (automaticRenderQueue && (renderQueue != material.renderQueue))
+                material.renderQueue = renderQueue;
+
+            bool isShaderGraph = material.IsShaderGraph();
+
+            // Cast Shadows
+            bool castShadows = true;
+            if (material.HasProperty(MaterialPropertyNames.CastShadows))
+            {
+                castShadows = (material.GetFloat(MaterialPropertyNames.CastShadows) != 0.0f);
             }
             else
             {
-                material.SetFloat(Property.QueueControl, (float)QueueControl.UserOverride); // User has selected explicit render queue
-            }
-        }
-        private void OnOpenGUI(Material material, MaterialEditor materialEditor)
-        {
-            var filter = (Expandable)_materialFilter;
-
-            // Generate the foldouts
-            if (filter.HasFlag(Expandable.SurfaceOptions))
-                _materialScopeList.RegisterHeaderScope(Styles.SurfaceOptions, (uint)Expandable.SurfaceOptions, DrawSurfaceOptions);
-
-            if (filter.HasFlag(Expandable.SurfaceInputs))
-                _materialScopeList.RegisterHeaderScope(Styles.SurfaceInputs, (uint)Expandable.SurfaceInputs, DrawSurfaceInputs);
-
-            // NOTE: Unlitは未使用の模様。なんか活かせるかも
-            // if (filter.HasFlag(Expandable.Details))
-            //     FillAdditionalFoldouts(m_MaterialScopeList);
-
-            if (filter.HasFlag(Expandable.Advanced))
-                _materialScopeList.RegisterHeaderScope(Styles.AdvancedLabel, (uint)Expandable.Advanced, DrawAdvancedOptions);
-        }
-
-        private void DoPopup(GUIContent label, MaterialProperty property, string[] options)
-        {
-            if (property != null)
-                _materialEditor.PopupShaderProperty(property, label, options);
-            // NOTE: UTS3に同じ名前のメソッドがあるらしい。要注意
-        }
-
-        /// <summary>
-        /// Draws the surface options GUI.
-        /// </summary>
-        /// <param name="material">The material to use.</param>
-        public virtual void DrawSurfaceOptions(Material material)
-        {
-            DoPopup(Styles.surfaceType, _surfaceTypeProp, Styles.surfaceTypeNames);
-            if ((_surfaceTypeProp != null) && ((SurfaceType)_surfaceTypeProp.floatValue == SurfaceType.Transparent))
-            {
-                DoPopup(Styles.blendingMode, _blendModeProp, Styles.blendModeNames);
-
-                if (material.HasProperty(Property.BlendModePreserveSpecular))
+                if (isShaderGraph)
                 {
-                    BlendMode blendMode = (BlendMode)material.GetFloat(Property.BlendMode);
-                    var isDisabled = blendMode == BlendMode.Multiply || blendMode == BlendMode.Premultiply;
-                    if (!isDisabled)
-                        DrawFloatToggleProperty(Styles.preserveSpecularText, _preserveSpecProp, 1, isDisabled);
+                    // Lit.shadergraph or Unlit.shadergraph, but no material control defined
+                    // enable the pass in the material, so shader can decide...
+                    castShadows = true;
+                }
+                else
+                {
+                    // Lit.shader or Unlit.shader -- set based on transparency
+                    // castShadows = Rendering.Universal.ShaderGUI.LitGUI.IsOpaque(material);
+                    // TODO: 多分この処理で代用できるはず
+                    castShadows = IsOpaque(material);
                 }
             }
-            DoPopup(Styles.cullingText, _cullingProp, Styles.renderFaceNames);
-            DoPopup(Styles.zwriteText, _zwriteProp, Styles.zwriteNames);
+            material.SetShaderPassEnabled("ShadowCaster", castShadows);
 
-            if (_ztestProp != null)
-                _materialEditor.IntPopupShaderProperty(_ztestProp, Styles.ztestText.text, Styles.ztestNames, Styles.ztestValues);
-
-            DrawFloatToggleProperty(Styles.alphaClipText, _alphaClipProp);
-
-            if ((_alphaClipProp != null) && (_alphaCutoffProp != null) && (_alphaClipProp.floatValue == 1))
-                _materialEditor.ShaderProperty(_alphaCutoffProp, Styles.alphaClipThresholdText, 1);
-
-            DrawFloatToggleProperty(Styles.castShadowText, _castShadowsProp);
-            DrawFloatToggleProperty(Styles.receiveShadowText, _receiveShadowsProp);
+            // Receive Shadows
+            if (material.HasProperty(MaterialPropertyNames.ReceiveShadows))
+                CoreUtils.SetKeyword(material, ShaderKeywordStrings._RECEIVE_SHADOWS_OFF, material.GetFloat(MaterialPropertyNames.ReceiveShadows) == 0.0f);
+        }
+        internal static bool IsOpaque(Material material)
+        {
+            bool opaque = true;
+            if (material.HasProperty(MaterialPropertyNames.SurfaceType))
+                opaque = ((BaseShaderGUI.SurfaceType)material.GetFloat(MaterialPropertyNames.SurfaceType) == BaseShaderGUI.SurfaceType.Opaque);
+            return opaque;
         }
         
-        private static void DrawFloatToggleProperty(GUIContent styles, MaterialProperty prop, int indentLevel = 0, bool isDisabled = false)
+        private void SetMaterialSrcDstBlendProperties(Material material, UnityEngine.Rendering.BlendMode srcBlendRGB, UnityEngine.Rendering.BlendMode dstBlendRGB, UnityEngine.Rendering.BlendMode srcBlendAlpha, UnityEngine.Rendering.BlendMode dstBlendAlpha)
         {
-            if (prop == null)
-                return;
+            if (material.HasProperty(MaterialPropertyNames.SrcBlend))
+                material.SetFloat(MaterialPropertyNames.SrcBlend, (float)srcBlendRGB);
 
-            EditorGUI.BeginDisabledGroup(isDisabled);
-            EditorGUI.indentLevel += indentLevel;
-            EditorGUI.BeginChangeCheck();
-            MaterialEditor.BeginProperty(prop);
-            bool newValue = EditorGUILayout.Toggle(styles, prop.floatValue == 1);
-            if (EditorGUI.EndChangeCheck())
-                prop.floatValue = newValue ? 1.0f : 0.0f;
-            MaterialEditor.EndProperty();
-            EditorGUI.indentLevel -= indentLevel;
-            EditorGUI.EndDisabledGroup();
+            if (material.HasProperty(MaterialPropertyNames.DstBlend))
+                material.SetFloat(MaterialPropertyNames.DstBlend, (float)dstBlendRGB);
+
+            if (material.HasProperty(MaterialPropertyNames.SrcBlendAlpha))
+                material.SetFloat(MaterialPropertyNames.SrcBlendAlpha, (float)srcBlendAlpha);
+
+            if (material.HasProperty(MaterialPropertyNames.DstBlendAlpha))
+                material.SetFloat(MaterialPropertyNames.DstBlendAlpha, (float)dstBlendAlpha);
         }
         
-        private void ShaderPropertiesGUI(Material material)
+        private void SetMaterialZWriteProperty(Material material, bool zwriteEnabled)
         {
-            _materialScopeList.DrawHeaders(_materialEditor, material);
+            if (material.HasProperty(MaterialPropertyNames.ZWrite))
+                material.SetFloat(MaterialPropertyNames.ZWrite, zwriteEnabled ? 1.0f : 0.0f);
         }
+        
+        public override void AssignNewShaderToMaterial(Material material, Shader oldShader, Shader newShader)
+        {
+            // Clear all keywords for fresh start
+            // Note: this will nuke user-selected custom keywords when they change shaders
+            material.shaderKeywords = null;
+
+            base.AssignNewShaderToMaterial(material, oldShader, newShader);
+
+            // Setup keywords based on the new shader
+            // UpdateMaterial(material);
+        }
+        
+        // private void UpdateMaterial(Material material)
+        // {
+        //     SetMaterialKeywords(material);
+        // }
     }
 }
