@@ -75,7 +75,7 @@ Shader "HumToon"
             // -------------------------------------
             // Includes
             #include "HumToonInput.hlsl"
-            #include "HumToonVertFrag.hlsl"
+            #include "HumToonForwardPass.hlsl"
             ENDHLSL
         }
         // TODO: 他のパス
