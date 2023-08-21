@@ -80,7 +80,7 @@ Shader "HumToon"
         }
         // TODO: 他のパス
     }
-    
+
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
 //    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.UnlitShader"
     CustomEditor "HumToon.Editor.HumToonGUI"

@@ -9,6 +9,10 @@
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
 #endif
 
+#if defined(DEBUG_DISPLAY)
+    #include "DebugOverrideOutputColor.hlsl"
+#endif
+
 void frag(
     Varyings input
     , out half4 outColor : SV_Target0
@@ -40,7 +44,10 @@ void frag(
     ApplyDecalToBaseColor(input.positionCS, color);
 #endif
 
-    half4 finalColor = UniversalFragmentUnlit(inputData, color, alpha);
+    half4 finalColor = half4(color, alpha);
+#if defined(DEBUG_DISPLAY)
+    finalColor = DebugOverrideOutputColor(inputData, finalColor);
+#endif
 
 #if defined(_SCREEN_SPACE_OCCLUSION) && !defined(_SURFACE_TYPE_TRANSPARENT)
     float2 normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
@@ -60,6 +67,7 @@ void frag(
     half fogFactor = input.fogCoord;
 #endif
     finalColor.rgb = MixFog(finalColor.rgb, fogFactor);
+
     finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
 
     outColor = finalColor;
