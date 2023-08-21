@@ -1,8 +1,7 @@
 #ifndef HUM_TOON_FRAG_INCLUDED
 #define HUM_TOON_FRAG_INCLUDED
 
-#include "InitializeInputData.hlsl"
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Unlit.hlsl"
+#include "../ShaderLibrary/InitializeInputData.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
 #if defined(LOD_FADE_CROSSFADE)
@@ -10,7 +9,7 @@
 #endif
 
 #if defined(DEBUG_DISPLAY)
-    #include "DebugOverrideOutputColor.hlsl"
+    #include "../ShaderLibrary/DebugOverrideOutputColor.hlsl"
 #endif
 
 void frag(
