@@ -1,6 +1,8 @@
 #ifndef HUM_TOON_FRAG_INCLUDED
 #define HUM_TOON_FRAG_INCLUDED
 
+#include "HumToonTemp.hlsl"
+
 #include "../ShaderLibrary/InitializeInputData.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
@@ -23,27 +25,24 @@ void frag(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-    half2 uv = input.uv;
-    half4 texColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
-    half3 color = texColor.rgb * _BaseColor.rgb;
-    half alpha = texColor.a * _BaseColor.a;
-
-    alpha = AlphaDiscard(alpha, _AlphaCutoff);
-    color = AlphaModulate(color, alpha);
-
 #ifdef LOD_FADE_CROSSFADE
     LODFadeCrossFade(input.positionCS);
 #endif
 
+    half2 uv0 = input.uv;
+
     InputData inputData;
     InitializeInputData(input, inputData);
-    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
+    SETUP_DEBUG_TEXTURE_DATA(inputData, uv0, _BaseMap);
 
-#ifdef _DBUFFER
+    half4 finalColor;
+    finalColor     = CalcBaseColor(uv0);
+    // finalColor.rgb = CalcShade(finalColor.rgb, input.normalWS, float3(0,0,1));
+
+#ifdef _DBUFFER // BaseColorに載せたほうが良さそう
     ApplyDecalToBaseColor(input.positionCS, color);
 #endif
-
-    half4 finalColor = half4(color, alpha);
+    
 #if defined(DEBUG_DISPLAY)
     finalColor = DebugOverrideOutputColor(inputData, finalColor);
 #endif

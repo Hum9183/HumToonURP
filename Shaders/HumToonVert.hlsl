@@ -12,25 +12,23 @@ Varyings vert(Attributes input)
     VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
 
     output.positionCS = vertexInput.positionCS;
-    output.uv = TRANSFORM_TEX(input.uv, _BaseMap);
+    output.uv = input.uv;
     #if defined(_FOG_FRAGMENT)
         output.fogCoord = vertexInput.positionVS.z;
     #else
         output.fogCoord = ComputeFogFactor(vertexInput.positionCS.z);
     #endif
 
-    #if defined(DEBUG_DISPLAY)
-        // normalWS and tangentWS already normalize.
-        // this is required to avoid skewing the direction during interpolation
-        // also required for per-vertex lighting and SH evaluation
-        VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS, input.tangentOS);
-        half3 viewDirWS = GetWorldSpaceViewDir(vertexInput.positionWS);
+    // normalWS and tangentWS already normalize.
+    // this is required to avoid skewing the direction during interpolation
+    // also required for per-vertex lighting and SH evaluation
+    VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS, input.tangentOS);
+    half3 viewDirWS = GetWorldSpaceViewDir(vertexInput.positionWS);
 
-        // already normalized from normal transform to WS.
-        output.positionWS = vertexInput.positionWS;
-        output.normalWS = normalInput.normalWS;
-        output.viewDirWS = viewDirWS;
-    #endif
+    // already normalized from normal transform to WS.
+    output.positionWS = vertexInput.positionWS;
+    output.normalWS = normalInput.normalWS;
+    output.viewDirWS = viewDirWS;
 
     return output;
 }

@@ -19,7 +19,7 @@ namespace HumToon.Editor
         private void DrawSurfaceInputs(Material material)
         {
             _materialEditor.TexturePropertySingleLine(Styles.baseMap, _matProps.BaseMap, _matProps.BaseColor);
-            _materialEditor.TextureScaleOffsetProperty(_matProps.BaseMap);
+            // _materialEditor.TextureScaleOffsetProperty(_matProps.BaseMap);
         }
     }
 }

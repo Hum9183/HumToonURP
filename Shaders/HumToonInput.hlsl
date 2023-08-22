@@ -4,7 +4,7 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
 
 CBUFFER_START(UnityPerMaterial)
-    float4 _BaseMap_ST;
+    // float4 _BaseMap_ST;
     half4 _BaseColor;
     half _AlphaCutoff;
     half _SurfaceType;
