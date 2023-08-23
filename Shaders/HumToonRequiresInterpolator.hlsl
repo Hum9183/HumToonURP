@@ -1,0 +1,13 @@
+#ifndef HUM_TOON_REQUIRES_INTERPOLATOR_INCLUDED
+#define HUM_TOON_REQUIRES_INTERPOLATOR_INCLUDED
+
+// GLES2 has limited amount of interpolators
+#if defined(_PARALLAXMAP) && !defined(SHADER_API_GLES)
+    #define REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR
+#endif
+
+#if (defined(_NORMALMAP) || (defined(_PARALLAXMAP) && !defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR))) || defined(_DETAIL)
+    #define REQUIRES_WORLD_SPACE_TANGENT_INTERPOLATOR
+#endif
+
+#endif

@@ -1,20 +1,17 @@
 #ifndef HUM_TOON_FRAG_INCLUDED
 #define HUM_TOON_FRAG_INCLUDED
 
-#include "HumToonTemp.hlsl"
-
-#include "../ShaderLibrary/InitializeInputData.hlsl"
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+#include "HumToonInput.hlsl"
+#include "HumToonVaryings.hlsl"
+#include "HumToonFunc.hlsl"
+#include "InitializeInputData.hlsl"
 
 #if defined(LOD_FADE_CROSSFADE)
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
 #endif
 
-#if defined(DEBUG_DISPLAY)
-    #include "../ShaderLibrary/DebugOverrideOutputColor.hlsl"
-#endif
-
-void frag(
+// Used in Standard (Physically Based) shader
+void LitPassFragment(
     Varyings input
     , out half4 outColor : SV_Target0
 #ifdef _WRITE_RENDERING_LAYERS
@@ -25,50 +22,36 @@ void frag(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
+#if defined(_PARALLAXMAP)
+    #if defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR)
+        half3 viewDirTS = input.viewDirTS;
+    #else
+        half3 viewDirWS = GetWorldSpaceNormalizeViewDir(input.positionWS);
+        half3 viewDirTS = GetViewDirectionTangentSpace(input.tangentWS, input.normalWS, viewDirWS);
+    #endif
+    ApplyPerPixelDisplacement(viewDirTS, input.uv);
+#endif
+
+    SurfaceData surfaceData;
+    InitializeStandardLitSurfaceData(input.uv, surfaceData);
+
 #ifdef LOD_FADE_CROSSFADE
     LODFadeCrossFade(input.positionCS);
 #endif
 
-    half2 uv0 = input.uv;
-
     InputData inputData;
-    InitializeInputData(input, inputData);
-    SETUP_DEBUG_TEXTURE_DATA(inputData, uv0, _BaseMap);
+    InitializeInputData(input, surfaceData.normalTS, inputData);
+    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
 
-    half4 finalColor;
-    finalColor     = CalcBaseColor(uv0);
-    // finalColor.rgb = CalcShade(finalColor.rgb, input.normalWS, float3(0,0,1));
-
-#ifdef _DBUFFER // BaseColorに載せたほうが良さそう
-    ApplyDecalToBaseColor(input.positionCS, color);
-#endif
-    
-#if defined(DEBUG_DISPLAY)
-    finalColor = DebugOverrideOutputColor(inputData, finalColor);
+#ifdef _DBUFFER
+    ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
 #endif
 
-#if defined(_SCREEN_SPACE_OCCLUSION) && !defined(_SURFACE_TYPE_TRANSPARENT)
-    float2 normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
-    AmbientOcclusionFactor aoFactor = GetScreenSpaceAmbientOcclusion(normalizedScreenSpaceUV);
-    finalColor.rgb *= aoFactor.directAmbientOcclusion;
-#endif
+    half4 color = UniversalFragmentPBR(inputData, surfaceData);
+    color.rgb = MixFog(color.rgb, inputData.fogCoord);
+    color.a = OutputAlpha(color.a, IsSurfaceTypeTransparent(_Surface));
 
-#if defined(_FOG_FRAGMENT)
-#if (defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2))
-    float viewZ = -input.fogCoord;
-    float nearToFarZ = max(viewZ - _ProjectionParams.y, 0);
-    half fogFactor = ComputeFogFactorZ0ToFar(nearToFarZ);
-#else
-    half fogFactor = 0;
-#endif
-#else
-    half fogFactor = input.fogCoord;
-#endif
-    finalColor.rgb = MixFog(finalColor.rgb, fogFactor);
-
-    finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
-
-    outColor = finalColor;
+    outColor = color;
 
 #ifdef _WRITE_RENDERING_LAYERS
     uint renderingLayers = GetMeshRenderingLayer();
