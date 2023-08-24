@@ -12,7 +12,7 @@ using UnityEngine.Rendering.Universal;
 // using static Unity.Rendering.Universal.ShaderUtils;
 using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     internal partial class HumToonGUI : ShaderGUI
     {
@@ -40,14 +40,14 @@ namespace HumToon.Editor
 
             FinalSetting(material);
         }
-        
+
         private void OnOpenGUI()
         {
             _materialHeaderScopeList.RegisterHeaderScope(Styles.SurfaceOptions, Expandable.SurfaceOptions, DrawSurfaceOptions);
             _materialHeaderScopeList.RegisterHeaderScope(Styles.SurfaceInputs,  Expandable.SurfaceInputs,  DrawSurfaceInputs);
             _materialHeaderScopeList.RegisterHeaderScope(Styles.AdvancedLabel,  Expandable.Advanced,       DrawAdvancedOptions);
         }
-        
+
         private void FinalSetting(Material material)
         {
             SetupMaterialBlendModeInternal(material, out int renderQueue);
@@ -101,7 +101,7 @@ namespace HumToon.Editor
                 throw new ArgumentNullException("material");
 
             material.SetOverrideTag("RenderType", "");      // clear override tag
-            
+
             // alpha clip
             bool alphaClip = false;
             alphaClip = (HumToggle)_matProps.AlphaClip.floatValue is HumToggle.On;
@@ -114,7 +114,7 @@ namespace HumToon.Editor
             // transparent
             SurfaceType surfaceType = (SurfaceType)_matProps.SurfaceType.floatValue;
             CoreUtils.SetKeyword(material, ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT, surfaceType is SurfaceType.Transparent);
-            
+
             if (surfaceType == SurfaceType.Opaque)
             {
                 if (alphaClip)
@@ -231,7 +231,7 @@ namespace HumToon.Editor
 
             automaticRenderQueue = renderQueue;
         }
-        
+
         private void SetMaterialSrcDstBlendProperties(Material material, UnityEngine.Rendering.BlendMode srcBlend, UnityEngine.Rendering.BlendMode dstBlend)
         {
             material.SetFloat(MaterialPropertyNames.SrcBlend, (float)srcBlend);
@@ -239,7 +239,7 @@ namespace HumToon.Editor
             material.SetFloat(MaterialPropertyNames.SrcBlendAlpha, (float)srcBlend);
             material.SetFloat(MaterialPropertyNames.DstBlendAlpha, (float)dstBlend);
         }
-        
+
         private void UpdateMaterialSurfaceOptions(Material material, bool automaticRenderQueue, int renderQueue)
         {
             // Setup blending - consistent across all Universal RP shaders
@@ -285,7 +285,7 @@ namespace HumToon.Editor
                 opaque = ((BaseShaderGUI.SurfaceType)material.GetFloat(MaterialPropertyNames.SurfaceType) == BaseShaderGUI.SurfaceType.Opaque);
             return opaque;
         }
-        
+
         private void SetMaterialSrcDstBlendProperties(Material material, UnityEngine.Rendering.BlendMode srcBlendRGB, UnityEngine.Rendering.BlendMode dstBlendRGB, UnityEngine.Rendering.BlendMode srcBlendAlpha, UnityEngine.Rendering.BlendMode dstBlendAlpha)
         {
             if (material.HasProperty(MaterialPropertyNames.SrcBlend))
@@ -300,13 +300,13 @@ namespace HumToon.Editor
             if (material.HasProperty(MaterialPropertyNames.DstBlendAlpha))
                 material.SetFloat(MaterialPropertyNames.DstBlendAlpha, (float)dstBlendAlpha);
         }
-        
+
         private void SetMaterialZWriteProperty(Material material, bool zwriteEnabled)
         {
             if (material.HasProperty(MaterialPropertyNames.ZWrite))
                 material.SetFloat(MaterialPropertyNames.ZWrite, zwriteEnabled ? 1.0f : 0.0f);
         }
-        
+
         public override void AssignNewShaderToMaterial(Material material, Shader oldShader, Shader newShader)
         {
             // Clear all keywords for fresh start
@@ -318,7 +318,7 @@ namespace HumToon.Editor
             // Setup keywords based on the new shader
             // UpdateMaterial(material);
         }
-        
+
         // private void UpdateMaterial(Material material)
         // {
         //     SetMaterialKeywords(material);

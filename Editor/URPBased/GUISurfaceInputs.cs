@@ -12,14 +12,14 @@ using UnityEngine.Rendering.Universal;
 // using static Unity.Rendering.Universal.ShaderUtils;
 using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     internal partial class HumToonGUI
     {
-        private void DrawAdvancedOptions(Material material)
+        private void DrawSurfaceInputs(Material material)
         {
-            _materialEditor.IntSliderShaderProperty(_matProps.QueueOffset, -QueueOffsetRange, QueueOffsetRange, Styles.queueSlider);
-            _materialEditor.EnableInstancingField();
+            _materialEditor.TexturePropertySingleLine(Styles.baseMap, _matProps.BaseMap, _matProps.BaseColor);
+            // _materialEditor.TextureScaleOffsetProperty(_matProps.BaseMap);
         }
     }
 }

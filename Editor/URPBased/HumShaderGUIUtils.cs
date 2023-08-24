@@ -12,7 +12,7 @@ using UnityEngine.Rendering.Universal;
 // using static Unity.Rendering.Universal.ShaderUtils;
 using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     class HumShaderGUIUtils
     {
@@ -24,17 +24,17 @@ namespace HumToon.Editor
 
             return newValue;
         }
-        
+
         public static int DoPopup<T>(MaterialEditor materialEditor, MaterialProperty property, GUIContent label)
             where T: Enum
         {
             int newValue = 0;
             if (property != null)
                 newValue = materialEditor.PopupShaderProperty(property, label, Enum.GetNames(typeof(T)));
-            
+
             return newValue;
         }
-        
+
         public static void DrawFloatToggleProperty(GUIContent styles, MaterialProperty prop, int indentLevel = 0, bool isDisabled = false)
         {
             if (prop == null)
@@ -51,7 +51,7 @@ namespace HumToon.Editor
             EditorGUI.indentLevel -= indentLevel;
             EditorGUI.EndDisabledGroup();
         }
-        
+
         public static bool DrawHumToggleProperty(GUIContent styles, MaterialProperty prop, int indentLevel = 0)
         {
             if (prop == null)

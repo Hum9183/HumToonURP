@@ -12,7 +12,7 @@ using UnityEngine.Rendering.Universal;
 // using static Unity.Rendering.Universal.ShaderUtils;
 using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     internal static class Styles
     {

@@ -18,7 +18,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Object = System.Object;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     public static class GraphUtil
     {
@@ -28,7 +28,7 @@ namespace HumToon.Editor
             return !string.IsNullOrEmpty(shaderGraphTag);
         }
     }
-    
+
     internal enum Expandable
     {
         /// <summary>
@@ -146,7 +146,7 @@ namespace HumToon.Editor
         /// </summary>
         UserOverride = 1
     }
-    
+
     /// <summary>
     /// Options for the material type.
     /// </summary>

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     internal partial class HumToonGUI
     {
@@ -31,7 +31,7 @@ namespace HumToon.Editor
             SurfaceType surfaceType = (SurfaceType)HumShaderGUIUtils.DoPopup<SurfaceType>(_materialEditor, _matProps.SurfaceType, Styles.surfaceType);
             BlendMode blendMode = (BlendMode)HumShaderGUIUtils.DoPopup<BlendMode>(_materialEditor, _matProps.BlendMode, Styles.blendingMode);
         }
-        
+
         private void DrawAlphaClip(Material material)
         {
             bool alphaClip = HumShaderGUIUtils.DrawHumToggleProperty(Styles.alphaClipText, _matProps.AlphaClip);

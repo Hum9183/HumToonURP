@@ -14,7 +14,7 @@ using UnityEngine.Rendering.Universal;
 // using Unity.Rendering.Universal;
 using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.URPBased
 {
     internal sealed class MaterialProperties
     {
@@ -34,7 +34,7 @@ namespace HumToon.Editor
         internal MaterialProperty EmissionColor;
         internal MaterialProperty QueueOffset;
         internal MaterialProperty QueueControl;
-    
+
         public void Set(MaterialProperty[] properties)
         {
             var fieldInfos = typeof(MaterialProperties).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
@@ -45,7 +45,7 @@ namespace HumToon.Editor
                 fieldInfo.SetValue(this, prop);
             }
         }
-        
+
         private MaterialProperty FindProperty(string propertyName, MaterialProperty[] properties, bool propertyIsMandatory)
         {
             foreach (var prop in properties)
