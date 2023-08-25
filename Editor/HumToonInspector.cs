@@ -14,6 +14,27 @@ namespace HumToon.Editor
         private LitGUI.LitProperties litProperties;
         private LitDetailGUI.LitProperties litDetailProperties;
 
+        public override void OnGUI(MaterialEditor materialEditorIn, MaterialProperty[] properties)
+        {
+            if (materialEditorIn == null)
+                throw new ArgumentNullException("materialEditorIn");
+
+            materialEditor = materialEditorIn;
+            Material material = materialEditor.target as Material;
+
+            FindProperties(properties);   // MaterialProperties can be animated so we do not cache them but fetch them every event to ensure animated values are updated correctly
+
+            // Make sure that needed setup (ie keywords/renderqueue) are set up if we're switching some existing
+            // material to a universal shader.
+            if (m_FirstTimeApply)
+            {
+                OnOpenGUI(material, materialEditorIn);
+                m_FirstTimeApply = false;
+            }
+
+            ShaderPropertiesGUI(material);
+        }
+
         public override void FillAdditionalFoldouts(MaterialHeaderScopeList materialScopesList)
         {
             materialScopesList.RegisterHeaderScope(LitDetailGUI.Styles.detailInputs, Expandable.Details, _ => LitDetailGUI.DoDetailArea(litDetailProperties, materialEditor));
