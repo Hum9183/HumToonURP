@@ -5,14 +5,14 @@ namespace HumToon.Editor
     public class LitMaterialPropertyContainer : IMaterialPropertyContainer
     {
         private readonly MaterialPropertySetter _matPropSetter;
-
+        // SmoothnessMap
         public MaterialProperty WorkflowMode;
         public MaterialProperty Metallic;
         public MaterialProperty SpecColor;
         public MaterialProperty MetallicGlossMap;
         public MaterialProperty SpecGlossMap;
         public MaterialProperty Smoothness;
-        public MaterialProperty SmoothnessMapChannel;
+        public MaterialProperty SmoothnessTextureChannel;
         public MaterialProperty BumpMap;
         public MaterialProperty BumpScale;
         public MaterialProperty ParallaxMap;

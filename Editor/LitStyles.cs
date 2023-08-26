@@ -35,7 +35,7 @@ namespace HumToon.Editor
         /// <summary>
         /// The text and tooltip for the smoothness source GUI.
         /// </summary>
-        public static readonly GUIContent SmoothnessMapChannel =
+        public static readonly GUIContent SmoothnessTextureChannel =
             EditorGUIUtility.TrTextContent("Source",
                 "Specifies where to sample a smoothness map from. By default, uses the alpha channel for your map.");
 

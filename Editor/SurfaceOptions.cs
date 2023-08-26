@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace HumToon.Editor
 {
@@ -31,7 +30,7 @@ namespace HumToon.Editor
             HumToonGUIUtils.DrawFloatToggleProperty(_matPropContainer.AlphaClip, HumToonStyles.AlphaClip);
 
             if (_matPropContainer.AlphaClip.floatValue is 1)
-                _materialEditor.ShaderProperty(_matPropContainer.AlphaCutoffThreshold, HumToonStyles.AlphaCutoffThreshold, 1);
+                _materialEditor.ShaderProperty(_matPropContainer.Cutoff, HumToonStyles.Cutoff, 1);
 
             HumToonGUIUtils.DrawFloatToggleProperty(_matPropContainer.ReceiveShadows, HumToonStyles.ReceiveShadow);
         }

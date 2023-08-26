@@ -90,16 +90,16 @@ namespace HumToon.Editor
         /// </summary>
         private uint materialFilter => uint.MaxValue;
 
-        /// <summary>
-        /// Draws the tile offset GUI.
-        /// </summary>
-        /// <param name="materialEditor">The material editor to use.</param>
-        /// <param name="textureProp">The texture property.</param>
-        protected static void DrawTileOffset(MaterialEditor materialEditor, MaterialProperty textureProp)
-        {
-            if (textureProp != null)
-                materialEditor.TextureScaleOffsetProperty(textureProp);
-        }
+        // /// <summary>
+        // /// Draws the tile offset GUI.
+        // /// </summary>
+        // /// <param name="materialEditor">The material editor to use.</param>
+        // /// <param name="textureProp">The texture property.</param>
+        // protected static void DrawTileOffset(MaterialEditor materialEditor, MaterialProperty textureProp)
+        // {
+        //     if (textureProp != null)
+        //         materialEditor.TextureScaleOffsetProperty(textureProp);
+        // }
 
         // this function is shared between ShaderGraph and hand-written GUIs
         internal static void UpdateMaterialRenderQueueControl(Material material)
@@ -366,19 +366,19 @@ namespace HumToon.Editor
                 _materialEditor.PopupShaderProperty(property, label, options);
         }
 
-        /// <summary>
-        /// Draws the surface inputs GUI.
-        /// </summary>
-        /// <param name="material">The material to use.</param>
-        private void DrawSurfaceInputs(Material material)
-        {
-            DrawBaseProperties(material);
-
-            // lit専用
-            LitGUI.Inputs(_litMatPropContainer, _materialEditor, material);
-            DrawEmissionProperties(material, true);
-            DrawTileOffset(_materialEditor, _matPropContainer.BaseMap);
-        }
+        // /// <summary>
+        // /// Draws the surface inputs GUI.
+        // /// </summary>
+        // /// <param name="material">The material to use.</param>
+        // private void DrawSurfaceInputs(Material material)
+        // {
+        //     DrawBaseProperties(material);
+        //
+        //     // lit専用
+        //     LitGUI.Inputs(_litMatPropContainer, _materialEditor, material);
+        //     DrawEmissionProperties(material, true);
+        //     DrawTileOffset(_matPropContainer.BaseMap);
+        // }
 
                 /// <summary>
         /// Helper function to show texture and color properties.
@@ -424,44 +424,6 @@ namespace HumToon.Editor
             MaterialEditor.EndProperty();
 
             return rect;
-        }
-
-        /// <summary>
-        /// Draws the emission properties.
-        /// </summary>
-        /// <param name="material">The material to use.</param>
-        /// <param name="keyword">The keyword used for emission.</param>
-        protected virtual void DrawEmissionProperties(Material material, bool keyword)
-        {
-            var emissive = true;
-
-            if (!keyword)
-            {
-                DrawEmissionTextureProperty();
-            }
-            else
-            {
-                emissive = _materialEditor.EmissionEnabledProperty();
-                using (new EditorGUI.DisabledScope(!emissive))
-                {
-                    DrawEmissionTextureProperty();
-                }
-            }
-
-            // If texture was assigned and color was black set color to white
-            if ((_matPropContainer.EmissionMap != null) && (_matPropContainer.EmissionColor != null))
-            {
-                var hadEmissionTexture = _matPropContainer.EmissionMap?.textureValue != null;
-                var brightness = _matPropContainer.EmissionColor.colorValue.maxColorComponent;
-                if (_matPropContainer.EmissionMap.textureValue != null && !hadEmissionTexture && brightness <= 0f)
-                    _matPropContainer.EmissionColor.colorValue = Color.white;
-            }
-
-            if (emissive)
-            {
-                // Change the GI emission flag and fix it up with emissive as black if necessary.
-                _materialEditor.LightmapEmissionFlagsProperty(MaterialEditor.kMiniTextureFieldLabelIndentLevel, true);
-            }
         }
 
         /// <summary>
@@ -693,10 +655,8 @@ namespace HumToon.Editor
             // Note: this will nuke user-selected custom keywords when they change shaders
             material.shaderKeywords = null;
             base.AssignNewShaderToMaterial(material, oldShader, newShader);
-            // TODO: 長そうなので、一旦コメントアウト
             // Setup keywords based on the new shader
-            // UpdateMaterial(material, MaterialUpdateType.ChangedAssignedShader);
-
+            UpdateMaterial(material, MaterialUpdateType.ChangedAssignedShader);
 
             if (oldShader == null || !oldShader.name.Contains("Legacy Shaders/"))
             {
@@ -744,6 +704,19 @@ namespace HumToon.Editor
                 if (texture != null)
                     material.SetTexture("_MetallicSpecGlossMap", texture);
             }
+        }
+
+
+        // this is used to update a material's keywords, applying any shader-associated logic to update dependent properties and keywords
+        // this is also invoked when a material is created, modified, or the material's shader is modified or reassigned
+        internal static void UpdateMaterial(Material material, MaterialUpdateType updateType)
+        {
+            // if unknown, look it up from the material's shader
+            // NOTE: this will only work for asset-based shaders..
+            // if (shaderID == ShaderID.Unknown)
+            //     shaderID = GetShaderID(material.shader);
+
+            SetMaterialKeywords(material, LitGUI.SetMaterialKeywords);
         }
     }
 }

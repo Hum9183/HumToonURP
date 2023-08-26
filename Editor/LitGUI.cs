@@ -113,7 +113,7 @@ namespace HumToon.Editor
                 HumToonInspector.TextureColorProps(materialEditor, LitStyles.SpecularMap, properties.SpecGlossMap,
                     hasGlossMap ? null : properties.SpecColor);
             }
-            DoSmoothness(materialEditor, material, properties.Smoothness, properties.SmoothnessMapChannel, smoothnessChannelNames);
+            DoSmoothness(materialEditor, material, properties.Smoothness, properties.SmoothnessTextureChannel, smoothnessChannelNames);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace HumToon.Editor
                     MaterialEditor.BeginProperty(smoothnessMapChannel);
                     EditorGUI.BeginChangeCheck();
                     var smoothnessSource = (int)smoothnessMapChannel.floatValue;
-                    smoothnessSource = EditorGUILayout.Popup(LitStyles.SmoothnessMapChannel, smoothnessSource, smoothnessChannelNames);
+                    smoothnessSource = EditorGUILayout.Popup(LitStyles.SmoothnessTextureChannel, smoothnessSource, smoothnessChannelNames);
                     if (EditorGUI.EndChangeCheck())
                         smoothnessMapChannel.floatValue = smoothnessSource;
                     MaterialEditor.EndProperty();
@@ -148,7 +148,7 @@ namespace HumToon.Editor
                 else
                 {
                     EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.Popup(LitStyles.SmoothnessMapChannel, 0, smoothnessChannelNames);
+                    EditorGUILayout.Popup(LitStyles.SmoothnessTextureChannel, 0, smoothnessChannelNames);
                     EditorGUI.EndDisabledGroup();
                 }
                 EditorGUI.showMixedValue = false;
@@ -162,13 +162,13 @@ namespace HumToon.Editor
         /// </summary>
         /// <param name="material"></param>
         /// <returns>The Alpha channel used for Smoothness.</returns>
-        public static SmoothnessMapChannel GetSmoothnessMapChannel(Material material)
+        public static SmoothnessTextureChannel GetSmoothnessTextureChannel(Material material)
         {
             int ch = (int)material.GetFloat("_SmoothnessTextureChannel");
-            if (ch == (int)SmoothnessMapChannel.AlbedoAlpha)
-                return SmoothnessMapChannel.AlbedoAlpha;
+            if (ch == (int)SmoothnessTextureChannel.AlbedoAlpha)
+                return SmoothnessTextureChannel.AlbedoAlpha;
 
-            return SmoothnessMapChannel.SpecularMetallicAlpha;
+            return SmoothnessTextureChannel.SpecularMetallicAlpha;
         }
 
         // (shared by all lit shaders, including shadergraph Lit Target and Lit.shader)
@@ -207,11 +207,11 @@ namespace HumToon.Editor
             if (material.HasProperty("_ParallaxMap"))
                 CoreUtils.SetKeyword(material, "_PARALLAXMAP", material.GetTexture("_ParallaxMap"));
 
-            if (material.HasProperty("_SmoothnessTextureChannel"))
+            if (material.HasProperty("_SmoothnessMapChannel"))
             {
                 var opaque = HumToonInspector.IsOpaque(material);
                 CoreUtils.SetKeyword(material, "_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A",
-                    GetSmoothnessMapChannel(material) == SmoothnessMapChannel.AlbedoAlpha && opaque);
+                    GetSmoothnessTextureChannel(material) == SmoothnessTextureChannel.AlbedoAlpha && opaque);
             }
 
             // Clear coat keywords are independent to remove possiblity of invalid combinations.

@@ -113,7 +113,7 @@ namespace HumToon.Editor
         /// <summary>
         /// The text and tooltip for the alpha clipping threshold GUI.
         /// </summary>
-        public static readonly GUIContent AlphaCutoffThreshold = EditorGUIUtility.TrTextContent("Threshold",
+        public static readonly GUIContent Cutoff = EditorGUIUtility.TrTextContent("Threshold",
             "Sets where the Alpha Clipping starts. The higher the value is, the brighter the  effect is when clipping starts.");
 
         /// <summary>

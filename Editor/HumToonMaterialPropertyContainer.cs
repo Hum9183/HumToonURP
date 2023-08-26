@@ -13,7 +13,7 @@ namespace HumToon.Editor
         // public MaterialProperty ZWriteControl;
         public MaterialProperty AlphaClip;
         public MaterialProperty ReceiveShadows;
-        public MaterialProperty AlphaCutoffThreshold;
+        public MaterialProperty Cutoff;
         public MaterialProperty BaseMap;
         public MaterialProperty BaseColor;
         public MaterialProperty EmissionMap;

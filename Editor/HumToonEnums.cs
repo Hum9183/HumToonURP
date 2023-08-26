@@ -178,7 +178,7 @@ namespace HumToon.Editor
     /// <summary>
     /// Options to select the texture channel where the smoothness value is stored.
     /// </summary>
-    public enum SmoothnessMapChannel
+    public enum SmoothnessTextureChannel
     {
         /// <summary>
         /// Use this when smoothness is stored in the alpha channel of the Specular/Metallic Map.

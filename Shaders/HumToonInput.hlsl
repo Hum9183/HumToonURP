@@ -18,7 +18,7 @@ CBUFFER_START(UnityPerMaterial)
     half4 _BaseColor;
     half4 _SpecColor;
     half4 _EmissionColor;
-    half _AlphaCutoffThreshold;
+    half _Cutoff;
     half _Smoothness;
     half _Metallic;
     half _BumpScale;
