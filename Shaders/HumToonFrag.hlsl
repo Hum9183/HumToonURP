@@ -49,7 +49,7 @@ void LitPassFragment(
 
     half4 color = UniversalFragmentPBR(inputData, surfaceData);
     color.rgb = MixFog(color.rgb, inputData.fogCoord);
-    color.a = OutputAlpha(color.a, IsSurfaceTypeTransparent(_Surface));
+    color.a = OutputAlpha(color.a, IsSurfaceTypeTransparent(_SurfaceType));
 
     outColor = color;
 

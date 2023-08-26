@@ -18,7 +18,7 @@ CBUFFER_START(UnityPerMaterial)
     half4 _BaseColor;
     half4 _SpecColor;
     half4 _EmissionColor;
-    half _Cutoff;
+    half _AlphaCutoffThreshold;
     half _Smoothness;
     half _Metallic;
     half _BumpScale;
@@ -28,7 +28,7 @@ CBUFFER_START(UnityPerMaterial)
     half _ClearCoatSmoothness;
     half _DetailAlbedoMapScale;
     half _DetailNormalMapScale;
-    half _Surface;
+    half _SurfaceType;
 CBUFFER_END
 
 // NOTE: Do not ifdef the properties for dots instancing, but ifdef the actual usage.

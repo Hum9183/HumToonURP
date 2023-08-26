@@ -1,5 +1,5 @@
 Shader "HumToon(URPBased)"
-{    
+{
     Properties
     {
         [MainTexture] _BaseMap("Texture", 2D) = "white" {}
@@ -28,15 +28,15 @@ Shader "HumToon(URPBased)"
         [HideInInspector] _SampleGI("SampleGI", float) = 0.0 // needed from bakedlit
     }
     SubShader
-    {        
+    {
         Tags
-        {   
+        {
             "RenderType" = "Opaque"
             "IgnoreProjector" = "True"
             "RenderPipeline" = "UniversalPipeline"
         }
         LOD 100
-        
+
         // Render state
         Blend [_SrcBlend][_DstBlend], [_SrcBlendAlpha][_DstBlendAlpha]
         ZWrite [_ZWrite]
@@ -46,10 +46,10 @@ Shader "HumToon(URPBased)"
         {
             Name "Unlit"
             AlphaToMask[_AlphaToMask]
-            
+
             HLSLPROGRAM
             #pragma target 2.0
-            
+
             #pragma vertex vert
             #pragma fragment frag
 
@@ -83,5 +83,5 @@ Shader "HumToon(URPBased)"
 
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
 //    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.UnlitShader"
-    CustomEditor "HumToon.Editor.HumToonGUI"
+    CustomEditor "HumToon.Editor.URPBased.HumToonGUI"
 }

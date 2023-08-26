@@ -7,11 +7,11 @@ using UnityEngine.Rendering.Universal;
 
 namespace HumToon.Editor
 {
-    public static class HumToonProperties
+    public static class HumToonPropertyNames
     {
         public static readonly string SpecularWorkflowMode = "_WorkflowMode";
-        public static readonly string SurfaceType = "_Surface";
-        public static readonly string BlendMode = "_Blend";
+        public static readonly string SurfaceType = "_SurfaceType";
+        public static readonly string BlendMode = "_BlendMode";
         public static readonly string AlphaClip = "_AlphaClip";
         public static readonly string AlphaToMask = "_AlphaToMask";
         public static readonly string SrcBlend = "_SrcBlend";
@@ -20,7 +20,7 @@ namespace HumToon.Editor
         public static readonly string DstBlendAlpha = "_DstBlendAlpha";
         public static readonly string BlendModePreserveSpecular = "_BlendModePreserveSpecular";
         public static readonly string ZWrite = "_ZWrite";
-        public static readonly string CullMode = "_Cull";
+        public static readonly string CullMode = "_CullMode";
         public static readonly string CastShadows = "_CastShadows";
         public static readonly string ReceiveShadows = "_ReceiveShadows";
         public static readonly string QueueOffset = "_QueueOffset";

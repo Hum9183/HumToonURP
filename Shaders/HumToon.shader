@@ -8,7 +8,7 @@ Shader "HumToon"
         [MainTexture] _BaseMap("Albedo", 2D) = "white" {}
         [MainColor] _BaseColor("Color", Color) = (1,1,1,1)
 
-        _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+        _AlphaCutoffThreshold("Alpha Cutoff Threshold", Range(0.0, 1.0)) = 0.5
 
         _Smoothness("Smoothness", Range(0.0, 1.0)) = 0.5
         _SmoothnessTextureChannel("Smoothness texture channel", Float) = 0
@@ -45,9 +45,9 @@ Shader "HumToon"
         [HideInInspector] _ClearCoatSmoothness("_ClearCoatSmoothness", Float) = 0.0
 
         // Blending state
-        _Surface("__surface", Float) = 0.0
-        _Blend("__blend", Float) = 0.0
-        _Cull("__cull", Float) = 2.0
+        _SurfaceType("__surface", Float) = 0.0
+        _BlendMode("__blend", Float) = 0.0
+        _CullMode("__cull", Float) = 2.0
         [ToggleUI] _AlphaClip("__clip", Float) = 0.0
         [HideInInspector] _SrcBlend("__src", Float) = 1.0
         [HideInInspector] _DstBlend("__dst", Float) = 0.0
@@ -103,7 +103,7 @@ Shader "HumToon"
             // Render State Commands
             Blend [_SrcBlend] [_DstBlend], [_SrcBlendAlpha] [_DstBlendAlpha]
             ZWrite [_ZWrite]
-            Cull [_Cull]
+            Cull [_CullMode]
             AlphaToMask [_AlphaToMask]
 
             HLSLPROGRAM
@@ -183,7 +183,7 @@ Shader "HumToon"
             ZWrite On
             ZTest LEqual
             ColorMask 0
-            Cull[_Cull]
+            Cull[_CullMode]
 
             HLSLPROGRAM
             #pragma target 2.0
@@ -234,7 +234,7 @@ Shader "HumToon"
             // Render State Commands
             ZWrite[_ZWrite]
             ZTest LEqual
-            Cull[_Cull]
+            Cull[_CullMode]
 
             HLSLPROGRAM
             #pragma target 4.5
@@ -312,7 +312,7 @@ Shader "HumToon"
             // Render State Commands
             ZWrite On
             ColorMask R
-            Cull[_Cull]
+            Cull[_CullMode]
 
             HLSLPROGRAM
             #pragma target 2.0
@@ -355,7 +355,7 @@ Shader "HumToon"
             // -------------------------------------
             // Render State Commands
             ZWrite On
-            Cull[_Cull]
+            Cull[_CullMode]
 
             HLSLPROGRAM
             #pragma target 2.0
@@ -445,7 +445,7 @@ Shader "HumToon"
             // Render State Commands
             Blend[_SrcBlend][_DstBlend]
             ZWrite[_ZWrite]
-            Cull[_Cull]
+            Cull[_CullMode]
 
             HLSLPROGRAM
             #pragma target 2.0
