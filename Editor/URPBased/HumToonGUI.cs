@@ -282,7 +282,7 @@ namespace HumToon.Editor.URPBased
         {
             bool opaque = true;
             if (material.HasProperty(MaterialPropertyNames.SurfaceType))
-                opaque = ((BaseShaderGUI.SurfaceType)material.GetFloat(MaterialPropertyNames.SurfaceType) == BaseShaderGUI.SurfaceType.Opaque);
+                opaque = ((SurfaceType)material.GetFloat(MaterialPropertyNames.SurfaceType) == SurfaceType.Opaque);
             return opaque;
         }
 
