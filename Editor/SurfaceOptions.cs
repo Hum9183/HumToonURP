@@ -20,7 +20,7 @@ namespace HumToon.Editor
                 HumToonGUIUtils.DoPopup<BlendMode>(_materialEditor, _matPropContainer.BlendMode, HumToonStyles.BlendingMode);
 
                 BlendMode blendMode = (BlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
-                bool isEnabled = blendMode is BlendMode.Alpha || blendMode == BlendMode.Additive;
+                bool isEnabled = blendMode is BlendMode.Alpha || blendMode is BlendMode.Additive;
                 if (isEnabled)
                     HumToonGUIUtils.DrawFloatToggleProperty(_matPropContainer.BlendModePreserveSpecular, HumToonStyles.BlendModePreserveSpecular, 1);
             }

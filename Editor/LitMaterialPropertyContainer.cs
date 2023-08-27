@@ -16,7 +16,7 @@ namespace HumToon.Editor
         public MaterialProperty BumpMap;
         public MaterialProperty BumpScale;
         public MaterialProperty ParallaxMap;
-        public MaterialProperty ParallaxScale;
+        public MaterialProperty Parallax;
         public MaterialProperty OcclusionStrength;
         public MaterialProperty OcclusionMap;
         public MaterialProperty SpecularHighlights;

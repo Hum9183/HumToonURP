@@ -346,7 +346,7 @@ namespace HumToon.Editor
             return automaticQueueControl;
         }
 
-        internal static bool IsOpaque(Material material)
+        public static bool IsOpaque(Material material)
         {
             bool opaque = true;
             if (material.HasProperty(HumToonPropertyNames.SurfaceType))
@@ -366,91 +366,6 @@ namespace HumToon.Editor
                 _materialEditor.PopupShaderProperty(property, label, options);
         }
 
-        // /// <summary>
-        // /// Draws the surface inputs GUI.
-        // /// </summary>
-        // /// <param name="material">The material to use.</param>
-        // private void DrawSurfaceInputs(Material material)
-        // {
-        //     DrawBaseProperties(material);
-        //
-        //     // lit専用
-        //     LitGUI.Inputs(_litMatPropContainer, _materialEditor, material);
-        //     DrawEmissionProperties(material, true);
-        //     DrawTileOffset(_matPropContainer.BaseMap);
-        // }
-
-                /// <summary>
-        /// Helper function to show texture and color properties.
-        /// </summary>
-        /// <param name="materialEditor">The material editor to use.</param>
-        /// <param name="label">The label to use.</param>
-        /// <param name="textureProp">The texture property.</param>
-        /// <param name="colorProp">The color property.</param>
-        /// <param name="hdr">Marks whether this is a HDR texture or not.</param>
-        /// <returns></returns>
-        public static Rect TextureColorProps(MaterialEditor materialEditor, GUIContent label, MaterialProperty textureProp, MaterialProperty colorProp, bool hdr = false)
-        {
-            MaterialEditor.BeginProperty(textureProp);
-            if (colorProp != null)
-                MaterialEditor.BeginProperty(colorProp);
-
-            Rect rect = EditorGUILayout.GetControlRect();
-            EditorGUI.showMixedValue = textureProp.hasMixedValue;
-            materialEditor.TexturePropertyMiniThumbnail(rect, textureProp, label.text, label.tooltip);
-            EditorGUI.showMixedValue = false;
-
-            if (colorProp != null)
-            {
-                EditorGUI.BeginChangeCheck();
-                EditorGUI.showMixedValue = colorProp.hasMixedValue;
-                int indentLevel = EditorGUI.indentLevel;
-                EditorGUI.indentLevel = 0;
-                Rect rectAfterLabel = new Rect(rect.x + EditorGUIUtility.labelWidth, rect.y,
-                    EditorGUIUtility.fieldWidth, EditorGUIUtility.singleLineHeight);
-                var col = EditorGUI.ColorField(rectAfterLabel, GUIContent.none, colorProp.colorValue, true,
-                    false, hdr);
-                EditorGUI.indentLevel = indentLevel;
-                if (EditorGUI.EndChangeCheck())
-                {
-                    materialEditor.RegisterPropertyChangeUndo(colorProp.displayName);
-                    colorProp.colorValue = col;
-                }
-                EditorGUI.showMixedValue = false;
-            }
-
-            if (colorProp != null)
-                MaterialEditor.EndProperty();
-            MaterialEditor.EndProperty();
-
-            return rect;
-        }
-
-        /// <summary>
-        /// Draws the GUI for the normal area.
-        /// </summary>
-        /// <param name="materialEditor">The material editor to use.</param>
-        /// <param name="bumpMap">The normal map property.</param>
-        /// <param name="bumpMapScale">The normal map scale property.</param>
-        public static void DrawNormalArea(MaterialEditor materialEditor, MaterialProperty bumpMap, MaterialProperty bumpMapScale = null)
-        {
-            if (bumpMapScale != null)
-            {
-                materialEditor.TexturePropertySingleLine(HumToonStyles.NormalMap, bumpMap,
-                    bumpMap.textureValue != null ? bumpMapScale : null);
-                if (bumpMapScale.floatValue != 1 &&
-                    UnityEditorInternal.InternalEditorUtility.IsMobilePlatform(
-                        EditorUserBuildSettings.activeBuildTarget))
-                    if (materialEditor.HelpBoxWithButton(HumToonStyles.BumpScaleNotSupported, HumToonStyles.FixNormalNow))
-                        bumpMapScale.floatValue = 1;
-            }
-            else
-            {
-                materialEditor.TexturePropertySingleLine(HumToonStyles.NormalMap, bumpMap);
-            }
-        }
-
-
         /// <summary>
         /// Draws the base properties GUI.
         /// </summary>
@@ -460,17 +375,6 @@ namespace HumToon.Editor
             if (_matPropContainer.BaseMap != null && _matPropContainer.BaseColor != null) // Draw the baseMap, most shader will have at least a baseMap
             {
                 _materialEditor.TexturePropertySingleLine(HumToonStyles.BaseMap, _matPropContainer.BaseMap, _matPropContainer.BaseColor);
-            }
-        }
-
-        private void DrawEmissionTextureProperty()
-        {
-            if ((_matPropContainer.EmissionMap == null) || (_matPropContainer.EmissionColor == null))
-                return;
-
-            using (new EditorGUI.IndentLevelScope(2))
-            {
-                _materialEditor.TexturePropertyWithHDRColor(HumToonStyles.EmissionMap, _matPropContainer.EmissionMap, _matPropContainer.EmissionColor, false);
             }
         }
 

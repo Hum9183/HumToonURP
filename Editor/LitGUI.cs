@@ -11,31 +11,6 @@ namespace HumToon.Editor
     /// </summary>
     public static class LitGUI
     {
-        /// <summary>
-        /// Draws the surface inputs GUI.
-        /// </summary>
-        /// <param name="properties"></param>
-        /// <param name="materialEditor"></param>
-        /// <param name="material"></param>
-        public static void Inputs(LitMaterialPropertyContainer properties, MaterialEditor materialEditor, Material material)
-        {
-            DoMetallicSpecularArea(properties, materialEditor, material);
-            HumToonInspector.DrawNormalArea(materialEditor, properties.BumpMap, properties.BumpScale);
-
-            if (HeightmapAvailable(material))
-                DoHeightmapArea(properties, materialEditor);
-
-            if (properties.OcclusionMap != null)
-            {
-                materialEditor.TexturePropertySingleLine(LitStyles.Occlusion, properties.OcclusionMap,
-                    properties.OcclusionMap.textureValue != null ? properties.OcclusionStrength : null);
-            }
-
-            // Check that we have all the required properties for clear coat,
-            // otherwise we will get null ref exception from MaterialEditor GUI helpers.
-            if (ClearCoatAvailable(material))
-                DoClearCoat(properties, materialEditor, material);
-        }
 
         private static bool ClearCoatAvailable(Material material)
         {
@@ -54,7 +29,7 @@ namespace HumToon.Editor
         private static void DoHeightmapArea(LitMaterialPropertyContainer properties, MaterialEditor materialEditor)
         {
             materialEditor.TexturePropertySingleLine(LitStyles.HeightMap, properties.ParallaxMap,
-                properties.ParallaxMap.textureValue != null ? properties.ParallaxScale : null);
+                properties.ParallaxMap.textureValue != null ? properties.Parallax : null);
         }
 
         private static bool ClearCoatEnabled(Material material)
@@ -110,7 +85,7 @@ namespace HumToon.Editor
             {
                 hasGlossMap = properties.SpecGlossMap.textureValue != null;
                 smoothnessChannelNames = LitStyles.SpecularSmoothnessChannelNames;
-                HumToonInspector.TextureColorProps(materialEditor, LitStyles.SpecularMap, properties.SpecGlossMap,
+                HumToonGUIUtils.TextureColorProps(materialEditor, LitStyles.SpecularMap, properties.SpecGlossMap,
                     hasGlossMap ? null : properties.SpecColor);
             }
             DoSmoothness(materialEditor, material, properties.Smoothness, properties.SmoothnessTextureChannel, smoothnessChannelNames);

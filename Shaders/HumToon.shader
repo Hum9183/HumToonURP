@@ -22,10 +22,10 @@ Shader "HumToon"
         [ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
         [ToggleOff] _EnvironmentReflections("Environment Reflections", Float) = 1.0
 
-        _BumpScale("Scale", Float) = 1.0
+        _BumpScale("Bump Scale", Range(0.0, 8.0)) = 1.0
         _BumpMap("Normal Map", 2D) = "bump" {}
 
-        _Parallax("Scale", Range(0.005, 0.08)) = 0.005
+        _Parallax("Height Scale", Range(0.005, 0.08)) = 0.005
         _ParallaxMap("Height Map", 2D) = "black" {}
 
         _OcclusionStrength("Strength", Range(0.0, 1.0)) = 1.0
