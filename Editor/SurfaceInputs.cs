@@ -120,10 +120,10 @@ namespace HumToon.Editor
                 }
             }
 
-            // If texture was not assigned and color was black set color to white.
+            // If texture was assigned and color was black set color to white.
             var hadEmissionTexture = _matPropContainer.EmissionMap?.textureValue is not null;
             var brightness = _matPropContainer.EmissionColor.colorValue.maxColorComponent;
-            if (!hadEmissionTexture && brightness <= 0f)
+            if (hadEmissionTexture && brightness <= 0f)
                 _matPropContainer.EmissionColor.colorValue = Color.white;
 
             if (emissive)
