@@ -75,7 +75,7 @@ namespace HumToon.Editor
                 _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceInputs, (uint)Expandable.SurfaceInputs, DrawSurfaceInputs);
 
             if (filter.HasFlag(Expandable.Details))
-                FillAdditionalFoldouts(_materialHeaderScopeList);
+                _materialHeaderScopeList.RegisterHeaderScope(LitDetailStyles.detailInputs, (uint)Expandable.Details, DrawDetailInputs);
 
             if (filter.HasFlag(Expandable.Advanced))
                 _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel, (uint)Expandable.Advanced, DrawAdvancedOptions);
@@ -503,11 +503,6 @@ namespace HumToon.Editor
         public virtual void MaterialChanged(Material material)
         {
             ValidateMaterial(material);
-        }
-
-        public void FillAdditionalFoldouts(MaterialHeaderScopeList materialScopesList)
-        {
-            materialScopesList.RegisterHeaderScope(LitDetailGUI.Styles.detailInputs, Expandable.Details, _ => LitDetailGUI.DoDetailArea(_litDetailMatPropContainer, _materialEditor));
         }
 
         // material changed check
