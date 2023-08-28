@@ -10,7 +10,7 @@ namespace HumToon.Editor
         {
             _materialEditor.ShaderProperty(_litMatPropContainer.SpecularHighlights, LitStyles.Highlights);
             _materialEditor.ShaderProperty(_litMatPropContainer.EnvironmentReflections, LitStyles.Reflections);
-            _materialEditor.IntSliderShaderProperty(_matPropContainer.QueueOffset, -queueOffsetRange, queueOffsetRange, HumToonStyles.QueueSlider);
+            _materialEditor.IntSliderShaderProperty(_matPropContainer.QueueOffset, -QueueOffsetRange, QueueOffsetRange, HumToonStyles.QueueSlider);
             _materialEditor.EnableInstancingField();
         }
     }
