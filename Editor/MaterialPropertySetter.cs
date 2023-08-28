@@ -20,6 +20,7 @@ namespace HumToon.Editor
 
         private MaterialProperty FindProperty(string matPropName, bool propertyIsMandatory)
         {
+            // NOTE: Linqで書いてもいいかも
             foreach (var prop in MatProps)
             {
                 if (prop != null && prop.name.Equals(matPropName))

@@ -90,17 +90,6 @@ namespace HumToon.Editor
         /// </summary>
         private uint materialFilter => uint.MaxValue;
 
-        // /// <summary>
-        // /// Draws the tile offset GUI.
-        // /// </summary>
-        // /// <param name="materialEditor">The material editor to use.</param>
-        // /// <param name="textureProp">The texture property.</param>
-        // protected static void DrawTileOffset(MaterialEditor materialEditor, MaterialProperty textureProp)
-        // {
-        //     if (textureProp != null)
-        //         materialEditor.TextureScaleOffsetProperty(textureProp);
-        // }
-
         // this function is shared between ShaderGraph and hand-written GUIs
         internal static void UpdateMaterialRenderQueueControl(Material material)
         {
@@ -326,26 +315,6 @@ namespace HumToon.Editor
                 material.SetFloat(HumToonPropertyNames.DstBlendAlpha, (float)dstBlend);
         }
 
-
-        internal static bool GetAutomaticQueueControlSetting(Material material)
-        {
-            // If a Shader Graph material doesn't yet have the queue control property,
-            // we should not engage automatic behavior until the shader gets reimported.
-            // bool automaticQueueControl = !material.IsShaderGraph(); // NOTE: ShaderGraphではない
-            bool automaticQueueControl = true;
-            if (material.HasProperty(HumToonPropertyNames.QueueControl))
-            {
-                var queueControl = material.GetFloat(HumToonPropertyNames.QueueControl);
-                if (queueControl < 0.0f)
-                {
-                    // The property was added with a negative value, indicating it needs to be validated for this material
-                    UpdateMaterialRenderQueueControl(material);
-                }
-                automaticQueueControl = (material.GetFloat(HumToonPropertyNames.QueueControl) == (float)QueueControl.Auto);
-            }
-            return automaticQueueControl;
-        }
-
         public static bool IsOpaque(Material material)
         {
             bool opaque = true;
@@ -376,26 +345,6 @@ namespace HumToon.Editor
             {
                 _materialEditor.TexturePropertySingleLine(HumToonStyles.BaseMap, _matPropContainer.BaseMap, _matPropContainer.BaseColor);
             }
-        }
-
-        /// <summary>
-        /// Draws the advanced options GUI.
-        /// </summary>
-        /// <param name="material">The material to use.</param>
-        public virtual void DrawAdvancedOptions(Material material)
-        {
-            // lit専用
-            if (_litMatPropContainer.EnvironmentReflections != null && _litMatPropContainer.SpecularHighlights != null)
-            {
-                _materialEditor.ShaderProperty(_litMatPropContainer.SpecularHighlights, LitStyles.Highlights);
-                _materialEditor.ShaderProperty(_litMatPropContainer.EnvironmentReflections, LitStyles.Reflections);
-            }
-
-            // Only draw the sorting priority field if queue control is set to "auto"
-            bool autoQueueControl = GetAutomaticQueueControlSetting(material);
-            if (autoQueueControl)
-                DrawQueueOffsetField();
-            _materialEditor.EnableInstancingField();
         }
 
         // this is the function used by Lit.shader, Unlit.shader GUIs
@@ -483,15 +432,6 @@ namespace HumToon.Editor
             // Receive Shadows
             if (material.HasProperty(HumToonPropertyNames.ReceiveShadows))
                 CoreUtils.SetKeyword(material, ShaderKeywordStrings._RECEIVE_SHADOWS_OFF, material.GetFloat(HumToonPropertyNames.ReceiveShadows) == 0.0f);
-        }
-
-        /// <summary>
-        /// Draws the queue offset field.
-        /// </summary>
-        protected void DrawQueueOffsetField()
-        {
-            if (_matPropContainer.QueueOffset != null)
-                _materialEditor.IntSliderShaderProperty(_matPropContainer.QueueOffset, -queueOffsetRange, queueOffsetRange, HumToonStyles.QueueSlider);
         }
 
         /// <summary>
