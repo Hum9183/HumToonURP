@@ -56,7 +56,7 @@ namespace HumToon.Editor
     /// <summary>
     /// The blend mode for your material.
     /// </summary>
-    public enum BlendMode
+    public enum TransparentBlendMode
     {
         /// <summary>
         /// Use this for alpha blend mode.

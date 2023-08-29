@@ -17,10 +17,10 @@ namespace HumToon.Editor
 
             if ((SurfaceType)_matPropContainer.SurfaceType.floatValue is SurfaceType.Transparent)
             {
-                HumToonGUIUtils.DoPopup<BlendMode>(_materialEditor, _matPropContainer.BlendMode, HumToonStyles.BlendingMode);
+                HumToonGUIUtils.DoPopup<TransparentBlendMode>(_materialEditor, _matPropContainer.BlendMode, HumToonStyles.BlendingMode);
 
-                BlendMode blendMode = (BlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
-                bool isEnabled = blendMode is BlendMode.Alpha || blendMode is BlendMode.Additive;
+                TransparentBlendMode transparentBlendMode = (TransparentBlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
+                bool isEnabled = transparentBlendMode is TransparentBlendMode.Alpha || transparentBlendMode is TransparentBlendMode.Additive;
                 if (isEnabled)
                     HumToonGUIUtils.DrawFloatToggleProperty(_matPropContainer.BlendModePreserveSpecular, HumToonStyles.BlendModePreserveSpecular, 1);
             }

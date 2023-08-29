@@ -20,7 +20,7 @@ namespace HumToon.Editor
         /// <summary>
         /// The names for options available in the BlendMode enum.
         /// </summary>
-        public static readonly string[] blendModeNames = Enum.GetNames(typeof(BlendMode));
+        public static readonly string[] blendModeNames = Enum.GetNames(typeof(TransparentBlendMode));
 
         /// <summary>
         /// The names for options available in the RenderFace enum.
