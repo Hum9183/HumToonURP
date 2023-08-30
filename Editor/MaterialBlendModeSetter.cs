@@ -18,40 +18,43 @@ namespace HumToon.Editor
             if (material is null)
                 throw new ArgumentNullException(nameof(material));
 
-            // alpha test
+            // Alpha test
             bool alphaClip = material.GetFloat(HumToonPropertyNames.AlphaClip).ToBool();
             CoreUtils.SetKeyword(material, ShaderKeywordStrings._ALPHATEST_ON, alphaClip);
 
-            // transparent
-            SurfaceType surfaceType = (SurfaceType)material.GetFloat(HumToonPropertyNames.SurfaceType);
-            CoreUtils.SetKeyword(material, ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT, surfaceType is SurfaceType.Transparent);
+            // Transparent
+            bool isOpaque = HumToonInspector.IsOpaque(material);
+            CoreUtils.SetKeyword(material, ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT, isOpaque is false);
+            material.SetShaderPassEnabled("ShadowCaster", isOpaque);
 
-            // clear override tag
+            // Clear override tag
             material.SetOverrideTag(RenderType, string.Empty);
 
             int renderQueue;
-            if (surfaceType is SurfaceType.Opaque)
-            {
-                renderQueue = OpaqueType(material, alphaClip);
-            }
-            else
-            {
-                renderQueue = TransparentType(material);
-            }
+            bool alphaToMask;
+            bool zWrite;
+            (renderQueue, alphaToMask, zWrite) = isOpaque ? OpaqueType(material, alphaClip) : TransparentType(material);
 
-            // must always apply queue offset, even if not set to material control
             renderQueue += (int)material.GetFloat(HumToonPropertyNames.QueueOffset);
-
             automaticRenderQueue = renderQueue;
+
+            material.SetFloat(HumToonPropertyNames.AlphaToMask, alphaToMask.ToFloat());
+
+            material.SetFloat(HumToonPropertyNames.ZWrite, zWrite.ToFloat());
+            material.SetShaderPassEnabled("DepthOnly", zWrite);
         }
 
-        private static int OpaqueType(Material material, bool alphaClip)
+        private static (int renderQueue, bool alphaToMask, bool zWrite)
+            OpaqueType(Material material, bool alphaClip)
         {
             int renderQueue;
+            bool alphaToMask = false;
+
             if (alphaClip)
             {
                 renderQueue = (int)RenderQueue.AlphaTest;
                 material.SetOverrideTag(RenderType, "TransparentCutout");
+                alphaToMask = true;
             }
             else
             {
@@ -65,10 +68,11 @@ namespace HumToon.Editor
             material.DisableKeyword(ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT);
             material.DisableKeyword(ShaderKeywordStrings._ALPHAMODULATE_ON);
 
-            return renderQueue;
+            return (renderQueue, alphaToMask, true);
         }
 
-        private static int TransparentType(Material material)
+        private static (int renderQueue, bool alphaToMask, bool zWrite)
+            TransparentType(Material material)
         {
             TransparentBlendMode transparentBlendMode = (TransparentBlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
 
@@ -96,12 +100,8 @@ namespace HumToon.Editor
             material.SetOverrideTag(RenderType, "Transparent");
             material.EnableKeyword(ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT);
             int renderQueue = (int)RenderQueue.Transparent;
-            material.SetFloat(HumToonPropertyNames.AlphaToMask, 0.0f); // NOTE: デフォルト値のままなので、要確認
 
-            material.SetFloat(HumToonPropertyNames.ZWrite, 0.0f);
-            material.SetShaderPassEnabled("DepthOnly", false);
-
-            return renderQueue;
+            return (renderQueue, false, false);
         }
 
         private static (BlendMode srcBlendRGB, BlendMode dstBlendRGB, BlendMode srcBlendA, BlendMode dstBlendA)

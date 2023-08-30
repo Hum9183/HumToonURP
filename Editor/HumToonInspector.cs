@@ -167,11 +167,9 @@ namespace HumToon.Editor
         private void UpdateMaterial(Material material, MaterialUpdateType updateType)
         {
             Debug.Log("UpdateMaterial");
-            SetMaterialKeywords(material, LitGUI.SetMaterialKeywords);
+            SetMaterialKeywords(material);
+            LitGUI.SetMaterialKeywords(material);
         }
-
-
-
 
         /// <summary>
         /// Sets up the blend mode.

@@ -15,5 +15,10 @@ namespace HumToon.Editor
         {
             return value >= 0.5;
         }
+
+        public static float ToFloat(this bool value)
+        {
+            return value ? 1.0f : 0.0f;
+        }
     }
 }
