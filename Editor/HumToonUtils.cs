@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using Unity.Rendering.Universal;
-using ShaderPathID = UnityEngine.Rendering.Universal.ShaderPathID;
 using UnityEditor.ShaderGraph;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEditor.Rendering.Universal.ShaderGUI;
@@ -11,14 +10,19 @@ namespace HumToon.Editor
 {
     public static class Utils
     {
-        public static bool ToBool(this float value)
+        public static bool IsOpaque(Material material)
         {
-            return value >= 0.5;
+            return (SurfaceType)material.GetFloat(HumToonPropertyNames.SurfaceType) is SurfaceType.Opaque;
         }
 
-        public static float ToFloat(this bool value)
+        /// <summary>
+        /// this function is shared with ShaderGraph Lit/Unlit GUIs and also the hand-written GUIs
+        /// </summary>
+        public static void UpdateMaterialRenderQueue(Material material, int renderQueue)
         {
-            return value ? 1.0f : 0.0f;
+            if (material.renderQueue != renderQueue)
+                material.renderQueue = renderQueue;
         }
+
     }
 }

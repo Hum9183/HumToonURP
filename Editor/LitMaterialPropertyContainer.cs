@@ -21,10 +21,10 @@ namespace HumToon.Editor
         public MaterialProperty OcclusionMap;
         public MaterialProperty SpecularHighlights;
         public MaterialProperty EnvironmentReflections;
-        public MaterialProperty ClearCoat;
-        public MaterialProperty ClearCoatMap;
-        public MaterialProperty ClearCoatMask;
-        public MaterialProperty ClearCoatSmoothness;
+        // public MaterialProperty ClearCoat;
+        // public MaterialProperty ClearCoatMap;
+        // public MaterialProperty ClearCoatMask;
+        // public MaterialProperty ClearCoatSmoothness;
 
         public LitMaterialPropertyContainer(MaterialPropertySetter matPropSetter)
         {

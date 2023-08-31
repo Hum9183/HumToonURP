@@ -54,7 +54,7 @@ namespace HumToon.Editor
                 var smoothnessTextureChannel = _litMatPropContainer.SmoothnessTextureChannel;
                 EditorGUI.indentLevel++;
                 EditorGUI.showMixedValue = smoothnessTextureChannel.hasMixedValue;
-                if (IsOpaque(material))
+                if (Utils.IsOpaque(material))
                 {
                     HumToonGUIUtils.DoPopup(_materialEditor, smoothnessTextureChannel, LitStyles.SmoothnessTextureChannel, smoothnessChannelNames);
                 }
