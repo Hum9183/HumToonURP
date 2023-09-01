@@ -88,5 +88,51 @@ namespace HumToon.Editor
             if (filter.HasFlag(Expandable.Advanced))
                 _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel, (uint)Expandable.Advanced, DrawAdvancedOptions);
         }
+
+        /// <summary>
+        /// Called when a material has been changed.
+        /// </summary>
+        public override void ValidateMaterial(Material material)
+        {
+            int renderQueue = MaterialBlendModeSetter.Set(material);
+            Utils.UpdateMaterialRenderQueue(material, renderQueue);
+
+            MaterialKeywordsSetter.Set(material, litDetail: true);
+        }
+
+        /// <summary>
+        /// NOTE: 自身がnewShaderのときに呼ばれる
+        /// </summary>
+        /// <param name="material"></param>
+        /// <param name="oldShader"></param>
+        /// <param name="newShader"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public override void AssignNewShaderToMaterial(Material material, Shader oldShader, Shader newShader)
+        {
+            if (material is null)
+                throw new ArgumentNullException(nameof(material));
+
+            AssignNewShaderToMaterialUtils.ConvertEmission(material);
+
+            // Clear all keywords for fresh start
+            // Note: this will nuke user-selected custom keywords when they change shaders
+            material.shaderKeywords = null;
+
+            // Assign new shader
+            base.AssignNewShaderToMaterial(material, oldShader, newShader);
+
+            // Setup keywords based on the new shader
+            MaterialKeywordsSetter.Set(material);
+
+            if (oldShader is null || oldShader.name.Contains("Legacy Shaders/") is false)
+            {
+                int renderQueue = MaterialBlendModeSetter.Set(material);
+                Utils.UpdateMaterialRenderQueue(material, renderQueue);
+            }
+            else
+            {
+                AssignNewShaderToMaterialUtils.ModeLegacyShaders(material, oldShader);
+            }
+        }
     }
 }

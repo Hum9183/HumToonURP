@@ -1,44 +1,10 @@
-using System;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 namespace HumToon.Editor
 {
-    public partial class HumToonInspector
+    public static class AssignNewShaderToMaterialUtils
     {
-        public override void AssignNewShaderToMaterial(Material material, Shader oldShader, Shader newShader)
-        {
-            // NOTE: 自身がnewShaderのときに呼ばれる
-            Debug.Log("AssignNewShaderToMaterial");
-
-            if (material is null)
-                throw new ArgumentNullException(nameof(material));
-
-            ConvertEmission(material);
-
-            // Clear all keywords for fresh start
-            // Note: this will nuke user-selected custom keywords when they change shaders
-            material.shaderKeywords = null;
-
-            AssignNewShader(material, oldShader, newShader);
-
-            // Setup keywords based on the new shader
-            MaterialKeywordsSetter.Set(material);
-
-            if (oldShader is null || oldShader.name.Contains("Legacy Shaders/") is false)
-            {
-                int renderQueue = MaterialBlendModeSetter.Set(material);
-                Utils.UpdateMaterialRenderQueue(material, renderQueue);
-            }
-            else
-            {
-                ModeLegacyShaders(material, oldShader);
-            }
-        }
-
-        private void ConvertEmission(Material material)
+        public static void ConvertEmission(Material material)
         {
             // _Emission property is lost after assigning Standard shader to the material
             // thus transfer it before assigning the new shader
@@ -48,15 +14,8 @@ namespace HumToon.Editor
             }
         }
 
-        private void AssignNewShader(Material material, Shader oldShader, Shader newShader)
+        public static void ModeLegacyShaders(Material material, Shader oldShader)
         {
-            base.AssignNewShaderToMaterial(material, oldShader, newShader);
-        }
-
-        private void ModeLegacyShaders(Material material, Shader oldShader)
-        {
-            // mode: legacy shaders or null
-
             SurfaceType surfaceType = SurfaceType.Opaque;
             TransparentBlendMode transparentBlendMode = TransparentBlendMode.Alpha;
             if (oldShader.name.Contains("/Transparent/Cutout/"))
