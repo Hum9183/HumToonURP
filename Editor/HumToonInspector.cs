@@ -94,10 +94,26 @@ namespace HumToon.Editor
         /// </summary>
         public override void ValidateMaterial(Material material)
         {
-            int renderQueue = MaterialBlendModeSetter.Set(material);
-            Utils.UpdateMaterialRenderQueue(material, renderQueue);
+            // 旧処理
+            // int renderQueue = MaterialBlendModeSetter.Set(material);
+            // Utils.UpdateMaterialRenderQueue(material, renderQueue);
+            // MaterialKeywordsSetter.Set(material, litDetail: true);
+            // =============================================
 
-            MaterialKeywordsSetter.Set(material, litDetail: true);
+            var isOpaque = Utils.IsOpaque(material);
+            var alphaClip = material.GetFloat(HumToonPropertyNames.AlphaClip).ToBool();
+            var transparentBlendMode = (TransparentBlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
+            var transparentPreserveSpecular = isOpaque is false && Utils.GetPreserveSpecular(material, transparentBlendMode);
+            var transparentAlphaModulate = isOpaque is false && transparentBlendMode is TransparentBlendMode.Multiply;
+
+            KeywordSetter.Set(material, isOpaque, alphaClip, transparentPreserveSpecular, transparentAlphaModulate);
+            TagSetter.Set(material, isOpaque, alphaClip);
+            PassSetter.Set(material, isOpaque);
+            FloatSetter.Set(material, isOpaque, alphaClip);
+            BlendSetter.Set(material, isOpaque, transparentBlendMode, transparentPreserveSpecular);
+            RenderQueueSetter.Set(material, isOpaque, alphaClip);
+
+            MaterialKeywordsSetter.Set(material, litDetail: true); // TODO: リファクタ
         }
 
         /// <summary>

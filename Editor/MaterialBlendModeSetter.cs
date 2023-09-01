@@ -109,7 +109,7 @@ namespace HumToon.Editor
             return (false, false, renderQueue);
         }
 
-        private static (BlendMode srcBlendRGB, BlendMode dstBlendRGB, BlendMode srcBlendA, BlendMode dstBlendA)
+        public static (BlendMode srcBlendRGB, BlendMode dstBlendRGB, BlendMode srcBlendA, BlendMode dstBlendA)
             SwitchBlendMode(Material material, TransparentBlendMode transparentBlendMode)
         {
             var srcBlendRGB = BlendMode.One;
@@ -165,7 +165,7 @@ namespace HumToon.Editor
             return (srcBlendRGB, dstBlendRGB, srcBlendA, dstBlendA);
         }
 
-        private static void SetMaterialSrcDstBlendProperties(Material material, BlendMode srcBlend, BlendMode dstBlend)
+        public static void SetMaterialSrcDstBlendProperties(Material material, BlendMode srcBlend, BlendMode dstBlend)
         {
             material.SetFloat(HumToonPropertyNames.SrcBlend, (float)srcBlend);
             material.SetFloat(HumToonPropertyNames.DstBlend, (float)dstBlend);
@@ -173,7 +173,7 @@ namespace HumToon.Editor
             material.SetFloat(HumToonPropertyNames.DstBlendAlpha, (float)dstBlend);
         }
 
-        private static void SetMaterialSrcDstBlendProperties(Material material, BlendMode srcBlendRGB, BlendMode dstBlendRGB, BlendMode srcBlendAlpha, BlendMode dstBlendAlpha)
+        public static void SetMaterialSrcDstBlendProperties(Material material, BlendMode srcBlendRGB, BlendMode dstBlendRGB, BlendMode srcBlendAlpha, BlendMode dstBlendAlpha)
         {
             material.SetFloat(HumToonPropertyNames.SrcBlend, (float)srcBlendRGB);
             material.SetFloat(HumToonPropertyNames.DstBlend, (float)dstBlendRGB);
