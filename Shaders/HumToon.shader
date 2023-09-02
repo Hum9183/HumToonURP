@@ -28,14 +28,14 @@ Shader "HumToon"
         _Parallax("Height Scale", Range(0.005, 0.08)) = 0.005
         _ParallaxMap("Height Map", 2D) = "black" {}
 
-        _OcclusionStrength("Strength", Range(0.0, 1.0)) = 1.0
-        _OcclusionMap("Occlusion", 2D) = "white" {}
+        _OcclusionStrength("Occlusion Strength", Range(0.0, 1.0)) = 1.0
+        _OcclusionMap("Occlusion Map", 2D) = "white" {}
 
-        [HDR] _EmissionColor("Color", Color) = (0,0,0)
-        _EmissionMap("Emission", 2D) = "white" {}
+        [HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
+        _EmissionMap("Emission Map", 2D) = "white" {}
 
         _DetailMask("Detail Mask", 2D) = "white" {}
-        _DetailAlbedoMapScale("Scale", Range(0.0, 2.0)) = 1.0
+        _DetailAlbedoMapScale("Detail Scale", Range(0.0, 2.0)) = 1.0
         _DetailAlbedoMap("Detail Albedo x2", 2D) = "linearGrey" {}
         _DetailNormalMapScale("Scale", Range(0.0, 2.0)) = 1.0
         [Normal] _DetailNormalMap("Normal Map", 2D) = "bump" {}

@@ -112,8 +112,7 @@ namespace HumToon.Editor
             FloatSetter.Set(material, isOpaque, alphaClip);
             BlendSetter.Set(material, isOpaque, transparentBlendMode, transparentPreserveSpecular);
             RenderQueueSetter.Set(material, isOpaque, alphaClip);
-
-            MaterialKeywordsSetter.Set(material, litDetail: true); // TODO: リファクタ
+            OtherSetter.Set(material, isOpaque, alphaClip);
         }
 
         /// <summary>
@@ -128,8 +127,6 @@ namespace HumToon.Editor
             if (material is null)
                 throw new ArgumentNullException(nameof(material));
 
-            AssignNewShaderToMaterialUtils.ConvertEmission(material);
-
             // Clear all keywords for fresh start
             // Note: this will nuke user-selected custom keywords when they change shaders
             material.shaderKeywords = null;
@@ -137,18 +134,13 @@ namespace HumToon.Editor
             // Assign new shader
             base.AssignNewShaderToMaterial(material, oldShader, newShader);
 
-            // Setup keywords based on the new shader
-            MaterialKeywordsSetter.Set(material);
-
             if (oldShader is null || oldShader.name.Contains("Legacy Shaders/") is false)
             {
-                int renderQueue = MaterialBlendModeSetter.Set(material);
-                Utils.UpdateMaterialRenderQueue(material, renderQueue);
+                // Setup keywords based on the new shader
+                ValidateMaterial(material);
             }
-            else
-            {
-                AssignNewShaderToMaterialUtils.ModeLegacyShaders(material, oldShader);
-            }
+
+            // NOTE: Legacy Shadersはサポートしない
         }
     }
 }

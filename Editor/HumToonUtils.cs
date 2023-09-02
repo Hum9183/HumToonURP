@@ -33,6 +33,5 @@ namespace HumToon.Editor
                    && transparentBlendMode != TransparentBlendMode.Multiply
                    && transparentBlendMode != TransparentBlendMode.Premultiply;
         }
-
     }
 }
