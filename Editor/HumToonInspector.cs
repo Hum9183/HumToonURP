@@ -70,23 +70,14 @@ namespace HumToon.Editor
 
         private void OnOpenGUI()
         {
-            var filter = (Expandable)MaterialFilter;
-
             // NOTE: 現在はGUI描画をpartialで定義したAction<Material>で渡しているが、
             // 第三者の拡張のしやすさを考慮し、Classのインスタンスで渡す形を検討したい。
 
             // Generate the foldouts
-            if (filter.HasFlag(Expandable.SurfaceOptions))
-                _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceOptions, (uint)Expandable.SurfaceOptions, DrawSurfaceOptions);
-
-            if (filter.HasFlag(Expandable.SurfaceInputs))
-                _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceInputs, (uint)Expandable.SurfaceInputs, DrawSurfaceInputs);
-
-            if (filter.HasFlag(Expandable.Details))
-                _materialHeaderScopeList.RegisterHeaderScope(LitDetailStyles.detailInputs, (uint)Expandable.Details, DrawDetailInputs);
-
-            if (filter.HasFlag(Expandable.Advanced))
-                _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel, (uint)Expandable.Advanced, DrawAdvancedOptions);
+            _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceOptions, (uint)Expandable.SurfaceOptions, DrawSurfaceOptions);
+            _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceInputs,　(uint)Expandable.SurfaceInputs, DrawSurfaceInputs);
+            _materialHeaderScopeList.RegisterHeaderScope(LitDetailStyles.detailInputs, (uint)Expandable.Details, DrawDetailInputs);
+            _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel,　(uint)Expandable.Advanced, DrawAdvancedOptions);
         }
 
         /// <summary>
