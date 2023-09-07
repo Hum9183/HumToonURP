@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public class LitMaterialPropertyContainer : IMaterialPropertyContainer
     {

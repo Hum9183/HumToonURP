@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public class HumToonEnums
     {

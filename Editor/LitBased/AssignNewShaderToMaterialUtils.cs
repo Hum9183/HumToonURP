@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public static class AssignNewShaderToMaterialUtils
     {

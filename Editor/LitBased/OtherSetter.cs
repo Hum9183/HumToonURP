@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public static class OtherSetter
     {

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public partial class HumToonInspector
     {

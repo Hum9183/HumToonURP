@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     /// <summary>
     /// Container for the text and tooltips used to display the shader.

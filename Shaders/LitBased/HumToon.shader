@@ -1,4 +1,4 @@
-Shader "HumToon"
+Shader "HumToon(LitBased)"
 {
     Properties
     {
@@ -457,5 +457,5 @@ Shader "HumToon"
 
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
 //    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
-    CustomEditor "HumToon.Editor.HumToonInspector"
+    CustomEditor "HumToon.Editor.LitBased.HumToonInspector"
 }

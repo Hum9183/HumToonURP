@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEditor.Rendering.Universal.ShaderGUI;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public partial class HumToonInspector : ShaderGUI
     {

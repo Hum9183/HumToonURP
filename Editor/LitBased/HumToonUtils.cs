@@ -6,7 +6,7 @@ using UnityEditor.ShaderGraph;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEditor.Rendering.Universal.ShaderGUI;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public static class Utils
     {

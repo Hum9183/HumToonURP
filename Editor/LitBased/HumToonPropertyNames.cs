@@ -5,7 +5,7 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEngine.Rendering.Universal;
 
-namespace HumToon.Editor
+namespace HumToon.Editor.LitBased
 {
     public static class HumToonPropertyNames
     {
