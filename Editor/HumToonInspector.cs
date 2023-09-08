@@ -18,6 +18,7 @@ namespace HumToon.Editor
         private HumToonMaterialPropertyContainer _matPropContainer;
         private LitMaterialPropertyContainer _litMatPropContainer;
         private LitDetailMaterialPropertyContainer _litDetailMatPropContainer;
+        private ShadeMaterialPropertyContainer _shadeMaterialPropertyContainer;
 
         private bool _firstTimeApply = true;
 
@@ -58,6 +59,7 @@ namespace HumToon.Editor
             _matPropContainer          = new HumToonMaterialPropertyContainer(_materialPropertySetter);
             _litMatPropContainer       = new LitMaterialPropertyContainer(_materialPropertySetter);
             _litDetailMatPropContainer = new LitDetailMaterialPropertyContainer(_materialPropertySetter);
+            _shadeMaterialPropertyContainer = new ShadeMaterialPropertyContainer(_materialPropertySetter);
         }
 
         private void SetMaterialPropertyContainers(MaterialProperty[] materialProperties)
@@ -66,6 +68,7 @@ namespace HumToon.Editor
             _matPropContainer.Set();
             _litMatPropContainer.Set();
             _litDetailMatPropContainer.Set();
+            _shadeMaterialPropertyContainer.Set();
         }
 
         private void OnOpenGUI()
@@ -76,8 +79,9 @@ namespace HumToon.Editor
             // Generate the foldouts
             _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceOptions, (uint)Expandable.SurfaceOptions, DrawSurfaceOptions);
             _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceInputs,　(uint)Expandable.SurfaceInputs, DrawSurfaceInputs);
-            _materialHeaderScopeList.RegisterHeaderScope(LitDetailStyles.detailInputs, (uint)Expandable.Details, DrawDetailInputs);
-            _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel,　(uint)Expandable.Advanced, DrawAdvancedOptions);
+            _materialHeaderScopeList.RegisterHeaderScope(ShadeStyles.ShadeFoldout,　(uint)Expandable.Shade, DrawShade);
+            // _materialHeaderScopeList.RegisterHeaderScope(LitDetailStyles.detailInputs, (uint)Expandable.Details, DrawDetailInputs);
+            // _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel,　(uint)Expandable.Advanced, DrawAdvancedOptions);
         }
 
         /// <summary>

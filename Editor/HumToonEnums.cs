@@ -35,6 +35,8 @@ namespace HumToon.Editor
         /// Use this for additional details foldout.
         /// </summary>
         Details = 1 << 3,
+
+        Shade = 1 << 4,
     }
 
     /// <summary>

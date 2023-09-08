@@ -1,6 +1,10 @@
 #ifndef HUM_TOON_FRAG_INCLUDED
 #define HUM_TOON_FRAG_INCLUDED
 
+#include "HumToonBaseColor.hlsl"
+#include "HumToonShade.hlsl"
+#include "../ShaderLibrary/RenderingLayers.hlsl"
+
 #include "HumToonInput.hlsl"
 #include "HumToonVaryings.hlsl"
 #include "HumToonFunc.hlsl"
@@ -10,7 +14,6 @@
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
 #endif
 
-// Used in Standard (Physically Based) shader
 void LitPassFragment(
     Varyings input
     , out half4 outColor : SV_Target0
@@ -22,16 +25,6 @@ void LitPassFragment(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-#if defined(_PARALLAXMAP)
-    #if defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR)
-        half3 viewDirTS = input.viewDirTS;
-    #else
-        half3 viewDirWS = GetWorldSpaceNormalizeViewDir(input.positionWS);
-        half3 viewDirTS = GetViewDirectionTangentSpace(input.tangentWS, input.normalWS, viewDirWS);
-    #endif
-    ApplyPerPixelDisplacement(viewDirTS, input.uv);
-#endif
-
     SurfaceData surfaceData;
     InitializeStandardLitSurfaceData(input.uv, surfaceData);
 
@@ -41,21 +34,21 @@ void LitPassFragment(
 
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
-    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
+    // TODO: SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
+    // TODO: Decal
+    // TODO: CanDebugOverrideOutputColor()
 
-#ifdef _DBUFFER
-    ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
-#endif
+    half4 finalColor;
+    finalColor     = CalcBaseColor(input.uv);
+    finalColor.rgb = CalcShade(input.uv, finalColor.rgb, input.normalWS, _MainLightPosition.xyz);
 
-    half4 color = UniversalFragmentPBR(inputData, surfaceData);
-    color.rgb = MixFog(color.rgb, inputData.fogCoord);
-    color.a = OutputAlpha(color.a, IsSurfaceTypeTransparent(_SurfaceType));
+    finalColor.rgb = MixFog(finalColor.rgb, inputData.fogCoord);
+    finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
 
-    outColor = color;
+    outColor = finalColor;
 
 #ifdef _WRITE_RENDERING_LAYERS
-    uint renderingLayers = GetMeshRenderingLayer();
-    outRenderingLayers = float4(EncodeMeshRenderingLayer(renderingLayers), 0, 0, 0);
+    SetRenderingLayers(outRenderingLayers);
 #endif
 }
 

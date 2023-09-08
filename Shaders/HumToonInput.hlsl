@@ -13,6 +13,8 @@
 
 // NOTE: Do not ifdef the properties here as SRP batcher can not handle different layouts.
 CBUFFER_START(UnityPerMaterial)
+    #include "HumToonVariablesPerMaterial.hlsl"
+
     float4 _BaseMap_ST;
     float4 _DetailAlbedoMap_ST;
     half4 _BaseColor;
@@ -67,6 +69,8 @@ CBUFFER_END
     #define _DetailNormalMapScale   UNITY_ACCESS_DOTS_INSTANCED_PROP_WITH_DEFAULT(float  , _DetailNormalMapScale)
     #define _Surface                UNITY_ACCESS_DOTS_INSTANCED_PROP_WITH_DEFAULT(float  , _Surface)
 #endif
+
+#include "HumToonVariablesTexture.hlsl"
 
 TEXTURE2D(_ParallaxMap);        SAMPLER(sampler_ParallaxMap);
 TEXTURE2D(_OcclusionMap);       SAMPLER(sampler_OcclusionMap);
