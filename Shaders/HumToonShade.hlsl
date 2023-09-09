@@ -15,10 +15,14 @@ half3 CalcShade(float2 uv, half3 color, float3 normalWS, float3 mainLightDirWS)
                                     halfLambert);
     half firstShade = OneMinus(smoothstepHalfLambert);
 
-    // half3 firstShadeMap = SAMPLE_TEXTURE2D(_FirstShadeMap, sampler_BaseMap, uv); // NOTE: 実装する場合は、use base map as first shade map 等を意識した実装にする
-    half3 firstShadeColor = _FirstShadeColor;
+    half3 firstShadeColor = _FirstShadeColor.rgb;
+#ifdef _USE_FIRST_SHADE_MAP
+    firstShadeColor *= SAMPLE_TEXTURE2D(_FirstShadeMap, sampler_BaseMap, uv).rgb;
+#else
+    firstShadeColor *= color;
+#endif
 
-    return lerp(color, color * firstShadeColor, firstShade); // NOTE: 暫定的に use base map as first shade mapのような挙動に
+    return lerp(color, firstShadeColor, firstShade);
 }
 
 #endif

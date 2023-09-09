@@ -158,6 +158,9 @@ Shader "HumToon"
             #pragma instancing_options renderinglayer
             #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 
+            // HumToon
+            #include "HumToonKeywords.hlsl"
+
             #include "HumToonInput.hlsl"
             #include "HumToonForwardPass.hlsl"
             ENDHLSL

@@ -108,6 +108,9 @@ namespace HumToon.Editor
             BlendSetter.Set(material, isOpaque, transparentBlendMode, transparentPreserveSpecular);
             RenderQueueSetter.Set(material, isOpaque, alphaClip);
             OtherSetter.Set(material, isOpaque, alphaClip);
+
+            // additional
+            ValidateMaterial_Shade(material);
         }
 
         /// <summary>
