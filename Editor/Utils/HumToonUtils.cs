@@ -34,18 +34,18 @@ namespace HumToon.Editor
         /// </summary>
         /// <param name="obj"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void ValidateNull(System.Object obj)
+        public static void ValidateNull(object obj)
         {
             if (IsNull(obj))
                 throw new ArgumentNullException(nameof(obj));
         }
 
-        public static bool IsNull(System.Object obj)
+        public static bool IsNull(object obj)
         {
             return obj is null;
         }
 
-        public static bool IsNotNull(System.Object obj)
+        public static bool IsNotNull(object obj)
         {
             return obj is not null;
         }
