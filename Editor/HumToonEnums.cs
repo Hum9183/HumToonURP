@@ -37,6 +37,7 @@ namespace HumToon.Editor
         Details = 1 << 3,
 
         Shade = 1 << 4,
+        Light = 1 << 5,
     }
 
     /// <summary>

@@ -3,6 +3,7 @@
 
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
+#include "MixMainLightColor.hlsl"
 #include "../ShaderLibrary/RenderingLayers.hlsl"
 
 #include "HumToonInput.hlsl"
@@ -37,11 +38,19 @@ void LitPassFragment(
     // TODO: SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
     // TODO: Decal
     // TODO: CanDebugOverrideOutputColor()
+    // TODO: _LIGHT_LAYERS
 
+    // Main light
+    half4 shadowMask = CalculateShadowMask(inputData);
+    AmbientOcclusionFactor aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
+    Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
+
+    // Frag
     half4 finalColor;
     finalColor     = CalcBaseColor(input.uv);
-    finalColor.rgb = CalcShade(input.uv, finalColor.rgb, input.normalWS, _MainLightPosition.xyz);
+    finalColor.rgb = CalcShade(input.uv, finalColor.rgb, input.normalWS, mainLight.direction);
 
+    finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLight.color.rgb);
     finalColor.rgb = MixFog(finalColor.rgb, inputData.fogCoord);
     finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
 

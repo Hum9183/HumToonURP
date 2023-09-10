@@ -3,11 +3,15 @@ Shader "HumToon"
     Properties
     {
         // HumToon
+        // Shade
         _FirstShadeMap("First Shade Map", 2D) = "white" {}
         _FirstShadeColor("First Shade Color", Color) = (0.5,0.5,0.5,1)
         _FirstShadeBorderPos("First Shade Border Pos", Range(0.0, 1.0)) = 0.5
         _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
+        // light
+        _MainLightColorWeight("Main Light Color Weight", Range(0.0, 1.0)) = 1.0
+        _AdditionalLightColorWeight("Additional Light Color Weight", Range(0.0, 1.0)) = 1.0
 
 
         // Specular vs Metallic workflow
