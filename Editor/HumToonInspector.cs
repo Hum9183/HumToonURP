@@ -1,92 +1,62 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEditor.Rendering;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using UnityEditor.Rendering.Universal.ShaderGUI;
 
 namespace HumToon.Editor
 {
-    public partial class HumToonInspector : ShaderGUI
+    public class HumToonInspector : ShaderGUI
     {
-        // Fields
         private MaterialEditor _materialEditor;
-        private MaterialPropertySetter _materialPropertySetter;
-
-        private HumToonMaterialPropertyContainer _matPropContainer;
-        private LitMaterialPropertyContainer _litMatPropContainer;
-        private LitDetailMaterialPropertyContainer _litDetailMatPropContainer;
-        private ShadeMaterialPropertyContainer _shadeMaterialPropertyContainer;
-        private LightMaterialPropertyContainer _lightMaterialPropertyContainer;
-
+        private readonly PropertySetter _propSetter = new PropertySetter();
+        private IEnumerable<IHeaderScopeDrawer> _drawers;
         private bool _firstTimeApply = true;
 
         /// <summary>
-        /// Foldouts
-        /// By default, everything is expanded, except advanced
+        /// インスペクタ上をマウスが動いているときに呼ばれる
         /// </summary>
-        private readonly MaterialHeaderScopeList _materialHeaderScopeList = new MaterialHeaderScopeList(uint.MaxValue & ~(uint)Expandable.Advanced);
-
-        /// <summary>
-        /// Filter for the surface options, surface inputs, details and advanced foldouts.
-        /// </summary>
-        private static uint MaterialFilter => uint.MaxValue;
-
-        // Constants
-        private const int QueueOffsetRange = 50;
-
-        // methods
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] materialProperties)
         {
             _materialEditor = materialEditor ? materialEditor : throw new ArgumentNullException(nameof(materialEditor));
-            Material material = materialEditor.target as Material; // TODO: メンバ化できないか要検証
 
             if (_firstTimeApply)
             {
-                InitializeMaterialPropertyContainers();
-                OnOpenGUI();
+                InitDrawers();
                 _firstTimeApply = false;
             }
 
-            SetMaterialPropertyContainers(materialProperties);
-            _materialHeaderScopeList.DrawHeaders(materialEditor, material);
+            SetMaterialProperties(materialProperties);
+            Draw();
         }
 
-        private void InitializeMaterialPropertyContainers()
+        private void InitDrawers()
         {
-            _materialPropertySetter    = new MaterialPropertySetter();
-            _matPropContainer          = new HumToonMaterialPropertyContainer(_materialPropertySetter);
-            _litMatPropContainer       = new LitMaterialPropertyContainer(_materialPropertySetter);
-            _litDetailMatPropContainer = new LitDetailMaterialPropertyContainer(_materialPropertySetter);
-            _shadeMaterialPropertyContainer = new ShadeMaterialPropertyContainer(_materialPropertySetter);
-            _lightMaterialPropertyContainer = new LightMaterialPropertyContainer(_materialPropertySetter);
+            var factory = new HeaderScopeFactory();
+            _drawers = factory.CreateDrawers(_propSetter);
         }
 
-        private void SetMaterialPropertyContainers(MaterialProperty[] materialProperties)
+        /// <summary>
+        /// マテリアルプロパティは毎描画ごとに取得する
+        /// </summary>
+        private void SetMaterialProperties(MaterialProperty[] materialProperties)
         {
-            _materialPropertySetter.MatProps = materialProperties;
-            _matPropContainer.Set();
-            _litMatPropContainer.Set();
-            _litDetailMatPropContainer.Set();
-            _shadeMaterialPropertyContainer.Set();
-            _lightMaterialPropertyContainer.Set();
+            _propSetter.MatProps = materialProperties; // NOTE: 各DrawersたちはPropertySetterへの参照を持っている
+
+            foreach (var drawer in _drawers)
+            {
+                drawer.SetProperties();
+            }
         }
 
-        private void OnOpenGUI()
+        /// <summary>
+        /// Draw
+        /// </summary>
+        private void Draw()
         {
-            // NOTE: 現在はGUI描画をpartialで定義したAction<Material>で渡しているが、
-            // 第三者の拡張のしやすさを考慮し、Classのインスタンスで渡す形を検討したい。
-
-            // Generate the foldouts
-            _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceOptions, (uint)Expandable.SurfaceOptions, DrawSurfaceOptions);
-            _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.SurfaceInputs,　(uint)Expandable.SurfaceInputs, DrawSurfaceInputs);
-            _materialHeaderScopeList.RegisterHeaderScope(ShadeStyles.ShadeFoldout,　(uint)Expandable.Shade, DrawShade);
-            _materialHeaderScopeList.RegisterHeaderScope(LightStyles.LightFoldout,　(uint)Expandable.Light, DrawLight);
-            // _materialHeaderScopeList.RegisterHeaderScope(LitDetailStyles.detailInputs, (uint)Expandable.Details, DrawDetailInputs);
-            // _materialHeaderScopeList.RegisterHeaderScope(HumToonStyles.AdvancedLabel,　(uint)Expandable.Advanced, DrawAdvancedOptions);
+            foreach (var drawer in _drawers)
+            {
+                drawer.Draw(_materialEditor);
+            }
         }
 
         /// <summary>
@@ -94,37 +64,16 @@ namespace HumToon.Editor
         /// </summary>
         public override void ValidateMaterial(Material material)
         {
-            // 旧処理
-            // int renderQueue = MaterialBlendModeSetter.Set(material);
-            // Utils.UpdateMaterialRenderQueue(material, renderQueue);
-            // MaterialKeywordsSetter.Set(material, litDetail: true);
-            // =============================================
-
-            var isOpaque = Utils.IsOpaque(material);
-            var alphaClip = material.GetFloat(HumToonPropertyNames.AlphaClip).ToBool();
-            var transparentBlendMode = (TransparentBlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
-            var transparentPreserveSpecular = isOpaque is false && Utils.GetPreserveSpecular(material, transparentBlendMode);
-            var transparentAlphaModulate = isOpaque is false && transparentBlendMode is TransparentBlendMode.Multiply;
-
-            KeywordSetter.Set(material, isOpaque, alphaClip, transparentPreserveSpecular, transparentAlphaModulate);
-            TagSetter.Set(material, isOpaque, alphaClip);
-            PassSetter.Set(material, isOpaque);
-            FloatSetter.Set(material, isOpaque, alphaClip);
-            BlendSetter.Set(material, isOpaque, transparentBlendMode, transparentPreserveSpecular);
-            RenderQueueSetter.Set(material, isOpaque, alphaClip);
-            OtherSetter.Set(material, isOpaque, alphaClip);
-
-            // additional
-            ValidateMaterial_Shade(material);
+            var matScopeFactory = new HeaderScopeFactory();
+            foreach (var validator in matScopeFactory.CreateValidators())
+            {
+                validator.Validate(material);
+            }
         }
 
         /// <summary>
         /// NOTE: 自身がnewShaderのときに呼ばれる
         /// </summary>
-        /// <param name="material"></param>
-        /// <param name="oldShader"></param>
-        /// <param name="newShader"></param>
-        /// <exception cref="ArgumentNullException"></exception>
         public override void AssignNewShaderToMaterial(Material material, Shader oldShader, Shader newShader)
         {
             if (material is null)
