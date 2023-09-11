@@ -1,5 +1,5 @@
-#ifndef ADDITIONAL_LIGHT_COLOR_INCLUDED
-#define ADDITIONAL_LIGHT_COLOR_INCLUDED
+#ifndef ADDITIONAL_LIGHTS_COLOR_INCLUDED
+#define ADDITIONAL_LIGHTS_COLOR_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 
