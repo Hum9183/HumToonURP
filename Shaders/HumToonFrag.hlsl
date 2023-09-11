@@ -52,6 +52,7 @@ void LitPassFragment(
     finalColor     = CalcBaseColor(input.uv);
     finalColor.rgb = CalcShade(input.uv, finalColor.rgb, input.normalWS, mainLight.direction);
 
+    // Get light colors
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
 
 #if defined(_ADDITIONAL_LIGHTS)
