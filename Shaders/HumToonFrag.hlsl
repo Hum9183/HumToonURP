@@ -3,7 +3,7 @@
 
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
-#include "MixMainLightColor.hlsl"
+#include "MainLightColor.hlsl"
 #include "../ShaderLibrary/RenderingLayers.hlsl"
 
 #include "HumToonInput.hlsl"
@@ -49,8 +49,10 @@ void LitPassFragment(
     half4 finalColor;
     finalColor     = CalcBaseColor(input.uv);
     finalColor.rgb = CalcShade(input.uv, finalColor.rgb, input.normalWS, mainLight.direction);
+    
+    half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
+    finalColor.rgb *= mainLightColor;
 
-    finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLight.color.rgb);
     finalColor.rgb = MixFog(finalColor.rgb, inputData.fogCoord);
     finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
 
