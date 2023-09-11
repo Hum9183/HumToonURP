@@ -7,7 +7,7 @@ namespace HumToon.Editor
         private readonly PropertySetter _propSetter;
 
         public MaterialProperty MainLightColorWeight;
-        public MaterialProperty AdditionalLightColorWeight;
+        public MaterialProperty AdditionalLightsColorWeight;
 
         public LightPropertyContainer(PropertySetter propSetter)
         {

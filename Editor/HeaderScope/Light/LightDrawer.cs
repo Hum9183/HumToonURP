@@ -13,7 +13,7 @@ namespace HumToon.Editor
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
             materialEditor.ShaderProperty(PropContainer.MainLightColorWeight, LightStyles.MainLightColorWeight);
-            materialEditor.ShaderProperty(PropContainer.AdditionalLightColorWeight, LightStyles.AdditionalLightColorWeight);
+            materialEditor.ShaderProperty(PropContainer.AdditionalLightsColorWeight, LightStyles.AdditionalLightsColorWeight);
         }
     }
 }

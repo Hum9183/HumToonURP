@@ -4,6 +4,7 @@
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
 #include "MainLightColor.hlsl"
+#include "AdditionalLightsColor.hlsl"
 #include "../ShaderLibrary/RenderingLayers.hlsl"
 
 #include "HumToonInput.hlsl"
@@ -39,6 +40,7 @@ void LitPassFragment(
     // TODO: Decal
     // TODO: CanDebugOverrideOutputColor()
     // TODO: _LIGHT_LAYERS
+    // TODO: Forward plus
 
     // Main light
     half4 shadowMask = CalculateShadowMask(inputData);
@@ -49,9 +51,27 @@ void LitPassFragment(
     half4 finalColor;
     finalColor     = CalcBaseColor(input.uv);
     finalColor.rgb = CalcShade(input.uv, finalColor.rgb, input.normalWS, mainLight.direction);
-    
+
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
+
+#if defined(_ADDITIONAL_LIGHTS)
+    half3 additionalLightsColor = CalcAdditionalLightColor(finalColor.rgb, inputData, shadowMask, aoFactor);
+#endif
+
+#if defined(_ADDITIONAL_LIGHTS_VERTEX)
+    half3 additionalLightsColorVertex = CalcAdditionalLightColorVertex(finalColor.rgb, inputData.vertexLighting);
+#endif
+
+    // Final composite
     finalColor.rgb *= mainLightColor;
+
+#if defined(_ADDITIONAL_LIGHTS)
+    finalColor.rgb += additionalLightsColor;
+#endif
+
+#if defined(_ADDITIONAL_LIGHTS_VERTEX)
+    finalColor.rgb += additionalLightsColorVertex;
+#endif
 
     finalColor.rgb = MixFog(finalColor.rgb, inputData.fogCoord);
     finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));

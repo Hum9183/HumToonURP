@@ -11,7 +11,7 @@ Shader "HumToon"
 
         // light
         _MainLightColorWeight("Main Light Color Weight", Range(0.0, 1.0)) = 1.0
-        _AdditionalLightColorWeight("Additional Light Color Weight", Range(0.0, 1.0)) = 1.0
+        _AdditionalLightsColorWeight("Additional Light Color Weight", Range(0.0, 1.0)) = 1.0
 
 
         // Specular vs Metallic workflow
