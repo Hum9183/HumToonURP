@@ -64,8 +64,8 @@ namespace HumToon.Editor
         /// </summary>
         public override void ValidateMaterial(Material material)
         {
-            var matScopeFactory = new HeaderScopeFactory();
-            foreach (var validator in matScopeFactory.CreateValidators())
+            var factory = new HeaderScopeFactory();
+            foreach (var validator in factory.CreateValidators())
             {
                 validator.Validate(material);
             }
