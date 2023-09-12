@@ -27,10 +27,10 @@ namespace HumToon.Editor
             return newValue;
         }
 
-        internal static void DrawFloatToggleProperty(MaterialProperty matProp, GUIContent styles, int indentLevel = 0, bool isDisabled = false)
+        internal static bool DrawFloatToggleProperty(MaterialProperty matProp, GUIContent styles, int indentLevel = 0, bool isDisabled = false)
         {
             if (matProp == null)
-                return;
+                throw new ArgumentNullException(nameof(matProp));
 
             EditorGUI.BeginDisabledGroup(isDisabled);
             EditorGUI.indentLevel += indentLevel;
@@ -42,6 +42,7 @@ namespace HumToon.Editor
             MaterialEditor.EndProperty();
             EditorGUI.indentLevel -= indentLevel;
             EditorGUI.EndDisabledGroup();
+            return newValue;
         }
 
         /// <summary>

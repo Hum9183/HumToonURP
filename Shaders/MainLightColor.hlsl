@@ -3,7 +3,10 @@
 
 half3 CalcMainLightColor(half3 mainLightColor)
 {
-    return mainLightColor * _MainLightColorWeight;
+    half3 finalMainLightColor = mainLightColor * _MainLightColorWeight;
+    finalMainLightColor = lerp(finalMainLightColor, min(finalMainLightColor, _MainLightUpperLimit), _UseMainLightUpperLimit);
+    finalMainLightColor = lerp(finalMainLightColor, max(finalMainLightColor, _MainLightLowerLimit), _UseMainLightLowerLimit);
+    return finalMainLightColor;
 }
 
 #endif

@@ -8,6 +8,10 @@ half _FirstShadeBorderBlur;
 
 // Light
 half _MainLightColorWeight;
+half _UseMainLightUpperLimit;
+half _MainLightUpperLimit;
+half _UseMainLightLowerLimit;
+half _MainLightLowerLimit;
 half _AdditionalLightsColorWeight;
 
 #endif
