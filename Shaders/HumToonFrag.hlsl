@@ -1,6 +1,8 @@
 #ifndef HUM_TOON_FRAG_INCLUDED
 #define HUM_TOON_FRAG_INCLUDED
 
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
+
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
 #include "MainLightColor.hlsl"
@@ -41,6 +43,7 @@ void LitPassFragment(
     // TODO: CanDebugOverrideOutputColor()
     // TODO: _LIGHT_LAYERS
     // TODO: Forward plus
+    // TODO: SSAOのweight調整機能
 
     // Main light
     half4 shadowMask = CalculateShadowMask(inputData);
