@@ -29,8 +29,10 @@ void LitPassFragment(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
+    float2 uv0 = input.uv;
+
     SurfaceData surfaceData;
-    InitializeStandardLitSurfaceData(input.uv, surfaceData);
+    InitializeStandardLitSurfaceData(uv0, surfaceData);
 
 #ifdef LOD_FADE_CROSSFADE
     LODFadeCrossFade(input.positionCS);
@@ -52,8 +54,8 @@ void LitPassFragment(
 
     // Frag
     half4 finalColor;
-    finalColor     = CalcBaseColor(input.uv);
-    finalColor.rgb = CalcShade(input.uv, finalColor.rgb, inputData.normalWS, mainLight.direction);
+    finalColor     = CalcBaseColor(uv0);
+    finalColor.rgb = CalcShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction);
 
     // Get light colors
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
