@@ -5,13 +5,20 @@
 
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
+
 #if defined(_USE_MAT_CAP)
     #include "HumToonMatCap.hlsl"
 #endif
 
 #include "MainLightColor.hlsl"
-#include "AdditionalLightsColor.hlsl"
-#include "../ShaderLibrary/RenderingLayers.hlsl"
+
+#if defined(_ADDITIONAL_LIGHTS) || defined(_ADDITIONAL_LIGHTS_VERTEX)
+    #include "AdditionalLightsColor.hlsl"
+#endif
+
+#if defined(_WRITE_RENDERING_LAYERS)
+    #include "../ShaderLibrary/RenderingLayers.hlsl"
+#endif
 
 #include "HumToonInput.hlsl"
 #include "HumToonVaryings.hlsl"
