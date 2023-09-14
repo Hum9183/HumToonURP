@@ -2,5 +2,6 @@
 #define HUM_TOON_VARIABLES_TEXTURE_INCLUDED
 
 TEXTURE2D(_FirstShadeMap);
+TEXTURE2D(_MatCapMap);
 
 #endif

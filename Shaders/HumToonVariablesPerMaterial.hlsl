@@ -6,6 +6,9 @@ half4 _FirstShadeColor;
 half _FirstShadeBorderPos;
 half _FirstShadeBorderBlur;
 
+// MatCap
+half4 _MatCapColor;
+
 // Light
 half _MainLightColorWeight;
 half _UseMainLightUpperLimit;

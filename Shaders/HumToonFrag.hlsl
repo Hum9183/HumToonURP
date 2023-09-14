@@ -5,6 +5,8 @@
 
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
+#include "HumToonMatCap.hlsl"
+
 #include "MainLightColor.hlsl"
 #include "AdditionalLightsColor.hlsl"
 #include "../ShaderLibrary/RenderingLayers.hlsl"
@@ -57,6 +59,11 @@ void LitPassFragment(
     finalColor     = CalcBaseColor(uv0);
     finalColor.rgb = CalcShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction);
 
+    // Get others
+#if defined(_USE_MAT_CAP)
+    half3 matCapColor = CalcMatCap(inputData.normalWS);
+#endif
+
     // Get light colors
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
 
@@ -70,6 +77,9 @@ void LitPassFragment(
 
     // Final composite
     finalColor.rgb *= mainLightColor;
+#if defined(_USE_MAT_CAP)
+    finalColor.rgb += matCapColor;
+#endif
 
 #if defined(_ADDITIONAL_LIGHTS)
     finalColor.rgb += additionalLightsColor;
