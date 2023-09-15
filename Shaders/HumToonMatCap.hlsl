@@ -7,8 +7,14 @@
 half3 CalcMatCap(float3 normalWS)
 {
     // TODO:
-    // MainLightの影響
-    // その他、いろいろなオプション
+    // ・MainLightの影響
+    // ・Blur
+    // ・Scale
+    // ・Rotate
+    // ・スタビライザ
+    // ・ブレンド方法(乗算etc.)
+    // ・Persp or Ortho
+    // ・Mask
     float2 matCapUV = mul((float3x3)UNITY_MATRIX_V, normalWS).xy;
     matCapUV = matCapUV * _MatCapMap_ST.xy + _MatCapMap_ST.zw;
     matCapUV = matCapUV * 0.5 + 0.5;
