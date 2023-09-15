@@ -7,6 +7,7 @@ half _FirstShadeBorderPos;
 half _FirstShadeBorderBlur;
 
 // MatCap
+float4 _MatCapMap_ST;
 half4 _MatCapColor;
 
 // Light
