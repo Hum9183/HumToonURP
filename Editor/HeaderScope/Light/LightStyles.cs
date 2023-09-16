@@ -14,24 +14,24 @@ namespace HumToon.Editor
             tooltip: String.Empty);
 
         public static readonly GUIContent MainLightColorWeight = EditorGUIUtility.TrTextContent(
-            text: "Main Light Color Weight",
+            text: "Color Weight",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.MainLightColorWeight).Prefix()}");
 
         public static readonly GUIContent MainLightUpperLimit = EditorGUIUtility.TrTextContent(
-            text: "Main Light Upper Limit",
+            text: "Upper Limit",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.UseMainLightUpperLimit).Prefix()}{C.Ln}" +
                      $"{nameof(P.MainLightUpperLimit).Prefix()}");
 
         public static readonly GUIContent MainLightLowerLimit = EditorGUIUtility.TrTextContent(
-            text: "Main Light Lower Limit",
+            text: "Lower Limit",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.UseMainLightLowerLimit).Prefix()}{C.Ln}" +
                      $"{nameof(P.MainLightLowerLimit).Prefix()}");
 
         public static readonly GUIContent AdditionalLightsColorWeight = EditorGUIUtility.TrTextContent(
-            text: "Additional Lights Color Weight",
+            text: "Color Weight",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.AdditionalLightsColorWeight).Prefix()}");
     }

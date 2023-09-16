@@ -35,7 +35,7 @@ namespace HumToon.Editor
             }
 
             HumToonGUIUtils.Space();
-            
+
             EditorGUILayout.LabelField("Additional Lights", EditorStyles.boldLabel);
             using (new EditorGUI.IndentLevelScope(1))
             {
