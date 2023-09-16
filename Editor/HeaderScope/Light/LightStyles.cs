@@ -1,15 +1,38 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using C = HumToon.Editor.Const;
 
 namespace HumToon.Editor
 {
     public static class LightStyles
     {
-        public static readonly GUIContent LightFoldout = EditorGUIUtility.TrTextContent("Light", String.Empty);
-        public static readonly GUIContent MainLightColorWeight = EditorGUIUtility.TrTextContent("Main Light Color Weight", $"{Const.Property}_MainLightColorWeight");
-        public static readonly GUIContent MainLightUpperLimit = EditorGUIUtility.TrTextContent("Main Light Upper Limit", $"{Const.Property}_UseMainLightUpperLimit, _MainLightUpperLimit");
-        public static readonly GUIContent MainLightLowerLimit = EditorGUIUtility.TrTextContent("Main Light Lower Limit", $"{Const.Property}_UseMainLightLowerLimit, _MainLightLowerLimit");
-        public static readonly GUIContent AdditionalLightsColorWeight = EditorGUIUtility.TrTextContent("Additional Lights Color Weight", $"{Const.Property}_AdditionalLightColorWeight");
+        private static readonly LightPropertyContainer P = new LightPropertyContainer(null);
+
+        public static readonly GUIContent LightFoldout = EditorGUIUtility.TrTextContent(
+            text: "Light",
+            tooltip: String.Empty);
+
+        public static readonly GUIContent MainLightColorWeight = EditorGUIUtility.TrTextContent(
+            text: "Main Light Color Weight",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.MainLightColorWeight).Prefix()}");
+
+        public static readonly GUIContent MainLightUpperLimit = EditorGUIUtility.TrTextContent(
+            text: "Main Light Upper Limit",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.UseMainLightUpperLimit).Prefix()}{C.Ln}" +
+                     $"{nameof(P.MainLightUpperLimit).Prefix()}");
+
+        public static readonly GUIContent MainLightLowerLimit = EditorGUIUtility.TrTextContent(
+            text: "Main Light Lower Limit",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.UseMainLightLowerLimit).Prefix()}{C.Ln}" +
+                     $"{nameof(P.MainLightLowerLimit).Prefix()}");
+
+        public static readonly GUIContent AdditionalLightsColorWeight = EditorGUIUtility.TrTextContent(
+            text: "Additional Lights Color Weight",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.AdditionalLightsColorWeight).Prefix()}");
     }
 }

@@ -5,20 +5,6 @@ namespace HumToon.Editor
 {
     public static class Utils
     {
-        public static bool IsOpaque(Material material)
-        {
-            return (SurfaceType)material.GetFloat(HumToonPropertyNames.SurfaceType) is SurfaceType.Opaque;
-        }
-
-        /// <summary>
-        /// this function is shared with ShaderGraph Lit/Unlit GUIs and also the hand-written GUIs
-        /// </summary>
-        public static void UpdateMaterialRenderQueue(Material material, int renderQueue)
-        {
-            if (material.renderQueue != renderQueue)
-                material.renderQueue = renderQueue;
-        }
-
         public static bool GetPreserveSpecular(Material material, TransparentBlendMode transparentBlendMode)
         {
             // Lift alpha multiply from ROP to shader by setting pre-multiplied _SrcBlend mode.
@@ -27,22 +13,6 @@ namespace HumToon.Editor
             return material.GetFloat(HumToonPropertyNames.BlendModePreserveSpecular).ToBool()
                    && transparentBlendMode != TransparentBlendMode.Multiply
                    && transparentBlendMode != TransparentBlendMode.Premultiply;
-        }
-
-        /// <summary>
-        /// Nullチェック
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static void ValidateNull(object obj)
-        {
-            if (IsNull(obj))
-                throw new ArgumentNullException(nameof(obj));
-        }
-
-        public static bool IsNull(object obj)
-        {
-            return obj is null;
         }
 
         public static bool IsNotNull(object obj)

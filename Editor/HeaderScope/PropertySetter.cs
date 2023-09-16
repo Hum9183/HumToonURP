@@ -12,7 +12,7 @@ namespace HumToon.Editor
             var fieldInfos = typeof(T).GetFields();
             foreach (var fieldInfo in fieldInfos)
             {
-                string matPropName = $"_{fieldInfo.Name}";
+                string matPropName = fieldInfo.Name.Prefix();
                 var prop = FindProperty(matPropName, false);
                 fieldInfo.SetValue(matPropContainer, prop);
             }

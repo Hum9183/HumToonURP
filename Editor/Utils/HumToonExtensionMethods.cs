@@ -18,5 +18,10 @@ namespace HumToon.Editor
         {
             return Math.Abs(value - 1.0f) < tolerance;
         }
+
+        public static string Prefix(this string value, string prefix = "_")
+        {
+            return $"{prefix}{value}";
+        }
     }
 }

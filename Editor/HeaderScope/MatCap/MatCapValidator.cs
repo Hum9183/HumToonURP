@@ -5,8 +5,8 @@ namespace HumToon.Editor
 {
     public class MatCapValidator : IHeaderScopeValidator
     {
-        private static readonly string _USE_MAT_CAP = "_USE_MAT_CAP";
-        private static readonly int UseMatCap = Shader.PropertyToID("_UseMatCap");
+        private static readonly MatCapPropertyContainer P = new MatCapPropertyContainer(null);
+        private static readonly int IDUseMatCap = Shader.PropertyToID(nameof(P.UseMatCap).Prefix());
 
         public void Validate(Material material)
         {
@@ -15,8 +15,8 @@ namespace HumToon.Editor
 
         private void SetKeywords(Material material)
         {
-            bool useMatCap = material.GetFloat(UseMatCap).ToBool();
-            CoreUtils.SetKeyword(material, _USE_MAT_CAP, useMatCap);
+            bool useMatCap = material.GetFloat(IDUseMatCap).ToBool();
+            CoreUtils.SetKeyword(material, MatCapKeywords._USE_MAT_CAP, useMatCap);
         }
     }
 }

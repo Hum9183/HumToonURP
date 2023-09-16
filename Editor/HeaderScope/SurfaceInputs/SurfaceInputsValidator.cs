@@ -1,5 +1,3 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -8,7 +6,8 @@ namespace HumToon.Editor
 {
     public class SurfaceInputsValidator : IHeaderScopeValidator
     {
-        private static readonly int BumpMap = Shader.PropertyToID("_BumpMap");
+        private static readonly SurfaceInputsPropertyContainer P = new SurfaceInputsPropertyContainer(null);
+        private static readonly int IDBumpMap = Shader.PropertyToID($"{nameof(P.BumpMap).Prefix()}");
 
         public void Validate(Material material)
         {
@@ -17,7 +16,8 @@ namespace HumToon.Editor
 
         private static void SetKeywords(Material material)
         {
-            CoreUtils.SetKeyword(material, ShaderKeywordStrings._NORMALMAP, material.GetTexture(BumpMap));
+            bool existsNormalMap = material.GetTexture(IDBumpMap) is not null;
+            CoreUtils.SetKeyword(material, ShaderKeywordStrings._NORMALMAP, existsNormalMap);
         }
     }
 }

@@ -12,13 +12,14 @@ namespace HumToon.Editor
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
-            EditorGUIUtility.labelWidth = 0f;
+            SurfaceType surfaceType = (SurfaceType)HumToonGUIUtils.DoPopup<SurfaceType>(materialEditor, PropContainer.SurfaceType, SurfaceOptionsStyles.SurfaceType);
 
-            HumToonGUIUtils.DoPopup<SurfaceType>(materialEditor, PropContainer.SurfaceType, SurfaceOptionsStyles.SurfaceType);
-
-            if ((SurfaceType)PropContainer.SurfaceType.floatValue is SurfaceType.Transparent)
+            if (surfaceType is SurfaceType.Transparent)
             {
-                HumToonGUIUtils.DoPopup<TransparentBlendMode>(materialEditor, PropContainer.BlendMode, SurfaceOptionsStyles.BlendingMode);
+                using (new EditorGUI.IndentLevelScope(1))
+                {
+                    HumToonGUIUtils.DoPopup<TransparentBlendMode>(materialEditor, PropContainer.BlendMode, SurfaceOptionsStyles.TransparentBlendMode);
+                }
             }
 
             HumToonGUIUtils.DoPopup<RenderFace>(materialEditor, PropContainer.CullMode, SurfaceOptionsStyles.RenderFace); // NOTE: RenderFaceで表裏の差を吸収

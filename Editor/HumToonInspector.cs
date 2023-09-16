@@ -53,6 +53,8 @@ namespace HumToon.Editor
         /// </summary>
         private void Draw()
         {
+            EditorGUIUtility.labelWidth = 0f;
+
             foreach (var drawer in _drawers)
             {
                 drawer.Draw(_materialEditor);

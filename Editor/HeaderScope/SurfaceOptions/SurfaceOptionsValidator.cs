@@ -6,13 +6,21 @@ namespace HumToon.Editor
 {
     public class SurfaceOptionsValidator : IHeaderScopeValidator
     {
-        private const string RenderType = "RenderType";
+        private static readonly SurfaceOptionsPropertyContainer P = new SurfaceOptionsPropertyContainer(null);
+        private static readonly int IDSurfaceType          = Shader.PropertyToID($"{nameof(P.SurfaceType).Prefix()}");
+        private static readonly int IDAlphaClip            = Shader.PropertyToID($"{nameof(P.AlphaClip).Prefix()}");
+        private static readonly int IDTransparentBlendMode = Shader.PropertyToID($"{nameof(P.BlendMode).Prefix()}");
+        private static readonly int IDReceiveShadows       = Shader.PropertyToID($"{nameof(P.ReceiveShadows).Prefix()}");
+        private static readonly int IDCullMode             = Shader.PropertyToID($"{nameof(P.CullMode).Prefix()}");
+        private static readonly int IDAlphaToMask          = Shader.PropertyToID(HumToonPropertyNames.AlphaToMask);
+        private static readonly int IDZWrite               = Shader.PropertyToID(HumToonPropertyNames.ZWrite);
+        private static readonly int IDQueueOffset          = Shader.PropertyToID(HumToonPropertyNames.QueueOffset);
 
         public void Validate(Material material)
         {
-            var isOpaque = Utils.IsOpaque(material);
-            var alphaClip = material.GetFloat(HumToonPropertyNames.AlphaClip).ToBool();
-            var transparentBlendMode = (TransparentBlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
+            var isOpaque = (SurfaceType)material.GetFloat(IDSurfaceType) is SurfaceType.Opaque;
+            var alphaClip = material.GetFloat(IDAlphaClip).ToBool();
+            var transparentBlendMode = (TransparentBlendMode)material.GetFloat(IDTransparentBlendMode);
             var transparentPreserveSpecular = isOpaque is false && Utils.GetPreserveSpecular(material, transparentBlendMode);
             var transparentAlphaModulate = isOpaque is false && transparentBlendMode is TransparentBlendMode.Multiply;
 
@@ -29,7 +37,7 @@ namespace HumToon.Editor
             bool transparentPreserveSpecular, bool transparentAlphaModulate)
         {
             // Receive Shadows
-            bool receiveShadows = material.GetFloat(HumToonPropertyNames.ReceiveShadows).ToBool();
+            bool receiveShadows = material.GetFloat(IDReceiveShadows).ToBool();
             CoreUtils.SetKeyword(material, ShaderKeywordStrings._RECEIVE_SHADOWS_OFF, receiveShadows is false);
 
             // Alpha test
@@ -48,32 +56,32 @@ namespace HumToon.Editor
         private void SetTags(Material material, bool isOpaque, bool alphaClip)
         {
             // Clear override tag
-            material.SetOverrideTag(RenderType, string.Empty); // TODO: 必要ないかも
+            material.SetOverrideTag(RenderTypeTags.RenderType, string.Empty); // TODO: 必要ないかも
 
             if (isOpaque)
             {
-                material.SetOverrideTag(RenderType, alphaClip ? "TransparentCutout" : "Opaque");
+                material.SetOverrideTag(RenderTypeTags.RenderType, alphaClip ? RenderTypeTags.TransparentCutout : RenderTypeTags.Opaque);
             }
             else
             {
-                material.SetOverrideTag(RenderType, "Transparent");
+                material.SetOverrideTag(RenderTypeTags.RenderType, RenderTypeTags.Transparent);
             }
         }
 
         private void SetPass(Material material, bool isOpaque)
         {
             // Transparent
-            material.SetShaderPassEnabled("ShadowCaster", isOpaque);
+            material.SetShaderPassEnabled(Passes.ShadowCaster, isOpaque);
 
             // Depth
-            material.SetShaderPassEnabled("DepthOnly", isOpaque);
+            material.SetShaderPassEnabled(Passes.DepthOnly, isOpaque);
         }
 
         private void SetFloat(Material material, bool isOpaque, bool alphaClip)
         {
-            material.SetFloat(HumToonPropertyNames.AlphaToMask, alphaClip.ToFloat());
+            material.SetFloat(IDAlphaToMask, alphaClip.ToFloat());
 
-            material.SetFloat(HumToonPropertyNames.ZWrite, isOpaque.ToFloat());
+            material.SetFloat(IDZWrite, isOpaque.ToFloat());
         }
 
         private void SetRenderQueue(Material material, bool isOpaque, bool alphaClip)
@@ -89,7 +97,7 @@ namespace HumToon.Editor
                 renderQueue = (int)RenderQueue.Transparent;
             }
 
-            renderQueue += (int)material.GetFloat(HumToonPropertyNames.QueueOffset);
+            renderQueue += (int)material.GetFloat(IDQueueOffset);
 
             if (material.renderQueue != renderQueue)
                 material.renderQueue = renderQueue;
@@ -98,7 +106,7 @@ namespace HumToon.Editor
         private void SetOthers(Material material)
         {
             // Setup double sided GI based on Cull state
-            material.doubleSidedGI = (RenderFace)material.GetFloat(HumToonPropertyNames.CullMode) != RenderFace.Front;
+            material.doubleSidedGI = (RenderFace)material.GetFloat(IDCullMode) != RenderFace.Front;
         }
     }
 }
