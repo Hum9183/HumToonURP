@@ -9,6 +9,7 @@ namespace HumToon.Editor
         public MaterialProperty UseMatCap;
         public MaterialProperty MatCapMap;
         public MaterialProperty MatCapColor;
+        public MaterialProperty MatCapMainLightEffectiveness;
 
         public MatCapPropertyContainer(PropertySetter propSetter)
         {

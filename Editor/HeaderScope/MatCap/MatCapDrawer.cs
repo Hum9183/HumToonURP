@@ -19,6 +19,7 @@ namespace HumToon.Editor
                 {
                     materialEditor.TexturePropertySingleLine(MatCapStyles.MatCapMap, PropContainer.MatCapMap, PropContainer.MatCapColor);
                     materialEditor.TextureScaleOffsetProperty(PropContainer.MatCapMap);
+                    materialEditor.ShaderProperty(PropContainer.MatCapMainLightEffectiveness, MatCapStyles.MatCapMainLightEffectiveness);
                 }
             }
         }

@@ -13,6 +13,7 @@ Shader "HumToon"
         _UseMatCap("Use Mat Cap", Float) = 0.0 // NOTE: Only for keyword
         _MatCapMap("Mat Cap Map", 2D) = "black" {}
         _MatCapColor("Mat Cap Color", Color) = (1.0,1.0,1.0,1.0)
+        _MatCapMainLightEffectiveness("Mat Cap Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
 
         // light

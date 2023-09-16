@@ -42,13 +42,13 @@ void LitPassFragment(
     finalColor     = CalcBaseColor(uv0);
     finalColor.rgb = CalcShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction);
 
-    // Get others
-#if defined(_USE_MAT_CAP)
-    half3 matCapColor = CalcMatCap(inputData.normalWS);
-#endif
-
     // Get light colors
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
+
+    // Get others
+#if defined(_USE_MAT_CAP)
+    half3 matCapColor = CalcMatCap(inputData.normalWS, mainLightColor);
+#endif
 
 #if defined(_ADDITIONAL_LIGHTS)
     half3 additionalLightsColor = CalcAdditionalLightColor(finalColor.rgb, inputData, shadowMask, aoFactor);

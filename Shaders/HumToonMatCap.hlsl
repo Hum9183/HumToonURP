@@ -4,10 +4,9 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 
-half3 CalcMatCap(float3 normalWS)
+half3 CalcMatCap(float3 normalWS, half3 mainLightColor)
 {
     // TODO:
-    // ・MainLightの影響
     // ・Blur
     // ・Scale
     // ・Rotate
@@ -15,11 +14,15 @@ half3 CalcMatCap(float3 normalWS)
     // ・ブレンド方法(乗算etc.)
     // ・Persp or Ortho
     // ・Mask
+
     float2 matCapUV = mul((float3x3)UNITY_MATRIX_V, normalWS).xy;
     matCapUV = matCapUV * _MatCapMap_ST.xy + _MatCapMap_ST.zw;
     matCapUV = matCapUV * 0.5 + 0.5;
+
     half3 matCapMapColor = SAMPLE_TEXTURE2D(_MatCapMap, sampler_BaseMap, matCapUV).rgb;
-    return matCapMapColor * _MatCapColor;
+    matCapMapColor *= _MatCapColor;
+    matCapMapColor = lerp(matCapMapColor, matCapMapColor * mainLightColor, _MatCapMainLightEffectiveness);
+    return matCapMapColor;
 }
 
 #endif
