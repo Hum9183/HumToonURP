@@ -23,4 +23,9 @@ inline float OneMinus(float value)
     return 1 - value;
 }
 
+inline float2 RemapZeroToOneRange(float2 value)
+{
+    return value * 0.5 + 0.5;
+}
+
 #endif
