@@ -90,5 +90,10 @@ namespace HumToon.Editor
 
             return rect;
         }
+
+        public static void Space(float height = 8.0f)
+        {
+            EditorGUI.DrawRect(EditorGUILayout.GetControlRect(false, height), new Color(1.0f,1.0f,1.0f,0.0f));
+        }
     }
 }
