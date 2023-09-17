@@ -31,7 +31,7 @@ half3 MixSecondShade(float2 uv, half3 originalColor, half halfLambert)
     half secondShade = HumCalcShadeSmoothstep(halfLambert, _SecondShadeBorderPos, _SecondShadeBorderBlur);
 
     half3 secondShadeColor = _SecondShadeColor.rgb;
-#ifdef _USE_Second_SHADE_MAP
+#ifdef _USE_SECOND_SHADE_MAP
     secondShadeColor *= SAMPLE_TEXTURE2D(_SecondShadeMap, sampler_BaseMap, uv).rgb;
 #else
     secondShadeColor *= originalColor;
