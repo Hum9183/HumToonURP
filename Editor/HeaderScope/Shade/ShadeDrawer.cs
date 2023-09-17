@@ -12,9 +12,29 @@ namespace HumToon.Editor
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
-            materialEditor.TexturePropertySingleLine(ShadeStyles.FirstShadeMap, PropContainer.FirstShadeMap, PropContainer.FirstShadeColor);
-            materialEditor.ShaderProperty(PropContainer.FirstShadeBorderPos, ShadeStyles.FirstShadeBorderPos);
-            materialEditor.ShaderProperty(PropContainer.FirstShadeBorderBlur, ShadeStyles.FirstShadeBorderBlur);
+            bool useFirstShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseFirstShade, ShadeStyles.UseFirstShade);
+            if (useFirstShade)
+            {
+                using (new EditorGUI.IndentLevelScope(1))
+                {
+                    materialEditor.TexturePropertySingleLine(ShadeStyles.FirstShadeMap, PropContainer.FirstShadeMap, PropContainer.FirstShadeColor);
+                    materialEditor.ShaderProperty(PropContainer.FirstShadeBorderPos, ShadeStyles.FirstShadeBorderPos);
+                    materialEditor.ShaderProperty(PropContainer.FirstShadeBorderBlur, ShadeStyles.FirstShadeBorderBlur);
+                }
+                HumToonGUIUtils.Space();
+            }
+
+
+            bool useSecondShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseSecondShade, ShadeStyles.UseSecondShade);
+            if (useSecondShade)
+            {
+                using (new EditorGUI.IndentLevelScope(1))
+                {
+                    materialEditor.TexturePropertySingleLine(ShadeStyles.SecondShadeMap, PropContainer.SecondShadeMap, PropContainer.SecondShadeColor);
+                    materialEditor.ShaderProperty(PropContainer.SecondShadeBorderPos, ShadeStyles.SecondShadeBorderPos);
+                    materialEditor.ShaderProperty(PropContainer.SecondShadeBorderBlur, ShadeStyles.SecondShadeBorderBlur);
+                }
+            }
         }
     }
 }

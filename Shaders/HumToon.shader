@@ -4,13 +4,19 @@ Shader "HumToon"
     {
         // HumToon
         // Shade
+        _UseFirstShade("Use First Shade", Float) = 0.0 // Only for keyword
         _FirstShadeMap("First Shade Map", 2D) = "white" {}
         _FirstShadeColor("First Shade Color", Color) = (0.5,0.5,0.5,1)
         _FirstShadeBorderPos("First Shade Border Pos", Range(0.0, 1.0)) = 0.5
         _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.1
+        _UseSecondShade("Use Second Shade", Float) = 0.0 // Only for keyword
+        _SecondShadeMap("Second Shade Map", 2D) = "white" {}
+        _SecondShadeColor("Second Shade Color", Color) = (0.2,0.2,0.2,1)
+        _SecondShadeBorderPos("Second Shade Border Pos", Range(0.0, 1.0)) = 0.2
+        _SecondShadeBorderBlur("Second Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
         // MatCap
-        _UseMatCap("Use Mat Cap", Float) = 0.0 // NOTE: Only for keyword
+        _UseMatCap("Use Mat Cap", Float) = 0.0 // Only for keyword
         _MatCapMap("Mat Cap Map", 2D) = "black" {}
         _MatCapColor("Mat Cap Color", Color) = (1.0,1.0,1.0,1.0)
         _MatCapCorrectPerspectiveDistortion("Mat Cap Correct Perspective Distortion", Float) = 1.0

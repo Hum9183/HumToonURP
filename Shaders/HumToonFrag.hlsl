@@ -42,7 +42,9 @@ void LitPassFragment(
     // Frag
     half4 finalColor;
     finalColor     = CalcBaseColor(uv0);
-    finalColor.rgb = CalcShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction);
+#if defined(_USE_FIRST_SHADE) || defined(_USE_SECOND_SHADE)
+    finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction);
+#endif
 
     // Get light colors
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);

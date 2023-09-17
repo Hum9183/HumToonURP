@@ -5,6 +5,9 @@
 half4 _FirstShadeColor;
 half _FirstShadeBorderPos;
 half _FirstShadeBorderBlur;
+half4 _SecondShadeColor;
+half _SecondShadeBorderPos;
+half _SecondShadeBorderBlur;
 
 // MatCap
 float4 _MatCapMap_ST;

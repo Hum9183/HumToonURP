@@ -6,10 +6,16 @@ namespace HumToon.Editor
     {
         private readonly PropertySetter _propSetter;
 
+        public MaterialProperty UseFirstShade;
         public MaterialProperty FirstShadeMap;
         public MaterialProperty FirstShadeColor;
         public MaterialProperty FirstShadeBorderPos;
         public MaterialProperty FirstShadeBorderBlur;
+        public MaterialProperty UseSecondShade;
+        public MaterialProperty SecondShadeMap;
+        public MaterialProperty SecondShadeColor;
+        public MaterialProperty SecondShadeBorderPos;
+        public MaterialProperty SecondShadeBorderBlur;
 
         public ShadePropertyContainer(PropertySetter propSetter)
         {
