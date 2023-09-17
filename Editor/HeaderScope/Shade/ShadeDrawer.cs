@@ -20,6 +20,17 @@ namespace HumToon.Editor
                     materialEditor.TexturePropertySingleLine(ShadeStyles.FirstShadeMap, PropContainer.FirstShadeMap, PropContainer.FirstShadeColor);
                     materialEditor.ShaderProperty(PropContainer.FirstShadeBorderPos, ShadeStyles.FirstShadeBorderPos);
                     materialEditor.ShaderProperty(PropContainer.FirstShadeBorderBlur, ShadeStyles.FirstShadeBorderBlur);
+
+                    bool useExFirstShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseExFirstShade, ShadeStyles.UseExFirstShade);
+                    if (useExFirstShade)
+                    {
+                        using (new EditorGUI.IndentLevelScope(1))
+                        {
+                            materialEditor.ShaderProperty(PropContainer.ExFirstShadeColor, ShadeStyles.ExFirstShadeColor);
+                            materialEditor.ShaderProperty(PropContainer.ExFirstShadeWidth, ShadeStyles.ExFirstShadeWidth);
+                            materialEditor.ShaderProperty(PropContainer.ExFirstShadeBlur, ShadeStyles.ExFirstShadeBlur);
+                        }
+                    }
                 }
                 HumToonGUIUtils.Space();
             }

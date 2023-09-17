@@ -11,6 +11,12 @@ namespace HumToon.Editor
         public MaterialProperty FirstShadeColor;
         public MaterialProperty FirstShadeBorderPos;
         public MaterialProperty FirstShadeBorderBlur;
+
+        public MaterialProperty UseExFirstShade;
+        public MaterialProperty ExFirstShadeColor;
+        public MaterialProperty ExFirstShadeWidth;
+        public MaterialProperty ExFirstShadeBlur;
+
         public MaterialProperty UseSecondShade;
         public MaterialProperty SecondShadeMap;
         public MaterialProperty SecondShadeColor;

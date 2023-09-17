@@ -12,6 +12,22 @@ half HumCalcShadeSmoothstep(half halfLambert, half ShadeBorderPos, half ShadeBor
     return OneMinus(smoothstepHalfLambert);
 }
 
+half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half exShadeWidth, half exShadeBlur)
+{
+    half startCenter = shadeBorderPos + exShadeWidth;
+    half endCenter   = shadeBorderPos - exShadeWidth;
+    half start = smoothstep(
+                    startCenter - exShadeBlur,
+                    startCenter + exShadeBlur,
+                    halfLambert);
+    half end   = smoothstep(
+                    endCenter - exShadeBlur,
+                    endCenter + exShadeBlur,
+                    halfLambert);
+
+    return halfLambert > shadeBorderPos ? OneMinus(start) : end;
+}
+
 half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
 {
     half firstShade = HumCalcShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur);
@@ -23,7 +39,15 @@ half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
     firstShadeColor *= originalColor;
 #endif
 
-    return lerp(originalColor, firstShadeColor, firstShade);
+    half3 finalFirstShadedColor;
+
+    finalFirstShadedColor = lerp(originalColor, firstShadeColor, firstShade);
+#if defined(_USE_EX_FIRST_SHADE)
+    half exFirstShade = HumCalcExShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _ExFirstShadeWidth, _ExFirstShadeBlur);
+    finalFirstShadedColor = lerp(finalFirstShadedColor, _ExFirstShadeColor, exFirstShade);
+#endif
+
+    return finalFirstShadedColor;
 }
 
 half3 MixSecondShade(float2 uv, half3 originalColor, half halfLambert)
