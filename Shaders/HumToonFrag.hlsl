@@ -31,6 +31,8 @@ void LitPassFragment(
     // TODO: _LIGHT_LAYERS
     // TODO: Forward plus
     // TODO: SSAOのweight調整機能
+    // TODO: normalのoverride(顔の法線を正面に向ける等)
+    // TODO: 関数名にHumをつける(被り対策)
 
     // Main light
     half4 shadowMask = CalculateShadowMask(inputData);
