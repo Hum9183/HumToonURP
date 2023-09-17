@@ -9,6 +9,8 @@ half _FirstShadeBorderBlur;
 // MatCap
 float4 _MatCapMap_ST;
 half4 _MatCapColor;
+half _MatCapCorrectPerspectiveDistortion;
+half _MatCapStabilizeCameraZRotation;
 half _MatCapMainLightEffectiveness;
 
 // Light

@@ -9,6 +9,8 @@ namespace HumToon.Editor
         public MaterialProperty UseMatCap;
         public MaterialProperty MatCapMap;
         public MaterialProperty MatCapColor;
+        public MaterialProperty MatCapCorrectPerspectiveDistortion;
+        public MaterialProperty MatCapStabilizeCameraZRotation;
         public MaterialProperty MatCapMainLightEffectiveness;
 
         public MatCapPropertyContainer(PropertySetter propSetter)

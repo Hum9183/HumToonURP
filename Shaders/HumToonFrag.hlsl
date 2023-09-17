@@ -47,7 +47,7 @@ void LitPassFragment(
 
     // Get others
 #if defined(_USE_MAT_CAP)
-    half3 matCapColor = CalcMatCap(inputData.normalWS, mainLightColor);
+    half3 matCapColor = HumCalcMatCap(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
