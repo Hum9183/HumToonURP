@@ -28,7 +28,6 @@ namespace HumToon.Editor
                         {
                             materialEditor.ShaderProperty(PropContainer.ExFirstShadeColor, ShadeStyles.ExFirstShadeColor);
                             materialEditor.ShaderProperty(PropContainer.ExFirstShadeWidth, ShadeStyles.ExFirstShadeWidth);
-                            materialEditor.ShaderProperty(PropContainer.ExFirstShadeBlur, ShadeStyles.ExFirstShadeBlur);
                         }
                     }
                 }

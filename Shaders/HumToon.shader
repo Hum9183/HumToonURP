@@ -8,12 +8,11 @@ Shader "HumToon"
         _FirstShadeMap("First Shade Map", 2D) = "white" {}
         _FirstShadeColor("First Shade Color", Color) = (0.5,0.5,0.5,1)
         _FirstShadeBorderPos("First Shade Border Pos", Range(0.0, 1.0)) = 0.5
-        _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.1
+        _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.01
 
         _UseExFirstShade("Use Ex First Shade", Float) = 0.0 // Only for keyword
         _ExFirstShadeColor("Ex First Shade Color", Color) = (1.0,0.0,0.0,1.0)
-        _ExFirstShadeWidth("Ex First Shade Width", Range(0.0, 0.1)) = 0.01
-        _ExFirstShadeBlur("Ex First Shade Blur", Range(0.0, 0.1)) = 0.01
+        _ExFirstShadeWidth("Ex First Shade Width", Range(0.0, 1.0)) = 0.005
 
         _UseSecondShade("Use Second Shade", Float) = 0.0 // Only for keyword
         _SecondShadeMap("Second Shade Map", 2D) = "white" {}

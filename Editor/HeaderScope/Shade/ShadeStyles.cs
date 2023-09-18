@@ -66,11 +66,6 @@ namespace HumToon.Editor
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.ExFirstShadeWidth).Prefix()}");
 
-        public static readonly GUIContent ExFirstShadeBlur = EditorGUIUtility.TrTextContent(
-            text: "Ex First Shade Blur",
-            tooltip: $"{C.Property}{C.Ln}" +
-                     $"{nameof(P.ExFirstShadeBlur).Prefix()}");
-
         public static readonly GUIContent SecondShadeMap = EditorGUIUtility.TrTextContent(
             text: "Second Shade Map",
             tooltip: $"{C.Properties}{C.Ln}" +

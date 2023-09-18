@@ -9,7 +9,6 @@ half _FirstShadeBorderBlur;
 half _UseExFirstShade;
 half4 _ExFirstShadeColor;
 half _ExFirstShadeWidth;
-half _ExFirstShadeBlur;
 
 half4 _SecondShadeColor;
 half _SecondShadeBorderPos;

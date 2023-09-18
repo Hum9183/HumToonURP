@@ -12,17 +12,21 @@ half HumCalcShadeSmoothstep(half halfLambert, half ShadeBorderPos, half ShadeBor
     return OneMinus(smoothstepHalfLambert);
 }
 
-half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half exShadeWidth, half exShadeBlur)
+half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half shadeBorderBlur, half exShadeWidth)
 {
     half startCenter = shadeBorderPos + exShadeWidth;
     half endCenter   = shadeBorderPos - exShadeWidth;
+
+    // NOTE: blurはwidthを超えてはいけない(グラデが汚くなるため)
+    shadeBorderBlur = shadeBorderBlur > exShadeWidth ? exShadeWidth : shadeBorderBlur;
+
     half start = smoothstep(
-                    startCenter - exShadeBlur,
-                    startCenter + exShadeBlur,
+                    startCenter - shadeBorderBlur,
+                    startCenter + shadeBorderBlur,
                     halfLambert);
     half end   = smoothstep(
-                    endCenter - exShadeBlur,
-                    endCenter + exShadeBlur,
+                    endCenter - shadeBorderBlur,
+                    endCenter + shadeBorderBlur,
                     halfLambert);
 
     return halfLambert > shadeBorderPos ? OneMinus(start) : end;
@@ -30,7 +34,11 @@ half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half exShad
 
 half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
 {
+#if defined(_USE_EX_FIRST_SHADE)
+    half firstShade =  OneMinus(step(_FirstShadeBorderPos, halfLambert));
+#else
     half firstShade = HumCalcShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur);
+#endif
 
     half3 firstShadeColor = _FirstShadeColor.rgb;
 #ifdef _USE_FIRST_SHADE_MAP
@@ -43,7 +51,7 @@ half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
 
     finalFirstShadedColor = lerp(originalColor, firstShadeColor, firstShade);
 #if defined(_USE_EX_FIRST_SHADE)
-    half exFirstShade = HumCalcExShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _ExFirstShadeWidth, _ExFirstShadeBlur);
+    half exFirstShade = HumCalcExShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur, _ExFirstShadeWidth);
     finalFirstShadedColor = lerp(finalFirstShadedColor, _ExFirstShadeColor, exFirstShade);
 #endif
 
