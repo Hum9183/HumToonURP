@@ -39,14 +39,6 @@ namespace HumToon.Editor
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.FirstShadeBorderBlur).Prefix()}");
 
-        public static readonly GUIContent UseSecondShade = EditorGUIUtility.TrTextContent(
-            text: "Use Second Shade",
-            tooltip: $"{C.Properties}{C.Ln}" +
-                     $"{nameof(P.UseSecondShade).Prefix()}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._USE_SECOND_SHADE}");
-
         public static readonly GUIContent UseExFirstShade = EditorGUIUtility.TrTextContent(
             text: "Use Ex",
             tooltip: $"{C.Property}{C.Ln}" +
@@ -64,6 +56,14 @@ namespace HumToon.Editor
             text: "Ex Width",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.ExFirstShadeWidth).Prefix()}");
+
+        public static readonly GUIContent UseSecondShade = EditorGUIUtility.TrTextContent(
+            text: "Use Second Shade",
+            tooltip: $"{C.Properties}{C.Ln}" +
+                     $"{nameof(P.UseSecondShade).Prefix()}{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Keyword}{C.Ln}" +
+                     $"{ShadeKeywords._USE_SECOND_SHADE}");
 
         public static readonly GUIContent SecondShadeMap = EditorGUIUtility.TrTextContent(
             text: "Second Shade Map",
