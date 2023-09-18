@@ -30,12 +30,12 @@ namespace HumToon.Editor
                      $"{ShadeKeywords._USE_FIRST_SHADE_MAP}");
 
         public static readonly GUIContent FirstShadeBorderPos = EditorGUIUtility.TrTextContent(
-            text: "First Shade Border Pos",
+            text: "Border Pos",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.FirstShadeBorderPos).Prefix()}");
 
         public static readonly GUIContent FirstShadeBorderBlur = EditorGUIUtility.TrTextContent(
-            text: "First Shade Border Blur",
+            text: "Border Blur",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.FirstShadeBorderBlur).Prefix()}");
 
@@ -48,7 +48,7 @@ namespace HumToon.Editor
                      $"{ShadeKeywords._USE_SECOND_SHADE}");
 
         public static readonly GUIContent UseExFirstShade = EditorGUIUtility.TrTextContent(
-            text: "Use Ex First Shade",
+            text: "Use Ex",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.UseExFirstShade).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
@@ -56,12 +56,12 @@ namespace HumToon.Editor
                      $"{ShadeKeywords._USE_EX_FIRST_SHADE}");
 
         public static readonly GUIContent ExFirstShadeColor = EditorGUIUtility.TrTextContent(
-            text: "Ex First Shade Color",
+            text: "Ex Color",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.ExFirstShadeColor).Prefix()}");
 
         public static readonly GUIContent ExFirstShadeWidth = EditorGUIUtility.TrTextContent(
-            text: "Ex First Shade Width",
+            text: "Ex Width",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.ExFirstShadeWidth).Prefix()}");
 
@@ -75,12 +75,12 @@ namespace HumToon.Editor
                      $"{ShadeKeywords._USE_SECOND_SHADE_MAP}");
 
         public static readonly GUIContent SecondShadeBorderPos = EditorGUIUtility.TrTextContent(
-            text: "Second Shade Border Pos",
+            text: "Border Pos",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.SecondShadeBorderPos).Prefix()}");
 
         public static readonly GUIContent SecondShadeBorderBlur = EditorGUIUtility.TrTextContent(
-            text: "Second Shade Border Blur",
+            text: "Border Blur",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.SecondShadeBorderBlur).Prefix()}");
     }

@@ -34,7 +34,6 @@ namespace HumToon.Editor
                 HumToonGUIUtils.Space();
             }
 
-
             bool useSecondShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseSecondShade, ShadeStyles.UseSecondShade);
             if (useSecondShade)
             {
