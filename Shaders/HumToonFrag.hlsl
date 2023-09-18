@@ -63,7 +63,7 @@ void LitPassFragment(
 #endif
 
     // Final composite
-    finalColor.rgb *= mainLightColor;
+    finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
 #if defined(_USE_MAT_CAP)
     finalColor.rgb += matCapColor;
 #endif

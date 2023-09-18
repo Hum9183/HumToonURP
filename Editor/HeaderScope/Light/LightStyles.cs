@@ -13,7 +13,7 @@ namespace HumToon.Editor
             tooltip: String.Empty);
 
         public static readonly GUIContent MainLightColorWeight = EditorGUIUtility.TrTextContent(
-            text: "Color Weight",
+            text: "Weight",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.MainLightColorWeight).Prefix()}");
 
@@ -30,7 +30,7 @@ namespace HumToon.Editor
                      $"{nameof(P.MainLightLowerLimit).Prefix()}");
 
         public static readonly GUIContent AdditionalLightsColorWeight = EditorGUIUtility.TrTextContent(
-            text: "Color Weight",
+            text: "Weight",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.AdditionalLightsColorWeight).Prefix()}");
     }
