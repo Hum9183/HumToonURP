@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using P = HumToon.Editor.MatCapPropertyContainer;
 
 namespace HumToon.Editor
 {
     public class MatCapValidator : IHeaderScopeValidator
     {
-        private static readonly MatCapPropertyContainer P = new MatCapPropertyContainer(null);
         private static readonly int IDUseMatCap = Shader.PropertyToID(nameof(P.UseMatCap).Prefix());
 
         public void Validate(Material material)

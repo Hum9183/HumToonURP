@@ -1,13 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 using C = HumToon.Editor.Const;
+using P = HumToon.Editor.MatCapPropertyContainer;
 
 namespace HumToon.Editor
 {
     public static class MatCapStyles
     {
-        private static readonly MatCapPropertyContainer P = new MatCapPropertyContainer(null);
-
         public static readonly GUIContent MatCapFoldout = EditorGUIUtility.TrTextContent(
             text: "Mat Cap",
             tooltip: string.Empty);

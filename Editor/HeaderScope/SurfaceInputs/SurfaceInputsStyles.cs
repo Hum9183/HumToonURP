@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using C = HumToon.Editor.Const;
+using P = HumToon.Editor.SurfaceInputsPropertyContainer;
 
 namespace HumToon.Editor
 {
@@ -10,8 +11,6 @@ namespace HumToon.Editor
     /// </summary>
     public static class SurfaceInputsStyles
     {
-        private static readonly SurfaceInputsPropertyContainer P = new SurfaceInputsPropertyContainer(null);
-
         public static readonly GUIContent SurfaceInputsFoldout = EditorGUIUtility.TrTextContent(
             text: "Surface Inputs",
             tooltip: $"{C.Description}{C.Ln}" +

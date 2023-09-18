@@ -2,13 +2,12 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using C = HumToon.Editor.Const;
+using P = HumToon.Editor.ShadePropertyContainer;
 
 namespace HumToon.Editor
 {
     public static class ShadeStyles
     {
-        private static readonly ShadePropertyContainer P = new ShadePropertyContainer(null);
-
         public static readonly GUIContent ShadeFoldout = EditorGUIUtility.TrTextContent(
             text: "Shade",
             tooltip: String.Empty);

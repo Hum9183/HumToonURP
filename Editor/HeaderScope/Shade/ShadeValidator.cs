@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using P = HumToon.Editor.ShadePropertyContainer;
 
 namespace HumToon.Editor
 {
     public class ShadeValidator : IHeaderScopeValidator
     {
-        private static readonly ShadePropertyContainer P = new ShadePropertyContainer(null);
         private static readonly int IDUseFirstShade = Shader.PropertyToID($"{nameof(P.UseFirstShade).Prefix()}");
         private static readonly int IDFirstShadeMap = Shader.PropertyToID($"{nameof(P.FirstShadeMap).Prefix()}");
         private static readonly int IDUseExFirstShade = Shader.PropertyToID($"{nameof(P.UseExFirstShade).Prefix()}");

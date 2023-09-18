@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using P = HumToon.Editor.SurfaceOptionsPropertyContainer;
 
 namespace HumToon.Editor
 {
     public class SurfaceOptionsValidator : IHeaderScopeValidator
     {
-        private static readonly SurfaceOptionsPropertyContainer P = new SurfaceOptionsPropertyContainer(null);
         private static readonly int IDSurfaceType          = Shader.PropertyToID($"{nameof(P.SurfaceType).Prefix()}");
         private static readonly int IDAlphaClip            = Shader.PropertyToID($"{nameof(P.AlphaClip).Prefix()}");
         private static readonly int IDTransparentBlendMode = Shader.PropertyToID($"{nameof(P.BlendMode).Prefix()}");

@@ -2,13 +2,12 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using C = HumToon.Editor.Const;
+using P = HumToon.Editor.LightPropertyContainer;
 
 namespace HumToon.Editor
 {
     public static class LightStyles
     {
-        private static readonly LightPropertyContainer P = new LightPropertyContainer(null);
-
         public static readonly GUIContent LightFoldout = EditorGUIUtility.TrTextContent(
             text: "Light",
             tooltip: String.Empty);

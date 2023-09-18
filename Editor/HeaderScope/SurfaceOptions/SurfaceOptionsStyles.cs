@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using C = HumToon.Editor.Const;
+using P = HumToon.Editor.SurfaceOptionsPropertyContainer;
 
 namespace HumToon.Editor
 {
@@ -11,8 +12,6 @@ namespace HumToon.Editor
     /// </summary>
     public static class SurfaceOptionsStyles
     {
-        private static readonly SurfaceOptionsPropertyContainer P = new SurfaceOptionsPropertyContainer(null);
-
         public static readonly GUIContent SurfaceOptionsFoldout = EditorGUIUtility.TrTextContent(
             text: "Surface Options",
             tooltip: $"{C.Description}{C.Ln}" +
