@@ -52,7 +52,7 @@ half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
     finalFirstShadedColor = lerp(originalColor, firstShadeColor, firstShade);
 #if defined(_USE_EX_FIRST_SHADE)
     half exFirstShade = HumCalcExShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur, _ExFirstShadeWidth);
-    finalFirstShadedColor = lerp(finalFirstShadedColor, _ExFirstShadeColor, exFirstShade);
+    finalFirstShadedColor = lerp(finalFirstShadedColor, originalColor * _ExFirstShadeColor, exFirstShade);
 #endif
 
     return finalFirstShadedColor;
