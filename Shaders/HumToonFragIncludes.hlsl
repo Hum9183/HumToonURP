@@ -3,7 +3,7 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 
-#include "HumToonBaseColor.hlsl"
+#include "HumToonBase.hlsl"
 #include "HumToonShade.hlsl"
 
 #if defined(_USE_RIM_LIGHT)
