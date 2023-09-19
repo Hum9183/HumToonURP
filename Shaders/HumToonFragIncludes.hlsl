@@ -6,6 +6,10 @@
 #include "HumToonBaseColor.hlsl"
 #include "HumToonShade.hlsl"
 
+#if defined(_USE_RIM_LIGHT)
+    #include "HumToonRimLight.hlsl"
+#endif
+
 #if defined(_USE_MAT_CAP)
     #include "HumToonMatCap.hlsl"
 #endif

@@ -20,6 +20,10 @@ Shader "HumToon"
         _SecondShadeBorderPos("Second Shade Border Pos", Range(0.0, 1.0)) = 0.2
         _SecondShadeBorderBlur("Second Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
+        // RimLight
+        _UseRimLight("Use Rim Light", Float) = 0.0 // Only for keyword
+
+
         // MatCap
         _UseMatCap("Use Mat Cap", Float) = 0.0 // Only for keyword
         _MatCapMap("Mat Cap Map", 2D) = "black" {}

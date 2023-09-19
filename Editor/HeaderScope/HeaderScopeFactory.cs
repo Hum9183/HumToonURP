@@ -31,6 +31,7 @@ namespace HumToon.Editor
                 (CreateBaseDrawer(propSetter), null),
                 (CreateNormalDrawer(propSetter), new NormalValidator()),
                 (CreateShadeDrawer(propSetter), new ShadeValidator()),
+                (CreateRimLightDrawer(propSetter), new RimLightValidator()),
                 (CreateMatCapDrawer(propSetter), new MatCapValidator()),
                 (CreateLightDrawer(propSetter), null),
             };
@@ -66,6 +67,14 @@ namespace HumToon.Editor
                 new ShadePropertyContainer(propSetter),
                 ShadeStyles.ShadeFoldout,
                 Convert.ToUInt32(HumToon.Editor.Expandable.Shade));
+        }
+
+        private RimLightDrawer CreateRimLightDrawer(PropertySetter propSetter)
+        {
+            return new RimLightDrawer(
+                new RimLightPropertyContainer(propSetter),
+                RimLightStyles.RimLightFoldout,
+                Convert.ToUInt32(HumToon.Editor.Expandable.RimLight));
         }
 
         private MatCapDrawer CreateMatCapDrawer(PropertySetter propSetter)
