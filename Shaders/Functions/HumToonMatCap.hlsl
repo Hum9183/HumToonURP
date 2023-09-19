@@ -43,7 +43,7 @@ float2 HumCalcMatCapUV(float3 normalWS, float3 viewDirWS)
     return matCapUV;
 }
 
-half3 HumCalcMatCap(float3 normalWS, float3 viewDirWS, half3 mainLightColor)
+half3 HumCalcMatCapColor(float3 normalWS, float3 viewDirWS, half3 mainLightColor)
 {
     // TODO:
     // ・Blur

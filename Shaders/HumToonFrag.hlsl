@@ -51,11 +51,11 @@ void LitPassFragment(
 
     // Get others
 #if defined(_USE_RIM_LIGHT)
-    half3 rimLightColor = HumCalcRimLight(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
+    half3 rimLightColor = HumCalcRimLightColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
 
 #if defined(_USE_MAT_CAP)
-    half3 matCapColor = HumCalcMatCap(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
+    half3 matCapColor = HumCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
