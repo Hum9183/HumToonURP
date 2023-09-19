@@ -30,11 +30,11 @@ namespace HumToon.Editor
                      $"{ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.RenderTypeTag}{C.Ln}" +
-                     $"{RenderTypeTags.Opaque} or {RenderTypeTags.Transparent}{C.Ln}" +
+                     $"{RenderTypeTagNames.Opaque} or {RenderTypeTagNames.Transparent}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Passes}{C.Ln}" +
-                     $"{Passes.ShadowCaster}{C.Ln}" +
-                     $"{Passes.DepthOnly}{C.Ln}" +
+                     $"{PassNames.ShadowCaster}{C.Ln}" +
+                     $"{PassNames.DepthOnly}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.RenderQueue}{C.Ln}" +
                      $"{RenderQueue.Geometry} or {RenderQueue.Transparent}");
@@ -77,7 +77,7 @@ namespace HumToon.Editor
                      $"{ShaderKeywordStrings._ALPHATEST_ON}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.RenderTypeTag}{C.Ln}" +
-                     $"{RenderTypeTags.TransparentCutout}{C.Ln}" +
+                     $"{RenderTypeTagNames.TransparentCutout}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.RenderQueue}{C.Ln}" +
                      $"{RenderQueue.AlphaTest}");

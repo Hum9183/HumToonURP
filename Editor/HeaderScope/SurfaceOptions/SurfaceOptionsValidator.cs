@@ -56,25 +56,25 @@ namespace HumToon.Editor
         private void SetTags(Material material, bool isOpaque, bool alphaClip)
         {
             // Clear override tag
-            material.SetOverrideTag(RenderTypeTags.RenderType, string.Empty); // TODO: 必要ないかも
+            material.SetOverrideTag(RenderTypeTagNames.RenderType, string.Empty); // TODO: 必要ないかも
 
             if (isOpaque)
             {
-                material.SetOverrideTag(RenderTypeTags.RenderType, alphaClip ? RenderTypeTags.TransparentCutout : RenderTypeTags.Opaque);
+                material.SetOverrideTag(RenderTypeTagNames.RenderType, alphaClip ? RenderTypeTagNames.TransparentCutout : RenderTypeTagNames.Opaque);
             }
             else
             {
-                material.SetOverrideTag(RenderTypeTags.RenderType, RenderTypeTags.Transparent);
+                material.SetOverrideTag(RenderTypeTagNames.RenderType, RenderTypeTagNames.Transparent);
             }
         }
 
         private void SetPass(Material material, bool isOpaque)
         {
             // Transparent
-            material.SetShaderPassEnabled(Passes.ShadowCaster, isOpaque);
+            material.SetShaderPassEnabled(PassNames.ShadowCaster, isOpaque);
 
             // Depth
-            material.SetShaderPassEnabled(Passes.DepthOnly, isOpaque);
+            material.SetShaderPassEnabled(PassNames.DepthOnly, isOpaque);
         }
 
         private void SetFloat(Material material, bool isOpaque, bool alphaClip)
