@@ -55,7 +55,7 @@ half3 HumCalcMatCap(float3 normalWS, float3 viewDirWS, half3 mainLightColor)
     float2 matCapUV = HumCalcMatCapUV(normalWS, viewDirWS);
 
     half3 matCapMapColor = SAMPLE_TEXTURE2D(_MatCapMap, sampler_BaseMap, matCapUV).rgb;
-    matCapMapColor *= _MatCapColor;
+    matCapMapColor *= _MatCapColor * _MatCapIntensity;
     matCapMapColor = lerp(matCapMapColor, matCapMapColor * mainLightColor, _MatCapMainLightEffectiveness);
     return matCapMapColor;
 }

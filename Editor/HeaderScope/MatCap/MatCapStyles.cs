@@ -25,6 +25,11 @@ namespace HumToon.Editor
                      $"{nameof(P.MatCapMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.MatCapColor).Prefix()}");
 
+        public static readonly GUIContent MatCapIntensity = EditorGUIUtility.TrTextContent(
+            text: "Intensity",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.MatCapIntensity).Prefix()}");
+
         public static readonly GUIContent MatCapCorrectPerspectiveDistortion = EditorGUIUtility.TrTextContent(
             text: "Correct Persp Distortion",
             tooltip: $"{C.Properties}{C.Ln}" +

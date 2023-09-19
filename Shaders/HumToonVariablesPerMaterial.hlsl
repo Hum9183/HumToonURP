@@ -17,6 +17,7 @@ half _SecondShadeBorderBlur;
 // MatCap
 float4 _MatCapMap_ST;
 half4 _MatCapColor;
+half _MatCapIntensity;
 half _MatCapCorrectPerspectiveDistortion;
 half _MatCapStabilizeCameraZRotation;
 half _MatCapMainLightEffectiveness;
