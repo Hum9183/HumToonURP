@@ -15,7 +15,7 @@ namespace HumToon.Editor
             bool useMarCap = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseMatCap, MatCapStyles.UseMatCap);
             if (useMarCap)
             {
-                using (new EditorGUI.IndentLevelScope(1))
+                using (new EditorGUI.IndentLevelScope())
                 {
                     materialEditor.TexturePropertySingleLine(MatCapStyles.MatCapMap, PropContainer.MatCapMap, PropContainer.MatCapColor);
                     materialEditor.TextureScaleOffsetProperty(PropContainer.MatCapMap);

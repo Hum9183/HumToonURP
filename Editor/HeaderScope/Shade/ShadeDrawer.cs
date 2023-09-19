@@ -15,7 +15,7 @@ namespace HumToon.Editor
             bool useFirstShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseFirstShade, ShadeStyles.UseFirstShade);
             if (useFirstShade)
             {
-                using (new EditorGUI.IndentLevelScope(1))
+                using (new EditorGUI.IndentLevelScope())
                 {
                     materialEditor.TexturePropertySingleLine(ShadeStyles.FirstShadeMap, PropContainer.FirstShadeMap, PropContainer.FirstShadeColor);
                     materialEditor.ShaderProperty(PropContainer.FirstShadeBorderPos, ShadeStyles.FirstShadeBorderPos);
@@ -24,7 +24,7 @@ namespace HumToon.Editor
                     bool useExFirstShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseExFirstShade, ShadeStyles.UseExFirstShade);
                     if (useExFirstShade)
                     {
-                        using (new EditorGUI.IndentLevelScope(1))
+                        using (new EditorGUI.IndentLevelScope())
                         {
                             materialEditor.ShaderProperty(PropContainer.ExFirstShadeColor, ShadeStyles.ExFirstShadeColor);
                             materialEditor.ShaderProperty(PropContainer.ExFirstShadeWidth, ShadeStyles.ExFirstShadeWidth);
@@ -37,7 +37,7 @@ namespace HumToon.Editor
             bool useSecondShade = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseSecondShade, ShadeStyles.UseSecondShade);
             if (useSecondShade)
             {
-                using (new EditorGUI.IndentLevelScope(1))
+                using (new EditorGUI.IndentLevelScope())
                 {
                     materialEditor.TexturePropertySingleLine(ShadeStyles.SecondShadeMap, PropContainer.SecondShadeMap, PropContainer.SecondShadeColor);
                     materialEditor.ShaderProperty(PropContainer.SecondShadeBorderPos, ShadeStyles.SecondShadeBorderPos);
