@@ -34,14 +34,14 @@ half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half shadeB
 
 half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
 {
-#if defined(_USE_EX_FIRST_SHADE)
+#if defined(_HUM_USE_EX_FIRST_SHADE)
     half firstShade =  OneMinus(step(_FirstShadeBorderPos, halfLambert));
 #else
     half firstShade = HumCalcShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur);
 #endif
 
     half3 firstShadeColor = _FirstShadeColor.rgb;
-#ifdef _USE_FIRST_SHADE_MAP
+#ifdef _HUM_USE_FIRST_SHADE_MAP
     firstShadeColor *= SAMPLE_TEXTURE2D(_FirstShadeMap, sampler_BaseMap, uv).rgb;
 #else
     firstShadeColor *= originalColor;
@@ -50,7 +50,7 @@ half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
     half3 finalFirstShadedColor;
 
     finalFirstShadedColor = lerp(originalColor, firstShadeColor, firstShade);
-#if defined(_USE_EX_FIRST_SHADE)
+#if defined(_HUM_USE_EX_FIRST_SHADE)
     half exFirstShade = HumCalcExShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur, _ExFirstShadeWidth);
     finalFirstShadedColor = lerp(finalFirstShadedColor, originalColor * _ExFirstShadeColor, exFirstShade);
 #endif
@@ -63,7 +63,7 @@ half3 MixSecondShade(float2 uv, half3 originalColor, half halfLambert)
     half secondShade = HumCalcShadeSmoothstep(halfLambert, _SecondShadeBorderPos, _SecondShadeBorderBlur);
 
     half3 secondShadeColor = _SecondShadeColor.rgb;
-#ifdef _USE_SECOND_SHADE_MAP
+#ifdef _HUM_USE_SECOND_SHADE_MAP
     secondShadeColor *= SAMPLE_TEXTURE2D(_SecondShadeMap, sampler_BaseMap, uv).rgb;
 #else
     secondShadeColor *= originalColor;
@@ -78,11 +78,11 @@ half3 MixShade(float2 uv, half3 originalColor, float3 normalWS, float3 mainLight
 
     half halfLambert = CalcHalfLambert(normalWS, mainLightDirWS);
 
-#if defined(_USE_FIRST_SHADE)
+#if defined(_HUM_USE_FIRST_SHADE)
     finalShadedColor = MixFirstShade(uv, finalShadedColor, halfLambert);
 #endif
 
-#if defined(_USE_SECOND_SHADE)
+#if defined(_HUM_USE_SECOND_SHADE)
     finalShadedColor = MixSecondShade(uv, finalShadedColor, halfLambert);
 #endif
 

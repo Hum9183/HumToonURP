@@ -42,7 +42,7 @@ void LitPassFragment(
     // Frag
     half4 finalColor;
     finalColor     = CalcBaseColor(uv0);
-#if defined(_USE_FIRST_SHADE) || defined(_USE_SECOND_SHADE)
+#if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE)
     finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction);
 #endif
 
@@ -50,11 +50,11 @@ void LitPassFragment(
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
 
     // Get others
-#if defined(_USE_RIM_LIGHT)
+#if defined(_HUM_USE_RIM_LIGHT)
     half3 rimLightColor = HumCalcRimLightColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
 
-#if defined(_USE_MAT_CAP)
+#if defined(_HUM_USE_MAT_CAP)
     half3 matCapColor = HumCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
 
@@ -68,11 +68,11 @@ void LitPassFragment(
 
     // Final composite
     finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
-#if defined(_USE_RIM_LIGHT)
+#if defined(_HUM_USE_RIM_LIGHT)
     finalColor.rgb += rimLightColor;
 #endif
 
-#if defined(_USE_MAT_CAP)
+#if defined(_HUM_USE_MAT_CAP)
     finalColor.rgb += matCapColor;
 #endif
 

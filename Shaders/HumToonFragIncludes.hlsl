@@ -4,13 +4,16 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 
 #include "Functions/HumToonBase.hlsl"
-#include "Functions/HumToonShade.hlsl"
 
-#if defined(_USE_RIM_LIGHT)
+#if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE)
+    #include "Functions/HumToonShade.hlsl"
+#endif
+
+#if defined(_HUM_USE_RIM_LIGHT)
     #include "Functions/HumToonRimLight.hlsl"
 #endif
 
-#if defined(_USE_MAT_CAP)
+#if defined(_HUM_USE_MAT_CAP)
     #include "Functions/HumToonMatCap.hlsl"
 #endif
 

@@ -17,6 +17,6 @@ namespace HumToon.Editor
                      $"{nameof(P.UseRimLight).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{RimLightKeywords._USE_RIM_LIGHT}");
+                     $"{RimLightKeywords._HUM_USE_RIM_LIGHT}");
     }
 }

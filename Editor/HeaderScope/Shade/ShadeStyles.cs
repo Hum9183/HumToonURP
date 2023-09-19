@@ -18,7 +18,7 @@ namespace HumToon.Editor
                      $"{nameof(P.UseFirstShade).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._USE_FIRST_SHADE}");
+                     $"{ShadeKeywords._HUM_USE_FIRST_SHADE}");
 
         public static readonly GUIContent FirstShadeMap = EditorGUIUtility.TrTextContent(
             text: "First Shade Map (RGB)",
@@ -27,7 +27,7 @@ namespace HumToon.Editor
                      $"{nameof(P.FirstShadeColor).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._USE_FIRST_SHADE_MAP}");
+                     $"{ShadeKeywords._HUM_USE_FIRST_SHADE_MAP}");
 
         public static readonly GUIContent FirstShadeBorderPos = EditorGUIUtility.TrTextContent(
             text: "Border Pos",
@@ -45,7 +45,7 @@ namespace HumToon.Editor
                      $"{nameof(P.UseExFirstShade).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._USE_EX_FIRST_SHADE}");
+                     $"{ShadeKeywords._HUM_USE_EX_FIRST_SHADE}");
 
         public static readonly GUIContent ExFirstShadeColor = EditorGUIUtility.TrTextContent(
             text: "Ex Color",
@@ -63,7 +63,7 @@ namespace HumToon.Editor
                      $"{nameof(P.UseSecondShade).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._USE_SECOND_SHADE}");
+                     $"{ShadeKeywords._HUM_USE_SECOND_SHADE}");
 
         public static readonly GUIContent SecondShadeMap = EditorGUIUtility.TrTextContent(
             text: "Second Shade Map (RGB)",
@@ -72,7 +72,7 @@ namespace HumToon.Editor
                      $"{nameof(P.SecondShadeColor).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._USE_SECOND_SHADE_MAP}");
+                     $"{ShadeKeywords._HUM_USE_SECOND_SHADE_MAP}");
 
         public static readonly GUIContent SecondShadeBorderPos = EditorGUIUtility.TrTextContent(
             text: "Border Pos",

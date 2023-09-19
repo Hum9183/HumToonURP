@@ -16,7 +16,7 @@ namespace HumToon.Editor
         private void SetKeywords(Material material)
         {
             bool useMatCap = material.GetFloat(IDUseMatCap).ToBool();
-            CoreUtils.SetKeyword(material, MatCapKeywords._USE_MAT_CAP, useMatCap);
+            CoreUtils.SetKeyword(material, MatCapKeywords._HUM_USE_MAT_CAP, useMatCap);
         }
     }
 }

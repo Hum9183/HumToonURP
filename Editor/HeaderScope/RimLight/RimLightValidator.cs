@@ -16,7 +16,7 @@ namespace HumToon.Editor
         private void SetKeywords(Material material)
         {
             bool useRimLight = material.GetFloat(IDUseRimLight).ToBool();
-            CoreUtils.SetKeyword(material, RimLightKeywords._USE_RIM_LIGHT, useRimLight);
+            CoreUtils.SetKeyword(material, RimLightKeywords._HUM_USE_RIM_LIGHT, useRimLight);
         }
     }
 }
