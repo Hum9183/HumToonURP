@@ -22,7 +22,7 @@ namespace HumToon.Editor.LitBased
                 TransparentBlendMode transparentBlendMode = (TransparentBlendMode)material.GetFloat(HumToonPropertyNames.BlendMode);
                 bool isEnabled = transparentBlendMode is TransparentBlendMode.Alpha || transparentBlendMode is TransparentBlendMode.Additive;
                 if (isEnabled)
-                    HumToonGUIUtils.DrawFloatToggleProperty(_matPropContainer.BlendModePreserveSpecular, HumToonStyles.BlendModePreserveSpecular, 1);
+                    HumToonGUIUtils.DrawFloatToggleProperty(_matPropContainer.BlendModePreserveSpecular, HumToonStyles.BlendModePreserveSpecular);
             }
 
             HumToonGUIUtils.DoPopup<RenderFace>(_materialEditor, _matPropContainer.CullMode, HumToonStyles.RenderFace); // NOTE: RenderFaceで表裏の差を吸収

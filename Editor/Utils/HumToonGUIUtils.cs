@@ -27,21 +27,18 @@ namespace HumToon.Editor
             return newValue;
         }
 
-        internal static bool DrawFloatToggleProperty(MaterialProperty matProp, GUIContent styles, int indentLevel = 0, bool isDisabled = false)
+        public static bool DrawFloatToggleProperty(MaterialProperty matProp, GUIContent styles)
         {
             if (matProp == null)
                 throw new ArgumentNullException(nameof(matProp));
 
-            EditorGUI.BeginDisabledGroup(isDisabled);
-            EditorGUI.indentLevel += indentLevel;
-            EditorGUI.BeginChangeCheck();
+            using var changeCheckScope = new EditorGUI.ChangeCheckScope();
             MaterialEditor.BeginProperty(matProp);
-            bool newValue = EditorGUILayout.Toggle(styles, matProp.floatValue is 1);
-            if (EditorGUI.EndChangeCheck())
+            var newValue = EditorGUILayout.Toggle(styles, matProp.floatValue.IsOne());
+            if (changeCheckScope.changed)
                 matProp.floatValue = newValue ? 1.0f : 0.0f;
             MaterialEditor.EndProperty();
-            EditorGUI.indentLevel -= indentLevel;
-            EditorGUI.EndDisabledGroup();
+
             return newValue;
         }
 
