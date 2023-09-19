@@ -24,7 +24,7 @@ namespace HumToon.Editor
         /// <summary>
         /// Use this for surface input foldout.
         /// </summary>
-        SurfaceInputs = 1 << 1,
+        Base = 1 << 1,
 
         Normal = 1 << 2,
 

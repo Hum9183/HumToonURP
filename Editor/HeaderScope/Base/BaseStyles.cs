@@ -2,17 +2,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using C = HumToon.Editor.Const;
-using P = HumToon.Editor.SurfaceInputsPropertyContainer;
 
 namespace HumToon.Editor
 {
     /// <summary>
     /// Container for the text and tooltips used to display the shader.
     /// </summary>
-    public static class SurfaceInputsStyles
+    public static class BaseStyles
     {
         public static readonly GUIContent SurfaceInputsFoldout = EditorGUIUtility.TrTextContent(
-            text: "Surface Inputs",
+            text: "Base",
             tooltip: $"{C.Description}{C.Ln}" +
                      $"These settings describe the look and feel of the surface itself.");
 
@@ -24,7 +23,7 @@ namespace HumToon.Editor
                      $"your Material uses the Texture’s alpha channel or color.{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Properties}{C.Ln}" +
-                     $"{nameof(P.BaseMap).Prefix()}{C.Ln}" +
-                     $"{nameof(P.BaseColor).Prefix()}");
+                     $"{nameof(BasePropertyContainer.BaseMap).Prefix()}{C.Ln}" +
+                     $"{nameof(BasePropertyContainer.BaseColor).Prefix()}");
     }
 }

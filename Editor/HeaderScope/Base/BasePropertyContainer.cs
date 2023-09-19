@@ -2,14 +2,14 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class SurfaceInputsPropertyContainer : IPropertyContainer
+    public class BasePropertyContainer : IPropertyContainer
     {
         private readonly PropertySetter _propSetter;
 
         public MaterialProperty BaseMap;
         public MaterialProperty BaseColor;
 
-        public SurfaceInputsPropertyContainer(PropertySetter propSetter)
+        public BasePropertyContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

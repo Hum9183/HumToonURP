@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class SurfaceInputsDrawer : HeaderScopeDrawerBase<SurfaceInputsPropertyContainer>
+    public class BaseDrawer : HeaderScopeDrawerBase<BasePropertyContainer>
     {
-        public SurfaceInputsDrawer(SurfaceInputsPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public BaseDrawer(BasePropertyContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }
@@ -18,7 +18,7 @@ namespace HumToon.Editor
 
         private void DrawBaseMap(MaterialEditor materialEditor)
         {
-            materialEditor.TexturePropertySingleLine(SurfaceInputsStyles.BaseMap, PropContainer.BaseMap, PropContainer.BaseColor);
+            materialEditor.TexturePropertySingleLine(BaseStyles.BaseMap, PropContainer.BaseMap, PropContainer.BaseColor);
         }
 
         private void DrawTileOffset(MaterialEditor materialEditor)
