@@ -1,7 +1,7 @@
 #ifndef HUM_TOON_MAT_CAP_INCLUDED
 #define HUM_TOON_MAT_CAP_INCLUDED
 
-#include "../ShaderLibrary/Func.hlsl"
+#include "../../ShaderLibrary/Func.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 
