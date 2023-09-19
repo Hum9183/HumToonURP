@@ -17,7 +17,7 @@ namespace HumToon.Editor
                      $"These settings describe the look and feel of the surface itself.");
 
         public static readonly GUIContent BaseMap = EditorGUIUtility.TrTextContent(
-            text: "Base Map",
+            text: "Base Map (RGBA)",
             tooltip: $"{C.Description}{C.Ln}" +
                      $"Specifies the base Material and/or Color of the surface. " +
                      $"If you’ve selected Transparent or Alpha Clipping under Surface Options, " +
@@ -28,7 +28,7 @@ namespace HumToon.Editor
                      $"{nameof(P.BaseColor).Prefix()}");
 
         public static readonly GUIContent NormalMap = EditorGUIUtility.TrTextContent(
-            text: "Normal Map",
+            text: "Normal Map (RGB)",
             tooltip: $"{C.Description}{C.Ln}" +
                      $"Designates a Normal Map to create the illusion of bumps and dents on this Material's surface.{C.Ln}" +
                      $"{C.Ln}" +

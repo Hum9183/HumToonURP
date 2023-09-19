@@ -20,7 +20,7 @@ namespace HumToon.Editor
                      $"{MatCapKeywords._USE_MAT_CAP}");
 
         public static readonly GUIContent MatCapMap = EditorGUIUtility.TrTextContent(
-            text: "Mat Cap Map",
+            text: "Mat Cap Map (RGB)",
             tooltip: $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.MatCapMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.MatCapColor).Prefix()}");

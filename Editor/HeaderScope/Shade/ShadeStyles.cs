@@ -21,7 +21,7 @@ namespace HumToon.Editor
                      $"{ShadeKeywords._USE_FIRST_SHADE}");
 
         public static readonly GUIContent FirstShadeMap = EditorGUIUtility.TrTextContent(
-            text: "First Shade Map",
+            text: "First Shade Map (RGB)",
             tooltip: $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.FirstShadeMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.FirstShadeColor).Prefix()}{C.Ln}" +
@@ -66,7 +66,7 @@ namespace HumToon.Editor
                      $"{ShadeKeywords._USE_SECOND_SHADE}");
 
         public static readonly GUIContent SecondShadeMap = EditorGUIUtility.TrTextContent(
-            text: "Second Shade Map",
+            text: "Second Shade Map (RGB)",
             tooltip: $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.SecondShadeMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.SecondShadeColor).Prefix()}{C.Ln}" +
