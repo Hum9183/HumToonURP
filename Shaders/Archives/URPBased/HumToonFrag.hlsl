@@ -3,7 +3,7 @@
 
 #include "HumToonTemp.hlsl"
 
-#include "../../ShaderLibrary/InitializeInputData.hlsl"
+#include "../../../ShaderLibrary/InitializeInputData.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
 #if defined(LOD_FADE_CROSSFADE)
@@ -11,7 +11,7 @@
 #endif
 
 #if defined(DEBUG_DISPLAY)
-    #include "../../ShaderLibrary/DebugOverrideOutputColor.hlsl"
+    #include "../../../ShaderLibrary/DebugOverrideOutputColor.hlsl"
 #endif
 
 void frag(
@@ -42,7 +42,7 @@ void frag(
 #ifdef _DBUFFER // BaseColorに載せたほうが良さそう
     ApplyDecalToBaseColor(input.positionCS, color);
 #endif
-    
+
 #if defined(DEBUG_DISPLAY)
     finalColor = DebugOverrideOutputColor(inputData, finalColor);
 #endif

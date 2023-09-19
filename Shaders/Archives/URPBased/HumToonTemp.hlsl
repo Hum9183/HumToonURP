@@ -15,7 +15,7 @@ half4 CalcBaseColor(float2 uv)
     return float4(baseColor, alpha);
 }
 
-#include "../../ShaderLibrary/Func.hlsl"
+#include "../../../ShaderLibrary/Func.hlsl"
 
 half3 CalcShade(half3 color, float3 normalWS, float3 lightDir)
 {
