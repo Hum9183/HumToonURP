@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using P = HumToon.Editor.SurfaceInputsPropertyContainer;
+using P = HumToon.Editor.NormalPropertyContainer;
 
 namespace HumToon.Editor
 {
-    public class SurfaceInputsValidator : IHeaderScopeValidator
+    public class NormalValidator : IHeaderScopeValidator
     {
         private static readonly int IDBumpMap = Shader.PropertyToID($"{nameof(P.BumpMap).Prefix()}");
 

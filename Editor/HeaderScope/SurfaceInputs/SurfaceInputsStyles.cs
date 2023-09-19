@@ -26,25 +26,5 @@ namespace HumToon.Editor
                      $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.BaseMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.BaseColor).Prefix()}");
-
-        public static readonly GUIContent NormalMap = EditorGUIUtility.TrTextContent(
-            text: "Normal Map (RGB)",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Designates a Normal Map to create the illusion of bumps and dents on this Material's surface.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Properties}{C.Ln}" +
-                     $"{nameof(P.BumpMap).Prefix()}{C.Ln}" +
-                     $"{nameof(P.BumpScale).Prefix()}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShaderKeywordStrings._NORMALMAP}");
-
-        public static readonly GUIContent BumpScaleNotSupported = EditorGUIUtility.TrTextContent(
-            text: "Bump scale is not supported on mobile platforms");
-
-        public static readonly GUIContent FixNormalNow = EditorGUIUtility.TrTextContent(
-            text: "Fix now",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Converts the assigned texture to be a normal map format.");
     }
 }

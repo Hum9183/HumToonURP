@@ -26,19 +26,21 @@ namespace HumToon.Editor
         /// </summary>
         SurfaceInputs = 1 << 1,
 
+        Normal = 1 << 2,
+
         /// <summary>
         /// Use this for advanced foldout.
         /// </summary>
-        Advanced = 1 << 2,
+        Advanced = 1 << 3,
 
         /// <summary>
         /// Use this for additional details foldout.
         /// </summary>
-        Details = 1 << 3,
+        Details = 1 << 4,
 
-        Shade = 1 << 4,
-        MatCap = 1 << 5,
-        Light = 1 << 6,
+        Shade = 1 << 5,
+        MatCap = 1 << 6,
+        Light = 1 << 7,
     }
 
     /// <summary>

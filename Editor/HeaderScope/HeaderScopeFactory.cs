@@ -28,7 +28,8 @@ namespace HumToon.Editor
             return new List<(IHeaderScopeDrawer, IHeaderScopeValidator)>
             {
                 (CreateSurfaceOptionsDrawer(propSetter), new SurfaceOptionsValidator()),
-                (CreateSurfaceInputsDrawer(propSetter), new SurfaceInputsValidator()),
+                (CreateSurfaceInputsDrawer(propSetter), null),
+                (CreateNormalDrawer(propSetter), new NormalValidator()),
                 (CreateShadeDrawer(propSetter), new ShadeValidator()),
                 (CreateMatCapDrawer(propSetter), new MatCapValidator()),
                 (CreateLightDrawer(propSetter), null),
@@ -49,6 +50,14 @@ namespace HumToon.Editor
                 new SurfaceInputsPropertyContainer(propSetter),
                 SurfaceInputsStyles.SurfaceInputsFoldout,
                 Convert.ToUInt32(HumToon.Editor.Expandable.SurfaceInputs));
+        }
+
+        private NormalDrawer CreateNormalDrawer(PropertySetter propSetter)
+        {
+            return new NormalDrawer(
+                new NormalPropertyContainer(propSetter),
+                NormalStyles.NormalFoldout,
+                Convert.ToUInt32(HumToon.Editor.Expandable.Normal));
         }
 
         private ShadeDrawer CreateShadeDrawer(PropertySetter propSetter)
