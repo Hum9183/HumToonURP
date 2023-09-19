@@ -12,10 +12,18 @@ namespace HumToon.Editor
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
+            DrawMainLight(materialEditor);
+            HumToonGUIUtils.Space();
+            DrawAdditionalLights(materialEditor);
+        }
+
+        private void DrawMainLight(MaterialEditor materialEditor)
+        {
             EditorGUILayout.LabelField("Main Light", EditorStyles.boldLabel);
             using (new EditorGUI.IndentLevelScope(1))
             {
                 materialEditor.ShaderProperty(PropContainer.MainLightColorWeight, LightStyles.MainLightColorWeight);
+
                 // TODO: alignがなんかズレてるので自前実装してちゃんと直す
                 EditorGUILayout.BeginHorizontal();
                 bool useMainLightUpperLimit =
@@ -33,9 +41,10 @@ namespace HumToon.Editor
                     materialEditor.ShaderProperty(PropContainer.MainLightLowerLimit, string.Empty);
                 EditorGUILayout.EndHorizontal();
             }
+        }
 
-            HumToonGUIUtils.Space();
-
+        private void DrawAdditionalLights(MaterialEditor materialEditor)
+        {
             EditorGUILayout.LabelField("Additional Lights", EditorStyles.boldLabel);
             using (new EditorGUI.IndentLevelScope())
             {
