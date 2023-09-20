@@ -7,6 +7,7 @@ namespace HumToon.Editor
     public class RimLightValidator : IHeaderScopeValidator
     {
         private static readonly int IDUseRimLight = Shader.PropertyToID(nameof(P.UseRimLight).Prefix());
+        private static readonly int IDRimLightMap = Shader.PropertyToID(nameof(P.RimLightMap).Prefix());
 
         public void Validate(Material material)
         {
@@ -17,6 +18,9 @@ namespace HumToon.Editor
         {
             bool useRimLight = material.GetFloat(IDUseRimLight).ToBool();
             CoreUtils.SetKeyword(material, RimLightKeywords._HUM_USE_RIM_LIGHT, useRimLight);
+
+            bool existsRimLightMap = material.GetTexture(IDRimLightMap) is not null;
+            CoreUtils.SetKeyword(material, RimLightKeywords._HUM_USE_RIM_LIGHT_MAP, existsRimLightMap);
         }
     }
 }

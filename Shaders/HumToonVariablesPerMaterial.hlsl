@@ -14,6 +14,12 @@ half4 _SecondShadeColor;
 half _SecondShadeBorderPos;
 half _SecondShadeBorderBlur;
 
+// RimLight
+half4 _RimLightColor;
+half _RimLightBorderPos;
+half _RimLightBorderBlur;
+half _RimLightMainLightEffectiveness;
+
 // MatCap
 float4 _MatCapMap_ST;
 half4 _MatCapColor;

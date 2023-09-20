@@ -22,7 +22,11 @@ Shader "HumToon"
 
         // RimLight
         _UseRimLight("Use Rim Light", Float) = 0.0 // Only for keyword
-
+        _RimLightMap("Rim Light Map", 2D) = "white" {}
+        _RimLightColor("Rim Light Color", Color) = (0.5,0.9,1.0,1)
+        _RimLightBorderPos("Rim Light Border Pos", Range(0.0, 1.0)) = 0.3
+        _RimLightBorderBlur("Rim Light Border Blur", Range(0.0, 1.0)) = 0.2
+        _RimLightMainLightEffectiveness("Rim Light Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
         // MatCap
         _UseMatCap("Use Mat Cap", Float) = 0.0 // Only for keyword

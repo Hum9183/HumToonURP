@@ -10,6 +10,7 @@
 
 // RimLight
 #pragma shader_feature_local_fragment _HUM_USE_RIM_LIGHT
+#pragma shader_feature_local_fragment _HUM_USE_RIM_LIGHT_MAP
 
 // MatCap
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP

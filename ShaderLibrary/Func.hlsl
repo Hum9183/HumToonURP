@@ -1,6 +1,8 @@
 #ifndef FUNC_INCLUDED
 #define FUNC_INCLUDED
 
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
+
 float HalfLambert(float3 normalWS, float3 lightDir)
 {
     float NdotL = dot(normalWS, lightDir);
@@ -26,6 +28,16 @@ inline float OneMinus(float value)
 inline float2 RemapZeroToOneRange(float2 value)
 {
     return value * 0.5 + 0.5;
+}
+
+inline float1 RemapZeroToOneRange(float1 value)
+{
+    return value * 0.5 + 0.5;
+}
+
+inline half HumBlurStep(half step, half blur, half inValue)
+{
+    return smoothstep(step - blur, step + blur, inValue);
 }
 
 
