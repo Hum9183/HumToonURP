@@ -16,6 +16,10 @@ namespace HumToon.Editor
 
         private void SetKeywords(Material material)
         {
+            // TODO:
+            // Useをオフにしても、Texがアサインされていると_HUM_USE_RIM_LIGHT_MAPが定義されてしまう。
+            // やり方を考える。
+
             bool useRimLight = material.GetFloat(IDUseRimLight).ToBool();
             CoreUtils.SetKeyword(material, RimLightKeywords._HUM_USE_RIM_LIGHT, useRimLight);
 
