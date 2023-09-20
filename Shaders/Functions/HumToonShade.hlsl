@@ -11,14 +11,8 @@ half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half shadeB
     // NOTE: blurはwidthを超えてはいけない(グラデが汚くなるため)
     shadeBorderBlur = shadeBorderBlur > exShadeWidth ? exShadeWidth : shadeBorderBlur;
 
-    half start = smoothstep(
-                    startCenter - shadeBorderBlur,
-                    startCenter + shadeBorderBlur,
-                    halfLambert);
-    half end   = smoothstep(
-                    endCenter - shadeBorderBlur,
-                    endCenter + shadeBorderBlur,
-                    halfLambert);
+    half start = HumBlurStep(startCenter, shadeBorderBlur, halfLambert);
+    half end   = HumBlurStep(endCenter,   shadeBorderBlur, halfLambert);
 
     return halfLambert > shadeBorderPos ? OneMinus(start) : end;
 }
