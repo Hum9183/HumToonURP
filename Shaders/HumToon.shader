@@ -28,6 +28,9 @@ Shader "HumToon"
         _RimLightBorderBlur("Rim Light Border Blur", Range(0.0, 1.0)) = 0.2
         _RimLightMainLightEffectiveness("Rim Light Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
+        // Emission
+        _UseEmission("Use Emission", FLoat) = 0.0 // Only for keyword
+
         // MatCap
         _UseMatCap("Use Mat Cap", Float) = 0.0 // Only for keyword
         _MatCapMap("Mat Cap Map", 2D) = "black" {}

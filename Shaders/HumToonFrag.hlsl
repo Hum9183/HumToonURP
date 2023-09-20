@@ -54,6 +54,10 @@ void LitPassFragment(
     half3 rimLightColor = HumCalcRimLightColor(uv0, inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
 
+#if defined(_HUM_USE_EMISSION)
+    half3 emissionColor = HumCalcEmissionColor(uv0, mainLightColor);
+#endif
+
 #if defined(_HUM_USE_MAT_CAP)
     half3 matCapColor = HumCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
 #endif
@@ -70,6 +74,10 @@ void LitPassFragment(
     finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
 #if defined(_HUM_USE_RIM_LIGHT)
     finalColor.rgb += rimLightColor;
+#endif
+
+#if defined(_HUM_USE_EMISSION)
+    finalColor.rgb = emissionColor;
 #endif
 
 #if defined(_HUM_USE_MAT_CAP)

@@ -12,6 +12,9 @@
 #pragma shader_feature_local_fragment _HUM_USE_RIM_LIGHT
 #pragma shader_feature_local_fragment _HUM_USE_RIM_LIGHT_MAP
 
+// Emission
+#pragma shader_feature_local_fragment _HUM_USE_EMISSION
+
 // MatCap
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP
 

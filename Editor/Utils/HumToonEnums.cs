@@ -40,8 +40,9 @@ namespace HumToon.Editor
 
         Shade = 1 << 5,
         RimLight = 1 << 6,
-        MatCap = 1 << 7,
-        Light = 1 << 8,
+        Emission = 1 << 7,
+        MatCap = 1 << 8,
+        Light = 1 << 9,
     }
 
     /// <summary>

@@ -13,6 +13,10 @@
     #include "Functions/HumToonRimLight.hlsl"
 #endif
 
+#if defined(_HUM_USE_EMISSION)
+    #include "Functions/HumToonEmission.hlsl"
+#endif
+
 #if defined(_HUM_USE_MAT_CAP)
     #include "Functions/HumToonMatCap.hlsl"
 #endif
