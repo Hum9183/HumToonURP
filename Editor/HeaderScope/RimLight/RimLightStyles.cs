@@ -28,6 +28,11 @@ namespace HumToon.Editor
                      $"{C.Keyword}{C.Ln}" +
                      $"{RimLightKeywords._HUM_USE_RIM_LIGHT_MAP}");
 
+        public static readonly GUIContent RimLightIntensity = EditorGUIUtility.TrTextContent(
+            text: "Intensity",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.RimLightIntensity).Prefix()}");
+
         public static readonly GUIContent RimLightBorderPos = EditorGUIUtility.TrTextContent(
             text: "Border Pos",
             tooltip: $"{C.Property}{C.Ln}" +

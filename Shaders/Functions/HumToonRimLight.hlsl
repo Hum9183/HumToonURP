@@ -25,7 +25,7 @@ half3 HumCalcRimLightColor(float2 uv, float3 normalWS, float3 viewDirWS, half3 m
     half3 finalRimLightColor = rim * rimLightColor;
     finalRimLightColor = lerp(finalRimLightColor, finalRimLightColor * mainLightColor, _RimLightMainLightEffectiveness);
 
-    return finalRimLightColor;
+    return finalRimLightColor * _RimLightIntensity;
 }
 
 #endif

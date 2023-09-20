@@ -16,6 +16,7 @@ half _SecondShadeBorderBlur;
 
 // RimLight
 half4 _RimLightColor;
+half _RimLightIntensity;
 half _RimLightBorderPos;
 half _RimLightBorderBlur;
 half _RimLightMainLightEffectiveness;
