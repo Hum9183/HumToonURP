@@ -1,16 +1,7 @@
 #ifndef HUM_TOON_SHADE_INCLUDED
 #define HUM_TOON_SHADE_INCLUDED
 
-#include "../ShaderLibrary/Func.hlsl"
-
-half HumCalcShadeSmoothstep(half halfLambert, half ShadeBorderPos, half ShadeBorderBlur)
-{
-    half smoothstepHalfLambert = smoothstep(
-                                    ShadeBorderPos - ShadeBorderBlur,
-                                    ShadeBorderPos + ShadeBorderBlur,
-                                    halfLambert);
-    return OneMinus(smoothstepHalfLambert);
-}
+#include "../../ShaderLibrary/Func.hlsl"
 
 half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half shadeBorderBlur, half exShadeWidth)
 {
@@ -37,7 +28,7 @@ half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
 #if defined(_HUM_USE_EX_FIRST_SHADE)
     half firstShade =  OneMinus(step(_FirstShadeBorderPos, halfLambert));
 #else
-    half firstShade = HumCalcShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur);
+    half firstShade = OneMinus(HumBlurStep(_FirstShadeBorderPos, _FirstShadeBorderBlur, halfLambert));
 #endif
 
     half3 firstShadeColor = _FirstShadeColor.rgb;
@@ -60,7 +51,7 @@ half3 MixFirstShade(float2 uv, half3 originalColor, half halfLambert)
 
 half3 MixSecondShade(float2 uv, half3 originalColor, half halfLambert)
 {
-    half secondShade = HumCalcShadeSmoothstep(halfLambert, _SecondShadeBorderPos, _SecondShadeBorderBlur);
+    half secondShade = OneMinus(HumBlurStep(_SecondShadeBorderPos, _SecondShadeBorderBlur, halfLambert));
 
     half3 secondShadeColor = _SecondShadeColor.rgb;
 #ifdef _HUM_USE_SECOND_SHADE_MAP
