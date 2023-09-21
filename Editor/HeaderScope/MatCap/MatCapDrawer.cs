@@ -12,6 +12,7 @@ namespace HumToon.Editor
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
+            // TODO: Toggleの真横にIntensityのSliderがあるほうが良いかもしれない
             bool useMarCap = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseMatCap, MatCapStyles.UseMatCap);
             if (useMarCap)
             {
