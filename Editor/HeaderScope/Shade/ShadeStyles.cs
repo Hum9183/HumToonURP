@@ -8,6 +8,8 @@ namespace HumToon.Editor
 {
     public static class ShadeStyles
     {
+        private const string DescriptionIfIsNot = "If texture is not assigned, it refers to Base Map.";
+
         public static readonly GUIContent ShadeFoldout = EditorGUIUtility.TrTextContent(
             text: "Shade",
             tooltip: String.Empty);
@@ -22,7 +24,10 @@ namespace HumToon.Editor
 
         public static readonly GUIContent FirstShadeMap = EditorGUIUtility.TrTextContent(
             text: "First Shade Map (RGB)",
-            tooltip: $"{C.Properties}{C.Ln}" +
+            tooltip: $"{C.Description}{C.Ln}" +
+                     $"{DescriptionIfIsNot}{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.FirstShadeMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.FirstShadeColor).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
@@ -67,12 +72,15 @@ namespace HumToon.Editor
 
         public static readonly GUIContent SecondShadeMap = EditorGUIUtility.TrTextContent(
             text: "Second Shade Map (RGB)",
-            tooltip: $"{C.Properties}{C.Ln}" +
-                     $"{nameof(P.SecondShadeMap).Prefix()}{C.Ln}" +
-                     $"{nameof(P.SecondShadeColor).Prefix()}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShadeKeywords._HUM_USE_SECOND_SHADE_MAP}");
+            tooltip:  $"{C.Description}{C.Ln}" +
+                      $"{DescriptionIfIsNot}{C.Ln}" +
+                      $"{C.Ln}" +
+                      $"{C.Properties}{C.Ln}" +
+                      $"{nameof(P.SecondShadeMap).Prefix()}{C.Ln}" +
+                      $"{nameof(P.SecondShadeColor).Prefix()}{C.Ln}" +
+                      $"{C.Ln}" +
+                      $"{C.Keyword}{C.Ln}" +
+                      $"{ShadeKeywords._HUM_USE_SECOND_SHADE_MAP}");
 
         public static readonly GUIContent SecondShadeBorderPos = EditorGUIUtility.TrTextContent(
             text: "Border Pos",
