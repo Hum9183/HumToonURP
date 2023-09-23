@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class LightDrawer : HeaderScopeDrawerBase<LightPropertyContainer>
+    public class LightDrawer : HeaderScopeDrawerBase<LightPropertiesContainer>
     {
-        public LightDrawer(LightPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public LightDrawer(LightPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

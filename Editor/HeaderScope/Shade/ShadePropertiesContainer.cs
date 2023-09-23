@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class ShadePropertyContainer : IPropertyContainer
+    public class ShadePropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
@@ -35,7 +35,7 @@ namespace HumToon.Editor
         public MaterialProperty ShadeControlMap;
         public MaterialProperty ShadeControlMapIntensity;
 
-        public ShadePropertyContainer(PropertySetter propSetter)
+        public ShadePropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

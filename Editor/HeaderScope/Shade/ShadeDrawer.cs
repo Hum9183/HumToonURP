@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class ShadeDrawer : HeaderScopeDrawerBase<ShadePropertyContainer>
+    public class ShadeDrawer : HeaderScopeDrawerBase<ShadePropertiesContainer>
     {
-        public ShadeDrawer(ShadePropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public ShadeDrawer(ShadePropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

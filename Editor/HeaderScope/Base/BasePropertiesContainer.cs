@@ -2,13 +2,14 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class EmissionPropertyContainer : IPropertyContainer
+    public class BasePropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
-        public MaterialProperty UseEmission;
+        public MaterialProperty BaseMap;
+        public MaterialProperty BaseColor;
 
-        public EmissionPropertyContainer(PropertySetter propSetter)
+        public BasePropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

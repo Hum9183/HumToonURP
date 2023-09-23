@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class MatCapPropertyContainer : IPropertyContainer
+    public class MatCapPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
@@ -14,7 +14,7 @@ namespace HumToon.Editor
         public MaterialProperty MatCapStabilizeCameraZRotation;
         public MaterialProperty MatCapMainLightEffectiveness;
 
-        public MatCapPropertyContainer(PropertySetter propSetter)
+        public MatCapPropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

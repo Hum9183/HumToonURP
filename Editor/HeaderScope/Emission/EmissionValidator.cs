@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.EmissionPropertyContainer;
+using P = HumToon.Editor.EmissionPropertiesContainer;
 
 namespace HumToon.Editor
 {

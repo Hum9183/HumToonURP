@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class EmissionDrawer : HeaderScopeDrawerBase<EmissionPropertyContainer>
+    public class EmissionDrawer : HeaderScopeDrawerBase<EmissionPropertiesContainer>
     {
-        public EmissionDrawer(EmissionPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public EmissionDrawer(EmissionPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

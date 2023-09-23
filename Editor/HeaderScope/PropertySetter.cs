@@ -7,7 +7,7 @@ namespace HumToon.Editor
     {
         public MaterialProperty[] MatProps { private get; set; }
 
-        public void Set<T>(T matPropContainer) where T : IPropertyContainer
+        public void Set<T>(T matPropContainer) where T : IPropertiesContainer
         {
             var fieldInfos = typeof(T).GetFields();
             foreach (var fieldInfo in fieldInfos)

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class RimLightDrawer : HeaderScopeDrawerBase<RimLightPropertyContainer>
+    public class RimLightDrawer : HeaderScopeDrawerBase<RimLightPropertiesContainer>
     {
-        public RimLightDrawer(RimLightPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public RimLightDrawer(RimLightPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

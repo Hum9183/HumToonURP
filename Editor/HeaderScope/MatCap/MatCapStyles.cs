@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using C = HumToon.Editor.Const;
-using P = HumToon.Editor.MatCapPropertyContainer;
+using P = HumToon.Editor.MatCapPropertiesContainer;
 
 namespace HumToon.Editor
 {

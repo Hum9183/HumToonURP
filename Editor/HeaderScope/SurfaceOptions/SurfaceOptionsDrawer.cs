@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class SurfaceOptionsDrawer : HeaderScopeDrawerBase<SurfaceOptionsPropertyContainer>
+    public class SurfaceOptionsDrawer : HeaderScopeDrawerBase<SurfaceOptionsPropertiesContainer>
     {
-        public SurfaceOptionsDrawer(SurfaceOptionsPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public SurfaceOptionsDrawer(SurfaceOptionsPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

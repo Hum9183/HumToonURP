@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class LightPropertyContainer : IPropertyContainer
+    public class LightPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
@@ -13,7 +13,7 @@ namespace HumToon.Editor
         public MaterialProperty MainLightLowerLimit;
         public MaterialProperty AdditionalLightsColorWeight;
 
-        public LightPropertyContainer(PropertySetter propSetter)
+        public LightPropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

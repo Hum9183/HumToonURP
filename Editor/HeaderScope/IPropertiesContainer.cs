@@ -1,6 +1,6 @@
 namespace HumToon.Editor
 {
-    public interface IPropertyContainer
+    public interface IPropertiesContainer
     {
         void Set();
     }

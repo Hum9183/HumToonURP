@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class SurfaceOptionsPropertyContainer : IPropertyContainer
+    public class SurfaceOptionsPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
@@ -13,7 +13,7 @@ namespace HumToon.Editor
         public MaterialProperty ReceiveShadows;
         public MaterialProperty Cutoff;
 
-        public SurfaceOptionsPropertyContainer(PropertySetter propSetter)
+        public SurfaceOptionsPropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

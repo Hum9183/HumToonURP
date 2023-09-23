@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using C = HumToon.Editor.Const;
-using P = HumToon.Editor.EmissionPropertyContainer;
+using P = HumToon.Editor.EmissionPropertiesContainer;
 
 namespace HumToon.Editor
 {

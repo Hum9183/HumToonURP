@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using C = HumToon.Editor.Const;
-using P = HumToon.Editor.SurfaceOptionsPropertyContainer;
+using P = HumToon.Editor.SurfaceOptionsPropertiesContainer;
 
 namespace HumToon.Editor
 {

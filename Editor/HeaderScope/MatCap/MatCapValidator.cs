@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.MatCapPropertyContainer;
+using P = HumToon.Editor.MatCapPropertiesContainer;
 
 namespace HumToon.Editor
 {

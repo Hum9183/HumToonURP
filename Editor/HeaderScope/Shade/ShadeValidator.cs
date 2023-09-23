@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.ShadePropertyContainer;
+using P = HumToon.Editor.ShadePropertiesContainer;
 
 namespace HumToon.Editor
 {

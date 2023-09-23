@@ -23,7 +23,7 @@ namespace HumToon.Editor
                      $"your Material uses the Texture’s alpha channel or color.{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Properties}{C.Ln}" +
-                     $"{nameof(BasePropertyContainer.BaseMap).Prefix()}{C.Ln}" +
-                     $"{nameof(BasePropertyContainer.BaseColor).Prefix()}");
+                     $"{nameof(BasePropertiesContainer.BaseMap).Prefix()}{C.Ln}" +
+                     $"{nameof(BasePropertiesContainer.BaseColor).Prefix()}");
     }
 }

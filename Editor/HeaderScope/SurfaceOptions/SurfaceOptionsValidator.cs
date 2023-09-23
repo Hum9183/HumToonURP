@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using P = HumToon.Editor.SurfaceOptionsPropertyContainer;
+using P = HumToon.Editor.SurfaceOptionsPropertiesContainer;
 
 namespace HumToon.Editor
 {

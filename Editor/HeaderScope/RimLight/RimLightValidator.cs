@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.RimLightPropertyContainer;
+using P = HumToon.Editor.RimLightPropertiesContainer;
 
 namespace HumToon.Editor
 {

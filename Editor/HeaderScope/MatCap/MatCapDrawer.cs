@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class MatCapDrawer : HeaderScopeDrawerBase<MatCapPropertyContainer>
+    public class MatCapDrawer : HeaderScopeDrawerBase<MatCapPropertiesContainer>
     {
-        public MatCapDrawer(MatCapPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public MatCapDrawer(MatCapPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

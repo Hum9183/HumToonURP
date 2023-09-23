@@ -5,7 +5,7 @@ using UnityEditor.Rendering;
 namespace HumToon.Editor
 {
     public abstract class HeaderScopeDrawerBase<T> : IHeaderScopeDrawer
-        where T : IPropertyContainer
+        where T : IPropertiesContainer
     {
         protected readonly T PropContainer;
         private readonly GUIContent _headerStyle;

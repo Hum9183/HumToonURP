@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor.LitBased
 {
-    public class LitPropertyContainer : IPropertyContainer
+    public class LitPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _matPropSetter;
         // SmoothnessMap
@@ -26,7 +26,7 @@ namespace HumToon.Editor.LitBased
         // public MaterialProperty ClearCoatMask;
         // public MaterialProperty ClearCoatSmoothness;
 
-        public LitPropertyContainer(PropertySetter matPropSetter)
+        public LitPropertiesContainer(PropertySetter matPropSetter)
         {
             _matPropSetter = matPropSetter;
         }

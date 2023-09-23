@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor.LitBased
 {
-    public class LitDetailPropertyContainer : IPropertyContainer
+    public class LitDetailPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _matPropSetter;
 
@@ -12,7 +12,7 @@ namespace HumToon.Editor.LitBased
         public MaterialProperty DetailNormalMapScale;
         public MaterialProperty DetailNormalMap;
 
-        public LitDetailPropertyContainer(PropertySetter matPropSetter)
+        public LitDetailPropertiesContainer(PropertySetter matPropSetter)
         {
             _matPropSetter = matPropSetter;
         }

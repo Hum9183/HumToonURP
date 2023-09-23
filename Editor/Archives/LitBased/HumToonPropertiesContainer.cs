@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor.LitBased
 {
-    public class HumToonPropertyContainer : IPropertyContainer
+    public class HumToonPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _matPropSetter;
 
@@ -20,7 +20,7 @@ namespace HumToon.Editor.LitBased
         public MaterialProperty EmissionColor;
         public MaterialProperty QueueOffset;
 
-        public HumToonPropertyContainer(PropertySetter matPropSetter)
+        public HumToonPropertiesContainer(PropertySetter matPropSetter)
         {
             _matPropSetter = matPropSetter;
         }

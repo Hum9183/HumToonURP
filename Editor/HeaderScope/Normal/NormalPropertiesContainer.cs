@@ -2,14 +2,14 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class NormalPropertyContainer : IPropertyContainer
+    public class NormalPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
         public MaterialProperty BumpMap;
         public MaterialProperty BumpScale;
 
-        public NormalPropertyContainer(PropertySetter propSetter)
+        public NormalPropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace HumToon.Editor
 {
-    public class NormalDrawer : HeaderScopeDrawerBase<NormalPropertyContainer>
+    public class NormalDrawer : HeaderScopeDrawerBase<NormalPropertiesContainer>
     {
-        public NormalDrawer(NormalPropertyContainer propContainer, GUIContent headerStyle, uint expandable)
+        public NormalDrawer(NormalPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
             : base(propContainer, headerStyle, expandable)
         {
         }

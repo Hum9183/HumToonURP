@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace HumToon.Editor
 {
-    public class RimLightPropertyContainer : IPropertyContainer
+    public class RimLightPropertiesContainer : IPropertiesContainer
     {
         private readonly PropertySetter _propSetter;
 
@@ -14,7 +14,7 @@ namespace HumToon.Editor
         public MaterialProperty RimLightBorderBlur;
         public MaterialProperty RimLightMainLightEffectiveness;
 
-        public RimLightPropertyContainer(PropertySetter propSetter)
+        public RimLightPropertiesContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;
         }

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using C = HumToon.Editor.Const;
-using P = HumToon.Editor.RimLightPropertyContainer;
+using P = HumToon.Editor.RimLightPropertiesContainer;
 
 namespace HumToon.Editor
 {
