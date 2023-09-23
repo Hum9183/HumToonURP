@@ -48,6 +48,9 @@ void frag(
     uint meshRenderingLayers = GetMeshRenderingLayer();
 #endif
 
+    // TODO:
+    // 2灯目のDirectionalLightを考慮すると、光の計算の辻褄が合わなくなってきたため、
+    // 根本的にBaseやShade、LightColorの計算順と計算法を見直したほうが良いかもしれない
 
     // Base
     half3 baseMapColor;
