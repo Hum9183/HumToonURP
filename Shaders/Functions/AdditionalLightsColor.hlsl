@@ -10,6 +10,16 @@ half3 CalcAdditionalLightColor(
 #endif
 )
 {
+    // NOTE:
+    // 2灯目以降のDirectionalLightはPointLight扱いとなるため、
+    // Litと比べルックの差異が大きい。
+    // 1灯目のDirectionalLightをShadeで計算している都合、回避できない。
+
+    // FEATURE:
+    // PointLightの計算もShadeと同様の計算を行うアプローチがある。
+    // できればPointLightはLitと同じ計算法にしたい。
+    // PointLight扱いのDirectionalLightの判定方法があれば、明確にDirectionalLightの計算を分けることが出来そう。
+
     uint pixelLightCount = GetAdditionalLightsCount();
     half3 additionalLightsColor;
 
