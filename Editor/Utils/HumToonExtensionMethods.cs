@@ -29,8 +29,14 @@ namespace HumToon.Editor
             where T : Enum
         {
             var floatValue = material.GetFloat(nameID);
-            var intValue = Convert.ToUInt32(floatValue);
-            return (T)Enum.ToObject(typeof(T), intValue);
+            var intValue = Convert.ToInt32(floatValue);
+            return intValue.ToEnum<T>();
+        }
+
+        public static T ToEnum<T>(this int value)
+            where T : Enum
+        {
+            return (T)Enum.ToObject(typeof(T), value);
         }
     }
 }
