@@ -3,6 +3,14 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 
+half3 CalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)
+{
+    // TODO: Specular
+    half NdotL = saturate(dot(normalWS, light.direction));
+    half3 lightColor = light.color * light.distanceAttenuation * light.shadowAttenuation * NdotL;
+    return originalColor * lightColor;
+}
+
 half3 CalcAdditionalLightColor(
     half3 originalColor, InputData inputData, half4 shadowMask, AmbientOcclusionFactor aoFactor
 #if defined(_LIGHT_LAYERS)
@@ -20,6 +28,7 @@ half3 CalcAdditionalLightColor(
     // できればPointLightはLitと同じ計算法にしたい。
     // PointLight扱いのDirectionalLightの判定方法があれば、明確にDirectionalLightの計算を分けることが出来そう。
 
+    float3 normalWS = inputData.normalWS;
     uint pixelLightCount = GetAdditionalLightsCount();
     half3 additionalLightsColor;
 
@@ -29,10 +38,7 @@ half3 CalcAdditionalLightColor(
         if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
     #endif
         {
-            // TODO: Specular
-            half NdotL = saturate(dot(inputData.normalWS, light.direction));
-            half3 lightColor = light.color * light.distanceAttenuation * light.shadowAttenuation * NdotL;
-            additionalLightsColor += originalColor * lightColor;
+            additionalLightsColor += CalcAdditionalLightColorInternal(originalColor, normalWS, light);
         }
     LIGHT_LOOP_END
 
