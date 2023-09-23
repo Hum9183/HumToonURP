@@ -115,7 +115,7 @@ half CalcShadeHalfLambert(float2 uv, float3 normalWS, float3 mainLightDirWS)
     half halfLambert = CalcHalfLambert(normalWS, mainLightDirWS);
 #if defined(_HUM_USE_SHADE_CONTROL_MAP)
     half shadeControl = SAMPLE_TEXTURE2D(_ShadeControlMap, sampler_BaseMap, uv).r;
-    shadeControl = lerp(ONE, shadeControl, _ShadeControlIntensity);
+    shadeControl = lerp(ONE, shadeControl, _ShadeControlMapIntensity);
     halfLambert *= shadeControl;
 #endif
 

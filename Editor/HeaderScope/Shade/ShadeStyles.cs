@@ -134,6 +134,6 @@ namespace HumToon.Editor
             text: "Shade Control Map (R)",
             tooltip: $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.ShadeControlMap).Prefix()}{C.Ln}" +
-                     $"{nameof(P.ShadeControlIntensity).Prefix()}"); // TODO: Mapをつける
+                     $"{nameof(P.ShadeControlMapIntensity).Prefix()}");
     }
 }

@@ -33,7 +33,7 @@ namespace HumToon.Editor
         // Control Map
         public MaterialProperty UseShadeControlMap;
         public MaterialProperty ShadeControlMap;
-        public MaterialProperty ShadeControlIntensity;
+        public MaterialProperty ShadeControlMapIntensity;
 
         public ShadePropertyContainer(PropertySetter propSetter)
         {

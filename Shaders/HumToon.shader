@@ -27,7 +27,7 @@ Shader "HumToon"
 
         _UseShadeControlMap("Use Shade Contro lMap", Float) = 0.0 // Only for keyword
         _ShadeControlMap("Shade Control Map", 2D) = "white" {}
-        _ShadeControlIntensity("Shade Control Intensity", Range(0.0, 1.0)) = 1.0
+        _ShadeControlMapIntensity("Shade Control Map Intensity", Range(0.0, 1.0)) = 1.0
 
         // RimLight
         _UseRimLight("Use Rim Light", Float) = 0.0 // Only for keyword

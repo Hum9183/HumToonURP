@@ -86,7 +86,7 @@ namespace HumToon.Editor
             {
                 using (new EditorGUI.IndentLevelScope())
                 {
-                    materialEditor.TexturePropertySingleLine(ShadeStyles.ShadeControlMap, PropContainer.ShadeControlMap, PropContainer.ShadeControlIntensity);
+                    materialEditor.TexturePropertySingleLine(ShadeStyles.ShadeControlMap, PropContainer.ShadeControlMap, PropContainer.ShadeControlMapIntensity);
                 }
             }
         }
