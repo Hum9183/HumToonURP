@@ -2,6 +2,7 @@
 #define ADDITIONAL_LIGHTS_COLOR_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
+#include "../../ShaderLibrary/Func.hlsl"
 
 half3 CalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)
 {
@@ -9,6 +10,25 @@ half3 CalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Lig
     half NdotL = saturate(dot(normalWS, light.direction));
     half3 lightColor = light.color * light.distanceAttenuation * light.shadowAttenuation * NdotL;
     return originalColor * lightColor;
+}
+
+// EXPERIMENTAL: AdditionalLightのDirectionalLightはShadeと同じ計算法を使用する
+half3 CalcAdditionalLightColorInternalForDirectional(half3 originalColor, float3 normalWS, Light light)
+{
+    half halfLambert = CalcHalfLambert(normalWS, light.direction);
+    half shade = HumBlurStep(_FirstShadeBorderPos, _FirstShadeBorderBlur, halfLambert);
+    return shade * originalColor * light.color;
+}
+
+// NOTE: AdditionalLight用
+bool HumIsDirectionalLight(uint lightIndex)
+{
+#if USE_STRUCTURED_BUFFER_FOR_LIGHT_DATA
+    float4 lightPositionWS = _AdditionalLightsBuffer[lightIndex].position;
+#else
+    float4 lightPositionWS = _AdditionalLightsPosition[lightIndex];
+#endif
+    return lightPositionWS.w == 0.0 ? true : false;
 }
 
 half3 CalcAdditionalLightColor(
@@ -44,7 +64,7 @@ half3 CalcAdditionalLightColor(
         if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
     #endif
         {
-            additionalLightsColor += CalcAdditionalLightColorInternal(originalColor, normalWS, light);
+            additionalLightsColor += CalcAdditionalLightColorInternalForDirectional(originalColor, normalWS, light);
         }
     }
 #endif
@@ -55,7 +75,14 @@ half3 CalcAdditionalLightColor(
         if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
     #endif
         {
-            additionalLightsColor += CalcAdditionalLightColorInternal(originalColor, normalWS, light);
+            if (HumIsDirectionalLight(lightIndex))
+            {
+                additionalLightsColor += CalcAdditionalLightColorInternalForDirectional(originalColor, normalWS, light);
+            }
+            else
+            {
+                additionalLightsColor += CalcAdditionalLightColorInternal(originalColor, normalWS, light);
+            }
         }
     LIGHT_LOOP_END
 
