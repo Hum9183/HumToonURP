@@ -1,3 +1,5 @@
+#pragma warning disable CS0414
+
 using System;
 using System.Reflection;
 using UnityEngine;
