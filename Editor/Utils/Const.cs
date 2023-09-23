@@ -15,6 +15,7 @@ namespace HumToon.Editor
         public static readonly string Property      = Decorate(nameof(Property));
         public static readonly string Properties    = Decorate(nameof(Properties));
         public static readonly string Keyword       = Decorate(nameof(Keyword));
+        public static readonly string Keywords      = Decorate(nameof(Keywords));
         public static readonly string RenderTypeTag = Decorate("Tag (RenderType)");
         public static readonly string Passes        = Decorate(nameof(Passes));
         public static readonly string RenderQueue   = Decorate(nameof(RenderQueue));

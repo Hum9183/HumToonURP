@@ -14,6 +14,19 @@ namespace HumToon.Editor
             text: "Shade",
             tooltip: String.Empty);
 
+        // Shade Mode
+
+        public static readonly GUIContent ShadeMode = EditorGUIUtility.TrTextContent(
+            text: "Shade Mode",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.ShadeMode).Prefix()}{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Keywords}{C.Ln}" +
+                     $"{ShadeKeywords._HUM_SHADE_MODE_POS_AND_BLUR}{C.Ln}" +
+                     $"{ShadeKeywords._HUM_SHADE_MODE_RAMP}");
+
+        // Pos And Blur
+
         public static readonly GUIContent UseFirstShade = EditorGUIUtility.TrTextContent(
             text: "Use First Shade",
             tooltip: $"{C.Properties}{C.Ln}" +
@@ -92,6 +105,23 @@ namespace HumToon.Editor
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.SecondShadeBorderBlur).Prefix()}");
 
+        // Ramp
+
+        public static readonly GUIContent UseRampShade = EditorGUIUtility.TrTextContent(
+            text: "Use Ramp Shade",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.UseRampShade).Prefix()}{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Keyword}{C.Ln}" +
+                     $"{ShadeKeywords._HUM_USE_RAMP_SHADE}");
+
+        public static readonly GUIContent RampShadeMap = EditorGUIUtility.TrTextContent(
+            text: "Ramp Shade Map (RGB)",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.RampShadeMap).Prefix()}");
+
+        // Control Map
+
         public static readonly GUIContent UseShadeControlMap = EditorGUIUtility.TrTextContent(
             text: "Use Shade Control Map",
             tooltip: $"{C.Property}{C.Ln}" +
@@ -104,6 +134,6 @@ namespace HumToon.Editor
             text: "Shade Control Map (R)",
             tooltip: $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.ShadeControlMap).Prefix()}{C.Ln}" +
-                     $"{nameof(P.ShadeControlIntensity).Prefix()}");
+                     $"{nameof(P.ShadeControlIntensity).Prefix()}"); // TODO: Mapをつける
     }
 }

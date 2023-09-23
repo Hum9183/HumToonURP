@@ -6,6 +6,10 @@ namespace HumToon.Editor
     {
         private readonly PropertySetter _propSetter;
 
+        // Shade Mode
+        public MaterialProperty ShadeMode;
+
+        // Pos And Blur
         public MaterialProperty UseFirstShade;
         public MaterialProperty FirstShadeMap;
         public MaterialProperty FirstShadeColor;
@@ -22,6 +26,11 @@ namespace HumToon.Editor
         public MaterialProperty SecondShadeBorderPos;
         public MaterialProperty SecondShadeBorderBlur;
 
+        // Ramp
+        public MaterialProperty UseRampShade;
+        public MaterialProperty RampShadeMap;
+
+        // Control Map
         public MaterialProperty UseShadeControlMap;
         public MaterialProperty ShadeControlMap;
         public MaterialProperty ShadeControlIntensity;

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace HumToon.Editor
 {
@@ -22,6 +23,14 @@ namespace HumToon.Editor
         public static string Prefix(this string value, string prefix = "_")
         {
             return $"{prefix}{value}";
+        }
+
+        public static T GetFloatEnum<T>(this Material material, int nameID)
+            where T : Enum
+        {
+            var floatValue = material.GetFloat(nameID);
+            var intValue = Convert.ToUInt32(floatValue);
+            return (T)Enum.ToObject(typeof(T), intValue);
         }
     }
 }

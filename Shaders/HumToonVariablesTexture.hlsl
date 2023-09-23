@@ -10,6 +10,11 @@
     TEXTURE2D(_SecondShadeMap);
 #endif
 
+#if defined(_HUM_USE_RAMP_SHADE)
+    TEXTURE2D(_RampShadeMap);
+    SAMPLER(hum_sampler_linear_clamp);
+#endif
+
 #if defined(_HUM_USE_SHADE_CONTROL_MAP)
     TEXTURE2D(_ShadeControlMap);
 #endif

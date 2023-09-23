@@ -19,5 +19,20 @@ namespace HumToon.Editor
         {
             return obj is not null;
         }
+
+        public static string InsertSpaceBeforeUppercase(string source)
+        {
+            string result = string.Empty;
+            foreach (char VARIABLE in source)
+            {
+                if (char.IsUpper(VARIABLE))
+                    result += " ";
+                result += VARIABLE;
+            }
+
+            // NOTE: sourceの先頭文字が大文字だった場合、先頭にスペースが入ってしまうため、削除する。
+            result = result.TrimStart();
+            return result;
+        }
     }
 }

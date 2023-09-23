@@ -4,6 +4,8 @@ Shader "HumToon"
     {
         // HumToon
         // Shade
+        _ShadeMode("Shade Mode", Float) = 0.0
+
         _UseFirstShade("Use First Shade", Float) = 0.0 // Only for keyword
         _FirstShadeMap("First Shade Map", 2D) = "white" {}
         _FirstShadeColor("First Shade Color", Color) = (0.5,0.5,0.5,1)
@@ -19,6 +21,9 @@ Shader "HumToon"
         _SecondShadeColor("Second Shade Color", Color) = (0.2,0.2,0.2,1)
         _SecondShadeBorderPos("Second Shade Border Pos", Range(0.0, 1.0)) = 0.2
         _SecondShadeBorderBlur("Second Shade Border Blur", Range(0.0, 1.0)) = 0.1
+
+        _UseRampShade("Use Ramp Shade", Float) = 0.0 // Only for keyword
+        _RampShadeMap("Ramp Shade Map", 2D) = "white" {}
 
         _UseShadeControlMap("Use Shade Contro lMap", Float) = 0.0 // Only for keyword
         _ShadeControlMap("Shade Control Map", 2D) = "white" {}

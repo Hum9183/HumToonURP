@@ -7,7 +7,7 @@
 
 #include "Functions/HumToonBase.hlsl"
 
-#if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE)
+#if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
     #include "Functions/HumToonShade.hlsl"
 #endif
 
