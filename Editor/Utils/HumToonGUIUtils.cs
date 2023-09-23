@@ -13,13 +13,15 @@ namespace HumToon.Editor
             return PopupShaderProperty(materialEditor, matProp, label, displayedOptions);
         }
 
-        public static int DoPopup<T>(MaterialEditor materialEditor, MaterialProperty matProp, GUIContent label)
+        public static T DoPopup<T>(MaterialEditor materialEditor, MaterialProperty matProp, GUIContent label)
             where T: Enum
         {
             var displayedOptions = Enum.GetNames(typeof(T)).ToList();
             displayedOptions = displayedOptions.Select(Utils.InsertSpaceBeforeUppercase).ToList();
 
-            return PopupShaderProperty(materialEditor, matProp, label, displayedOptions.ToArray());
+            int newValue = PopupShaderProperty(materialEditor, matProp, label, displayedOptions.ToArray());
+
+            return newValue.ToEnum<T>();
         }
 
         private static int PopupShaderProperty(MaterialEditor materialEditor, MaterialProperty matProp, GUIContent label, string[] displayedOptions)

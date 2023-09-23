@@ -13,7 +13,7 @@ namespace HumToon.Editor
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
-            ShadeMode shadeMode = (ShadeMode)HumToonGUIUtils.DoPopup<ShadeMode>(materialEditor, PropContainer.ShadeMode, ShadeStyles.ShadeMode);
+            ShadeMode shadeMode = HumToonGUIUtils.DoPopup<ShadeMode>(materialEditor, PropContainer.ShadeMode, ShadeStyles.ShadeMode);
 
             switch (shadeMode)
             {

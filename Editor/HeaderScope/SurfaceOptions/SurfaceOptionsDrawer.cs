@@ -12,7 +12,7 @@ namespace HumToon.Editor
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
-            SurfaceType surfaceType = (SurfaceType)HumToonGUIUtils.DoPopup<SurfaceType>(materialEditor, PropContainer.SurfaceType, SurfaceOptionsStyles.SurfaceType);
+            SurfaceType surfaceType = HumToonGUIUtils.DoPopup<SurfaceType>(materialEditor, PropContainer.SurfaceType, SurfaceOptionsStyles.SurfaceType);
 
             if (surfaceType is SurfaceType.Transparent)
             {
