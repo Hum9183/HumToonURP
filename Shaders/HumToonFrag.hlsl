@@ -60,7 +60,7 @@ void frag(
 #endif
 
     // Get light color
-    half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
+    half3 mainLightColor = CalcMainLightColor(mainLight);
 
     // Get others
 #if defined(_HUM_USE_RIM_LIGHT)
