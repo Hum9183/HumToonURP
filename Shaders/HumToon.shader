@@ -155,8 +155,8 @@ Shader "HumToon"
 
             // -------------------------------------
             // Shader Stages
-            #pragma vertex LitPassVertex
-            #pragma fragment LitPassFragment
+            #pragma vertex vert
+            #pragma fragment frag
 
             // -------------------------------------
             // Material Keywords

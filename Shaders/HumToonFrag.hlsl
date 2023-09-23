@@ -3,7 +3,7 @@
 
 #include "HumToonFragIncludes.hlsl"
 
-void LitPassFragment(
+void frag(
     Varyings input
     , out half4 outColor : SV_Target0
 #ifdef _WRITE_RENDERING_LAYERS

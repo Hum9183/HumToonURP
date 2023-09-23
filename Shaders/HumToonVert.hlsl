@@ -6,7 +6,7 @@
 #include "HumToonVaryings.hlsl"
 
 // Used in Standard (Physically Based) shader
-Varyings LitPassVertex(Attributes input)
+Varyings vert(Attributes input)
 {
     Varyings output = (Varyings)0;
 
