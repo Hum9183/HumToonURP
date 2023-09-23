@@ -16,7 +16,7 @@ namespace HumToon.Editor
         private void SetKeywords(Material material)
         {
             bool useFirstEmission = material.GetFloat(IDUseEmission).ToBool();
-            CoreUtils.SetKeyword(material, EmissionKeywords._HUM_USE_EMISSION, useFirstEmission);
+            CoreUtils.SetKeyword(material, EmissionKeywordNames._HUM_USE_EMISSION, useFirstEmission);
         }
     }
 }

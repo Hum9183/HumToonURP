@@ -42,37 +42,37 @@ namespace HumToon.Editor
                 default:
                     throw new NotImplementedException(nameof(shadeMode));
             }
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_SHADE_MODE_POS_AND_BLUR, posAndBlur);
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_SHADE_MODE_RAMP, ramp);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_SHADE_MODE_POS_AND_BLUR, posAndBlur);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_SHADE_MODE_RAMP, ramp);
 
             // Pos And Blur
 
             bool useFirstShade = material.GetFloat(IDUseFirstShade).ToBool();
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_FIRST_SHADE, useFirstShade);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_FIRST_SHADE, useFirstShade);
 
             bool existsFirstShadeMap = material.GetTexture(IDFirstShadeMap) is not null;
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_FIRST_SHADE_MAP, existsFirstShadeMap);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_FIRST_SHADE_MAP, existsFirstShadeMap);
 
             bool useExFirstShade = material.GetFloat(IDUseExFirstShade).ToBool();
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_EX_FIRST_SHADE, useExFirstShade);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_EX_FIRST_SHADE, useExFirstShade);
 
             bool useSecondShade = material.GetFloat(IDUseSecondShade).ToBool();
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_SECOND_SHADE, useSecondShade);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_SECOND_SHADE, useSecondShade);
 
             bool existsSecondShadeMap = material.GetTexture(IDSecondShadeMap) is not null;
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_SECOND_SHADE_MAP, existsSecondShadeMap);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_SECOND_SHADE_MAP, existsSecondShadeMap);
 
             // Ramp
 
             bool useRampShade = material.GetFloat(IDUseRampShade).ToBool();
             bool existsRampShadeMap = material.GetTexture(IDRampShadeMap) is not null;
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_RAMP_SHADE, useRampShade && existsRampShadeMap);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_RAMP_SHADE, useRampShade && existsRampShadeMap);
 
             // Control Map
 
             bool useShadeControlMap = material.GetFloat(IDUseShadeControlMap).ToBool();
             bool existsShadeControlMap = material.GetTexture(IDShadeControlMap) is not null;
-            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_SHADE_CONTROL_MAP, useShadeControlMap && existsShadeControlMap);
+            CoreUtils.SetKeyword(material, ShadeKeywordNames._HUM_USE_SHADE_CONTROL_MAP, useShadeControlMap && existsShadeControlMap);
         }
     }
 }

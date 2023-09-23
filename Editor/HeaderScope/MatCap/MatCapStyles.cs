@@ -17,7 +17,7 @@ namespace HumToon.Editor
                      $"{nameof(P.UseMatCap).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{MatCapKeywords._HUM_USE_MAT_CAP}");
+                     $"{MatCapKeywordNames._HUM_USE_MAT_CAP}");
 
         public static readonly GUIContent MatCapMap = EditorGUIUtility.TrTextContent(
             text: "Mat Cap Map (RGB)",

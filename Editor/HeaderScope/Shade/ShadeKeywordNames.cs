@@ -1,6 +1,6 @@
 namespace HumToon.Editor
 {
-    public static class ShadeKeywords
+    public static class ShadeKeywordNames
     {
         public static readonly string _HUM_SHADE_MODE_POS_AND_BLUR = "_HUM_SHADE_MODE_POS_AND_BLUR";
         public static readonly string _HUM_SHADE_MODE_RAMP         = "_HUM_SHADE_MODE_RAMP";

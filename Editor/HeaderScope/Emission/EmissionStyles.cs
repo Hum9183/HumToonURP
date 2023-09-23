@@ -18,6 +18,6 @@ namespace HumToon.Editor
                      $"{nameof(P.UseEmission).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
-                     $"{EmissionKeywords._HUM_USE_EMISSION}");
+                     $"{EmissionKeywordNames._HUM_USE_EMISSION}");
     }
 }
