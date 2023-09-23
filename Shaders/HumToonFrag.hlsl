@@ -86,11 +86,11 @@ void frag(
 #endif
 
     // Final composite
-    half4 finalColor;
+    half4 finalColor = baseColor;
 
     // Mix Shade
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
-    finalColor.rgb = MixShade(uv0, baseColor.rgb, inputData.normalWS, mainLight.direction
+    finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseMapColor
     #endif
