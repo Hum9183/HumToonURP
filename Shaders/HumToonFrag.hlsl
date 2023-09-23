@@ -32,7 +32,6 @@ void frag(
     // TODO: SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
     // TODO: Decal
     // TODO: CanDebugOverrideOutputColor()
-    // TODO: _LIGHT_LAYERS
     // TODO: Forward plus
     // TODO: SSAOのweight調整機能
     // TODO: normalのoverride(顔の法線を正面に向ける等)
