@@ -3,12 +3,6 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 
-float HalfLambert(float3 normalWS, float3 lightDir)
-{
-    float NdotL = dot(normalWS, lightDir);
-    return NdotL * 0.5 + 0.5;
-}
-
 half CalcHalfLambert(float3 normalWS, float3 lightDirWS)
 {
     half NdotL = dot(normalWS, lightDirWS);

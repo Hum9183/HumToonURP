@@ -17,6 +17,12 @@ half4 CalcBaseColor(float2 uv)
 
 #include "../../../ShaderLibrary/Func.hlsl"
 
+float HalfLambert(float3 normalWS, float3 lightDir)
+{
+    float NdotL = dot(normalWS, lightDir);
+    return NdotL * 0.5 + 0.5;
+}
+
 half3 CalcShade(half3 color, float3 normalWS, float3 lightDir)
 {
     float halfLambert = HalfLambert(normalWS, lightDir);
