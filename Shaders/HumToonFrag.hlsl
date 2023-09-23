@@ -14,15 +14,19 @@ void frag(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
+    // UV
     float2 uv0 = input.uv;
 
+    // SurfaceData
     SurfaceData surfaceData;
     InitializeStandardLitSurfaceData(uv0, surfaceData);
 
+    // LOD Fade
 #ifdef LOD_FADE_CROSSFADE
     LODFadeCrossFade(input.positionCS);
 #endif
 
+    // InputData
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
     // TODO: SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
@@ -34,16 +38,19 @@ void frag(
     // TODO: normalのoverride(顔の法線を正面に向ける等)
     // TODO: 関数名にHumをつける(被り対策)
 
-    // Main light
+    // Shadow
     half4 shadowMask = CalculateShadowMask(inputData);
+    // AO
     AmbientOcclusionFactor aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
+    // Main light
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
 
-    // Frag
+    // Base
     half4 finalColor;
     half3 baseMapColor;
     finalColor = CalcBaseColor(uv0, baseMapColor);
 
+    // Shade
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
     finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
@@ -52,7 +59,7 @@ void frag(
     );
 #endif
 
-    // Get light colors
+    // Get light color
     half3 mainLightColor = CalcMainLightColor(mainLight.color.rgb);
 
     // Get others
@@ -103,6 +110,7 @@ void frag(
 
     outColor = finalColor;
 
+    // Rendering Layers
 #ifdef _WRITE_RENDERING_LAYERS
     SetRenderingLayers(outRenderingLayers);
 #endif
