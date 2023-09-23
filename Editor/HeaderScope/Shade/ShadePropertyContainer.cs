@@ -22,6 +22,10 @@ namespace HumToon.Editor
         public MaterialProperty SecondShadeBorderPos;
         public MaterialProperty SecondShadeBorderBlur;
 
+        public MaterialProperty UseShadeControlMap;
+        public MaterialProperty ShadeControlMap;
+        public MaterialProperty ShadeControlIntensity;
+
         public ShadePropertyContainer(PropertySetter propSetter)
         {
             _propSetter = propSetter;

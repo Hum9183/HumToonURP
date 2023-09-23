@@ -20,6 +20,10 @@ Shader "HumToon"
         _SecondShadeBorderPos("Second Shade Border Pos", Range(0.0, 1.0)) = 0.2
         _SecondShadeBorderBlur("Second Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
+        _UseShadeControlMap("Use Shade Contro lMap", Float) = 0.0 // Only for keyword
+        _ShadeControlMap("Shade Control Map", 2D) = "white" {}
+        _ShadeControlIntensity("Shade Control Intensity", Range(0.0, 1.0)) = 1.0
+
         // RimLight
         _UseRimLight("Use Rim Light", Float) = 0.0 // Only for keyword
         _RimLightMap("Rim Light Map", 2D) = "white" {}

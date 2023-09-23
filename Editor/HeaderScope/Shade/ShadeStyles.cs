@@ -91,5 +91,19 @@ namespace HumToon.Editor
             text: "Border Blur",
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.SecondShadeBorderBlur).Prefix()}");
+
+        public static readonly GUIContent UseShadeControlMap = EditorGUIUtility.TrTextContent(
+            text: "Use Shade Control Map",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.UseShadeControlMap).Prefix()}{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Keyword}{C.Ln}" +
+                     $"{ShadeKeywords._HUM_USE_SHADE_CONTROL_MAP}");
+
+        public static readonly GUIContent ShadeControlMap = EditorGUIUtility.TrTextContent(
+            text: "Shade Control Map (R)",
+            tooltip: $"{C.Properties}{C.Ln}" +
+                     $"{nameof(P.ShadeControlMap).Prefix()}{C.Ln}" +
+                     $"{nameof(P.ShadeControlIntensity).Prefix()}");
     }
 }

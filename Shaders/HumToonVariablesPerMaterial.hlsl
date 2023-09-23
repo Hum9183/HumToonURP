@@ -14,6 +14,8 @@ half4 _SecondShadeColor;
 half _SecondShadeBorderPos;
 half _SecondShadeBorderBlur;
 
+half _ShadeControlIntensity;
+
 // RimLight
 half4 _RimLightColor;
 half _RimLightIntensity;

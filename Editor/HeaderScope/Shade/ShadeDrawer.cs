@@ -43,6 +43,16 @@ namespace HumToon.Editor
                     materialEditor.ShaderProperty(PropContainer.SecondShadeBorderPos, ShadeStyles.SecondShadeBorderPos);
                     materialEditor.ShaderProperty(PropContainer.SecondShadeBorderBlur, ShadeStyles.SecondShadeBorderBlur);
                 }
+                HumToonGUIUtils.Space();
+            }
+
+            bool useShadeControlMap = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseShadeControlMap, ShadeStyles.UseShadeControlMap);
+            if (useShadeControlMap)
+            {
+                using (new EditorGUI.IndentLevelScope())
+                {
+                    materialEditor.TexturePropertySingleLine(ShadeStyles.ShadeControlMap, PropContainer.ShadeControlMap, PropContainer.ShadeControlIntensity);
+                }
             }
         }
     }

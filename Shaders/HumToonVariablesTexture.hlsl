@@ -10,6 +10,10 @@
     TEXTURE2D(_SecondShadeMap);
 #endif
 
+#if defined(_HUM_USE_SHADE_CONTROL_MAP)
+    TEXTURE2D(_ShadeControlMap);
+#endif
+
 // RimLight
 #if defined(_HUM_USE_RIM_LIGHT)
     TEXTURE2D(_RimLightMap);

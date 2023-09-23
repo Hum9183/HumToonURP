@@ -76,6 +76,11 @@ half3 MixShade(float2 uv, half3 originalColor, float3 normalWS, float3 mainLight
     half3 finalShadedColor = originalColor;
 
     half halfLambert = CalcHalfLambert(normalWS, mainLightDirWS);
+#if defined(_HUM_USE_SHADE_CONTROL_MAP)
+    half shadeControl = SAMPLE_TEXTURE2D(_ShadeControlMap, sampler_BaseMap, uv).r;
+    shadeControl = lerp(ONE, shadeControl, _ShadeControlIntensity);
+    halfLambert *= shadeControl;
+#endif
 
 #if defined(_HUM_USE_FIRST_SHADE)
     finalShadedColor = MixFirstShade(uv, finalShadedColor, halfLambert

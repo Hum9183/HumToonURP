@@ -7,6 +7,7 @@
 #pragma shader_feature_local_fragment _HUM_USE_EX_FIRST_SHADE
 #pragma shader_feature_local_fragment _HUM_USE_SECOND_SHADE
 #pragma shader_feature_local_fragment _HUM_USE_SECOND_SHADE_MAP
+#pragma shader_feature_local_fragment _HUM_USE_SHADE_CONTROL_MAP
 
 // RimLight
 #pragma shader_feature_local_fragment _HUM_USE_RIM_LIGHT

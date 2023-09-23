@@ -3,4 +3,6 @@
 
 #define NOT(boolValue) !(boolValue)
 
+#define ONE 1
+
 #endif

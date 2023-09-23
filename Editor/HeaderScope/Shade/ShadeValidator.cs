@@ -11,6 +11,8 @@ namespace HumToon.Editor
         private static readonly int IDUseExFirstShade = Shader.PropertyToID($"{nameof(P.UseExFirstShade).Prefix()}");
         private static readonly int IDUseSecondShade = Shader.PropertyToID($"{nameof(P.UseSecondShade).Prefix()}");
         private static readonly int IDSecondShadeMap = Shader.PropertyToID($"{nameof(P.SecondShadeMap).Prefix()}");
+        private static readonly int IDUseShadeControlMap = Shader.PropertyToID($"{nameof(P.UseShadeControlMap).Prefix()}");
+        private static readonly int IDShadeControlMap = Shader.PropertyToID($"{nameof(P.ShadeControlMap).Prefix()}");
 
         public void Validate(Material material)
         {
@@ -33,6 +35,10 @@ namespace HumToon.Editor
 
             bool existsSecondShadeMap = material.GetTexture(IDSecondShadeMap) is not null;
             CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_SECOND_SHADE_MAP, existsSecondShadeMap);
+
+            bool useShadeControlMap = material.GetFloat(IDUseShadeControlMap).ToBool();
+            bool existsShadeControlMap = material.GetTexture(IDShadeControlMap) is not null;
+            CoreUtils.SetKeyword(material, ShadeKeywords._HUM_USE_SHADE_CONTROL_MAP, useShadeControlMap && existsShadeControlMap);
         }
     }
 }
