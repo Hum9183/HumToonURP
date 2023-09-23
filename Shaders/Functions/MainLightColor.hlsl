@@ -1,12 +1,16 @@
 #ifndef MAIN_LIGHT_COLOR_INCLUDED
 #define MAIN_LIGHT_COLOR_INCLUDED
 
-half3 CalcMainLightColor(Light mainLight)
+half3 CalcMainLightColor(
+    Light mainLight
+#if defined(_LIGHT_LAYERS)
+    , uint meshRenderingLayers
+#endif
+)
 {
     half3 finalMainLightColor = 0;
 
 #if defined(_LIGHT_LAYERS)
-    uint meshRenderingLayers = GetMeshRenderingLayer();
     if (IsMatchingLightLayer(mainLight.layerMask, meshRenderingLayers))
 #endif
     {

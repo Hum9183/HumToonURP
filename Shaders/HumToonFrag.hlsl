@@ -45,6 +45,12 @@ void frag(
     // Main light
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
 
+    // Mesh Rendering Layers
+#if defined(_LIGHT_LAYERS)
+    uint meshRenderingLayers = GetMeshRenderingLayer();
+#endif
+
+
     // Base
     half4 finalColor;
     half3 baseMapColor;
@@ -60,7 +66,11 @@ void frag(
 #endif
 
     // Get light color
-    half3 mainLightColor = CalcMainLightColor(mainLight);
+    half3 mainLightColor = CalcMainLightColor(mainLight
+    #if defined(_LIGHT_LAYERS)
+        , meshRenderingLayers
+    #endif
+    );
 
     // Get others
 #if defined(_HUM_USE_RIM_LIGHT)
@@ -76,7 +86,11 @@ void frag(
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
-    half3 additionalLightsColor = CalcAdditionalLightColor(finalColor.rgb, inputData, shadowMask, aoFactor);
+    half3 additionalLightsColor = CalcAdditionalLightColor(finalColor.rgb, inputData, shadowMask, aoFactor
+    #if defined(_LIGHT_LAYERS)
+        , meshRenderingLayers
+    #endif
+    );
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS_VERTEX)
