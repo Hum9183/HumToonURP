@@ -21,7 +21,12 @@ namespace HumToon.Editor
 
         public static readonly GUIContent MatCapMap = EditorGUIUtility.TrTextContent(
             text: "Mat Cap Map (RGB)",
-            tooltip: $"{C.Properties}{C.Ln}" +
+            tooltip: $"{C.Description}{C.Ln}" +
+                     $"Mat Cap Map must always be assigned. " +
+                     $"If not assigned, " +
+                     $"the keyword will be invalid and Mat Cap will be invalid.{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.MatCapMap).Prefix()}{C.Ln}" +
                      $"{nameof(P.MatCapColor).Prefix()}");
 
