@@ -16,7 +16,7 @@ namespace HumToon.Editor
 
             if (surfaceType is SurfaceType.Transparent)
             {
-                using (new EditorGUI.IndentLevelScope(1))
+                using (new EditorGUI.IndentLevelScope())
                 {
                     HumToonGUIUtils.DoPopup<TransparentBlendMode>(materialEditor, PropContainer.BlendMode, SurfaceOptionsStyles.TransparentBlendMode);
                 }
@@ -26,7 +26,7 @@ namespace HumToon.Editor
 
             HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.AlphaClip, SurfaceOptionsStyles.AlphaClip);
 
-            if (PropContainer.AlphaClip.floatValue is 1)
+            if (PropContainer.AlphaClip.floatValue.IsOne())
                 materialEditor.ShaderProperty(PropContainer.Cutoff, SurfaceOptionsStyles.Cutoff, 1);
 
             HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.ReceiveShadows, SurfaceOptionsStyles.ReceiveShadow);
