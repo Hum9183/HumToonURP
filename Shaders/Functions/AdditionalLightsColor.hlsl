@@ -32,6 +32,23 @@ half3 CalcAdditionalLightColor(
     uint pixelLightCount = GetAdditionalLightsCount();
     half3 additionalLightsColor;
 
+#if USE_FORWARD_PLUS
+    // NOTE: ForwardPlus時の2灯目以降のDirectionalLightの計算
+    // (無印Forwardでは2灯目以降のDirectionalLightはPointLightと一緒に計算されるが、
+    // ForwardPlusでは個別で処理を書く必要がある)
+    for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
+    {
+        FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
+        Light light = GetAdditionalLight(lightIndex, inputData, shadowMask, aoFactor);
+    #ifdef _LIGHT_LAYERS
+        if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+    #endif
+        {
+            additionalLightsColor += CalcAdditionalLightColorInternal(originalColor, normalWS, light);
+        }
+    }
+#endif
+
     LIGHT_LOOP_BEGIN(pixelLightCount)
         Light light = GetAdditionalLight(lightIndex, inputData, shadowMask, aoFactor);
     #ifdef _LIGHT_LAYERS
