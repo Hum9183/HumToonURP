@@ -23,7 +23,7 @@ half3 CalcAdditionalLightColor(
     // Litと比べルックの差異が大きい。
     // 1灯目のDirectionalLightをShadeで計算している都合、回避できない。
 
-    // FEATURE:
+    // FUTURE:
     // PointLightの計算もShadeと同様の計算を行うアプローチがある。
     // できればPointLightはLitと同じ計算法にしたい。
     // PointLight扱いのDirectionalLightの判定方法があれば、明確にDirectionalLightの計算を分けることが出来そう。
