@@ -51,18 +51,8 @@ void frag(
 
 
     // Base
-    half4 finalColor;
     half3 baseMapColor;
-    finalColor = CalcBaseColor(uv0, baseMapColor);
-
-    // Shade
-#if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
-    finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction
-    #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-        , baseMapColor
-    #endif
-    );
-#endif
+    half4 baseColor = CalcBaseColor(uv0, baseMapColor);
 
     // Get light color
     half3 mainLightColor = CalcMainLightColor(mainLight
@@ -85,7 +75,7 @@ void frag(
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
-    half3 additionalLightsColor = CalcAdditionalLightColor(finalColor.rgb, inputData, shadowMask, aoFactor
+    half3 additionalLightsColor = CalcAdditionalLightColor(baseColor.rgb, inputData, shadowMask, aoFactor
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
@@ -93,11 +83,24 @@ void frag(
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS_VERTEX)
-    half3 additionalLightsColorVertex = CalcAdditionalLightColorVertex(finalColor.rgb, inputData.vertexLighting);
+    half3 additionalLightsColorVertex = CalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
 #endif
 
     // Final composite
+    half4 finalColor;
+
+    // Mix Shade
+#if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
+    finalColor.rgb = MixShade(uv0, baseColor.rgb, inputData.normalWS, mainLight.direction
+    #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+        , baseMapColor
+    #endif
+    );
+#endif
+
+    // Mix Main Light
     finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
+
 #if defined(_HUM_USE_RIM_LIGHT)
     finalColor.rgb += rimLightColor;
 #endif
