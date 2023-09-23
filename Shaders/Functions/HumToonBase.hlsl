@@ -3,16 +3,14 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/core.hlsl"
 
-half4 CalcBaseColor(float2 uv
-#if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-    , out half3 outBaseMapColor
-#endif
-)
+half4 CalcBaseColor(float2 uv, out half3 outBaseMapColor)
 {
+    // NOTE:
+    // outBaseMapColorはShadeの項目で使用する可能性があるため、outで渡す。
+    // defineで分岐しない理由は、Base <=> Shade間で予期しずらい依存を持たせないようにするため。
+
     half4 baseMapColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
-#if !defined(_HUM_USE_FIRST_SHADE_MAP) || !defined(_HUM_USE_SECOND_SHADE_MAP) || defined(_HUM_USE_EX_FIRST_SHADE)
     outBaseMapColor = baseMapColor.rgb;
-#endif
     half4 baseColor = baseMapColor * _BaseColor;
 
     baseColor.a = AlphaDiscard(baseColor.a, _Cutoff);

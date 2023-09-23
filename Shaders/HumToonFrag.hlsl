@@ -41,12 +41,8 @@ void LitPassFragment(
 
     // Frag
     half4 finalColor;
-#if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
     half3 baseMapColor;
     finalColor = CalcBaseColor(uv0, baseMapColor);
-#else
-    finalColor = CalcBaseColor(uv0);
-#endif
 
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE)
     finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction
