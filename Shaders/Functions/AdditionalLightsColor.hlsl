@@ -78,7 +78,11 @@ half3 CalcAdditionalLightColor(
         if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
     #endif
         {
-            additionalLightsColor += CalcAdditionalLightColorInternalForDirectional(originalColor, normalWS, light);
+            additionalLightsColor += HumCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light
+            #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+                , baseColor
+            #endif
+            );
         }
     }
 #endif
