@@ -1,25 +1,29 @@
 #ifndef MAIN_LIGHT_COLOR_INCLUDED
 #define MAIN_LIGHT_COLOR_INCLUDED
 
-half3 CalcMainLightColor(
+half3 HumCalcMainLightColor(
     Light mainLight
 #if defined(_LIGHT_LAYERS)
     , uint meshRenderingLayers
 #endif
 )
 {
-    half3 finalMainLightColor = 0;
+    half3 mainLightColor = 0;
 
 #if defined(_LIGHT_LAYERS)
     if (IsMatchingLightLayer(mainLight.layerMask, meshRenderingLayers))
 #endif
     {
-        finalMainLightColor = mainLight.color;
-        finalMainLightColor = lerp(finalMainLightColor, min(finalMainLightColor, _MainLightUpperLimit), _UseMainLightUpperLimit);
-        finalMainLightColor = lerp(finalMainLightColor, max(finalMainLightColor, _MainLightLowerLimit), _UseMainLightLowerLimit);
+        mainLightColor = mainLight.color;
+        mainLightColor = lerp(mainLightColor, min(mainLightColor, _MainLightUpperLimit), _UseMainLightUpperLimit);
+        mainLightColor = lerp(mainLightColor, max(mainLightColor, _MainLightLowerLimit), _UseMainLightLowerLimit);
+
+        // NOTE:
+        // DirectionalLightのIntensityが0になるとLightLayerからいなくなるらしいため、
+        // 上限と下限の処理は、_LIGHT_LAYERSのifの外で計算しても良いかもしれない。
     }
 
-    return finalMainLightColor;
+    return mainLightColor;
 }
 
 half3 MixMainLightColor(half3 originalColor, half3 mainLightColor)

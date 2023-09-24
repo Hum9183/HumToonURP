@@ -14,6 +14,10 @@ void frag(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
+    // ************************************ //
+    // ****** Calculate what PS needs ***** //
+    // ************************************ //
+
     // UV
     float2 uv0 = input.uv;
 
@@ -48,16 +52,14 @@ void frag(
     uint meshRenderingLayers = GetMeshRenderingLayer();
 #endif
 
-    // TODO:
-    // 2灯目のDirectionalLightを考慮すると、光の計算の辻褄が合わなくなってきたため、
-    // 根本的にBaseやShade、LightColorの計算順と計算法を見直したほうが良いかもしれない
-
     // Base
+    half4 baseColor;
     half3 baseMapColor;
-    half4 baseColor = CalcBaseColor(uv0, baseMapColor);
+    HumCalcBaseColor(uv0, baseColor, baseMapColor);
 
-    // Get light color
-    half3 mainLightColor = CalcMainLightColor(mainLight
+    // Main Light Color
+    half3 mainLightColor = HumCalcMainLightColor(
+        mainLight
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
@@ -77,9 +79,12 @@ void frag(
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
-    half3 additionalLightsColor = CalcAdditionalLightColor(baseColor.rgb, inputData, shadowMask, aoFactor
+    half3 additionalLightsColor = CalcAdditionalLightColor(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
+    #endif
+    #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+        , baseMapColor
     #endif
     );
 #endif
@@ -88,19 +93,25 @@ void frag(
     half3 additionalLightsColorVertex = CalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
 #endif
 
-    // Final composite
-    half4 finalColor = baseColor;
 
-    // Mix Shade
+    // ********************** //
+    // ****** Composite ***** //
+    // ********************** //
+    half4 finalColor = 0;
+
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
-    finalColor.rgb = MixShade(uv0, finalColor.rgb, inputData.normalWS, mainLight.direction
+    // Mix Base Color and Shade Color
+    finalColor.rgb = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseMapColor
     #endif
     );
+#else
+    // Base Color
+    finalColor.rgb = baseColor;
 #endif
 
-    // Mix Main Light
+    // Mix Main Light Color
     finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
 
 #if defined(_HUM_USE_RIM_LIGHT)

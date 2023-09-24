@@ -3,7 +3,7 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/core.hlsl"
 
-half4 CalcBaseColor(float2 uv, out half3 outBaseMapColor)
+void HumCalcBaseColor(float2 uv, out half4 baseColor, out half3 outBaseMapColor)
 {
     // NOTE:
     // outBaseMapColorはShadeの項目で使用する可能性があるため、outで渡す。
@@ -11,12 +11,10 @@ half4 CalcBaseColor(float2 uv, out half3 outBaseMapColor)
 
     half4 baseMapColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
     outBaseMapColor = baseMapColor.rgb;
-    half4 baseColor = baseMapColor * _BaseColor;
+    half4 tempBaseColor = baseMapColor * _BaseColor;
 
-    baseColor.a = AlphaDiscard(baseColor.a, _Cutoff);
-    baseColor.rgb = AlphaModulate(baseColor.rgb, baseColor.a);
-
-    return baseColor;
+    baseColor.a = AlphaDiscard(tempBaseColor.a, _Cutoff);
+    baseColor.rgb = AlphaModulate(tempBaseColor.rgb, baseColor.a);
 }
 
 #endif

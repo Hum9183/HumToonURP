@@ -3,6 +3,7 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 #include "../../ShaderLibrary/Func.hlsl"
+#include "HumToonShade.hlsl"
 
 half3 CalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)
 {
@@ -13,11 +14,21 @@ half3 CalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Lig
 }
 
 // EXPERIMENTAL: AdditionalLightのDirectionalLightはShadeと同じ計算法を使用する
-half3 CalcAdditionalLightColorInternalForDirectional(half3 originalColor, float3 normalWS, Light light)
+half3 HumCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 normalWS, Light additionalDirectionalLight
+#if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+    , half3 baseMapColor
+#endif
+)
 {
-    half halfLambert = CalcHalfLambert(normalWS, light.direction);
-    half shade = HumBlurStep(_FirstShadeBorderPos, _FirstShadeBorderBlur, halfLambert);
-    return shade * originalColor * light.color;
+    // TODO: Textureなどはサンプルし直しになるため負荷がかかる。
+    // structなどに保持することを検討する。
+    half3 shadedColor = HumMixShadeColor(uv, baseColor, normalWS, additionalDirectionalLight.direction
+    #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+        , baseMapColor
+    #endif
+    );
+
+    return shadedColor * additionalDirectionalLight.color;
 }
 
 // NOTE: AdditionalLight用
@@ -32,9 +43,12 @@ bool HumIsDirectionalLight(uint lightIndex)
 }
 
 half3 CalcAdditionalLightColor(
-    half3 originalColor, InputData inputData, half4 shadowMask, AmbientOcclusionFactor aoFactor
+    float2 uv, half3 baseColor, InputData inputData, half4 shadowMask, AmbientOcclusionFactor aoFactor
 #if defined(_LIGHT_LAYERS)
     , uint meshRenderingLayers
+#endif
+#if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+    , half3 baseMapColor
 #endif
 )
 {
@@ -77,11 +91,15 @@ half3 CalcAdditionalLightColor(
         {
             if (HumIsDirectionalLight(lightIndex))
             {
-                additionalLightsColor += CalcAdditionalLightColorInternalForDirectional(originalColor, normalWS, light);
+                additionalLightsColor += HumCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light
+                #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+                    , baseColor
+                #endif
+                );
             }
             else
             {
-                additionalLightsColor += CalcAdditionalLightColorInternal(originalColor, normalWS, light);
+                additionalLightsColor += CalcAdditionalLightColorInternal(baseColor, normalWS, light);
             }
         }
     LIGHT_LOOP_END
