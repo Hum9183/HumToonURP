@@ -71,7 +71,7 @@ void frag(
 #endif
 
 #if defined(_HUM_USE_EMISSION)
-    half3 emissionColor = HumCalcEmissionColor(uv0, mainLightColor);
+    half3 emissionColor = HumCalcEmissionColor(uv0, baseColor.rgb);
 #endif
 
 #if defined(_HUM_USE_MAT_CAP)
@@ -111,6 +111,10 @@ void frag(
     finalColor.rgb = baseColor;
 #endif
 
+#if defined(_HUM_OVERRIDE_EMISSION_COLOR)
+    finalColor.rgb = HumOverrideEmissionColor(finalColor.rgb, emissionColor);
+#endif
+
     // Mix Main Light Color
     finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
 
@@ -119,7 +123,7 @@ void frag(
 #endif
 
 #if defined(_HUM_USE_EMISSION)
-    finalColor.rgb = emissionColor;
+    finalColor.rgb += emissionColor;
 #endif
 
 #if defined(_HUM_USE_MAT_CAP)

@@ -24,6 +24,11 @@
     TEXTURE2D(_RimLightMap);
 #endif
 
+// Emission
+#if defined(_HUM_USE_EMISSION)
+    TEXTURE2D(_EmissionMap);
+#endif
+
 // MatCap
 #if defined(_HUM_USE_MAT_CAP)
     TEXTURE2D(_MatCapMap);

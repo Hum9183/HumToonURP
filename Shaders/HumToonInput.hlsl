@@ -3,7 +3,7 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/CommonMaterial.hlsl"
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+#include "HumSurfaceInput.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/ParallaxMapping.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DBuffer.hlsl"
 
@@ -19,7 +19,7 @@ CBUFFER_START(UnityPerMaterial)
     float4 _DetailAlbedoMap_ST;
     half4 _BaseColor;
     half4 _SpecColor;
-    half4 _EmissionColor;
+    // half4 _EmissionColor;
     half _Cutoff;
     half _Smoothness;
     half _Metallic;

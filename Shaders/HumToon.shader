@@ -40,6 +40,13 @@ Shader "HumToon"
 
         // Emission
         _UseEmission("Use Emission", FLoat) = 0.0 // Only for keyword
+        _EmissionMap("Emission Map", 2D) = "white" {}
+        _EmissionColor("Emission Color", Color) = (1.0,1.0,1.0,1.0)
+        _EmissionIntensity("Emission Intensity", Range(0.0, 8.0)) = 0.0
+        _EmissionFactorR("Emission Factor R", Range(0.0, 1.0)) = 1.0
+        _EmissionFactorG("Emission Factor G", Range(0.0, 1.0)) = 1.0
+        _EmissionFactorB("Emission Factor B", Range(0.0, 1.0)) = 1.0
+        _OverrideEmissionColor("Override Emission Color", FLoat) = 0.0 // Only for keyword
 
         // MatCap
         _UseMatCap("Use Mat Cap", Float) = 0.0 // Only for keyword
@@ -90,8 +97,8 @@ Shader "HumToon"
         _OcclusionStrength("Occlusion Strength", Range(0.0, 1.0)) = 1.0
         _OcclusionMap("Occlusion Map", 2D) = "white" {}
 
-        [HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
-        _EmissionMap("Emission Map", 2D) = "white" {}
+//        [HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
+//        _EmissionMap("Emission Map", 2D) = "white" {}
 
         _DetailMask("Detail Mask", 2D) = "white" {}
         _DetailAlbedoMapScale("Detail Scale", Range(0.0, 2.0)) = 1.0

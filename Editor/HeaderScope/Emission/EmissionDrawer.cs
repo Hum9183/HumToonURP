@@ -17,8 +17,13 @@ namespace HumToon.Editor
             {
                 using (new EditorGUI.IndentLevelScope())
                 {
+                    materialEditor.TexturePropertySingleLine(EmissionStyles.EmissionMap, PropContainer.EmissionMap, PropContainer.EmissionColor);
+                    materialEditor.ShaderProperty(PropContainer.EmissionIntensity, EmissionStyles.EmissionIntensity);
+                    materialEditor.ShaderProperty(PropContainer.EmissionFactorR, EmissionStyles.EmissionFactorR);
+                    materialEditor.ShaderProperty(PropContainer.EmissionFactorG, EmissionStyles.EmissionFactorG);
+                    materialEditor.ShaderProperty(PropContainer.EmissionFactorB, EmissionStyles.EmissionFactorB);
+                    HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.OverrideEmissionColor, EmissionStyles.OverrideEmissionColor);
                 }
-
             }
         }
     }

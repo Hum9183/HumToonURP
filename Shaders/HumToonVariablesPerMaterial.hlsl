@@ -23,6 +23,13 @@ half _RimLightBorderPos;
 half _RimLightBorderBlur;
 half _RimLightMainLightEffectiveness;
 
+// Emission
+half3 _EmissionColor;
+half _EmissionIntensity;
+half _EmissionFactorR;
+half _EmissionFactorG;
+half _EmissionFactorB;
+
 // MatCap
 float4 _MatCapMap_ST;
 half4 _MatCapColor;

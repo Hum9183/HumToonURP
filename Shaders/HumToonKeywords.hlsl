@@ -20,6 +20,8 @@
 
 // Emission
 #pragma shader_feature_local_fragment _HUM_USE_EMISSION
+#pragma shader_feature_local_fragment _HUM_USE_EMISSION_MAP
+#pragma shader_feature_local_fragment _HUM_OVERRIDE_EMISSION_COLOR
 
 // MatCap
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP
