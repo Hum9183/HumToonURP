@@ -46,6 +46,7 @@ void frag(
     AmbientOcclusionFactor aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
     // Main light
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
+    half shadowAttenuation = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
 
     // Mesh Rendering Layers
 #if defined(_LIGHT_LAYERS)
@@ -101,7 +102,7 @@ void frag(
 
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
     // Mix Base Color and Shade Color
-    finalColor.rgb = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction
+    finalColor.rgb = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseMapColor
     #endif

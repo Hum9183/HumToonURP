@@ -22,7 +22,8 @@ half3 HumCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 norma
 {
     // TODO: Textureなどはサンプルし直しになるため負荷がかかる。
     // structなどに保持することを検討する。
-    half3 shadedColor = HumMixShadeColor(uv, baseColor, normalWS, additionalDirectionalLight.direction
+    half shadowAttenuation = additionalDirectionalLight.distanceAttenuation * additionalDirectionalLight.shadowAttenuation;
+    half3 shadedColor = HumMixShadeColor(uv, baseColor, normalWS, additionalDirectionalLight.direction, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseMapColor
     #endif

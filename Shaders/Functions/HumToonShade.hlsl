@@ -18,7 +18,7 @@ half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half shadeB
     return halfLambert > shadeBorderPos ? OneMinus(start) : end;
 }
 
-half3 MixFirstShade(float2 uv, half3 baseColor, half halfLambert
+half3 MixFirstShade(float2 uv, half3 baseColor, half halfLambert, half shadowAttenuation
 #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
     , half3 baseMapColor
 #endif
@@ -30,6 +30,7 @@ half3 MixFirstShade(float2 uv, half3 baseColor, half halfLambert
 #else
     half firstShade = HumBlurStep(_FirstShadeBorderPos, _FirstShadeBorderBlur, halfLambert);
 #endif
+    firstShade *= shadowAttenuation;
 
     // First Shade Color
 #if defined(_HUM_USE_FIRST_SHADE_MAP)
@@ -71,7 +72,7 @@ half3 MixSecondShade(float2 uv, half3 originalColor, half halfLambert
     return lerp(secondShadeColor, originalColor, secondShade);
 }
 
-half3 MixPosAndBlurShade(float2 uv, half3 baseColor, half halfLambert
+half3 MixPosAndBlurShade(float2 uv, half3 baseColor, half halfLambert, half shadowAttenuation
 #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
     , half3 baseMapColor
 #endif
@@ -80,7 +81,7 @@ half3 MixPosAndBlurShade(float2 uv, half3 baseColor, half halfLambert
     half3 finalShadedColor = 0;
 
 #if defined(_HUM_USE_FIRST_SHADE)
-    finalShadedColor = MixFirstShade(uv, baseColor, halfLambert
+    finalShadedColor = MixFirstShade(uv, baseColor, halfLambert, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseMapColor
     #endif
@@ -126,7 +127,7 @@ half CalcShadeHalfLambert(float2 uv, float3 normalWS, float3 mainLightDirWS)
     return halfLambert;
 }
 
-half3 HumMixShadeColor(float2 uv, half3 baseColor, float3 normalWS, float3 mainLightDirWS
+half3 HumMixShadeColor(float2 uv, half3 baseColor, float3 normalWS, float3 mainLightDirWS, half shadowAttenuation
 #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
     , half3 baseMapColor
 #endif
@@ -137,7 +138,7 @@ half3 HumMixShadeColor(float2 uv, half3 baseColor, float3 normalWS, float3 mainL
     half3 finalShadedColor = 0;
 
 #if defined(_HUM_SHADE_MODE_POS_AND_BLUR)
-    finalShadedColor = MixPosAndBlurShade(uv, baseColor, halfLambert
+    finalShadedColor = MixPosAndBlurShade(uv, baseColor, halfLambert, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseMapColor
     #endif
