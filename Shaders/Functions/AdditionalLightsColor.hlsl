@@ -93,6 +93,7 @@ half3 CalcAdditionalLightColor(
         if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
     #endif
         {
+            // TODO: おそらく重いため、もう少し最適化する
             if (HumIsDirectionalLight(lightIndex))
             {
                 additionalLightsColor += HumCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light
