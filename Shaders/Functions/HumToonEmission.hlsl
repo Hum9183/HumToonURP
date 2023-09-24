@@ -17,6 +17,11 @@ half3 HumCalcEmissionColor(float2 uv, half3 originalColor)
     return emissionColor * _EmissionIntensity;
 }
 
+half3 HumCalcEmissionColorIntensity(half3 emissionColor)
+{
+    return emissionColor * _EmissionIntensity;
+}
+
 half3 HumOverrideEmissionColor(half3 originalColor, half3 emissionColor)
 {
     // NOTE: _EmissionIntensityにあわせてEmissionColorにしてしまう。

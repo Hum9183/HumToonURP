@@ -123,7 +123,7 @@ void frag(
 #endif
 
 #if defined(_HUM_USE_EMISSION)
-    finalColor.rgb += emissionColor;
+    finalColor.rgb += HumCalcEmissionColorIntensity(emissionColor);
 #endif
 
 #if defined(_HUM_USE_MAT_CAP)
