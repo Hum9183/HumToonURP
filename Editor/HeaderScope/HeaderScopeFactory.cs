@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace HumToon.Editor
 {
+    // TODO: VContainer等のライブラリを使用することを検討
     public class HeaderScopeFactory
     {
         public IEnumerable<IHeaderScopeDrawer> CreateDrawers(PropertySetter propSetter)
