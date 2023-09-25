@@ -5,7 +5,13 @@ namespace HumToon.Editor
 {
     public class PropertySetter
     {
-        public MaterialProperty[] MatProps { private get; set; }
+        public MaterialProperty[] MatProps
+        {
+            private get => _matProps;
+            set => _matProps = value;
+        }
+
+        private MaterialProperty[] _matProps;
 
         public void Set<T>(T matPropContainer) where T : IPropertiesContainer
         {
@@ -20,14 +26,14 @@ namespace HumToon.Editor
 
         private MaterialProperty FindProperty(string matPropName, bool propertyIsMandatory)
         {
-            foreach (var prop in MatProps)
+            foreach (var prop in _matProps)
             {
                 if (prop != null && prop.name.Equals(matPropName))
                     return prop;
             }
 
             if (propertyIsMandatory)
-                throw new ArgumentException($"Could not find MaterialProperty: '{matPropName}', Num properties: {MatProps.Length.ToString()}");
+                throw new ArgumentException($"Could not find MaterialProperty: '{matPropName}', Num properties: {_matProps.Length.ToString()}");
 
             return null;
         }
