@@ -5,12 +5,7 @@ namespace HumToon.Editor
 {
     public class PropertySetter
     {
-        public MaterialProperty[] MatProps
-        {
-            private get => _matProps;
-            set => _matProps = value;
-        }
-
+        public MaterialProperty[] MatProps { set => _matProps = value ?? throw new ArgumentException(); }
         private MaterialProperty[] _matProps;
 
         public void Set<T>(T matPropContainer) where T : IPropertiesContainer
