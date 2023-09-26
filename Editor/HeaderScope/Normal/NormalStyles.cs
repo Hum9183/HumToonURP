@@ -1,10 +1,11 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using C = HumToon.Editor.Const;
-using P = HumToon.Editor.NormalPropertiesContainer;
+using C = Hum.HumToon.Editor.Utils.Const;
+using P = Hum.HumToon.Editor.HeaderScope.Normal.NormalPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Normal
 {
     public static class NormalStyles
     {

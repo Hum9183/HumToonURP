@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public partial class HumToonInspector
     {

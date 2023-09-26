@@ -1,4 +1,4 @@
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.Utils
 {
     /// <summary>
     /// PropertyContainerに格納しないプロパティの名前の置き場

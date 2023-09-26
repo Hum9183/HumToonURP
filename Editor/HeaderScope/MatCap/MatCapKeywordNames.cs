@@ -1,4 +1,4 @@
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.MatCap
 {
     public static class MatCapKeywordNames
     {

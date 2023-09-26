@@ -1,8 +1,8 @@
 using UnityEditor;
-using UnityEngine;
 using UnityEditor.Rendering;
+using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope
 {
     public abstract class HeaderScopeDrawerBase<T> : IHeaderScopeDrawer
         where T : IPropertiesContainer

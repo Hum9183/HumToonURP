@@ -1,10 +1,6 @@
 using System;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Experimental.Rendering;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public class HumToonEnums
     {

@@ -1,4 +1,4 @@
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.SurfaceOptions
 {
     /// <summary>
     /// The surface type for your object.

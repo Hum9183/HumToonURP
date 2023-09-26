@@ -1,14 +1,10 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
+using Hum.HumToon.Editor.HeaderScope;
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
-using UnityEditor.Rendering;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using UnityEditor.Rendering.Universal.ShaderGUI;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public partial class HumToonInspector : ShaderGUI
     {

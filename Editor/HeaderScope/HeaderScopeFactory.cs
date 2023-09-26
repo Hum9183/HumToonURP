@@ -1,8 +1,17 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using Hum.HumToon.Editor.HeaderScope.Base;
+using Hum.HumToon.Editor.HeaderScope.Emission;
+using Hum.HumToon.Editor.HeaderScope.Light;
+using Hum.HumToon.Editor.HeaderScope.MatCap;
+using Hum.HumToon.Editor.HeaderScope.Normal;
+using Hum.HumToon.Editor.HeaderScope.RimLight;
+using Hum.HumToon.Editor.HeaderScope.Shade;
+using Hum.HumToon.Editor.HeaderScope.SurfaceOptions;
+using Hum.HumToon.Editor.Utils;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope
 {
     // TODO: VContainer等のライブラリを使用することを検討
     public class HeaderScopeFactory
@@ -12,7 +21,7 @@ namespace HumToon.Editor
             var scopes = CreateHeaderScopes(propSetter);
             return scopes
                 .Select(x => x.drawer)
-                .Where(Utils.IsNotNull);;
+                .Where(Utils.Utils.IsNotNull);;
         }
 
         public IEnumerable<IHeaderScopeValidator> CreateValidators()
@@ -20,7 +29,7 @@ namespace HumToon.Editor
             var scopes = CreateHeaderScopes();
             return scopes
                 .Select(x => x.validator)
-                .Where(Utils.IsNotNull);
+                .Where(Utils.Utils.IsNotNull);
         }
 
         private IEnumerable<(IHeaderScopeDrawer drawer, IHeaderScopeValidator validator)>
@@ -44,7 +53,7 @@ namespace HumToon.Editor
             return new SurfaceOptionsDrawer(
                 new SurfaceOptionsPropertiesContainer(propSetter),
                 SurfaceOptionsStyles.SurfaceOptionsFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.SurfaceOptions));
+                Convert.ToUInt32(Expandable.SurfaceOptions));
         }
 
         private BaseDrawer CreateBaseDrawer(PropertySetter propSetter)
@@ -52,7 +61,7 @@ namespace HumToon.Editor
             return new BaseDrawer(
                 new BasePropertiesContainer(propSetter),
                 BaseStyles.SurfaceInputsFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.Base));
+                Convert.ToUInt32(Expandable.Base));
         }
 
         private NormalDrawer CreateNormalDrawer(PropertySetter propSetter)
@@ -60,7 +69,7 @@ namespace HumToon.Editor
             return new NormalDrawer(
                 new NormalPropertiesContainer(propSetter),
                 NormalStyles.NormalFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.Normal));
+                Convert.ToUInt32(Expandable.Normal));
         }
 
         private ShadeDrawer CreateShadeDrawer(PropertySetter propSetter)
@@ -68,7 +77,7 @@ namespace HumToon.Editor
             return new ShadeDrawer(
                 new ShadePropertiesContainer(propSetter),
                 ShadeStyles.ShadeFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.Shade));
+                Convert.ToUInt32(Expandable.Shade));
         }
 
         private RimLightDrawer CreateRimLightDrawer(PropertySetter propSetter)
@@ -76,7 +85,7 @@ namespace HumToon.Editor
             return new RimLightDrawer(
                 new RimLightPropertiesContainer(propSetter),
                 RimLightStyles.RimLightFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.RimLight));
+                Convert.ToUInt32(Expandable.RimLight));
         }
 
         private EmissionDrawer CreateEmissionDrawer(PropertySetter propSetter)
@@ -84,7 +93,7 @@ namespace HumToon.Editor
             return new EmissionDrawer(
                 new EmissionPropertiesContainer(propSetter),
                 EmissionStyles.EmissionFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.Emission));
+                Convert.ToUInt32(Expandable.Emission));
         }
 
         private MatCapDrawer CreateMatCapDrawer(PropertySetter propSetter)
@@ -92,7 +101,7 @@ namespace HumToon.Editor
             return new MatCapDrawer(
                 new MatCapPropertiesContainer(propSetter),
                 MatCapStyles.MatCapFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.MatCap));
+                Convert.ToUInt32(Expandable.MatCap));
         }
 
         private LightDrawer CreateLightDrawer(PropertySetter propSetter)
@@ -100,7 +109,7 @@ namespace HumToon.Editor
             return new LightDrawer(
                 new LightPropertiesContainer(propSetter),
                 LightStyles.LightFoldout,
-                Convert.ToUInt32(HumToon.Editor.Expandable.Light));
+                Convert.ToUInt32(Expandable.Light));
         }
     }
 }

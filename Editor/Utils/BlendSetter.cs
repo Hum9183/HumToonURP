@@ -1,7 +1,8 @@
+using Hum.HumToon.Editor.HeaderScope.SurfaceOptions;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.Utils
 {
     public static class BlendSetter
     {

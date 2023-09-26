@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Normal
 {
     public class NormalDrawer : HeaderScopeDrawerBase<NormalPropertiesContainer>
     {

@@ -83,5 +83,5 @@ Shader "HumToon(URPBased)"
 
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
 //    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.UnlitShader"
-    CustomEditor "HumToon.Editor.URPBased.HumToonGUI"
+    CustomEditor "Hum.HumToon.Editor.URPBased.HumToonGUI"
 }

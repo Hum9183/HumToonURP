@@ -1,6 +1,6 @@
 using System;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.Utils
 {
     /// <summary>
     /// Flags for the foldouts used in the Hum Toon GUI.

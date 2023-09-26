@@ -1,9 +1,10 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using P = HumToon.Editor.SurfaceOptionsPropertiesContainer;
+using P = Hum.HumToon.Editor.HeaderScope.SurfaceOptions.SurfaceOptionsPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.SurfaceOptions
 {
     public class SurfaceOptionsValidator : IHeaderScopeValidator
     {
@@ -21,7 +22,7 @@ namespace HumToon.Editor
             var isOpaque = (SurfaceType)material.GetFloat(IDSurfaceType) is SurfaceType.Opaque;
             var alphaClip = material.GetFloat(IDAlphaClip).ToBool();
             var transparentBlendMode = (TransparentBlendMode)material.GetFloat(IDTransparentBlendMode);
-            var transparentPreserveSpecular = isOpaque is false && Utils.GetPreserveSpecular(material, transparentBlendMode);
+            var transparentPreserveSpecular = isOpaque is false && Utils.Utils.GetPreserveSpecular(material, transparentBlendMode);
             var transparentAlphaModulate = isOpaque is false && transparentBlendMode is TransparentBlendMode.Multiply;
 
             SetKeywords(material, isOpaque, alphaClip, transparentPreserveSpecular, transparentAlphaModulate);

@@ -1,7 +1,6 @@
 using UnityEditor;
-using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope
 {
     public interface IHeaderScopeDrawer
     {

@@ -1,12 +1,7 @@
-using System;
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
-using UnityEditor;
-using Unity.Rendering.Universal;
-using UnityEditor.ShaderGraph;
-using UnityEditor.Rendering.Universal.ShaderGraph;
-using UnityEditor.Rendering.Universal.ShaderGUI;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public static class Utils
     {

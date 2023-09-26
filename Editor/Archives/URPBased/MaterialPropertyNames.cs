@@ -1,4 +1,4 @@
-namespace HumToon.Editor.URPBased
+namespace Hum.HumToon.Editor.Archives.URPBased
 {
     internal static class MaterialPropertyNames
     {

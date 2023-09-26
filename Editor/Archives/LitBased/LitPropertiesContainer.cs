@@ -1,6 +1,7 @@
+using Hum.HumToon.Editor.HeaderScope;
 using UnityEditor;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public class LitPropertiesContainer : IPropertiesContainer
     {

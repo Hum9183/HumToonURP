@@ -1,20 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Rendering;
-using UnityEditor.Rendering.Universal;
-using UnityEditor.ShaderGraph;
-using UnityEditor.ShaderGraph.Drawing;
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 // using Unity.Rendering.Universal;
-using RenderQueue = UnityEngine.Rendering.RenderQueue;
 
-namespace HumToon.Editor.URPBased
+namespace Hum.HumToon.Editor.Archives.URPBased
 {
     internal sealed class MaterialProperties
     {

@@ -1,7 +1,6 @@
 using UnityEngine;
-using P = HumToon.Editor.ShadePropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Shade
 {
     public class ShadeValidator : IHeaderScopeValidator
     {

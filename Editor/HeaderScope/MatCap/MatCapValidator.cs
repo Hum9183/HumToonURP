@@ -1,8 +1,9 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.MatCapPropertiesContainer;
+using P = Hum.HumToon.Editor.HeaderScope.MatCap.MatCapPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.MatCap
 {
     public class MatCapValidator : IHeaderScopeValidator
     {

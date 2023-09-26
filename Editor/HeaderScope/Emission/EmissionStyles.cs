@@ -1,10 +1,11 @@
 using System;
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
-using C = HumToon.Editor.Const;
-using P = HumToon.Editor.EmissionPropertiesContainer;
+using C = Hum.HumToon.Editor.Utils.Const;
+using P = Hum.HumToon.Editor.HeaderScope.Emission.EmissionPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Emission
 {
     public static class EmissionStyles
     {

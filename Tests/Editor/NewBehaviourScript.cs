@@ -1,6 +1,6 @@
 using System;
+using Hum.HumToon.Editor.Utils;
 using NUnit.Framework;
-using HumToon.Editor;
 
 namespace Hum.HumToon.Tests.Editor
 {

@@ -1,7 +1,8 @@
 using System;
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope
 {
     public class PropertySetter
     {

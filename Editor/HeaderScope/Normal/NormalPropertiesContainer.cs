@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Normal
 {
     public class NormalPropertiesContainer : IPropertiesContainer
     {

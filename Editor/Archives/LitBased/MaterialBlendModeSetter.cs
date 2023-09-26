@@ -1,10 +1,10 @@
 using System;
-using UnityEditor;
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public static class MaterialBlendModeSetter
     {

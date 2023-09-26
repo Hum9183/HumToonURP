@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Hum.HumToon.Editor.HeaderScope;
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor
 {
     public class HumToonInspector : ShaderGUI
     {

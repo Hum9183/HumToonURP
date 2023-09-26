@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace HumToon.Editor.URPBased
+namespace Hum.HumToon.Editor.Archives.URPBased
 {
     internal partial class HumToonGUI
     {

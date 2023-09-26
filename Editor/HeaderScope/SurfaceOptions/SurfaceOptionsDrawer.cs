@@ -1,7 +1,8 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.SurfaceOptions
 {
     public class SurfaceOptionsDrawer : HeaderScopeDrawerBase<SurfaceOptionsPropertiesContainer>
     {

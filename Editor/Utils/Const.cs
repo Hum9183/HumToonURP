@@ -1,8 +1,4 @@
-using System;
-using UnityEditor;
-using UnityEngine;
-
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.Utils
 {
     public static class Const
     {

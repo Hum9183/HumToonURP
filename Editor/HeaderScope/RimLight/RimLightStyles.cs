@@ -1,9 +1,10 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
-using C = HumToon.Editor.Const;
-using P = HumToon.Editor.RimLightPropertiesContainer;
+using C = Hum.HumToon.Editor.Utils.Const;
+using P = Hum.HumToon.Editor.HeaderScope.RimLight.RimLightPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.RimLight
 {
     public static class RimLightStyles
     {

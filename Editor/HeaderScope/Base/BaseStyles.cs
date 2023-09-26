@@ -1,9 +1,9 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using C = HumToon.Editor.Const;
+using C = Hum.HumToon.Editor.Utils.Const;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Base
 {
     /// <summary>
     /// Container for the text and tooltips used to display the shader.

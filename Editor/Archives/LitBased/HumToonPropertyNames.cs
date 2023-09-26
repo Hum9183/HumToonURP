@@ -1,11 +1,4 @@
-using System;
-using UnityEditor;
-using UnityEditor.ShaderGraph;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEditor.Rendering.Universal.ShaderGraph;
-using UnityEngine.Rendering.Universal;
-
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public static class HumToonPropertyNames
     {

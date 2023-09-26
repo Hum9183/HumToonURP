@@ -1,8 +1,9 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.RimLightPropertiesContainer;
+using P = Hum.HumToon.Editor.HeaderScope.RimLight.RimLightPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.RimLight
 {
     public class RimLightValidator : IHeaderScopeValidator
     {

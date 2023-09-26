@@ -1,7 +1,8 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
-using P = HumToon.Editor.ShadePropertiesContainer;
+using P = Hum.HumToon.Editor.HeaderScope.Shade.ShadePropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Shade
 {
     public static class ShadePropertiesID
     {

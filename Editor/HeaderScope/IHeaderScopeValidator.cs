@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope
 {
     public interface IHeaderScopeValidator
     {

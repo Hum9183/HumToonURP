@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.Utils
 {
     public static class HumToonGUIUtils
     {

@@ -1,9 +1,10 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using P = HumToon.Editor.NormalPropertiesContainer;
+using P = Hum.HumToon.Editor.HeaderScope.Normal.NormalPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Normal
 {
     public class NormalValidator : IHeaderScopeValidator
     {

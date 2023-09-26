@@ -1,8 +1,9 @@
 using System;
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Shade
 {
     public class ShadeDrawer : HeaderScopeDrawerBase<ShadePropertiesContainer>
     {

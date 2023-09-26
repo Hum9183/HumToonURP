@@ -1,8 +1,9 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
-using P = HumToon.Editor.EmissionPropertiesContainer;
+using P = Hum.HumToon.Editor.HeaderScope.Emission.EmissionPropertiesContainer;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Emission
 {
     public class EmissionValidator : IHeaderScopeValidator
     {

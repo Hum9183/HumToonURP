@@ -2,12 +2,12 @@
 
 using System;
 using System.Reflection;
+using Hum.HumToon.Editor.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
-using ID = HumToon.Editor.ShadePropertiesID;
-using P = HumToon.Editor.ShadePropertiesContainer;
+using ID = Hum.HumToon.Editor.HeaderScope.Shade.ShadePropertiesID;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.Shade
 {
     public class ShadeKeywords
     {

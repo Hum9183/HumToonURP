@@ -1,7 +1,8 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace HumToon.Editor
+namespace Hum.HumToon.Editor.HeaderScope.MatCap
 {
     public class MatCapDrawer : HeaderScopeDrawerBase<MatCapPropertiesContainer>
     {

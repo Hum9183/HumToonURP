@@ -2,10 +2,8 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Experimental.Rendering;
 
-namespace HumToon.Editor.LitBased
+namespace Hum.HumToon.Editor.Archives.LitBased
 {
     /// <summary>
     /// Container for the text and tooltips used to display the shader.
