@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Hum.HumToon.Tests.Editor
 {
-    public class HumToonExtensionMethods
+    public class HumToonExtensionMethodsTests
     {
         [Test]
         [TestCase(0.0f, false)]
