@@ -8,6 +8,9 @@ namespace Hum.HumToon.Editor
 {
     public class HumToonInspector : ShaderGUI
     {
+        // TODO:
+        // ・日本語対応
+
         private MaterialEditor _materialEditor;
         private readonly PropertySetter _propSetter = new PropertySetter();
         private IEnumerable<IHeaderScopeDrawer> _drawers;
