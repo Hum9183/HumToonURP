@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Hum.HumToon.Editor.HeaderScope;
+using Hum.HumToon.Editor.HeaderScopes;
 using UnityEditor;
 using UnityEngine;
 

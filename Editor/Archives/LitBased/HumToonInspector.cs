@@ -1,5 +1,5 @@
 using System;
-using Hum.HumToon.Editor.HeaderScope;
+using Hum.HumToon.Editor.HeaderScopes;
 using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;

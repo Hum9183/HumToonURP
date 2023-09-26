@@ -1,4 +1,4 @@
-using Hum.HumToon.Editor.HeaderScope;
+using Hum.HumToon.Editor.HeaderScopes;
 using UnityEditor;
 
 namespace Hum.HumToon.Editor.Archives.LitBased

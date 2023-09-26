@@ -1,4 +1,4 @@
-using Hum.HumToon.Editor.HeaderScope.SurfaceOptions;
+using Hum.HumToon.Editor.HeaderScopes.SurfaceOptions;
 using UnityEngine;
 using UnityEngine.Rendering;
 
