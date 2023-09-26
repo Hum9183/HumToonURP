@@ -35,6 +35,7 @@ namespace HumToon.Editor
 
         public static bool DrawFloatToggleProperty(MaterialProperty matProp, GUIContent styles)
         {
+            // TODO: showMixedValue
             if (matProp == null)
                 throw new ArgumentNullException(nameof(matProp));
 
@@ -46,6 +47,61 @@ namespace HumToon.Editor
             MaterialEditor.EndProperty();
 
             return newValue;
+        }
+
+        public static Rect GetControlRectForSingleLine() => EditorGUILayout.GetControlRect(true, 20f, EditorStyles.layerMaskField);
+
+        public static (bool, float) FloatToggleAndRangePropertiesSingleLine(
+            MaterialEditor materialEditor,
+            MaterialProperty floatToggleProp,
+            MaterialProperty rangeProp,
+            GUIContent label)
+        {
+            bool floatToggleNewValue;
+            float rangeNewValue;
+
+            Rect rectForSingleLine = GetControlRectForSingleLine();
+
+            MaterialEditor.BeginProperty(rectForSingleLine, floatToggleProp);
+            MaterialEditor.BeginProperty(rectForSingleLine, rangeProp);
+
+            floatToggleNewValue = FloatToggleProperty();
+            rangeNewValue = RangeProperty(floatToggleNewValue);
+
+            MaterialEditor.EndProperty();
+            MaterialEditor.EndProperty();
+
+            return (floatToggleNewValue, rangeNewValue);
+
+            bool FloatToggleProperty()
+            {
+                bool floatToggleNewValueInternal;
+
+                using var changeCheckScope = new EditorGUI.ChangeCheckScope();
+                floatToggleNewValueInternal = EditorGUI.Toggle(rectForSingleLine, label, floatToggleProp.floatValue.IsOne());
+                if (changeCheckScope.changed)
+                    floatToggleProp.floatValue = floatToggleNewValueInternal ? 1.0f : 0.0f;
+
+                return floatToggleNewValueInternal;
+            }
+
+            float RangeProperty(bool floatToggleNewValueInternal)
+            {
+                float rangeNewValueInternal;
+
+                using (new EditorGUI.DisabledScope(!floatToggleNewValueInternal))
+                {
+                    int indentLevel = EditorGUI.indentLevel;
+                    EditorGUI.indentLevel = 0;
+
+                    materialEditor.ShaderProperty(MaterialEditor.GetFlexibleRectBetweenFieldAndRightEdge(rectForSingleLine), rangeProp, string.Empty);
+                    rangeNewValueInternal = rangeProp.floatValue;
+
+                    EditorGUI.indentLevel = indentLevel;
+                }
+
+                return rangeNewValueInternal;
+            }
         }
 
         /// <summary>

@@ -23,23 +23,8 @@ namespace HumToon.Editor
             using (new EditorGUI.IndentLevelScope(1))
             {
                 materialEditor.ShaderProperty(PropContainer.MainLightColorWeight, LightStyles.MainLightColorWeight);
-
-                // TODO: alignがなんかズレてるので自前実装してちゃんと直す
-                EditorGUILayout.BeginHorizontal();
-                bool useMainLightUpperLimit =
-                    HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseMainLightUpperLimit,
-                        LightStyles.MainLightUpperLimit);
-                using (new EditorGUI.DisabledScope(!useMainLightUpperLimit))
-                    materialEditor.ShaderProperty(PropContainer.MainLightUpperLimit, string.Empty);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.BeginHorizontal();
-                bool useMainLightLowerLimit =
-                    HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseMainLightLowerLimit,
-                        LightStyles.MainLightLowerLimit);
-                using (new EditorGUI.DisabledScope(!useMainLightLowerLimit))
-                    materialEditor.ShaderProperty(PropContainer.MainLightLowerLimit, string.Empty);
-                EditorGUILayout.EndHorizontal();
+                HumToonGUIUtils.FloatToggleAndRangePropertiesSingleLine(materialEditor,PropContainer.UseMainLightUpperLimit, PropContainer.MainLightUpperLimit, LightStyles.MainLightUpperLimit);
+                HumToonGUIUtils.FloatToggleAndRangePropertiesSingleLine(materialEditor,PropContainer.UseMainLightLowerLimit, PropContainer.MainLightLowerLimit, LightStyles.MainLightLowerLimit);
             }
         }
 
