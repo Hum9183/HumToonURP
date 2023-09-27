@@ -26,6 +26,7 @@ This project is under development.
 - SRP batcher
 
 ## Not supported
+- GI
 - DOTS (ECS)
 - Deferred rendering
 - Decal
