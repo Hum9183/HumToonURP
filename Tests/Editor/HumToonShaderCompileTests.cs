@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hum.HumToon.Tests.Editor
 {
-    public class HumToonCompileShaderTests
+    public class HumToonShaderCompileTests
     {
         private const string HumToonGUID = "e2deff3aad3b5ac4baad4f9622f2deea";
 
