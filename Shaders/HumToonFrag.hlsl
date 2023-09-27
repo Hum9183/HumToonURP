@@ -40,6 +40,10 @@ void frag(
     // TODO: normalのoverride(顔の法線を正面に向ける等)
     // TODO: 関数名にHumをつける(被り対策)
 
+    // NOTE:
+    // GI系の計算まで含めるとかなりやっかいになるため、
+    // Light系はLightingData構造体を使うようにしても良いかもしれない
+
     // Shadow
     half4 shadowMask = CalculateShadowMask(inputData);
     // AO
