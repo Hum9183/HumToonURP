@@ -22,6 +22,7 @@ namespace Hum.HumToon.Editor.HeaderScopes.MatCap
                     materialEditor.TexturePropertySingleLine(MatCapStyles.MatCapMap, PropContainer.MatCapMap, PropContainer.MatCapColor);
                     materialEditor.TextureScaleOffsetProperty(PropContainer.MatCapMap);
                     materialEditor.ShaderProperty(PropContainer.MatCapIntensity, MatCapStyles.MatCapIntensity);
+                    materialEditor.ShaderProperty(PropContainer.MatCapMapMipLevel, MatCapStyles.MatCapMapMipLevel);
                     materialEditor.ShaderProperty(PropContainer.MatCapMainLightEffectiveness, MatCapStyles.MatCapMainLightEffectiveness);
                     HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.MatCapCorrectPerspectiveDistortion, MatCapStyles.MatCapCorrectPerspectiveDistortion);
                     HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.MatCapStabilizeCameraZRotation, MatCapStyles.MatCapStabilizeCameraZRotation);

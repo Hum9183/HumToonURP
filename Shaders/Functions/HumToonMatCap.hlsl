@@ -46,7 +46,6 @@ float2 HumCalcMatCapUV(float3 normalWS, float3 viewDirWS)
 half3 HumCalcMatCapColor(float3 normalWS, float3 viewDirWS, half3 mainLightColor)
 {
     // TODO:
-    // ・Blur
     // ・Scale
     // ・Rotate
     // ・ブレンド方法(乗算etc.)
@@ -55,7 +54,7 @@ half3 HumCalcMatCapColor(float3 normalWS, float3 viewDirWS, half3 mainLightColor
     float2 matCapUV = HumCalcMatCapUV(normalWS, viewDirWS);
 
     half3 matCapColor = _MatCapColor;
-    matCapColor *= SAMPLE_TEXTURE2D(_MatCapMap, sampler_BaseMap, matCapUV).rgb;
+    matCapColor *= SAMPLE_TEXTURE2D_LOD(_MatCapMap, sampler_BaseMap, matCapUV, _MatCapMapMipLevel).rgb;
     matCapColor = lerp(matCapColor, matCapColor * mainLightColor, _MatCapMainLightEffectiveness);
     return matCapColor * _MatCapIntensity;
 }

@@ -34,6 +34,7 @@ half _EmissionFactorB;
 float4 _MatCapMap_ST;
 half4 _MatCapColor;
 half _MatCapIntensity;
+half _MatCapMapMipLevel;
 half _MatCapCorrectPerspectiveDistortion;
 half _MatCapStabilizeCameraZRotation;
 half _MatCapMainLightEffectiveness;

@@ -36,6 +36,11 @@ namespace Hum.HumToon.Editor.HeaderScopes.MatCap
             tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.MatCapIntensity).Prefix()}");
 
+        public static readonly GUIContent MatCapMapMipLevel = EditorGUIUtility.TrTextContent(
+            text: "Mip Level",
+            tooltip: $"{C.Property}{C.Ln}" +
+                     $"{nameof(P.MatCapMapMipLevel).Prefix()}");
+
         public static readonly GUIContent MatCapCorrectPerspectiveDistortion = EditorGUIUtility.TrTextContent(
             text: "Correct Persp Distortion",
             tooltip: $"{C.Properties}{C.Ln}" +
