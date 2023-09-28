@@ -1,3 +1,4 @@
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,30 +13,17 @@ namespace Hum.HumToon.Editor.HeaderScopes.Normal
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
-            DrawNormalArea(materialEditor);
-        }
-
-        private void DrawNormalArea(MaterialEditor materialEditor)
-        {
             var normalMap = PropContainer.BumpMap;
             var normalScale = PropContainer.BumpScale;
 
-            if (normalScale is not null)
-            {
-                materialEditor.TexturePropertySingleLine(NormalStyles.NormalMap, normalMap,
-                    normalMap.textureValue ? normalScale : null);
-                DrawMobileOptions();
-            }
-            else
-            {
-                materialEditor.TexturePropertySingleLine(NormalStyles.NormalMap, normalMap);
-            }
+            HumToonGUIUtils.TextureAndRangePropertiesSingleLine(materialEditor, normalMap, normalScale, NormalStyles.NormalMap);
+            DrawMobileOptions();
 
             return;
 
             void DrawMobileOptions()
             {
-                if (normalScale.floatValue is not 1
+                if (normalScale.floatValue.IsOne() is false
                     && UnityEditorInternal.InternalEditorUtility.IsMobilePlatform(EditorUserBuildSettings.activeBuildTarget))
                     if (materialEditor.HelpBoxWithButton(NormalStyles.BumpScaleNotSupported, NormalStyles.FixNormalNow))
                         normalScale.floatValue = 1;
