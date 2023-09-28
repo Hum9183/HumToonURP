@@ -104,6 +104,57 @@ namespace Hum.HumToon.Editor.Utils
             }
         }
 
+        public static (bool, float) TextureAndRangePropertiesSingleLine(
+            MaterialEditor materialEditor,
+            MaterialProperty textureProp,
+            MaterialProperty rangeProp,
+            GUIContent label)
+        {
+            bool existsTexture;
+            float rangeNewValue;
+
+            Rect rectForSingleLine = GetControlRectForSingleLine();
+
+            MaterialEditor.BeginProperty(rectForSingleLine, textureProp);
+            MaterialEditor.BeginProperty(rectForSingleLine, rangeProp);
+
+            existsTexture = TextureProperty();
+            rangeNewValue = RangeProperty(existsTexture);
+
+            MaterialEditor.EndProperty();
+            MaterialEditor.EndProperty();
+
+            return (existsTexture, rangeNewValue);
+
+            bool TextureProperty()
+            {
+                bool existsTextureInternal;
+
+                materialEditor.TexturePropertyMiniThumbnail(rectForSingleLine, textureProp, label.text, label.tooltip);
+                existsTextureInternal = textureProp.textureValue;
+
+                return existsTextureInternal;
+            }
+
+            float RangeProperty(bool existsTextureInternal)
+            {
+                float rangeNewValueInternal;
+
+                using (new EditorGUI.DisabledScope(!existsTextureInternal))
+                {
+                    int indentLevel = EditorGUI.indentLevel;
+                    EditorGUI.indentLevel = 0;
+
+                    materialEditor.ShaderProperty(MaterialEditor.GetRectAfterLabelWidth(rectForSingleLine), rangeProp, string.Empty);
+                    rangeNewValueInternal = rangeProp.floatValue;
+
+                    EditorGUI.indentLevel = indentLevel;
+                }
+
+                return rangeNewValueInternal;
+            }
+        }
+
         /// <summary>
         /// Helper function to show texture and color properties.
         /// </summary>
