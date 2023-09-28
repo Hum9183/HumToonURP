@@ -25,5 +25,6 @@
 
 // MatCap
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP
+#pragma shader_feature_local_fragment _HUM_USE_MAT_CAP_MASK
 
 #endif

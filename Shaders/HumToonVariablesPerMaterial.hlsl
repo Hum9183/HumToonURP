@@ -37,6 +37,7 @@ half _MatCapIntensity;
 half _MatCapMapMipLevel;
 half _MatCapCorrectPerspectiveDistortion;
 half _MatCapStabilizeCameraZRotation;
+half _MatCapMaskIntensity;
 half _MatCapMainLightEffectiveness;
 
 // Light

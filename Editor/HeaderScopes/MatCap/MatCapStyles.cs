@@ -51,6 +51,15 @@ namespace Hum.HumToon.Editor.HeaderScopes.MatCap
             tooltip: $"{C.Properties}{C.Ln}" +
                      $"{nameof(P.MatCapStabilizeCameraZRotation).Prefix()}");
 
+        public static readonly GUIContent MatCapMask = EditorGUIUtility.TrTextContent(
+            text: "Mask",
+            tooltip: $"{C.Properties}{C.Ln}" +
+                     $"{nameof(P.MatCapMask).Prefix()}{C.Ln}" +
+                     $"{nameof(P.MatCapMaskIntensity).Prefix()}{C.Ln}" +
+                     $"{C.Ln}" +
+                     $"{C.Keyword}{C.Ln}" +
+                     $"{MatCapKeywordNames._HUM_USE_MAT_CAP_MASK}");
+
         public static readonly GUIContent MatCapMainLightEffectiveness = EditorGUIUtility.TrTextContent(
             text: "Main Light Effectiveness",
             tooltip: $"{C.Property}{C.Ln}" +

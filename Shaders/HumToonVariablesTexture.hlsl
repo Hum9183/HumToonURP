@@ -34,4 +34,8 @@
     TEXTURE2D(_MatCapMap);
 #endif
 
+#if defined(_HUM_USE_MAT_CAP_MASK)
+    TEXTURE2D(_MatCapMask);
+#endif
+
 #endif

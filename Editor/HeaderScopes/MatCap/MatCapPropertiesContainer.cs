@@ -13,6 +13,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.MatCap
         public MaterialProperty MatCapMapMipLevel;
         public MaterialProperty MatCapCorrectPerspectiveDistortion;
         public MaterialProperty MatCapStabilizeCameraZRotation;
+        public MaterialProperty MatCapMask;
+        public MaterialProperty MatCapMaskIntensity;
         public MaterialProperty MatCapMainLightEffectiveness;
 
         public MatCapPropertiesContainer(PropertySetter propSetter)

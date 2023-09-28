@@ -56,6 +56,8 @@ Shader "HumToon"
         _MatCapMapMipLevel("Mat Cap Mip Level", Range(0.0, 10.0)) = 0.0
         _MatCapCorrectPerspectiveDistortion("Mat Cap Correct Perspective Distortion", Float) = 1.0
         _MatCapStabilizeCameraZRotation("Mat Cap Stabilize Camera Z Rotation", Float) = 1.0
+        _MatCapMask("Mat Cap Mask", 2D) = "white" {}
+        _MatCapMaskIntensity("Mat Cap Mask Intensity", Range(0.0, 1.0)) = 1.0
         _MatCapMainLightEffectiveness("Mat Cap Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
 

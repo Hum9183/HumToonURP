@@ -43,18 +43,24 @@ float2 HumCalcMatCapUV(float3 normalWS, float3 viewDirWS)
     return matCapUV;
 }
 
-half3 HumCalcMatCapColor(float3 normalWS, float3 viewDirWS, half3 mainLightColor)
+half3 HumCalcMatCapColor(float3 normalWS, float3 viewDirWS, half3 mainLightColor
+#if defined(_HUM_USE_MAT_CAP_MASK)
+    , float2 uvForMask
+#endif
+)
 {
     // TODO:
     // ・Scale
     // ・Rotate
     // ・ブレンド方法(乗算etc.)
-    // ・Mask
 
     float2 matCapUV = HumCalcMatCapUV(normalWS, viewDirWS);
 
     half3 matCapColor = _MatCapColor;
     matCapColor *= SAMPLE_TEXTURE2D_LOD(_MatCapMap, sampler_BaseMap, matCapUV, _MatCapMapMipLevel).rgb;
+#if defined(_HUM_USE_MAT_CAP_MASK)
+    matCapColor *= lerp(ONE, SAMPLE_TEXTURE2D(_MatCapMask, sampler_BaseMap, uvForMask).r, _MatCapMaskIntensity);
+#endif
     matCapColor = lerp(matCapColor, matCapColor * mainLightColor, _MatCapMainLightEffectiveness);
     return matCapColor * _MatCapIntensity;
 }

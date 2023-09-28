@@ -80,7 +80,11 @@ void frag(
 #endif
 
 #if defined(_HUM_USE_MAT_CAP)
-    half3 matCapColor = HumCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
+    half3 matCapColor = HumCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor
+    #if defined(_HUM_USE_MAT_CAP_MASK)
+        , uv0
+    #endif
+    );
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
