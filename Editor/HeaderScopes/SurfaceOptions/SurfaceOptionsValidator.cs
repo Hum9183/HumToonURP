@@ -22,7 +22,7 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
             var isOpaque = (SurfaceType)material.GetFloat(IDSurfaceType) is SurfaceType.Opaque;
             var alphaClip = material.GetFloat(IDAlphaClip).ToBool();
             var transparentBlendMode = (TransparentBlendMode)material.GetFloat(IDTransparentBlendMode);
-            var transparentPreserveSpecular = isOpaque is false && Utils.Utils.GetPreserveSpecular(material, transparentBlendMode);
+            var transparentPreserveSpecular = isOpaque is false && HumToonUtils.GetPreserveSpecular(material, transparentBlendMode);
             var transparentAlphaModulate = isOpaque is false && transparentBlendMode is TransparentBlendMode.Multiply;
 
             SetKeywords(material, isOpaque, alphaClip, transparentPreserveSpecular, transparentAlphaModulate);

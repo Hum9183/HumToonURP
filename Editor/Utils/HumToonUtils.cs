@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Hum.HumToon.Editor.Utils
 {
-    public static class Utils
+    public static class HumToonUtils
     {
         public static bool GetPreserveSpecular(Material material, TransparentBlendMode transparentBlendMode)
         {

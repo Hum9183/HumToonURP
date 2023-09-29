@@ -17,7 +17,7 @@ namespace Hum.HumToon.Editor.Utils
             where T: Enum
         {
             var displayedOptions = Enum.GetNames(typeof(T)).ToList();
-            displayedOptions = displayedOptions.Select(Utils.InsertSpaceBeforeUppercase).ToList();
+            displayedOptions = displayedOptions.Select(HumToonUtils.InsertSpaceBeforeUppercase).ToList();
 
             int newValue = PopupShaderProperty(materialEditor, matProp, label, displayedOptions.ToArray());
 

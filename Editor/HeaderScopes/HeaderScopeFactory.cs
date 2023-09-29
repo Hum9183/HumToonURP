@@ -21,7 +21,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
             var scopes = CreateHeaderScopes(new PropertySetter());
             return scopes
                 .Select(x => x.drawer)
-                .Where(Utils.Utils.IsNotNull);;
+                .Where(HumToonUtils.IsNotNull);;
         }
 
         public IEnumerable<IHeaderScopeValidator> CreateValidators()
@@ -29,7 +29,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
             var scopes = CreateHeaderScopes();
             return scopes
                 .Select(x => x.validator)
-                .Where(Utils.Utils.IsNotNull);
+                .Where(HumToonUtils.IsNotNull);
         }
 
         private IEnumerable<(IHeaderScopeDrawer drawer, IHeaderScopeValidator validator)>
