@@ -26,9 +26,9 @@ namespace Hum.HumToon.Editor.Archives.LitBased
             _matPropSetter = matPropSetter;
         }
 
-        public void Set()
+        public void Set(MaterialProperty[] materialProperties)
         {
-            _matPropSetter.Set(this);
+            _matPropSetter.Set(this, materialProperties);
         }
     }
 }

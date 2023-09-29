@@ -58,10 +58,9 @@ namespace Hum.HumToon.Editor.Archives.LitBased
 
         private void SetMaterialPropertyContainers(MaterialProperty[] materialProperties)
         {
-            _propertySetter.MatProps = materialProperties;
-            _matPropContainer.Set();
-            _litMatPropContainer.Set();
-            _litDetailMatPropContainer.Set();
+            _matPropContainer.Set(materialProperties);
+            _litMatPropContainer.Set(materialProperties);
+            _litDetailMatPropContainer.Set(materialProperties);
         }
 
         private void OnOpenGUI()

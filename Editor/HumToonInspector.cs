@@ -44,11 +44,9 @@ namespace Hum.HumToon.Editor
         /// </summary>
         private void SetMaterialProperties(MaterialProperty[] materialProperties)
         {
-            _propSetter.MatProps = materialProperties; // NOTE: 各DrawersたちはPropertySetterへの参照を持っている
-
             foreach (var drawer in _drawers)
             {
-                drawer.SetProperties();
+                drawer.SetProperties(materialProperties);
             }
         }
 

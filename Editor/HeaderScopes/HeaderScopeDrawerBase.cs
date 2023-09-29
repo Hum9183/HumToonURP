@@ -18,9 +18,9 @@ namespace Hum.HumToon.Editor.HeaderScopes
             _expandable = expandable;
         }
 
-        public void SetProperties()
+        public void SetProperties(MaterialProperty[] materialProperties)
         {
-            PropContainer.Set();
+            PropContainer.Set(materialProperties);
         }
 
         public void Draw(MaterialEditor materialEditor)

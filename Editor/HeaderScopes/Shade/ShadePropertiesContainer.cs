@@ -40,9 +40,9 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
             _propSetter = propSetter;
         }
 
-        public void Set()
+        public void Set(MaterialProperty[] materialProperties)
         {
-            _propSetter.Set(this);
+            _propSetter.Set(this, materialProperties);
         }
     }
 }
