@@ -2,7 +2,7 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
-using L = Hum.HumToon.Editor.HumToonLanguage;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Base
 {

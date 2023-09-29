@@ -3,38 +3,18 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace Hum.HumToon.Editor
+namespace Hum.HumToon.Editor.Language
 {
     public static class HumToonLanguage
     {
         private const Language DefaultLang = Language.English;
-        private const string ConfigName = "HumToonLanguage";
-        // private static readonly string[] DisplayedOptions = Enum.GetNames(typeof(Language));
+        private const string EditorUserSettingsConfigName = "HumToonLanguage";
 
         private static Language currentLanguage;
 
         private static GUIContent LanguageLabel =>
             EditorGUIUtility.TrTextContent(
                 text: $"{Select(new string[] { "Language", "言語", "语言" })}");
-
-        public enum Language
-        {
-            English,
-            Japanese,
-            Chinese
-        }
-
-        public static string[] DisplayedOptions(this Language value)
-        {
-            var displayedOptionsArray =  new string[][]
-            {
-                new string[] { "English", "Japanese", "Chinese" },
-                new string[] { "英語", "日本語", "中国語" },
-                new string[] { "英语", "日语", "中文" },
-            };
-
-            return displayedOptionsArray[(int)value];
-        }
 
         public static string Select(string[] texts)
         {
@@ -68,7 +48,7 @@ namespace Hum.HumToon.Editor
 
         private static int GetFromEditorUserSettings()
         {
-            string langStr = EditorUserSettings.GetConfigValue(ConfigName); // e.g. "0", "1", "2"
+            string langStr = EditorUserSettings.GetConfigValue(EditorUserSettingsConfigName); // e.g. "0", "1", "2"
             langStr ??= ((int)DefaultLang).ToString();
 
             bool success = Int32.TryParse(langStr, out int langInt);
@@ -85,7 +65,7 @@ namespace Hum.HumToon.Editor
 
         private static void SetToEditorUserSettings(int lang)
         {
-            EditorUserSettings.SetConfigValue(ConfigName, lang.ToString());
+            EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, lang.ToString());
             AssetDatabase.SaveAssets();
         }
     }

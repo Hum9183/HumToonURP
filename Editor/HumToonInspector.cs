@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Hum.HumToon.Editor.HeaderScopes;
+using Hum.HumToon.Editor.Language;
 using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
