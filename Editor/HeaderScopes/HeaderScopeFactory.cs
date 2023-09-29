@@ -16,9 +16,9 @@ namespace Hum.HumToon.Editor.HeaderScopes
     // TODO: VContainer等のライブラリを使用することを検討
     public class HeaderScopeFactory
     {
-        public IEnumerable<IHeaderScopeDrawer> CreateDrawers(PropertySetter propSetter)
+        public IEnumerable<IHeaderScopeDrawer> CreateDrawers()
         {
-            var scopes = CreateHeaderScopes(propSetter);
+            var scopes = CreateHeaderScopes(new PropertySetter());
             return scopes
                 .Select(x => x.drawer)
                 .Where(Utils.Utils.IsNotNull);;

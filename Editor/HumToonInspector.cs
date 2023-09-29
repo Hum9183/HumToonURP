@@ -12,7 +12,6 @@ namespace Hum.HumToon.Editor
         // ・日本語対応
 
         private MaterialEditor _materialEditor;
-        private readonly PropertySetter _propSetter = new PropertySetter();
         private IEnumerable<IHeaderScopeDrawer> _drawers;
         private bool _firstTimeApply = true;
 
@@ -36,7 +35,7 @@ namespace Hum.HumToon.Editor
         private void InitDrawers()
         {
             var factory = new HeaderScopeFactory();
-            _drawers = factory.CreateDrawers(_propSetter);
+            _drawers = factory.CreateDrawers();
         }
 
         /// <summary>
