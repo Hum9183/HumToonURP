@@ -9,7 +9,7 @@ namespace Hum.HumToon.Editor
     {
         private const Language DefaultLang = Language.English;
         private const string ConfigName = "HumToonLanguage";
-        private static readonly string[] DisplayedOptions = Enum.GetNames(typeof(Language));
+        // private static readonly string[] DisplayedOptions = Enum.GetNames(typeof(Language));
 
         private static Language currentLanguage;
 
@@ -17,11 +17,23 @@ namespace Hum.HumToon.Editor
             EditorGUIUtility.TrTextContent(
                 text: $"{Select(new string[] { "Language", "言語", "语言" })}");
 
-        private enum Language
+        public enum Language
         {
             English,
             Japanese,
             Chinese
+        }
+
+        public static string[] DisplayedOptions(this Language value)
+        {
+            var displayedOptionsArray =  new string[][]
+            {
+                new string[] { "English", "Japanese", "Chinese" },
+                new string[] { "英語", "日本語", "中国語" },
+                new string[] { "英语", "日语", "中文" },
+            };
+
+            return displayedOptionsArray[(int)value];
         }
 
         public static string Select(string[] texts)
@@ -65,9 +77,8 @@ namespace Hum.HumToon.Editor
 
         private static int DrawInternal(int lang)
         {
-            // TODO: DisplayedOptions自体の多言語化
             // TODO: Undo
-            int newValue = EditorGUILayout.Popup(LanguageLabel, lang, DisplayedOptions);
+            int newValue = EditorGUILayout.Popup(LanguageLabel, lang, ((Language)lang).DisplayedOptions());
             currentLanguage = (Language)newValue;
             return newValue;
         }
