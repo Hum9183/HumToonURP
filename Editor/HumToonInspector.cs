@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Hum.HumToon.Editor.HeaderScopes;
+using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Hum.HumToon.Editor
             }
 
             SetMaterialProperties(materialProperties);
-            Draw();
+            DrawHeaderScopes();
         }
 
         private void InitDrawers()
@@ -52,9 +53,13 @@ namespace Hum.HumToon.Editor
         /// <summary>
         /// Draw
         /// </summary>
-        private void Draw()
+        private void DrawHeaderScopes()
         {
             EditorGUIUtility.labelWidth = 0f;
+
+            HumToonLanguage.Draw();
+
+            HumToonGUIUtils.Space();
 
             foreach (var drawer in _drawers)
             {

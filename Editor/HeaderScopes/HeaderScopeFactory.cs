@@ -60,7 +60,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new BaseDrawer(
                 new BasePropertiesContainer(propSetter),
-                BaseStyles.SurfaceInputsFoldout,
+                () => BaseStyles.SurfaceInputsFoldout,
                 Convert.ToUInt32(Expandable.Base));
         }
 

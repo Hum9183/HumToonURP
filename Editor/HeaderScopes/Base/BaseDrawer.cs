@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -5,8 +6,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.Base
 {
     public class BaseDrawer : HeaderScopeDrawerBase<BasePropertiesContainer>
     {
-        public BaseDrawer(BasePropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
-            : base(propContainer, headerStyle, expandable)
+        public BaseDrawer(BasePropertiesContainer propContainer, Func<GUIContent> headerStyleFunc, uint expandable)
+            : base(propContainer, headerStyleFunc, expandable)
         {
         }
 

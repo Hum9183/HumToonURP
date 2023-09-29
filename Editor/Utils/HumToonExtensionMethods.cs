@@ -38,5 +38,26 @@ namespace Hum.HumToon.Editor.Utils
         {
             return (T)Enum.ToObject(typeof(T), value);
         }
+
+        public static bool TryGetValue<T>(this T[] array, int index, out T value)
+        {
+            if (array.IsIndexOutOfRange(index))
+            {
+                value = default;
+                return false;
+            }
+            else
+            {
+                value = array[index];
+                return true;
+            }
+        }
+
+        public static bool IsIndexOutOfRange<T>(this T[] array, int index)
+        {
+            return array is null
+                   || index < 0
+                   || index >= array.Length;
+        }
     }
 }
