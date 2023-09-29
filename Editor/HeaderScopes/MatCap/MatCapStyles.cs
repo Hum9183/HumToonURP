@@ -43,12 +43,12 @@ namespace Hum.HumToon.Editor.HeaderScopes.MatCap
 
         public static readonly GUIContent MatCapCorrectPerspectiveDistortion = EditorGUIUtility.TrTextContent(
             text: "Correct Persp Distortion",
-            tooltip: $"{C.Properties}{C.Ln}" +
+            tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.MatCapCorrectPerspectiveDistortion).Prefix()}");
 
         public static readonly GUIContent MatCapStabilizeCameraZRotation = EditorGUIUtility.TrTextContent(
             text: "Stabilize Camera Z Rotation",
-            tooltip: $"{C.Properties}{C.Ln}" +
+            tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.MatCapStabilizeCameraZRotation).Prefix()}");
 
         public static readonly GUIContent MatCapMask = EditorGUIUtility.TrTextContent(
