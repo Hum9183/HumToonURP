@@ -39,10 +39,7 @@ void frag(
     // TODO: SSAOのweight調整機能
     // TODO: normalのoverride(顔の法線を正面に向ける等)
     // TODO: 関数名にHumをつける(被り対策)
-
-    // NOTE:
-    // GI系の計算まで含めるとかなりやっかいになるため、
-    // Light系はLightingData構造体を使うようにしても良いかもしれない
+    // TODO: Varyings SurfaceData InputData BRDFDataの整理
 
     // Shadow
     half4 shadowMask = CalculateShadowMask(inputData);
@@ -51,6 +48,15 @@ void frag(
     // Main light
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
     half shadowAttenuation = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
+
+    // BRDF
+    BRDFData brdfData;
+    InitializeBRDFData(surfaceData, brdfData); // NOTE: can modify "surfaceData"...
+
+    // Global illumination
+    half3 giColor = HumGlobalIllumination(
+        brdfData, inputData.bakedGI, aoFactor.indirectAmbientOcclusion, inputData.positionWS,
+        inputData.normalWS, inputData.viewDirectionWS, inputData.normalizedScreenSpaceUV);
 
     // Mesh Rendering Layers
 #if defined(_LIGHT_LAYERS)
@@ -146,6 +152,8 @@ void frag(
 #if defined(_ADDITIONAL_LIGHTS_VERTEX)
     finalColor.rgb += additionalLightsColorVertex;
 #endif
+
+    finalColor.rgb += giColor;
 
     finalColor.rgb = MixFog(finalColor.rgb, inputData.fogCoord);
     finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));

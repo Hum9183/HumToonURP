@@ -25,6 +25,8 @@
 
 #include "Functions/MainLightColor.hlsl"
 
+#include "Functions/HumToonGI.hlsl"
+
 #if defined(_ADDITIONAL_LIGHTS) || defined(_ADDITIONAL_LIGHTS_VERTEX)
     #include "Functions/AdditionalLightsColor.hlsl"
 #endif
