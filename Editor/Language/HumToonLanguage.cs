@@ -66,7 +66,6 @@ namespace Hum.HumToon.Editor.Language
         private static void SetToEditorUserSettings(int lang)
         {
             EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, lang.ToString());
-            AssetDatabase.SaveAssets();
         }
     }
 }
