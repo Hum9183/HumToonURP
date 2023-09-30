@@ -24,9 +24,9 @@ This project is under development.
 - Light layers
 - Forward plus
 - SRP batcher
+- GI
 
 ## Not supported
-- GI
 - DOTS (ECS)
 - Deferred rendering
 - Decal
