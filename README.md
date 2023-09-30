@@ -9,7 +9,6 @@ This project is under development.
 - Universal RP ✔
 - Built-in RP ✘
 - High Definition RP ✘
-- Scriptable RP ✘
 
 ## Main features
 - Basic features (Transparent, etc.)
