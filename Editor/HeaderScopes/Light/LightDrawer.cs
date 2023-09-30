@@ -1,3 +1,4 @@
+using System;
 using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -6,8 +7,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.Light
 {
     public class LightDrawer : HeaderScopeDrawerBase<LightPropertiesContainer>
     {
-        public LightDrawer(LightPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
-            : base(propContainer, headerStyle, expandable)
+        public LightDrawer(LightPropertiesContainer propContainer, Func<GUIContent> headerStyleFunc, uint expandable)
+            : base(propContainer, headerStyleFunc, expandable)
         {
         }
 

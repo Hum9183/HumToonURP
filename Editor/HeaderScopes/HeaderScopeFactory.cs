@@ -52,7 +52,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new SurfaceOptionsDrawer(
                 new SurfaceOptionsPropertiesContainer(propSetter),
-                SurfaceOptionsStyles.SurfaceOptionsFoldout,
+                () => SurfaceOptionsStyles.SurfaceOptionsFoldout,
                 Convert.ToUInt32(Expandable.SurfaceOptions));
         }
 
@@ -68,7 +68,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new NormalDrawer(
                 new NormalPropertiesContainer(propSetter),
-                NormalStyles.NormalFoldout,
+                () => NormalStyles.NormalFoldout,
                 Convert.ToUInt32(Expandable.Normal));
         }
 
@@ -76,7 +76,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new ShadeDrawer(
                 new ShadePropertiesContainer(propSetter),
-                ShadeStyles.ShadeFoldout,
+                () => ShadeStyles.ShadeFoldout,
                 Convert.ToUInt32(Expandable.Shade));
         }
 
@@ -84,7 +84,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new RimLightDrawer(
                 new RimLightPropertiesContainer(propSetter),
-                RimLightStyles.RimLightFoldout,
+                () => RimLightStyles.RimLightFoldout,
                 Convert.ToUInt32(Expandable.RimLight));
         }
 
@@ -92,7 +92,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new EmissionDrawer(
                 new EmissionPropertiesContainer(propSetter),
-                EmissionStyles.EmissionFoldout,
+                () => EmissionStyles.EmissionFoldout,
                 Convert.ToUInt32(Expandable.Emission));
         }
 
@@ -100,7 +100,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new MatCapDrawer(
                 new MatCapPropertiesContainer(propSetter),
-                MatCapStyles.MatCapFoldout,
+                () => MatCapStyles.MatCapFoldout,
                 Convert.ToUInt32(Expandable.MatCap));
         }
 
@@ -108,7 +108,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
         {
             return new LightDrawer(
                 new LightPropertiesContainer(propSetter),
-                LightStyles.LightFoldout,
+                () => LightStyles.LightFoldout,
                 Convert.ToUInt32(Expandable.Light));
         }
     }

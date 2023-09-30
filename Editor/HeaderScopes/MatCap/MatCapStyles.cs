@@ -2,15 +2,17 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.MatCap.MatCapPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.MatCap
 {
     public static class MatCapStyles
     {
-        public static readonly GUIContent MatCapFoldout = EditorGUIUtility.TrTextContent(
-            text: "Mat Cap",
-            tooltip: string.Empty);
+        public static GUIContent MatCapFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Mat Cap", "マットキャップ", "" })}",
+                tooltip: string.Empty);
 
         public static readonly GUIContent UseMatCap = EditorGUIUtility.TrTextContent(
             text: "Use Mat Cap",

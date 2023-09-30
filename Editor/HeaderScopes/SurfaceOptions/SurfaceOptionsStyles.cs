@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.SurfaceOptions.SurfaceOptionsPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
@@ -13,10 +14,11 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
     /// </summary>
     public static class SurfaceOptionsStyles
     {
-        public static readonly GUIContent SurfaceOptionsFoldout = EditorGUIUtility.TrTextContent(
-            text: "Surface Options",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Controls how URP Renders the material on screen.");
+        public static GUIContent SurfaceOptionsFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Surface Options", "サーフェス設定", "表面选项" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"Controls how URP Renders the material on screen.");
 
         public static readonly GUIContent SurfaceType = EditorGUIUtility.TrTextContent(
             text: "Surface Type",

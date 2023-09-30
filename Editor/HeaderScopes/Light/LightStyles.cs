@@ -3,15 +3,17 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.Light.LightPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Light
 {
     public static class LightStyles
     {
-        public static readonly GUIContent LightFoldout = EditorGUIUtility.TrTextContent(
-            text: "Light",
-            tooltip: String.Empty);
+        public static GUIContent LightFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Light", "ライト", "光源" })}",
+                tooltip: String.Empty);
 
         public static readonly GUIContent MainLightColorWeight = EditorGUIUtility.TrTextContent(
             text: "Weight",

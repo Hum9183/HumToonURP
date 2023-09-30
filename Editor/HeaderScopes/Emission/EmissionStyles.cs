@@ -3,15 +3,17 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.Emission.EmissionPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Emission
 {
     public static class EmissionStyles
     {
-        public static readonly GUIContent EmissionFoldout = EditorGUIUtility.TrTextContent(
-            text: "Emission",
-            tooltip: String.Empty);
+        public static GUIContent EmissionFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Emission", "発光", "自发光" })}",
+                tooltip: string.Empty);
 
         public static readonly GUIContent UseEmission = EditorGUIUtility.TrTextContent(
             text: "Use Emission",

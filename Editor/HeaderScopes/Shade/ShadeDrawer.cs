@@ -7,8 +7,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
 {
     public class ShadeDrawer : HeaderScopeDrawerBase<ShadePropertiesContainer>
     {
-        public ShadeDrawer(ShadePropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
-            : base(propContainer, headerStyle, expandable)
+        public ShadeDrawer(ShadePropertiesContainer propContainer, Func<GUIContent> headerStyleFunc, uint expandable)
+            : base(propContainer, headerStyleFunc, expandable)
         {
         }
 

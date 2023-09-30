@@ -1,3 +1,4 @@
+using System;
 using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -6,8 +7,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.Normal
 {
     public class NormalDrawer : HeaderScopeDrawerBase<NormalPropertiesContainer>
     {
-        public NormalDrawer(NormalPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
-            : base(propContainer, headerStyle, expandable)
+        public NormalDrawer(NormalPropertiesContainer propContainer, Func<GUIContent> headerStyleFunc, uint expandable)
+            : base(propContainer, headerStyleFunc, expandable)
         {
         }
 

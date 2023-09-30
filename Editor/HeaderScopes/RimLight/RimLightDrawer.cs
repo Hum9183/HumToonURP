@@ -1,3 +1,4 @@
+using System;
 using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -6,8 +7,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.RimLight
 {
     public class RimLightDrawer : HeaderScopeDrawerBase<RimLightPropertiesContainer>
     {
-        public RimLightDrawer(RimLightPropertiesContainer propContainer, GUIContent headerStyle, uint expandable)
-            : base(propContainer, headerStyle, expandable)
+        public RimLightDrawer(RimLightPropertiesContainer propContainer, Func<GUIContent> headerStyleFunc, uint expandable)
+            : base(propContainer, headerStyleFunc, expandable)
         {
         }
 

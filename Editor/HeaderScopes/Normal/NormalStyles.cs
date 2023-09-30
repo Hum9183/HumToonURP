@@ -3,16 +3,18 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.Normal.NormalPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Normal
 {
     public static class NormalStyles
     {
-        public static readonly GUIContent NormalFoldout = EditorGUIUtility.TrTextContent(
-            text: "Normal",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"These settings describe the look and feel of the surface itself.");
+        public static GUIContent NormalFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Normal", "法線", "法向量" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"These settings describe the look and feel of the surface itself.");
 
         public static readonly GUIContent NormalMap = EditorGUIUtility.TrTextContent(
             text: "Normal Map (RGB)",

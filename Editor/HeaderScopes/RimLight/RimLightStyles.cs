@@ -2,15 +2,17 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.RimLight.RimLightPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.RimLight
 {
     public static class RimLightStyles
     {
-        public static readonly GUIContent RimLightFoldout = EditorGUIUtility.TrTextContent(
-            text: "Rim Light",
-            tooltip: string.Empty);
+        public static GUIContent RimLightFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Rim Light", "リムライト", "边缘光" })}",
+                tooltip: string.Empty);
 
         public static readonly GUIContent UseRimLight = EditorGUIUtility.TrTextContent(
             text: "Use Rim Light",

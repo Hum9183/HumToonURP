@@ -3,6 +3,7 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
+using L = Hum.HumToon.Editor.Language.HumToonLanguage;
 using P = Hum.HumToon.Editor.HeaderScopes.Shade.ShadePropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Shade
@@ -11,9 +12,10 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
     {
         private const string DescriptionIfIsNot = "If texture is not assigned, it refers to Base Map.";
 
-        public static readonly GUIContent ShadeFoldout = EditorGUIUtility.TrTextContent(
-            text: "Shade",
-            tooltip: String.Empty);
+        public static GUIContent ShadeFoldout =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Shade", "陰", "背阴" })}",
+                tooltip: string.Empty);
 
         // Shade Mode
 
