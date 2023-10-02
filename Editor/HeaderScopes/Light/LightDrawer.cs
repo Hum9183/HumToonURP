@@ -22,7 +22,7 @@ namespace Hum.HumToon.Editor.HeaderScopes.Light
         private void DrawMainLight(MaterialEditor materialEditor)
         {
             EditorGUILayout.LabelField("Main Light", EditorStyles.boldLabel);
-            using (new EditorGUI.IndentLevelScope(1))
+            using (new EditorGUI.IndentLevelScope())
             {
                 materialEditor.ShaderProperty(PropContainer.MainLightColorWeight, LightStyles.MainLightColorWeight);
                 HumToonGUIUtils.FloatToggleAndRangePropertiesSingleLine(materialEditor,PropContainer.UseMainLightUpperLimit, PropContainer.MainLightUpperLimit, LightStyles.MainLightUpperLimit);
