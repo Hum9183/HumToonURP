@@ -44,6 +44,7 @@ namespace Hum.HumToon.Editor.Language
             int currentLang = GetFromEditorUserSettings();
             int newLang = DrawInternal(currentLang);
             SetToEditorUserSettings(newLang);
+            SetCurrentLanguage(newLang);
         }
 
         private static int GetFromEditorUserSettings()
@@ -59,13 +60,17 @@ namespace Hum.HumToon.Editor.Language
         {
             // TODO: Undo
             int newValue = EditorGUILayout.Popup(LanguageLabel, lang, ((Language)lang).DisplayedOptions());
-            currentLanguage = (Language)newValue;
             return newValue;
         }
 
         private static void SetToEditorUserSettings(int lang)
         {
             EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, lang.ToString());
+        }
+
+        private static void SetCurrentLanguage(int newLang)
+        {
+            currentLanguage = (Language)newLang;
         }
     }
 }
