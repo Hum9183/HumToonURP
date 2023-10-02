@@ -18,7 +18,8 @@ namespace Hum.HumToon.Editor
         /// </summary>
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] materialProperties)
         {
-            var matEditor = materialEditor ? materialEditor : throw new ArgumentNullException(nameof(materialEditor));
+            if (materialEditor is null)
+                throw new ArgumentNullException(nameof(materialEditor));
 
             if (_firstTimeApply)
             {
@@ -27,7 +28,7 @@ namespace Hum.HumToon.Editor
             }
 
             SetMaterialProperties(materialProperties);
-            DrawAll(matEditor);
+            DrawAll(materialEditor);
         }
 
         private void InitDrawers()
