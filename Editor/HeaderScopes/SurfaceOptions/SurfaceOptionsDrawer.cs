@@ -28,7 +28,7 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
 
             HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.AlphaClip, SurfaceOptionsStyles.AlphaClip);
 
-            if (PropContainer.AlphaClip.floatValue.IsOne())
+            if (PropContainer.AlphaClip.floatValue.ToBool())
                 materialEditor.ShaderProperty(PropContainer.Cutoff, SurfaceOptionsStyles.Cutoff, 1);
 
             HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.ReceiveShadows, SurfaceOptionsStyles.ReceiveShadow);
