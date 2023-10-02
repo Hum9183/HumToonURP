@@ -38,7 +38,6 @@ namespace Hum.HumToon.Editor.Language
         /// <summary>
         /// Draw language GUI
         /// </summary>
-        /// <returns>Changed language</returns>
         public static void Draw()
         {
             int currentLang = GetFromEditorUserSettings();
