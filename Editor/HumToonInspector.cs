@@ -10,7 +10,6 @@ namespace Hum.HumToon.Editor
 {
     public class HumToonInspector : ShaderGUI
     {
-        private MaterialEditor _materialEditor;
         private IEnumerable<IHeaderScopeDrawer> _drawers;
         private bool _firstTimeApply = true;
 
@@ -19,7 +18,7 @@ namespace Hum.HumToon.Editor
         /// </summary>
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] materialProperties)
         {
-            _materialEditor = materialEditor ? materialEditor : throw new ArgumentNullException(nameof(materialEditor));
+            var matEditor = materialEditor ? materialEditor : throw new ArgumentNullException(nameof(materialEditor));
 
             if (_firstTimeApply)
             {
@@ -28,7 +27,7 @@ namespace Hum.HumToon.Editor
             }
 
             SetMaterialProperties(materialProperties);
-            DrawAll();
+            DrawAll(matEditor);
         }
 
         private void InitDrawers()
@@ -51,7 +50,7 @@ namespace Hum.HumToon.Editor
         /// <summary>
         /// Draw
         /// </summary>
-        private void DrawAll()
+        private void DrawAll(MaterialEditor matEditor)
         {
             EditorGUIUtility.labelWidth = 0f;
 
@@ -61,7 +60,7 @@ namespace Hum.HumToon.Editor
 
             foreach (var drawer in _drawers)
             {
-                drawer.Draw(_materialEditor);
+                drawer.Draw(matEditor);
             }
         }
 
