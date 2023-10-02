@@ -28,7 +28,7 @@ namespace Hum.HumToon.Editor
             }
 
             SetMaterialProperties(materialProperties);
-            DrawHeaderScopes();
+            DrawAll();
         }
 
         private void InitDrawers()
@@ -51,7 +51,7 @@ namespace Hum.HumToon.Editor
         /// <summary>
         /// Draw
         /// </summary>
-        private void DrawHeaderScopes()
+        private void DrawAll()
         {
             EditorGUIUtility.labelWidth = 0f;
 
