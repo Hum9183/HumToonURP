@@ -10,7 +10,6 @@ namespace Hum.HumToon.Editor.Archives.LitBased
     {
         // Fields
         private MaterialEditor _materialEditor;
-        private PropertySetter _propertySetter;
         private HumToonPropertiesContainer _matPropContainer;
         private LitPropertiesContainer _litMatPropContainer;
         private LitDetailPropertiesContainer _litDetailMatPropContainer;
@@ -50,10 +49,9 @@ namespace Hum.HumToon.Editor.Archives.LitBased
 
         private void InitializeMaterialPropertyContainers()
         {
-            _propertySetter    = new PropertySetter();
-            _matPropContainer          = new HumToonPropertiesContainer(_propertySetter);
-            _litMatPropContainer       = new LitPropertiesContainer(_propertySetter);
-            _litDetailMatPropContainer = new LitDetailPropertiesContainer(_propertySetter);
+            _matPropContainer          = new HumToonPropertiesContainer();
+            _litMatPropContainer       = new LitPropertiesContainer();
+            _litDetailMatPropContainer = new LitDetailPropertiesContainer();
         }
 
         private void SetMaterialPropertyContainers(MaterialProperty[] materialProperties)

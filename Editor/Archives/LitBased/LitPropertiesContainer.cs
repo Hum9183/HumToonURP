@@ -5,7 +5,6 @@ namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public class LitPropertiesContainer : IPropertiesContainer
     {
-        private readonly PropertySetter _matPropSetter;
         // SmoothnessMap
         public MaterialProperty WorkflowMode;
         public MaterialProperty Metallic;
@@ -27,14 +26,9 @@ namespace Hum.HumToon.Editor.Archives.LitBased
         // public MaterialProperty ClearCoatMask;
         // public MaterialProperty ClearCoatSmoothness;
 
-        public LitPropertiesContainer(PropertySetter matPropSetter)
-        {
-            _matPropSetter = matPropSetter;
-        }
-
         public void Set(MaterialProperty[] materialProperties)
         {
-            _matPropSetter.Set(this, materialProperties);
+            PropertySetter.Set(this, materialProperties);
         }
     }
 }

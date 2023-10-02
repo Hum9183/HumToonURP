@@ -4,9 +4,9 @@ using UnityEditor;
 
 namespace Hum.HumToon.Editor.HeaderScopes
 {
-    public class PropertySetter
+    public static class PropertySetter
     {
-        public void Set<T>(T matPropContainer, MaterialProperty[] materialProperties)
+        public static void Set<T>(T matPropContainer, MaterialProperty[] materialProperties)
             where T : IPropertiesContainer
         {
             var fieldInfos = typeof(T).GetFields();
@@ -18,7 +18,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
             }
         }
 
-        private MaterialProperty FindProperty(string matPropName, MaterialProperty[] materialProperties, bool propertyIsMandatory)
+        private static MaterialProperty FindProperty(string matPropName, MaterialProperty[] materialProperties, bool propertyIsMandatory)
         {
             foreach (var prop in materialProperties)
             {

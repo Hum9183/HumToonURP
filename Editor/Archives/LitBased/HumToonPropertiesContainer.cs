@@ -5,8 +5,6 @@ namespace Hum.HumToon.Editor.Archives.LitBased
 {
     public class HumToonPropertiesContainer : IPropertiesContainer
     {
-        private readonly PropertySetter _matPropSetter;
-
         public MaterialProperty SurfaceType;
         public MaterialProperty BlendMode;
         public MaterialProperty BlendModePreserveSpecular;
@@ -21,14 +19,9 @@ namespace Hum.HumToon.Editor.Archives.LitBased
         public MaterialProperty EmissionColor;
         public MaterialProperty QueueOffset;
 
-        public HumToonPropertiesContainer(PropertySetter matPropSetter)
-        {
-            _matPropSetter = matPropSetter;
-        }
-
         public void Set(MaterialProperty[] materialProperties)
         {
-            _matPropSetter.Set(this, materialProperties);
+            PropertySetter.Set(this, materialProperties);
         }
     }
 }

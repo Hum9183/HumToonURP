@@ -4,8 +4,6 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
 {
     public class ShadePropertiesContainer : IPropertiesContainer
     {
-        private readonly PropertySetter _propSetter;
-
         // Shade Mode
         public MaterialProperty ShadeMode;
 
@@ -34,15 +32,5 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
         public MaterialProperty UseShadeControlMap;
         public MaterialProperty ShadeControlMap;
         public MaterialProperty ShadeControlMapIntensity;
-
-        public ShadePropertiesContainer(PropertySetter propSetter)
-        {
-            _propSetter = propSetter;
-        }
-
-        public void Set(MaterialProperty[] materialProperties)
-        {
-            _propSetter.Set(this, materialProperties);
-        }
     }
 }

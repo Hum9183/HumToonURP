@@ -18,7 +18,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
     {
         public IEnumerable<IHeaderScopeDrawer> CreateDrawers()
         {
-            var scopes = CreateHeaderScopes(new PropertySetter());
+            var scopes = CreateHeaderScopes();
             return scopes
                 .Select(x => x.drawer)
                 .Where(HumToonUtils.IsNotNull);;
@@ -33,81 +33,81 @@ namespace Hum.HumToon.Editor.HeaderScopes
         }
 
         private IEnumerable<(IHeaderScopeDrawer drawer, IHeaderScopeValidator validator)>
-            CreateHeaderScopes(PropertySetter propSetter = null)
+            CreateHeaderScopes()
         {
             return new List<(IHeaderScopeDrawer, IHeaderScopeValidator)>
             {
-                (CreateSurfaceOptionsDrawer(propSetter), new SurfaceOptionsValidator()),
-                (CreateBaseDrawer(propSetter), null),
-                (CreateNormalDrawer(propSetter), new NormalValidator()),
-                (CreateShadeDrawer(propSetter), new ShadeValidator()),
-                (CreateRimLightDrawer(propSetter), new RimLightValidator()),
-                (CreateEmissionDrawer(propSetter), new EmissionValidator()),
-                (CreateMatCapDrawer(propSetter), new MatCapValidator()),
-                (CreateLightDrawer(propSetter), null),
+                (CreateSurfaceOptionsDrawer(), new SurfaceOptionsValidator()),
+                (CreateBaseDrawer(), null),
+                (CreateNormalDrawer(), new NormalValidator()),
+                (CreateShadeDrawer(), new ShadeValidator()),
+                (CreateRimLightDrawer(), new RimLightValidator()),
+                (CreateEmissionDrawer(), new EmissionValidator()),
+                (CreateMatCapDrawer(), new MatCapValidator()),
+                (CreateLightDrawer(), null),
             };
         }
 
-        private SurfaceOptionsDrawer CreateSurfaceOptionsDrawer(PropertySetter propSetter)
+        private SurfaceOptionsDrawer CreateSurfaceOptionsDrawer()
         {
             return new SurfaceOptionsDrawer(
-                new SurfaceOptionsPropertiesContainer(propSetter),
+                new SurfaceOptionsPropertiesContainer(),
                 () => SurfaceOptionsStyles.SurfaceOptionsFoldout,
                 Convert.ToUInt32(Expandable.SurfaceOptions));
         }
 
-        private BaseDrawer CreateBaseDrawer(PropertySetter propSetter)
+        private BaseDrawer CreateBaseDrawer()
         {
             return new BaseDrawer(
-                new BasePropertiesContainer(propSetter),
+                new BasePropertiesContainer(),
                 () => BaseStyles.SurfaceInputsFoldout,
                 Convert.ToUInt32(Expandable.Base));
         }
 
-        private NormalDrawer CreateNormalDrawer(PropertySetter propSetter)
+        private NormalDrawer CreateNormalDrawer()
         {
             return new NormalDrawer(
-                new NormalPropertiesContainer(propSetter),
+                new NormalPropertiesContainer(),
                 () => NormalStyles.NormalFoldout,
                 Convert.ToUInt32(Expandable.Normal));
         }
 
-        private ShadeDrawer CreateShadeDrawer(PropertySetter propSetter)
+        private ShadeDrawer CreateShadeDrawer()
         {
             return new ShadeDrawer(
-                new ShadePropertiesContainer(propSetter),
+                new ShadePropertiesContainer(),
                 () => ShadeStyles.ShadeFoldout,
                 Convert.ToUInt32(Expandable.Shade));
         }
 
-        private RimLightDrawer CreateRimLightDrawer(PropertySetter propSetter)
+        private RimLightDrawer CreateRimLightDrawer()
         {
             return new RimLightDrawer(
-                new RimLightPropertiesContainer(propSetter),
+                new RimLightPropertiesContainer(),
                 () => RimLightStyles.RimLightFoldout,
                 Convert.ToUInt32(Expandable.RimLight));
         }
 
-        private EmissionDrawer CreateEmissionDrawer(PropertySetter propSetter)
+        private EmissionDrawer CreateEmissionDrawer()
         {
             return new EmissionDrawer(
-                new EmissionPropertiesContainer(propSetter),
+                new EmissionPropertiesContainer(),
                 () => EmissionStyles.EmissionFoldout,
                 Convert.ToUInt32(Expandable.Emission));
         }
 
-        private MatCapDrawer CreateMatCapDrawer(PropertySetter propSetter)
+        private MatCapDrawer CreateMatCapDrawer()
         {
             return new MatCapDrawer(
-                new MatCapPropertiesContainer(propSetter),
+                new MatCapPropertiesContainer(),
                 () => MatCapStyles.MatCapFoldout,
                 Convert.ToUInt32(Expandable.MatCap));
         }
 
-        private LightDrawer CreateLightDrawer(PropertySetter propSetter)
+        private LightDrawer CreateLightDrawer()
         {
             return new LightDrawer(
-                new LightPropertiesContainer(propSetter),
+                new LightPropertiesContainer(),
                 () => LightStyles.LightFoldout,
                 Convert.ToUInt32(Expandable.Light));
         }

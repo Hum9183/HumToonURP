@@ -27,7 +27,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
 
         public void SetProperties(MaterialProperty[] materialProperties)
         {
-            PropContainer.Set(materialProperties);
+            PropertySetter.Set(PropContainer, materialProperties);
         }
 
         public void Draw(MaterialEditor materialEditor)
