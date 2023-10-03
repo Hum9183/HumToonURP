@@ -80,7 +80,7 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
 
         public static readonly GUIContent UseSecondShade = EditorGUIUtility.TrTextContent(
             text: "Use Second Shade",
-            tooltip: $"{C.Properties}{C.Ln}" +
+            tooltip: $"{C.Property}{C.Ln}" +
                      $"{nameof(P.UseSecondShade).Prefix()}{C.Ln}" +
                      $"{C.Ln}" +
                      $"{C.Keyword}{C.Ln}" +
