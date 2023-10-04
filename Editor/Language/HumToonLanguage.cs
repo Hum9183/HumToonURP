@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using Hum.HumToon.Editor.Utils;
 using UnityEditor;
-using UnityEngine;
 
 namespace Hum.HumToon.Editor.Language
 {
