@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Hum.HumToon.Editor.HeaderScopes.SurfaceOptions;
 using UnityEngine;
 
@@ -33,6 +37,13 @@ namespace Hum.HumToon.Editor.Utils
             // NOTE: sourceの先頭文字が大文字だった場合、先頭にスペースが入ってしまうため、削除する。
             result = result.TrimStart();
             return result;
+        }
+
+        public static IEnumerable<Type> GetSubclasses<T>()
+        {
+            return Assembly.GetAssembly(typeof(T)).GetTypes()
+                .Where(x => x.IsSubclassOf(typeof(T)))
+                .Where(x => x.IsAbstract is false);
         }
     }
 }

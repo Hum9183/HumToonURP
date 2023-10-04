@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using Hum.HumToon.Editor.Language;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -16,10 +16,9 @@ namespace Hum.HumToon.Editor.Utils
         public static T DoPopup<T>(MaterialEditor materialEditor, MaterialProperty matProp, GUIContent label)
             where T: Enum
         {
-            var displayedOptions = Enum.GetNames(typeof(T)).ToList();
-            displayedOptions = displayedOptions.Select(HumToonUtils.InsertSpaceBeforeUppercase).ToList();
+            var displayedOptions = HumToonLanguage.DisplayedOptions<T>();
 
-            int newValue = PopupShaderProperty(materialEditor, matProp, label, displayedOptions.ToArray());
+            int newValue = PopupShaderProperty(materialEditor, matProp, label, displayedOptions);
 
             return newValue.ToEnum<T>();
         }

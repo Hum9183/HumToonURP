@@ -39,6 +39,12 @@ namespace Hum.HumToon.Editor.Utils
             return (T)Enum.ToObject(typeof(T), value);
         }
 
+        public static T ToEnum<T>(this float value)
+            where T : Enum
+        {
+            return (T)Enum.ToObject(typeof(T), (int)value);
+        }
+
         public static bool TryGetValue<T>(this T[] array, int index, out T value)
         {
             if (array.IsIndexOutOfRange(index))

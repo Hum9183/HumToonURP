@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -35,6 +38,51 @@ namespace Hum.HumToon.Editor.Language
             return result;
         }
 
+        public static string[] DisplayedOptions<T>()
+            where T: Enum
+        {
+            // Ref: https://web.archive.org/web/20181119155348/http://www.distribucon.com/blog/GettingMembersOfAnEnumViaReflection.aspx
+            var enumFields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static);
+
+            var currentLangAttrs = new List<LanguageDisplayNameAttributeBase>();
+            foreach (var field in enumFields)
+            {
+                var existingAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<LanguageDisplayNameAttributeBase>();
+                var missingAttrs = CreateMissingLanguageAttributes(field);
+                var allLangAttrs = existingAttrs.Concat(missingAttrs);
+                var currentLangAttr = SortByCurrentLang(allLangAttrs);
+                currentLangAttrs.Add(currentLangAttr);
+            }
+
+            var displayedOptions = currentLangAttrs
+                .OrderBy(x => x.Enum)
+                .Select(x => x.DisplayName)
+                .ToArray();
+
+            return displayedOptions;
+        }
+
+        /// <summary>
+        /// 付与されていない言語アトリビュートを生成する
+        /// </summary>
+        private static IEnumerable<LanguageDisplayNameAttributeBase> CreateMissingLanguageAttributes(FieldInfo field)
+        {
+            // NOTE:
+            // アトリビュートが付与されていない場合は、その分インスタンスを生成する。
+            // インスタンス生成時の引数(ディスプレイ名)はフィールド名(Enumの項目名)
+            return HumToonUtils.GetSubclasses<LanguageDisplayNameAttributeBase>()
+                .Where(x => field.IsDefined(x) is false)
+                .Select(x => Activator.CreateInstance(x, field.Name) as LanguageDisplayNameAttributeBase);
+        }
+
+        /// <summary>
+        /// 現在の言語でソートする
+        /// </summary>
+        private static LanguageDisplayNameAttributeBase SortByCurrentLang(IEnumerable<LanguageDisplayNameAttributeBase> attrList)
+        {
+            return attrList.FirstOrDefault(x => x.Enum == currentLanguage);
+        }
+
         /// <summary>
         /// Draw language GUI
         /// </summary>
@@ -58,7 +106,7 @@ namespace Hum.HumToon.Editor.Language
         private static int DrawInternal(int lang)
         {
             // TODO: Undo
-            int newValue = EditorGUILayout.Popup(LanguageLabel, lang, ((Language)lang).DisplayedOptions());
+            int newValue = EditorGUILayout.Popup(LanguageLabel, lang, DisplayedOptions<Language>());
             return newValue;
         }
 

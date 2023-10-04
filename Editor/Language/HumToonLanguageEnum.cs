@@ -1,24 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
 namespace Hum.HumToon.Editor.Language
 {
     public enum Language
     {
+        [English("English")]
+        [Japanese("英語")]
+        [Chinese("英语")]
         English,
+
+        [English("Japanese")]
+        [Japanese("日本語")]
+        [Chinese("日语")]
         Japanese,
+
+        [English("Chinese")]
+        [Japanese("中国語")]
+        [Chinese("中文")]
         Chinese
-    }
-
-    public static class LanguageExtension
-    {
-        public static string[] DisplayedOptions(this Language value)
-        {
-            var displayedOptionsArray =  new string[][]
-            {
-                new string[] { "English", "Japanese", "Chinese" },
-                new string[] { "英語", "日本語", "中国語" },
-                new string[] { "英语", "日语", "中文" },
-            };
-
-            return displayedOptionsArray[(int)value];
-        }
     }
 }
