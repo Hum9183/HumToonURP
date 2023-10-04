@@ -20,38 +20,40 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
                 tooltip: $"{C.Description}{C.Ln}" +
                          $"Controls how URP Renders the material on screen.");
 
-        public static readonly GUIContent SurfaceType = EditorGUIUtility.TrTextContent(
-            text: "Surface Type",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Select a surface type for your texture. Choose between Opaque or Transparent.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Properties}{C.Ln}" +
-                     $"{nameof(P.SurfaceType).Prefix()}{C.Ln}" +
-                     $"{HumToonPropertyNames.ZWrite}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.RenderTypeTag}{C.Ln}" +
-                     $"{RenderTypeTagNames.Opaque} or {RenderTypeTagNames.Transparent}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Passes}{C.Ln}" +
-                     $"{PassNames.ShadowCaster}{C.Ln}" +
-                     $"{PassNames.DepthOnly}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.RenderQueue}{C.Ln}" +
-                     $"{RenderQueue.Geometry} or {RenderQueue.Transparent}");
+        public static GUIContent SurfaceType =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Surface Type", "サーフェスタイプ", "表面类型" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"Select a surface type for your texture. Choose between Opaque or Transparent.{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Properties}{C.Ln}" +
+                         $"{nameof(P.SurfaceType).Prefix()}{C.Ln}" +
+                         $"{HumToonPropertyNames.ZWrite}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Keyword}{C.Ln}" +
+                         $"{ShaderKeywordStrings._SURFACE_TYPE_TRANSPARENT}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.RenderTypeTag}{C.Ln}" +
+                         $"{RenderTypeTagNames.Opaque} or {RenderTypeTagNames.Transparent}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Passes}{C.Ln}" +
+                         $"{PassNames.ShadowCaster}{C.Ln}" +
+                         $"{PassNames.DepthOnly}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.RenderQueue}{C.Ln}" +
+                         $"{RenderQueue.Geometry} or {RenderQueue.Transparent}");
 
-        public static readonly GUIContent TransparentBlendMode = EditorGUIUtility.TrTextContent(
-            text: "Blending Mode",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Controls how the color of the Transparent surface blends with the Material color in the background.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Property}{C.Ln}" +
-                     $"{nameof(P.BlendMode).Prefix()}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShaderKeywordStrings._ALPHAMODULATE_ON}");
+        public static GUIContent TransparentBlendMode =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Blending Mode", "合成モード", "混合模式" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"Controls how the color of the Transparent surface blends with the Material color in the background.{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Property}{C.Ln}" +
+                         $"{nameof(P.BlendMode).Prefix()}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Keyword}{C.Ln}" +
+                         $"{ShaderKeywordStrings._ALPHAMODULATE_ON}");
 
         public static readonly GUIContent RenderFace = EditorGUIUtility.TrTextContent(
             text: "Render Face",

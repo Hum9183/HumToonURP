@@ -12,7 +12,7 @@ namespace Hum.HumToon.Editor.HeaderScopes.Normal
     {
         public static GUIContent NormalFoldout =>
             EditorGUIUtility.TrTextContent(
-                text: $"{L.Select(new string[] { "Normal", "法線", "法向量" })}",
+                text: $"{L.Select(new string[] { "Normal", "法線", "法线" })}",
                 tooltip: $"{C.Description}{C.Ln}" +
                          $"These settings describe the look and feel of the surface itself.");
 

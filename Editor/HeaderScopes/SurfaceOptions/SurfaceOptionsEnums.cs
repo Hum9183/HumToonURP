@@ -1,3 +1,5 @@
+using Hum.HumToon.Editor.Language;
+
 namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
 {
     /// <summary>
@@ -8,11 +10,17 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
         /// <summary>
         /// Use this for opaque surfaces.
         /// </summary>
+        [English("Opaque")]
+        [Japanese("不透明")]
+        [Chinese("不透明")]
         Opaque,
 
         /// <summary>
         /// Use this for transparent surfaces.
         /// </summary>
+        [English("Transparent")]
+        [Japanese("半透明")]
+        [Chinese("透明")]
         Transparent
     }
 
