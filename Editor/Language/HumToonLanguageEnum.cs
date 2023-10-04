@@ -7,7 +7,7 @@ namespace Hum.HumToon.Editor.Language
         Chinese
     }
 
-    public static class LanguageExtensionMethods
+    public static class LanguageExtension
     {
         public static string[] DisplayedOptions(this Language value)
         {
