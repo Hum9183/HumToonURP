@@ -79,9 +79,9 @@ namespace Hum.HumToon.Editor.Language
         /// <summary>
         /// 現在の言語でソートする
         /// </summary>
-        private static LanguageDisplayNameAttributeBase SortByCurrentLang(IEnumerable<LanguageDisplayNameAttributeBase> attrList)
+        private static LanguageDisplayNameAttributeBase SortByCurrentLang(IEnumerable<LanguageDisplayNameAttributeBase> langAttrs)
         {
-            return attrList.FirstOrDefault(x => x.Enum == currentLanguage);
+            return langAttrs.FirstOrDefault(x => x.Enum == currentLanguage);
         }
 
         /// <summary>
