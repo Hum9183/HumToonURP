@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Hum.HumToon.Editor.Language
 {
+    // TODO: クラスが大きくなってきたため、移譲する
     public static class HumToonLanguage
     {
         private const Language DefaultLang = Language.English;
