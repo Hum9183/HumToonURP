@@ -3,7 +3,7 @@ using Hum.HumToon.Editor.Utils;
 using UnityEditor;
 using UnityEngine;
 using C = Hum.HumToon.Editor.Utils.Const;
-using L = Hum.HumToon.Editor.Language.HumToonLanguage;
+using L = Hum.HumToon.Editor.Language.LanguageSelector;
 using P = Hum.HumToon.Editor.HeaderScopes.Light.LightPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Light

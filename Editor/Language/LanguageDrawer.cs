@@ -1,38 +1,20 @@
 using UnityEditor;
+using UnityEngine;
 
 namespace Hum.HumToon.Editor.Language
 {
-    public class LanguageDrawer
+    public static class LanguageDrawer
     {
-        private const string EditorUserSettingsConfigName = "HumToonLanguage";
-
-        public Language Draw(Language defaultLang)
+        public static void Draw()
         {
-            int currentLang = GetFromEditorUserSettings(defaultLang);
-            int newLang = DrawInternal(currentLang);
-            SetEditorUserSettings(newLang);
-            return (Language)newLang;;
+            HumToonLanguage.CurrentLang = (Language)DrawInternal();
         }
 
-        private int GetFromEditorUserSettings(Language defaultLang)
-        {
-            string langStr = EditorUserSettings.GetConfigValue(EditorUserSettingsConfigName); // e.g. "0", "1", "2"
-            langStr ??= ((int)defaultLang).ToString();
-
-            bool success = int.TryParse(langStr, out int langInt);
-            return success ? langInt : (int)defaultLang;
-        }
-
-        private int DrawInternal(int currentLang)
+        private static int DrawInternal()
         {
             // TODO: Undo
-            int newValue = EditorGUILayout.Popup(LanguageStyles.Language, currentLang, HumToonLanguage.DisplayedOptions<Language>());
+            int newValue = EditorGUILayout.Popup(LanguageStyles.Language, (int)HumToonLanguage.CurrentLang, LanguageDisplayedOptionsGetter.Get<Language>());
             return newValue;
-        }
-
-        private void SetEditorUserSettings(int newLang)
-        {
-            EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, newLang.ToString());
         }
     }
 }

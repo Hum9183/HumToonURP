@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using C = Hum.HumToon.Editor.Utils.Const;
-using L = Hum.HumToon.Editor.Language.HumToonLanguage;
+using L = Hum.HumToon.Editor.Language.LanguageSelector;
 using P = Hum.HumToon.Editor.HeaderScopes.Normal.NormalPropertiesContainer;
 
 namespace Hum.HumToon.Editor.HeaderScopes.Normal

@@ -55,7 +55,7 @@ namespace Hum.HumToon.Editor
         {
             EditorGUIUtility.labelWidth = 0f;
 
-            HumToonLanguage.Draw();
+            LanguageDrawer.Draw();
 
             HumToonGUIUtils.Space();
 

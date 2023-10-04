@@ -7,6 +7,6 @@ namespace Hum.HumToon.Editor.Language
     {
         public static GUIContent Language =>
             EditorGUIUtility.TrTextContent(
-                text: $"{HumToonLanguage.Select(new string[] { "Language", "言語", "语言" })}");
+                text: $"{LanguageSelector.Select(new string[] { "Language", "言語", "语言" })}");
     }
 }

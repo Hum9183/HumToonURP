@@ -1,31 +1,39 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using Hum.HumToon.Editor.Utils;
+using UnityEditor;
+using UnityEngine;
 
 namespace Hum.HumToon.Editor.Language
 {
     public static class HumToonLanguage
     {
-        private const Language DefaultLang = Language.English;
-        
-        private static Language currentLang;
-
-        private static readonly LanguageDrawer LanguageDrawer = new LanguageDrawer();
-        private static readonly LanguageSelector LanguageSelector = new LanguageSelector();
-        private static readonly LanguageDisplayedOptionsGetter LanguageDisplayedOptionsGetter = new LanguageDisplayedOptionsGetter();
-
-        public static void Draw()
+        public static Language CurrentLang
         {
-            currentLang = LanguageDrawer.Draw(DefaultLang);
+            get => GetFromEditorUserSettings();
+            set => SetEditorUserSettings(value);
         }
 
-        public static string Select(string[] texts)
+        public static readonly Language DefaultLang = Language.English;
+        private const string EditorUserSettingsConfigName = "HumToonLanguage";
+
+        private static Language GetFromEditorUserSettings()
         {
-            return LanguageSelector.Select(texts, DefaultLang, currentLang);
+            string langStr = EditorUserSettings.GetConfigValue(EditorUserSettingsConfigName); // e.g. "0", "1", "2"
+            langStr ??= ((int)DefaultLang).ToString();
+
+            bool success = int.TryParse(langStr, out int langInt);
+            int lang = success ? langInt : (int)DefaultLang;
+            return (Language)lang;
         }
 
-        public static string[] DisplayedOptions<T>()
-            where T: Enum
+        private static void SetEditorUserSettings(Language newLang)
         {
-            return LanguageDisplayedOptionsGetter.GetDisplayedOptions<T>(currentLang);
+            EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, ((int)newLang).ToString());
         }
     }
+
 }

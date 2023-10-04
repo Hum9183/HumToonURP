@@ -16,7 +16,7 @@ namespace Hum.HumToon.Editor.Utils
         public static T DoPopup<T>(MaterialEditor materialEditor, MaterialProperty matProp, GUIContent label)
             where T: Enum
         {
-            var displayedOptions = HumToonLanguage.DisplayedOptions<T>();
+            var displayedOptions = LanguageDisplayedOptionsGetter.Get<T>();
 
             int newValue = PopupShaderProperty(materialEditor, matProp, label, displayedOptions);
 

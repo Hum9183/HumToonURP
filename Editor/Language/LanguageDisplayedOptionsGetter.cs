@@ -6,9 +6,9 @@ using Hum.HumToon.Editor.Utils;
 
 namespace Hum.HumToon.Editor.Language
 {
-    public class LanguageDisplayedOptionsGetter
+    public static class LanguageDisplayedOptionsGetter
     {
-        public string[] GetDisplayedOptions<T>(Language currentLang)
+        public static string[] Get<T>()
             where T: Enum
         {
             // Ref: https://web.archive.org/web/20181119155348/http://www.distribucon.com/blog/GettingMembersOfAnEnumViaReflection.aspx
@@ -20,7 +20,7 @@ namespace Hum.HumToon.Editor.Language
                 var existingLangAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<DisplayNameLanguageAttributeBase>();
                 var missingLangAttrs = CreateMissingLanguageAttributes(field);
                 var allLangAttrs = existingLangAttrs.Concat(missingLangAttrs);
-                var currentLangAttr = SortByCurrentLang(allLangAttrs, currentLang);
+                var currentLangAttr = SortByCurrentLang(allLangAttrs);
                 currentLangAttrs.Add(currentLangAttr);
             }
 
@@ -48,9 +48,9 @@ namespace Hum.HumToon.Editor.Language
         /// <summary>
         /// 現在の言語でソートする
         /// </summary>
-        private static DisplayNameLanguageAttributeBase SortByCurrentLang(IEnumerable<DisplayNameLanguageAttributeBase> langAttrs, Language currentLang)
+        private static DisplayNameLanguageAttributeBase SortByCurrentLang(IEnumerable<DisplayNameLanguageAttributeBase> langAttrs)
         {
-            return langAttrs.FirstOrDefault(x => x.Enum == currentLang);
+            return langAttrs.FirstOrDefault(x => x.Enum == HumToonLanguage.CurrentLang);
         }
     }
 }
