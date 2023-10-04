@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Hum.HumToon.Editor.Utils
 {
-    public static class HumToonExtension
+    public static class HumToonExtensions
     {
         public static bool ToBool(this float value)
         {
