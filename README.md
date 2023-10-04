@@ -1,6 +1,11 @@
 # HumToon
 This project is under development.
 
+## Supported languages
+- English
+- Japanese (partially)
+- Chinese (partially)
+
 ## Development environment
 - Unity2022.3.5f1
 - Universal RP
