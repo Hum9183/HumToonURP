@@ -48,9 +48,9 @@ namespace Hum.HumToon.Editor.Language
             var currentLangAttrs = new List<LanguageDisplayNameAttributeBase>();
             foreach (var field in enumFields)
             {
-                var existingAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<LanguageDisplayNameAttributeBase>();
-                var missingAttrs = CreateMissingLanguageAttributes(field);
-                var allLangAttrs = existingAttrs.Concat(missingAttrs);
+                var existingLangAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<LanguageDisplayNameAttributeBase>();
+                var missingLangAttrs = CreateMissingLanguageAttributes(field);
+                var allLangAttrs = existingLangAttrs.Concat(missingLangAttrs);
                 var currentLangAttr = SortByCurrentLang(allLangAttrs);
                 currentLangAttrs.Add(currentLangAttr);
             }
