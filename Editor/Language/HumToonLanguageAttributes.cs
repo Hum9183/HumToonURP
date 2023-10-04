@@ -1,23 +1,20 @@
 using System;
-using Hum.HumToon.Editor.Utils;
-using UnityEditor;
-using UnityEngine;
 
 namespace Hum.HumToon.Editor.Language
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public abstract class LanguageDisplayNameAttributeBase : Attribute
+    public abstract class DisplayNameLanguageAttributeBase : Attribute
     {
         public string DisplayName { get; }
         public abstract Language Enum { get; }
 
-        protected LanguageDisplayNameAttributeBase(string displayName)
+        protected DisplayNameLanguageAttributeBase(string displayName)
         {
             DisplayName = displayName;
         }
     }
 
-    public class EnglishAttribute : LanguageDisplayNameAttributeBase
+    public class EnglishAttribute : DisplayNameLanguageAttributeBase
     {
         public override Language Enum => Language.English;
 
@@ -27,7 +24,7 @@ namespace Hum.HumToon.Editor.Language
         }
     }
 
-    public class JapaneseAttribute : LanguageDisplayNameAttributeBase
+    public class JapaneseAttribute : DisplayNameLanguageAttributeBase
     {
         public override Language Enum => Language.Japanese;
 
@@ -37,7 +34,7 @@ namespace Hum.HumToon.Editor.Language
         }
     }
 
-    public class ChineseAttribute : LanguageDisplayNameAttributeBase
+    public class ChineseAttribute : DisplayNameLanguageAttributeBase
     {
         public override Language Enum => Language.Chinese;
 

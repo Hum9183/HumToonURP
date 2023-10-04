@@ -45,10 +45,10 @@ namespace Hum.HumToon.Editor.Language
             // Ref: https://web.archive.org/web/20181119155348/http://www.distribucon.com/blog/GettingMembersOfAnEnumViaReflection.aspx
             var enumFields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static);
 
-            var currentLangAttrs = new List<LanguageDisplayNameAttributeBase>();
+            var currentLangAttrs = new List<DisplayNameLanguageAttributeBase>();
             foreach (var field in enumFields)
             {
-                var existingLangAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<LanguageDisplayNameAttributeBase>();
+                var existingLangAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<DisplayNameLanguageAttributeBase>();
                 var missingLangAttrs = CreateMissingLanguageAttributes(field);
                 var allLangAttrs = existingLangAttrs.Concat(missingLangAttrs);
                 var currentLangAttr = SortByCurrentLang(allLangAttrs);
@@ -66,20 +66,20 @@ namespace Hum.HumToon.Editor.Language
         /// <summary>
         /// 付与されていない言語アトリビュートを生成する
         /// </summary>
-        private static IEnumerable<LanguageDisplayNameAttributeBase> CreateMissingLanguageAttributes(FieldInfo field)
+        private static IEnumerable<DisplayNameLanguageAttributeBase> CreateMissingLanguageAttributes(FieldInfo field)
         {
             // NOTE:
             // アトリビュートが付与されていない場合は、その分インスタンスを生成する。
             // インスタンス生成時の引数(ディスプレイ名)はフィールド名(Enumの項目名)
-            return HumToonUtils.GetSubclasses<LanguageDisplayNameAttributeBase>()
+            return HumToonUtils.GetSubclasses<DisplayNameLanguageAttributeBase>()
                 .Where(x => field.IsDefined(x) is false)
-                .Select(x => Activator.CreateInstance(x, field.Name) as LanguageDisplayNameAttributeBase);
+                .Select(x => Activator.CreateInstance(x, field.Name) as DisplayNameLanguageAttributeBase);
         }
 
         /// <summary>
         /// 現在の言語でソートする
         /// </summary>
-        private static LanguageDisplayNameAttributeBase SortByCurrentLang(IEnumerable<LanguageDisplayNameAttributeBase> langAttrs)
+        private static DisplayNameLanguageAttributeBase SortByCurrentLang(IEnumerable<DisplayNameLanguageAttributeBase> langAttrs)
         {
             return langAttrs.FirstOrDefault(x => x.Enum == currentLanguage);
         }
