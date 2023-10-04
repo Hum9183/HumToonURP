@@ -51,7 +51,7 @@ namespace Hum.HumToon.Editor.Language
             string langStr = EditorUserSettings.GetConfigValue(EditorUserSettingsConfigName); // e.g. "0", "1", "2"
             langStr ??= ((int)DefaultLang).ToString();
 
-            bool success = Int32.TryParse(langStr, out int langInt);
+            bool success = int.TryParse(langStr, out int langInt);
             return success ? langInt : (int)DefaultLang;
         }
 
