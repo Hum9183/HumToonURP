@@ -7,7 +7,7 @@ namespace Hum.HumToon.Editor.Utils
     {
         public static bool ToBool(this float value)
         {
-            return value >= 0.5;
+            return value >= 0.5f;
         }
 
         public static float ToFloat(this bool value)
