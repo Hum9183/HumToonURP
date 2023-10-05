@@ -7,13 +7,13 @@ namespace Hum.HumToon.Editor.Language
     {
         public static void Draw()
         {
-            HumToonLanguage.CurrentLang = (Language)DrawInternal();
+            HumToonLanguage.CurrentLang = (Language)DrawInternal(HumToonLanguage.CurrentLang);
         }
 
-        private static int DrawInternal()
+        private static int DrawInternal(Language currentLang)
         {
             // TODO: Undo
-            int newValue = EditorGUILayout.Popup(LanguageStyles.Language, (int)HumToonLanguage.CurrentLang, LanguageDisplayedOptionsGetter.Get<Language>(HumToonLanguage.CurrentLang));
+            int newValue = EditorGUILayout.Popup(LanguageStyles.Language, (int)currentLang, LanguageDisplayedOptionsGetter.Get<Language>(currentLang));
             return newValue;
         }
     }
