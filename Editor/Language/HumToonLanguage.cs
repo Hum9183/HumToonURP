@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 
 namespace Hum.HumToon.Editor.Language
@@ -15,17 +16,14 @@ namespace Hum.HumToon.Editor.Language
 
         private static Language GetFromEditorUserSettings()
         {
-            string langStr = EditorUserSettings.GetConfigValue(EditorUserSettingsConfigName); // e.g. "0", "1", "2"
-            langStr ??= ((int)DefaultLang).ToString();
-
-            bool success = int.TryParse(langStr, out int langInt);
-            int lang = success ? langInt : (int)DefaultLang;
-            return (Language)lang;
+            string langStr = EditorUserSettings.GetConfigValue(EditorUserSettingsConfigName);
+            bool success = Enum.TryParse<Language>(langStr, out var lang);
+            return success ? lang : DefaultLang;
         }
 
         private static void SetEditorUserSettings(Language newLang)
         {
-            EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, ((int)newLang).ToString());
+            EditorUserSettings.SetConfigValue(EditorUserSettingsConfigName, newLang.ToString());
         }
     }
 
