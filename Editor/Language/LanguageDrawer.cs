@@ -12,7 +12,6 @@ namespace Hum.HumToon.Editor.Language
 
         private static int DrawInternal(Language currentLang)
         {
-            // TODO: Undo
             int newValue = EditorGUILayout.Popup(LanguageStyles.Language, (int)currentLang, LanguageDisplayedOptionsGetter.Get<Language>(currentLang));
             return newValue;
         }
