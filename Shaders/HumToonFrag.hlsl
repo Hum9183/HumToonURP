@@ -94,7 +94,7 @@ void frag(
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
-    half3 additionalLightsColor = CalcAdditionalLightColor(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
+    half3 additionalLightsColor = HumCalcAdditionalLightColor(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
@@ -105,7 +105,7 @@ void frag(
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS_VERTEX)
-    half3 additionalLightsColorVertex = CalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
+    half3 additionalLightsColorVertex = HumCalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
 #endif
 
 

@@ -1,11 +1,11 @@
-#ifndef ADDITIONAL_LIGHTS_COLOR_INCLUDED
-#define ADDITIONAL_LIGHTS_COLOR_INCLUDED
+#ifndef HUM_TOON_ADDITIONAL_LIGHTS_COLOR_INCLUDED
+#define HUM_TOON_ADDITIONAL_LIGHTS_COLOR_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 #include "../../ShaderLibrary/Func.hlsl"
 #include "HumToonShade.hlsl"
 
-half3 CalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)
+half3 HumCalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)
 {
     // TODO: Specular
     half NdotL = saturate(dot(normalWS, light.direction));
@@ -43,7 +43,7 @@ bool HumIsDirectionalLight(uint lightIndex)
     return lightPositionWS.w == 0.0 ? true : false;
 }
 
-half3 CalcAdditionalLightColor(
+half3 HumCalcAdditionalLightColor(
     float2 uv, half3 baseColor, InputData inputData, half4 shadowMask, AmbientOcclusionFactor aoFactor
 #if defined(_LIGHT_LAYERS)
     , uint meshRenderingLayers
@@ -95,7 +95,7 @@ half3 CalcAdditionalLightColor(
             }
             else
             {
-                additionalLightsColor += CalcAdditionalLightColorInternal(baseColor, normalWS, light);
+                additionalLightsColor += HumCalcAdditionalLightColorInternal(baseColor, normalWS, light);
             }
         }
     LIGHT_LOOP_END
@@ -103,7 +103,7 @@ half3 CalcAdditionalLightColor(
     return additionalLightsColor * _AdditionalLightsColorWeight;
 }
 
-half3 CalcAdditionalLightColorVertex(half3 originalColor, half3 vertexLighting)
+half3 HumCalcAdditionalLightColorVertex(half3 originalColor, half3 vertexLighting)
 {
     return originalColor * vertexLighting * _AdditionalLightsColorWeight;
 }

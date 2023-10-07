@@ -28,7 +28,7 @@
 #include "Functions/HumToonGI.hlsl"
 
 #if defined(_ADDITIONAL_LIGHTS) || defined(_ADDITIONAL_LIGHTS_VERTEX)
-    #include "Functions/AdditionalLightsColor.hlsl"
+    #include "Functions/HumToonAdditionalLightsColor.hlsl"
 #endif
 
 #if defined(_WRITE_RENDERING_LAYERS)
