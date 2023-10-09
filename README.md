@@ -29,9 +29,9 @@ This project is under development.
 - Forward plus
 - SRP batcher
 - GI
+- Decal
 
 ## Not supported
 - DOTS (ECS)
 - Deferred rendering
-- Decal
 - Rendering debugger
