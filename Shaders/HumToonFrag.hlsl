@@ -34,12 +34,16 @@ void frag(
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
     // TODO: SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
-    // TODO: Decal
     // TODO: CanDebugOverrideOutputColor()
     // TODO: SSAOのweight調整機能
     // TODO: normalのoverride(顔の法線を正面に向ける等)
     // TODO: 関数名にHumをつける(被り対策)
     // TODO: Varyings SurfaceData InputData BRDFDataの整理
+
+#ifdef _DBUFFER
+    // TODO: surfeceData.albedoは_BaseColorが適用されているが、Shadeでも使いたい都合、
+    ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
+#endif
 
     // Shadow
     half4 shadowMask = CalculateShadowMask(inputData);
@@ -65,8 +69,8 @@ void frag(
 
     // Base
     half4 baseColor;
-    half3 baseMapColor;
-    HumCalcBaseColor(uv0, baseColor, baseMapColor);
+    half3 baseColorWithoutBaseColor; // NOTE: _BaseColorが適用されていないBaseColor
+    HumCalcBaseColor(uv0, surfaceData, baseColor, baseColorWithoutBaseColor);
 
     // Main Light Color
     half3 mainLightColor = HumCalcMainLightColor(
@@ -99,7 +103,7 @@ void frag(
         , meshRenderingLayers
     #endif
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-        , baseMapColor
+        , baseColorWithoutBaseColor
     #endif
     );
 #endif
@@ -118,7 +122,7 @@ void frag(
     // Mix Base Color and Shade Color
     finalColor.rgb = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-        , baseMapColor
+        , baseColorWithoutBaseColor
     #endif
     );
 #else

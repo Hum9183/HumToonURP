@@ -16,7 +16,7 @@ half3 HumCalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, 
 // EXPERIMENTAL: AdditionalLightのDirectionalLightはShadeと同じ計算法を使用する
 half3 HumCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 normalWS, Light additionalDirectionalLight
 #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-    , half3 baseMapColor
+    , half3 baseColorWithoutBaseColor
 #endif
 )
 {
@@ -25,7 +25,7 @@ half3 HumCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 norma
     half shadowAttenuation = additionalDirectionalLight.distanceAttenuation * additionalDirectionalLight.shadowAttenuation;
     half3 shadedColor = HumMixShadeColor(uv, baseColor, normalWS, additionalDirectionalLight.direction, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-        , baseMapColor
+        , baseColorWithoutBaseColor
     #endif
     );
 
@@ -49,7 +49,7 @@ half3 HumCalcAdditionalLightColor(
     , uint meshRenderingLayers
 #endif
 #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
-    , half3 baseMapColor
+    , half3 baseColorWithoutBaseColor
 #endif
 )
 {
