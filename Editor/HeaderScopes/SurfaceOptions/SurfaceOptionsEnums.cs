@@ -32,21 +32,33 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
         /// <summary>
         /// Use this for alpha blend mode.
         /// </summary>
+        [English("Alpha")]
+        [Japanese("アルファ")]
+        [Chinese("Alpha")]
         Alpha,   // Old school alpha-blending mode, fresnel does not affect amount of transparency
 
         /// <summary>
         /// Use this for premultiply blend mode.
         /// </summary>
+        [English("Premultiply")]
+        [Japanese("事前乗算")]
+        [Chinese("预相乘")]
         Premultiply, // Physically plausible transparency mode, implemented as alpha pre-multiply
 
         /// <summary>
         /// Use this for additive blend mode.
         /// </summary>
+        [English("Additive")]
+        [Japanese("加算")]
+        [Chinese("相加")]
         Additive,
 
         /// <summary>
         /// Use this for multiply blend mode.
         /// </summary>
+        [English("Multiply")]
+        [Japanese("乗算")]
+        [Chinese("相乘")]
         Multiply
     }
 
