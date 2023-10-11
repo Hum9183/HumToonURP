@@ -41,7 +41,6 @@ void frag(
     // TODO: Varyings SurfaceData InputData BRDFDataの整理
 
 #ifdef _DBUFFER
-    // TODO: surfeceData.albedoは_BaseColorが適用されているが、Shadeでも使いたい都合、
     ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
 #endif
 
