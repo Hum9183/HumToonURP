@@ -78,10 +78,10 @@ half3 MixPosAndBlurShade(float2 uv, half3 baseColor, half halfLambert, half shad
 #endif
 )
 {
-    half3 finalShadedColor = 0;
+    half3 finalShadedColor = baseColor;
 
 #if defined(_HUM_USE_FIRST_SHADE)
-    finalShadedColor = MixFirstShade(uv, baseColor, halfLambert, shadowAttenuation
+    finalShadedColor = MixFirstShade(uv, finalShadedColor, halfLambert, shadowAttenuation
     #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
         , baseColorWithoutBaseColor
     #endif
