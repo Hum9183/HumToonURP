@@ -55,56 +55,60 @@ namespace Hum.HumToon.Editor.HeaderScopes.SurfaceOptions
                          $"{C.Keyword}{C.Ln}" +
                          $"{ShaderKeywordStrings._ALPHAMODULATE_ON}");
 
-        public static readonly GUIContent RenderFace = EditorGUIUtility.TrTextContent(
-            text: "Render Face",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Specifies which faces to cull from your geometry. " +
-                     $"Front culls front faces. Back culls backfaces. " +
-                     $"None means that both sides are rendered.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Property}{C.Ln}" +
-                     $"{nameof(P.CullMode).Prefix()}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Other}{C.Ln}" +
-                     $"material.doubleSidedGI");
+        public static GUIContent RenderFace =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Render Face", "Render Face", "Render Face" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"Specifies which faces to cull from your geometry. " +
+                         $"Front culls front faces. Back culls backfaces. " +
+                         $"None means that both sides are rendered.{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Property}{C.Ln}" +
+                         $"{nameof(P.CullMode).Prefix()}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Other}{C.Ln}" +
+                         $"material.doubleSidedGI");
 
-        public static readonly GUIContent AlphaClip = EditorGUIUtility.TrTextContent(
-            text: "Alpha Clipping",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Makes your Material act like a Cutout shader. " +
-                     $"Use this to create a transparent effect with hard edges between opaque and transparent areas.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Properties}{C.Ln}" +
-                     $"{nameof(P.AlphaClip).Prefix()}{C.Ln}" +
-                     $"{HumToonPropertyNames.AlphaToMask}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShaderKeywordStrings._ALPHATEST_ON}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.RenderTypeTag}{C.Ln}" +
-                     $"{RenderTypeTagNames.TransparentCutout}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.RenderQueue}{C.Ln}" +
-                     $"{RenderQueue.AlphaTest}");
+        public static GUIContent AlphaClip =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Alpha Clipping", "アルファクリッピング", "Alpha Clipping" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"Makes your Material act like a Cutout shader. " +
+                         $"Use this to create a transparent effect with hard edges between opaque and transparent areas.{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Properties}{C.Ln}" +
+                         $"{nameof(P.AlphaClip).Prefix()}{C.Ln}" +
+                         $"{HumToonPropertyNames.AlphaToMask}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Keyword}{C.Ln}" +
+                         $"{ShaderKeywordStrings._ALPHATEST_ON}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.RenderTypeTag}{C.Ln}" +
+                         $"{RenderTypeTagNames.TransparentCutout}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.RenderQueue}{C.Ln}" +
+                         $"{RenderQueue.AlphaTest}");
 
-        public static readonly GUIContent Cutoff = EditorGUIUtility.TrTextContent(
-            text: "Threshold",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"Sets where the Alpha Clipping starts. " +
-                     $"The higher the value is, the brighter the  effect is when clipping starts.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Property}{C.Ln}" +
-                     $"{nameof(P.Cutoff).Prefix()}");
+        public static GUIContent Cutoff =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Threshold", "しきい値", "阈值" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"Sets where the Alpha Clipping starts. " +
+                         $"The higher the value is, the brighter the  effect is when clipping starts.{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Property}{C.Ln}" +
+                         $"{nameof(P.Cutoff).Prefix()}");
 
-        public static readonly GUIContent ReceiveShadow = EditorGUIUtility.TrTextContent(
-            text: "Receive Shadows",
-            tooltip: $"{C.Description}{C.Ln}" +
-                     $"When enabled, other GameObjects can cast shadows onto this GameObject.{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Property}{C.Ln}" +
-                     $"{nameof(P.ReceiveShadows).Prefix()}{C.Ln}" +
-                     $"{C.Ln}" +
-                     $"{C.Keyword}{C.Ln}" +
-                     $"{ShaderKeywordStrings._RECEIVE_SHADOWS_OFF}");
+        public static GUIContent ReceiveShadow =>
+            EditorGUIUtility.TrTextContent(
+                text: $"{L.Select(new string[] { "Receive Shadows", "影を受け取る", "接收阴影" })}",
+                tooltip: $"{C.Description}{C.Ln}" +
+                         $"When enabled, other GameObjects can cast shadows onto this GameObject.{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Property}{C.Ln}" +
+                         $"{nameof(P.ReceiveShadows).Prefix()}{C.Ln}" +
+                         $"{C.Ln}" +
+                         $"{C.Keyword}{C.Ln}" +
+                         $"{ShaderKeywordStrings._RECEIVE_SHADOWS_OFF}");
     }
 }
