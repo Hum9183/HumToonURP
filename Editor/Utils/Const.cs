@@ -17,6 +17,10 @@ namespace Hum.HumToon.Editor.Utils
         public static readonly string RenderQueue   = Decorate(nameof(RenderQueue));
         public static readonly string Other         = Decorate(nameof(Other));
 
+        public static readonly string ColorChannelR    = "(R)";
+        public static readonly string ColorChannelRBG  = "(RGB)";
+        public static readonly string ColorChannelRGBA = "(RGBA)";
+
         private static string Decorate(string inStr)
         {
             return $"{HeadDecoration}{inStr}{TailDecoration}";
