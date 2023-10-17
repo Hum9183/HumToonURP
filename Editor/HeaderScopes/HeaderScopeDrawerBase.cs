@@ -32,7 +32,7 @@ namespace Hum.HumToon.Editor.HeaderScopes
 
         public void Draw(MaterialEditor materialEditor)
         {
-            using var header = new MaterialHeaderScope( _headerStyleFunc?.Invoke(), _expandable, materialEditor); // NOTE: Draw header
+            using var header = new MaterialHeaderScope(_headerStyleFunc?.Invoke(), _expandable, materialEditor); // NOTE: Draw header
             if (header.expanded is false)
                 return;
 
