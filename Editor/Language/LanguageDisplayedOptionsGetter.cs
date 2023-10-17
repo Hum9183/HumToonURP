@@ -25,7 +25,6 @@ namespace Hum.HumToon.Editor.Language
             }
 
             var displayedOptions = currentLangAttrs
-                .OrderBy(x => x.Enum)
                 .Select(x => x.DisplayName)
                 .ToArray();
 
