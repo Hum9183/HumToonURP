@@ -14,8 +14,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.RimLight
 
         protected override void DrawInternal(MaterialEditor materialEditor)
         {
-            bool useMarCap = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseRimLight, RimLightStyles.UseRimLight);
-            if (useMarCap)
+            bool useRimLight = HumToonGUIUtils.DrawFloatToggleProperty(PropContainer.UseRimLight, RimLightStyles.UseRimLight);
+            if (useRimLight)
             {
                 using (new EditorGUI.IndentLevelScope())
                 {
