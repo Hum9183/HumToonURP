@@ -20,7 +20,7 @@ namespace Hum.HumToon.Editor.Language
                 var existingLangAttrs = Attribute.GetCustomAttributes(field).ToList().OfType<DisplayNameLanguageAttributeBase>();
                 var missingLangAttrs = CreateMissingLanguageAttributes(field);
                 var allLangAttrs = existingLangAttrs.Concat(missingLangAttrs);
-                var currentLangAttr = SortByCurrentLang(allLangAttrs, currentLang);
+                var currentLangAttr = GetCurrentLangAttribute(allLangAttrs, currentLang);
                 currentLangAttrs.Add(currentLangAttr);
             }
 
@@ -46,9 +46,9 @@ namespace Hum.HumToon.Editor.Language
         }
 
         /// <summary>
-        /// 現在の言語でソートする
+        /// 現在の言語のアトリビュートを取得する
         /// </summary>
-        private static DisplayNameLanguageAttributeBase SortByCurrentLang(IEnumerable<DisplayNameLanguageAttributeBase> langAttrs, Language currentLang)
+        private static DisplayNameLanguageAttributeBase GetCurrentLangAttribute(IEnumerable<DisplayNameLanguageAttributeBase> langAttrs, Language currentLang)
         {
             return langAttrs.FirstOrDefault(x => x.Enum == currentLang);
         }
