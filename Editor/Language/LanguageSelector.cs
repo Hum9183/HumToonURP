@@ -1,3 +1,4 @@
+using System;
 using Hum.HumToon.Editor.Utils;
 
 namespace Hum.HumToon.Editor.Language
@@ -13,6 +14,9 @@ namespace Hum.HumToon.Editor.Language
         {
             string result = string.Empty;
 
+            if (texts.Length != Enum.GetNames(typeof(Language)).Length)
+                throw new LanguageTextsOutOfRangeException();
+
             if (texts.TryGetValue((int)defaultLang, out string defaultLangText))
             {
                 if (string.IsNullOrEmpty(defaultLangText) is false)
@@ -27,5 +31,9 @@ namespace Hum.HumToon.Editor.Language
 
             return result;
         }
+    }
+
+    public class LanguageTextsOutOfRangeException : Exception
+    {
     }
 }
