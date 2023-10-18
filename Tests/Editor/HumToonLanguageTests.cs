@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Hum.HumToon.Editor.Language;
 using NUnit.Framework;
@@ -19,7 +18,7 @@ namespace Hum.HumToon.Tests.Editor
         [TestCase(new string[]{            }, Language.English, Language.English, Empty)]
         [TestCase(new string[]{ Empty, Empty, Empty }, Language.English, Language.English, Empty)]
         [TestCase(new string[]{ null, null, null },    Language.English, Language.English, Empty)]
-        public void TestSelectInternal(string[] texts, Language defaultLang, Language currentLang,string expectedStr)
+        public void TestSelectInternal(string[] texts, Language defaultLang, Language currentLang, string expectedStr)
         {
             var clsType = typeof(LanguageSelector);
             var methodIndo = clsType.GetMethod("SelectInternal", BindingFlags.NonPublic | BindingFlags.Static);
