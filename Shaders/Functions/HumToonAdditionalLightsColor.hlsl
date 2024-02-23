@@ -53,6 +53,9 @@ half3 HumCalcAdditionalLightColor(
 #endif
 )
 {
+    // BUG: per-vertex light layers not working
+    // https://github.com/Unity-Technologies/Graphics/commit/2dcf83236d89dbe29dc3b1d0fe5a1f1658303842
+
     float3 normalWS = inputData.normalWS;
     uint pixelLightCount = GetAdditionalLightsCount();
     half3 additionalLightsColor;
