@@ -21,8 +21,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.Emission
             bool useEmission = material.GetFloat(IDUseEmission).ToBool();
             CoreUtils.SetKeyword(material, EmissionKeywordNames._HUM_USE_EMISSION, useEmission);
 
-            bool existsEmissionMap = material.GetTexture(IDEmissionMap) is not null;
-            CoreUtils.SetKeyword(material, EmissionKeywordNames._HUM_USE_EMISSION_MAP, existsEmissionMap && useEmission);
+            bool emissionMapExists = material.GetTexture(IDEmissionMap) is not null;
+            CoreUtils.SetKeyword(material, EmissionKeywordNames._HUM_USE_EMISSION_MAP, emissionMapExists && useEmission);
 
             bool overrideEmissionColor = material.GetFloat(IDOverrideEmissionColor).ToBool();
             CoreUtils.SetKeyword(material, EmissionKeywordNames._HUM_OVERRIDE_EMISSION_COLOR, overrideEmissionColor && useEmission);

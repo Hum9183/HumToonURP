@@ -109,7 +109,7 @@ namespace Hum.HumToon.Editor.Utils
             MaterialProperty rangeProp,
             GUIContent label)
         {
-            bool existsTexture;
+            bool textureExists;
             float rangeNewValue;
 
             Rect rectForSingleLine = GetControlRectForSingleLine();
@@ -117,29 +117,29 @@ namespace Hum.HumToon.Editor.Utils
             MaterialEditor.BeginProperty(rectForSingleLine, textureProp);
             MaterialEditor.BeginProperty(rectForSingleLine, rangeProp);
 
-            existsTexture = TextureProperty();
-            rangeNewValue = RangeProperty(existsTexture);
+            textureExists = TextureProperty();
+            rangeNewValue = RangeProperty(textureExists);
 
             MaterialEditor.EndProperty();
             MaterialEditor.EndProperty();
 
-            return (existsTexture, rangeNewValue);
+            return (textureExists, rangeNewValue);
 
             bool TextureProperty()
             {
-                bool existsTextureInternal;
+                bool textureExistsInternal;
 
                 materialEditor.TexturePropertyMiniThumbnail(rectForSingleLine, textureProp, label.text, label.tooltip);
-                existsTextureInternal = textureProp.textureValue;
+                textureExistsInternal = textureProp.textureValue;
 
-                return existsTextureInternal;
+                return textureExistsInternal;
             }
 
-            float RangeProperty(bool existsTextureInternal)
+            float RangeProperty(bool textureExistsInternal)
             {
                 float rangeNewValueInternal;
 
-                using (new EditorGUI.DisabledScope(!existsTextureInternal))
+                using (new EditorGUI.DisabledScope(!textureExistsInternal))
                 {
                     int indentLevel = EditorGUI.indentLevel;
                     EditorGUI.indentLevel = 0;

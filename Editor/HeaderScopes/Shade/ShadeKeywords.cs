@@ -66,17 +66,17 @@ namespace Hum.HumToon.Editor.HeaderScopes.Shade
             void SetupRamp()
             {
                 bool useRampShade = material.GetFloat(ID.UseRampShade).ToBool();
-                bool existsRampShadeMap = material.GetTexture(ID.RampShadeMap) is not null;
-                _HUM_USE_RAMP_SHADE = useRampShade && existsRampShadeMap;
+                bool rampShadeMapExists = material.GetTexture(ID.RampShadeMap) is not null;
+                _HUM_USE_RAMP_SHADE = useRampShade && rampShadeMapExists;
             }
         }
 
         private void SetupControlMap(Material material)
         {
             bool useShadeControlMap = material.GetFloat(ID.UseShadeControlMap).ToBool();
-            bool existsShadeControlMap = material.GetTexture(ID.ShadeControlMap) is not null;
+            bool shadeControlMapExists = material.GetTexture(ID.ShadeControlMap) is not null;
             bool isAtLeastOneShadeValid = _HUM_USE_FIRST_SHADE || _HUM_USE_SECOND_SHADE || _HUM_USE_RAMP_SHADE;
-            _HUM_USE_SHADE_CONTROL_MAP = useShadeControlMap && existsShadeControlMap && isAtLeastOneShadeValid;
+            _HUM_USE_SHADE_CONTROL_MAP = useShadeControlMap && shadeControlMapExists && isAtLeastOneShadeValid;
         }
 
         public void SetToMaterial(Material material)

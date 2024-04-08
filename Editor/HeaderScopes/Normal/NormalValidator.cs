@@ -17,8 +17,8 @@ namespace Hum.HumToon.Editor.HeaderScopes.Normal
 
         private static void SetKeywords(Material material)
         {
-            bool existsNormalMap = material.GetTexture(IDBumpMap) is not null;
-            CoreUtils.SetKeyword(material, ShaderKeywordStrings._NORMALMAP, existsNormalMap);
+            bool normalMapExists = material.GetTexture(IDBumpMap) is not null;
+            CoreUtils.SetKeyword(material, ShaderKeywordStrings._NORMALMAP, normalMapExists);
         }
     }
 }
