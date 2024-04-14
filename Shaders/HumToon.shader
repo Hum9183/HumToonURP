@@ -131,7 +131,7 @@ Shader "HumToon"
     {
         PackageRequirements
         {
-             "com.unity.render-pipelines.universal": "10.5.0"
+             "com.unity.render-pipelines.universal": "14.0.8"
         }
 
         // Universal Pipeline tag is required. If Universal render pipeline is not set in the graphics settings
