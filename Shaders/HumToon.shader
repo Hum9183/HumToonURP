@@ -533,6 +533,5 @@ Shader "HumToon"
     }
 
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
-//    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
-    CustomEditor "Hum.HumToon.Editor.HumToonInspector"
+    CustomEditor "Hum.HumToonCore.Editor.HumToonInspector"
 }
