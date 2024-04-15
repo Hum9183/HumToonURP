@@ -1,6 +1,9 @@
 # HumToon
 This project is under development.
 
+## Dependencies
+- https://github.com/Hum9183/HumToonCore
+
 ## Supported languages
 - English
 - Japanese (partially)
@@ -11,9 +14,7 @@ This project is under development.
 - Universal RP
 
 ## Render pipeline compatibility
-- Universal RP ✔
-- Built-in RP ✘
-- High Definition RP ✘
+- Universal RP
 
 ## Main features
 - Basic features (Transparent, etc.)
