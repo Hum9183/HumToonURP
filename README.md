@@ -1,8 +1,9 @@
 # HumToon
 This project is under development.
 
-## Dependencies
-- https://github.com/Hum9183/HumToonCore
+> [!WARNING]
+> Dependencies
+> - https://github.com/Hum9183/HumToonCore
 
 ## Supported languages
 - English
