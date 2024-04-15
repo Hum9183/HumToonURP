@@ -1,4 +1,4 @@
-Shader "HumToon"
+Shader "HumToonURP"
 {
     Properties
     {
