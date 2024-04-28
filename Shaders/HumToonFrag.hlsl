@@ -34,7 +34,6 @@ void frag(
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
     // TODO: SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
-    // TODO: CanDebugOverrideOutputColor()
     // TODO: SSAOのweight調整機能
     // TODO: normalのoverride(顔の法線を正面に向ける等)
     // TODO: 関数名にHumをつける(被り対策)
