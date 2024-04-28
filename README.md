@@ -36,4 +36,3 @@ This project is under development.
 ## Not supported
 - DOTS (ECS)
 - Deferred rendering
-- Rendering debugger
