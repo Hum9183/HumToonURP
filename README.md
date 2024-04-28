@@ -32,6 +32,7 @@ This project is under development.
 - SRP batcher
 - GI
 - Decal
+- Rendering Debugger
 
 ## Not supported
 - DOTS (ECS)
