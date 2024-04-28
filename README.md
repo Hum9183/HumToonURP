@@ -33,7 +33,7 @@ This project is under development.
 - GI
 - Decal
 - Rendering Debugger
+- DOTS (ECS)
 
 ## Not supported
-- DOTS (ECS)
 - Deferred rendering
