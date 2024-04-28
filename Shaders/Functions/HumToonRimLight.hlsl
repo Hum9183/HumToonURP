@@ -1,7 +1,7 @@
 #ifndef HUM_TOON_RIM_LIGHT_INCLUDED
 #define HUM_TOON_RIM_LIGHT_INCLUDED
 
-#include "../../ShaderLibrary/Func.hlsl"
+#include "../../ShaderLibrary/HumToonUtils.hlsl"
 
 half3 HumCalcRimLightColor(float2 uv, float3 normalWS, float3 viewDirWS, half3 mainLightColor)
 {

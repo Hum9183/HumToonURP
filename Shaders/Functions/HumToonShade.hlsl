@@ -2,7 +2,7 @@
 #define HUM_TOON_SHADE_INCLUDED
 
 #include "../HumToonPredefine.hlsl"
-#include "../../ShaderLibrary/Func.hlsl"
+#include "../../ShaderLibrary/HumToonUtils.hlsl"
 
 half HumCalcExShadeSmoothstep(half halfLambert, half shadeBorderPos, half shadeBorderBlur, half exShadeWidth)
 {

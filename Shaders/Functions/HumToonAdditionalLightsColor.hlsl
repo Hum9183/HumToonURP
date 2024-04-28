@@ -2,7 +2,7 @@
 #define HUM_TOON_ADDITIONAL_LIGHTS_COLOR_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
-#include "../../ShaderLibrary/Func.hlsl"
+#include "../../ShaderLibrary/HumToonUtils.hlsl"
 #include "HumToonShade.hlsl"
 
 half3 HumCalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)

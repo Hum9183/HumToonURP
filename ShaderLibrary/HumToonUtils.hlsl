@@ -1,5 +1,5 @@
-#ifndef FUNC_INCLUDED
-#define FUNC_INCLUDED
+#ifndef HUM_TOON_UTILS_INCLUDED
+#define HUM_TOON_UTILS_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 
