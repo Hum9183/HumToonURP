@@ -5,6 +5,11 @@
 
 #include "HumToonPredefine.hlsl"
 
+#if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+    #define _HUM_REQUIRES_BASE_MAP_COLOR_ONLY
+#endif
+
+// Features include
 #include "Functions/HumToonBase.hlsl"
 
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)

@@ -71,7 +71,7 @@ half4 CalcHumToonColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
-    #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+    #ifdef _HUM_REQUIRES_BASE_MAP_COLOR_ONLY
         , baseMapColorOnly
     #endif
     );
@@ -90,7 +90,7 @@ half4 CalcHumToonColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
     // Mix Base Color and Shade Color
     finalColor.rgb = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
-    #if NOT(defined(_HUM_USE_FIRST_SHADE_MAP)) || NOT(defined(_HUM_USE_SECOND_SHADE_MAP)) || defined(_HUM_USE_EX_FIRST_SHADE)
+    #ifdef _HUM_REQUIRES_BASE_MAP_COLOR_ONLY
         , baseMapColorOnly
     #endif
     );
