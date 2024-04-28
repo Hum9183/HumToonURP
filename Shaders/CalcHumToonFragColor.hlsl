@@ -3,8 +3,12 @@
 
 #include "HumToonFragIncludes.hlsl"
 
-half4 CalcHumToonColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
+half4 CalcHumToonFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 {
+    // ************************************ //
+    // ****** Calculate what PS needs ***** //
+    // ************************************ //
+
     // BRDF
     BRDFData brdfData;
     InitializeBRDFData(surfaceData, brdfData); // NOTE: can modify "surfaceData"...

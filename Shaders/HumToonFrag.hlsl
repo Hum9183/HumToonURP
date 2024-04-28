@@ -14,10 +14,6 @@ void frag(
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-    // ************************************ //
-    // ****** Calculate what PS needs ***** //
-    // ************************************ //
-
     // UV
     const float2 uv0 = input.uv;
 
@@ -44,7 +40,7 @@ void frag(
 #endif
 
     half4 finalColor = 0;
-    finalColor = CalcHumToonColor(uv0, inputData, surfaceData);
+    finalColor = CalcHumToonFragColor(uv0, inputData, surfaceData);
     finalColor.rgb = MixFog(finalColor.rgb, inputData.fogCoord);
     finalColor.a = OutputAlpha(finalColor.a, IsSurfaceTypeTransparent(_SurfaceType));
 
