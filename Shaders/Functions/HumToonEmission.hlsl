@@ -6,6 +6,7 @@ half3 HumCalcEmissionColor(float2 uv, half3 originalColor)
     // TODO:
     // ・Keywordの整理(URP標準のKeywordとの兼ね合い)
     // ・originalColorとemissionColorのブレンド方法
+    // ・SkyLightが入るとFactorRGBが意味をなさなくなるので解決法を考える
 
     half3 emissionColor = _EmissionColor;
 #if defined(_HUM_USE_EMISSION_MAP)
