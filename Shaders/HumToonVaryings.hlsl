@@ -30,7 +30,7 @@ struct Varyings
     half3 viewDirTS                : TEXCOORD7;
 #endif
 
-        DECLARE_LIGHTMAP_OR_SH(staticLightmapUV, vertexSH, 8);
+    DECLARE_LIGHTMAP_OR_SH(staticLightmapUV, vertexSH, 8);
 #ifdef DYNAMICLIGHTMAP_ON
     float2  dynamicLightmapUV : TEXCOORD9; // Dynamic lightmap UVs
 #endif
