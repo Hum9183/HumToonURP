@@ -133,7 +133,7 @@ half4 CalcHumToonFragColor(float2 uv0, InputData inputData, SurfaceData surfaceD
 #endif
 
 #if defined(_HUM_RECEIVE_GI)
-    finalColor.rgb += giColor * baseColor;
+    finalColor.rgb += giColor;
 #endif
 
     return finalColor;
