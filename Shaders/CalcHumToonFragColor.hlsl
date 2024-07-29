@@ -91,52 +91,66 @@ half4 CalcHumToonFragColor(float2 uv0, InputData inputData, SurfaceData surfaceD
     // ********************** //
     // ****** Composite ***** //
     // ********************** //
-    half4 finalColor = 0;
+
+    // *** Toon Color ***
+    half3 toonColor = 0;
 
 #if defined(_HUM_USE_FIRST_SHADE) || defined(_HUM_USE_SECOND_SHADE) || defined(_HUM_USE_RAMP_SHADE)
     // Mix Base Color and Shade Color
-    finalColor.rgb = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
+    toonColor = HumMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
     #ifdef _HUM_REQUIRES_BASE_MAP_COLOR_ONLY
         , baseMapColorOnly
     #endif
     );
 #else
     // Base Color
-    finalColor.rgb = baseColor;
+    toonColor = baseColor;
 #endif
 
 #if defined(_HUM_OVERRIDE_EMISSION_COLOR)
-    finalColor.rgb = HumOverrideEmissionColor(finalColor.rgb, emissionColor);
+    toonColor = HumOverrideEmissionColor(toonColor, emissionColor);
 #endif
 
     // Mix Main Light Color
-    finalColor.rgb = MixMainLightColor(finalColor.rgb, mainLightColor);
+    toonColor = MixMainLightColor(toonColor, mainLightColor);
 
 #if defined(_HUM_USE_RIM_LIGHT)
-    finalColor.rgb += rimLightColor;
-#endif
-
-#if defined(_HUM_USE_EMISSION)
-    finalColor.rgb += HumCalcEmissionColorIntensity(emissionColor);
+    toonColor += rimLightColor;
 #endif
 
 #if defined(_HUM_USE_MAT_CAP)
-    finalColor.rgb += matCapColor;
+    toonColor += matCapColor;
+#endif
+
+
+    // *** LightingData ***
+    LightingData lightingData = (LightingData)0;
+
+    lightingData.mainLightColor = toonColor;
+
+#if defined(_HUM_RECEIVE_GI)
+    lightingData.giColor += giColor;
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS)
-    finalColor.rgb += additionalLightsColor;
+    lightingData.additionalLightsColor += additionalLightsColor;
 #endif
 
 #if defined(_ADDITIONAL_LIGHTS_VERTEX)
-    finalColor.rgb += additionalLightsColorVertex;
+    lightingData.vertexLightingColor += additionalLightsColorVertex;
 #endif
 
-#if defined(_HUM_RECEIVE_GI)
-    finalColor.rgb += giColor;
+#if defined(_HUM_USE_EMISSION)
+    lightingData.emissionColor += HumCalcEmissionColorIntensity(emissionColor);
 #endif
 
-    return finalColor;
+    // *** Calculate Final Color ***
+#if REAL_IS_HALF
+    // Clamp any half.inf+ to HALF_MAX
+    return min(CalculateFinalColor(lightingData, surfaceData.alpha), HALF_MAX);
+#else
+    return CalculateFinalColor(lightingData, surfaceData.alpha);
+#endif
 }
 
 #endif
