@@ -27,4 +27,7 @@
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP_MASK
 
+// GI
+#pragma shader_feature_local_fragment _HUM_RECEIVE_GI
+
 #endif

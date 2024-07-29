@@ -48,4 +48,8 @@ half _UseMainLightLowerLimit;
 half _MainLightLowerLimit;
 half _AdditionalLightsColorWeight;
 
+// GI
+half _ReceiveGI;
+half _GIColorWeight;
+
 #endif

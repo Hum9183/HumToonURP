@@ -12,14 +12,14 @@ half3 HumGlobalIllumination(
     half3 indirectDiffuse = bakedGI;
     half3 indirectSpecular = GlossyEnvironmentReflection(reflectVector, positionWS, brdfData.perceptualRoughness, 1.0h, normalizedScreenSpaceUV);
 
-    half3 color = EnvironmentBRDF(brdfData, indirectDiffuse, indirectSpecular, fresnelTerm);
+    half3 giColor = EnvironmentBRDF(brdfData, indirectDiffuse, indirectSpecular, fresnelTerm);
 
     if (IsOnlyAOLightingFeatureEnabled())
     {
-        color = half3(1,1,1); // "Base white" for AO debug lighting mode
+        giColor = half3(1,1,1); // "Base white" for AO debug lighting mode
     }
 
-    return color * occlusion;
+    return giColor * occlusion * _GIColorWeight;
 }
 
 #endif

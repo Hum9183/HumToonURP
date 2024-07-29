@@ -31,9 +31,11 @@ half4 CalcHumToonFragColor(float2 uv0, InputData inputData, SurfaceData surfaceD
     half shadowAttenuation = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
 
     // Global illumination
+#if defined(_HUM_RECEIVE_GI)
     half3 giColor = HumGlobalIllumination(
         brdfData, inputData.bakedGI, aoFactor.indirectAmbientOcclusion, inputData.positionWS,
         inputData.normalWS, inputData.viewDirectionWS, inputData.normalizedScreenSpaceUV);
+#endif
 
     // Mesh Rendering Layers
 #if defined(_LIGHT_LAYERS)
@@ -130,7 +132,9 @@ half4 CalcHumToonFragColor(float2 uv0, InputData inputData, SurfaceData surfaceD
     finalColor.rgb += additionalLightsColorVertex;
 #endif
 
-    finalColor.rgb += giColor;
+#if defined(_HUM_RECEIVE_GI)
+    finalColor.rgb += giColor * baseColor;
+#endif
 
     return finalColor;
 }

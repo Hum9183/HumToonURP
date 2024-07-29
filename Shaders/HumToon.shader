@@ -60,7 +60,6 @@ Shader "HumToonURP"
         _MatCapMaskIntensity("Mat Cap Mask Intensity", Range(0.0, 1.0)) = 1.0
         _MatCapMainLightEffectiveness("Mat Cap Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
-
         // light
         _MainLightColorWeight("Main Light Color Weight", Range(0.0, 1.0)) = 1.0
 
@@ -70,6 +69,10 @@ Shader "HumToonURP"
         _MainLightLowerLimit("Main Light Lower Limit", Range(0.0, 1.0)) = 0.05
 
         _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 1.0)) = 1.0
+
+        // GI
+        _ReceiveGI("Receive GI", Float) = 0.0 // Only for keyword
+        _GIColorWeight("GI Color Weight", Range(0.0, 1.0)) = 1.0
 
         // Specular vs Metallic workflow
         _WorkflowMode("WorkflowMode", Float) = 1.0
