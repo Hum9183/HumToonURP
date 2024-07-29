@@ -30,10 +30,13 @@ void frag(
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
     SETUP_DEBUG_TEXTURE_DATA(inputData, uv0, _BaseMap);
-    // TODO: SSAOのweight調整機能
-    // TODO: normalのoverride(顔の法線を正面に向ける等)
-    // TODO: 関数名にHumをつける(被り対策)
-    // TODO: Varyings SurfaceData InputData BRDFDataの整理
+
+    // TODO:
+    // - SSAOのweight調整機能
+    // - normalのoverride(顔の法線を正面に向ける等)
+    // - 関数名にHumをつける(被り対策)
+    // - Varyings SurfaceData InputData BRDFDataの整理
+    // - Specularをどうするか考える
 
 #ifdef _DBUFFER
     ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
