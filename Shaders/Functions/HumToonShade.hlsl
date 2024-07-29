@@ -127,6 +127,8 @@ half CalcShadeHalfLambert(float2 uv, float3 normalWS, float3 mainLightDirWS)
     return halfLambert;
 }
 
+// TODO:
+// - shadowAttenuationをexShadeに対応させる(根本的な構造を見直す必要がありそうな気配...)
 half3 HumMixShadeColor(float2 uv, half3 baseColor, float3 normalWS, float3 mainLightDirWS, half shadowAttenuation
 #ifdef _HUM_REQUIRES_BASE_MAP_COLOR_ONLY
     , half3 baseMapColorOnly
