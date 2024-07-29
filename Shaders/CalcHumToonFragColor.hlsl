@@ -24,11 +24,23 @@ half4 CalcHumToonFragColor(float2 uv0, InputData inputData, SurfaceData surfaceD
 
     // Shadow
     half4 shadowMask = CalculateShadowMask(inputData);
+
     // AO
     AmbientOcclusionFactor aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
+
     // Main light
+#if defined(_LIGHT_COOKIES) && defined(_HUM_USE_MAIN_LIGHT_COOKIE_AS_SHADE)
+    Light mainLight = HumGetMainLight(inputData, shadowMask, aoFactor);
+#else
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
+#endif
+
+    // Shadow attenuation
     half shadowAttenuation = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
+#if defined(_LIGHT_COOKIES) && defined(_HUM_USE_MAIN_LIGHT_COOKIE_AS_SHADE)
+    real3 cookieColor = SampleMainLightCookie(inputData.positionWS);
+    shadowAttenuation *= cookieColor.r; // NOTE: RGB Format is not supported.
+#endif
 
     // Global illumination
 #if defined(_HUM_RECEIVE_GI)

@@ -16,6 +16,10 @@
     #include "Functions/HumToonShade.hlsl"
 #endif
 
+#if defined(_LIGHT_COOKIES) && defined(_HUM_USE_MAIN_LIGHT_COOKIE_AS_SHADE)
+    #include "../ShaderLibrary/HumRealtimeLights.hlsl"
+#endif
+
 #if defined(_HUM_USE_RIM_LIGHT)
     #include "Functions/HumToonRimLight.hlsl"
 #endif

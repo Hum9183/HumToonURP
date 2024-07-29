@@ -46,6 +46,7 @@ half _UseMainLightUpperLimit;
 half _MainLightUpperLimit;
 half _UseMainLightLowerLimit;
 half _MainLightLowerLimit;
+half _UseMainLightCookieAsShade;
 half _AdditionalLightsColorWeight;
 
 // GI

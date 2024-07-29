@@ -27,6 +27,9 @@
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP
 #pragma shader_feature_local_fragment _HUM_USE_MAT_CAP_MASK
 
+// Light
+#pragma shader_feature_local_fragment _HUM_USE_MAIN_LIGHT_COOKIE_AS_SHADE
+
 // GI
 #pragma shader_feature_local_fragment _HUM_RECEIVE_GI
 
