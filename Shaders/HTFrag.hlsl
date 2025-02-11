@@ -34,7 +34,6 @@ void frag(
     // TODO:
     // - SSAOのweight調整機能
     // - normalのoverride(顔の法線を正面に向ける等)
-    // - 関数名にHTをつける(被り対策)
     // - Varyings SurfaceData InputData BRDFDataの整理
     // - Specularをどうするか考える
 

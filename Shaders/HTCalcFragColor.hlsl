@@ -75,15 +75,17 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     #endif
     );
 
-    // Get others
+    // Rim Light
 #if defined(_HT_USE_RIM_LIGHT)
     half3 rimLightColor = HTCalcRimLightColor(uv0, inputData.normalWS, inputData.viewDirectionWS, mainLightDiffuse);
 #endif
 
+    // Emission
 #if defined(_HT_USE_EMISSION)
     half3 emissionColor = HTCalcEmissionColor(uv0, baseColor.rgb);
 #endif
 
+    // Mat Cap
 #if defined(_HT_USE_MAT_CAP)
     half3 matCapColor = HTCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightDiffuse
     #if defined(_HT_USE_MAT_CAP_MASK)
@@ -92,6 +94,7 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     );
 #endif
 
+    // Additional Lights Diffuse
 #if defined(_ADDITIONAL_LIGHTS)
     half3 additionalLightsColor = HTCalcAdditionalLightColor(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
     #if defined(_LIGHT_LAYERS)
@@ -103,6 +106,7 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     );
 #endif
 
+    // Additional Lights Vertex
 #if defined(_ADDITIONAL_LIGHTS_VERTEX)
     half3 additionalLightsColorVertex = HTCalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
 #endif
