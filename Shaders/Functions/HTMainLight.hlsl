@@ -1,5 +1,5 @@
-#ifndef HT_MAIN_LIGHT_COLOR_INCLUDED
-#define HT_MAIN_LIGHT_COLOR_INCLUDED
+#ifndef HT_MAIN_LIGHT_INCLUDED
+#define HT_MAIN_LIGHT_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
 
