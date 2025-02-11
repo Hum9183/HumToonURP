@@ -50,6 +50,8 @@ half _UseMainLightCookieAsShade;
 half _UseMainLightSpecular;
 half _MainLightSpecularIntensity;
 half _AdditionalLightsColorWeight;
+half _UseAdditionalLightsSpecular;
+half _AdditionalLightsSpecularIntensity;
 half _ReceiveGI;
 half _GIColorWeight;
 

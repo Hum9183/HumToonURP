@@ -37,7 +37,7 @@
 #include "Functions\HTGI.hlsl"
 
 #if defined(_ADDITIONAL_LIGHTS) || defined(_ADDITIONAL_LIGHTS_VERTEX)
-    #include "Functions/HTAdditionalLightsColor.hlsl"
+    #include "Functions/HTAdditionalLights.hlsl"
 #endif
 
 #if defined(_WRITE_RENDERING_LAYERS)

@@ -71,6 +71,8 @@ Shader "HumToonURP"
         _MainLightSpecularIntensity("Main Light Specular Intensity", Range(0.0, 4.0)) = 1.0
 
         _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 4.0)) = 1.0
+        _UseAdditionalLightsSpecular("Use Additional Lights Specular", Float) = 0.0 // Only for keyword
+        _AdditionalLightsSpecularIntensity("Additional Lights Specular Intensity", Range(0.0, 4.0)) = 1.0
 
         _ReceiveGI("Receive GI", Float) = 0.0 // Only for keyword
         _GIColorWeight("GI Color Weight", Range(0.0, 1.0)) = 1.0

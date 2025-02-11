@@ -35,7 +35,6 @@ void frag(
     // - SSAOのweight調整機能
     // - normalのoverride(顔の法線を正面に向ける等)
     // - Varyings SurfaceData InputData BRDFDataの整理
-    // - Specularをどうするか考える
 
 #ifdef _DBUFFER
     ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);

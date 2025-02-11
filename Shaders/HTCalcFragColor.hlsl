@@ -94,14 +94,18 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     );
 #endif
 
-    // Additional Lights Diffuse
+    // Additional Lights
 #if defined(_ADDITIONAL_LIGHTS)
-    half3 additionalLightsColor = HTCalcAdditionalLightColor(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
+    half3 additionalLightsColor = HTCalcAdditionalLights(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
     #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
         , baseMapColorOnly
+    #endif
+    #if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+        , brdfData
+        , inputData.viewDirectionWS
     #endif
     );
 #endif

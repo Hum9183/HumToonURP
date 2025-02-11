@@ -1,19 +1,33 @@
-#ifndef HT_ADDITIONAL_LIGHTS_COLOR_INCLUDED
-#define HT_ADDITIONAL_LIGHTS_COLOR_INCLUDED
+#ifndef HT_ADDITIONAL_LIGHTS_INCLUDED
+#define HT_ADDITIONAL_LIGHTS_INCLUDED
 
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
 #include "..\..\ShaderLibrary\HTUtils.hlsl"
 #include "HTShade.hlsl"
 
-half3 HTCalcAdditionalLightColorInternal(half3 originalColor, float3 normalWS, Light light)
+half3 HTCalcAdditionalLightInternal(
+    Light light, half3 baseColor, float3 normalWS
+#if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+    , BRDFData brdfData
+    , half3 viewDirectionWS
+#endif
+)
 {
-    // TODO: Specular
+    half3 additionalLightColor = baseColor;
     half NdotL = saturate(dot(normalWS, light.direction));
-    half3 lightColor = light.color * light.distanceAttenuation * light.shadowAttenuation * NdotL;
-    return originalColor * lightColor;
+    half3 radiance = light.color * light.distanceAttenuation * NdotL;
+
+#if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+    half3 addtionalLightSpecular = DirectBRDFSpecular(brdfData, normalWS, light.direction, viewDirectionWS);
+    additionalLightColor += addtionalLightSpecular * brdfData.specular * _AdditionalLightsSpecularIntensity;
+#endif
+
+    return additionalLightColor * radiance;
 }
 
 // EXPERIMENTAL: AdditionalLightのDirectionalLightはShadeと同じ計算法を使用する
+// TODO: Specular
 half3 HTCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 normalWS, Light additionalDirectionalLight
 #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
     , half3 baseMapColorOnly
@@ -43,13 +57,17 @@ bool HTIsDirectionalLight(uint lightIndex)
     return lightPositionWS.w == 0.0 ? true : false;
 }
 
-half3 HTCalcAdditionalLightColor(
+half3 HTCalcAdditionalLights(
     float2 uv, half3 baseColor, InputData inputData, half4 shadowMask, AmbientOcclusionFactor aoFactor
 #if defined(_LIGHT_LAYERS)
     , uint meshRenderingLayers
 #endif
 #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
     , half3 baseMapColorOnly
+#endif
+#if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+    , BRDFData brdfData
+    , half3 viewDirectionWS
 #endif
 )
 {
@@ -76,6 +94,7 @@ half3 HTCalcAdditionalLightColor(
             #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
                 , baseMapColorOnly
             #endif
+            // TODO: Specular
             );
         }
     }
@@ -98,7 +117,13 @@ half3 HTCalcAdditionalLightColor(
             }
             else
             {
-                additionalLightsColor += HTCalcAdditionalLightColorInternal(baseColor, normalWS, light);
+                additionalLightsColor += HTCalcAdditionalLightInternal(
+                    light, baseColor, normalWS
+                    #if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+                        , brdfData
+                        , viewDirectionWS
+                    #endif
+                );
             }
         }
     LIGHT_LOOP_END
