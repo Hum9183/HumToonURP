@@ -42,9 +42,9 @@ half3 HTMainLightSpecular(
         if (IsMatchingLightLayer(mainLight.layerMask, meshRenderingLayers))
     #endif
         {
-            // NOTE: NdotLを乗算してないからちょっとおかしいかも
+            half NdotL = saturate(dot(normalWS, mainLight.direction));
             mainLightSpecular = DirectBRDFSpecular(brdfData, normalWS, mainLight.direction, viewDirectionWS);
-            mainLightSpecular *= brdfData.specular * mainLight.color * _MainLightSpecularIntensity;
+            mainLightSpecular *= NdotL * brdfData.specular * mainLight.color * _MainLightSpecularIntensity;
         }
 #endif
 
