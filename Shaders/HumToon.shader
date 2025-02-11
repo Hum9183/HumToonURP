@@ -71,7 +71,6 @@ Shader "HumToonURP"
 
         _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 1.0)) = 1.0
 
-        // GI
         _ReceiveGI("Receive GI", Float) = 0.0 // Only for keyword
         _GIColorWeight("GI Color Weight", Range(0.0, 1.0)) = 1.0
 

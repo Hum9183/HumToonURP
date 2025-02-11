@@ -29,8 +29,6 @@
 
 // Light
 #pragma shader_feature_local_fragment _HT_USE_MAIN_LIGHT_COOKIE_AS_SHADE
-
-// GI
 #pragma shader_feature_local_fragment _HT_RECEIVE_GI
 
 #endif
