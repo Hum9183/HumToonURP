@@ -16,7 +16,7 @@ half3 HTCalcAdditionalLightInternal(
 {
     half3 additionalLightColor = baseColor;
     half NdotL = saturate(dot(normalWS, light.direction));
-    half3 radiance = light.color * light.distanceAttenuation * NdotL;
+    half3 radiance = light.color * light.distanceAttenuation * light.shadowAttenuation * NdotL;
 
 #if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
     half3 addtionalLightSpecular = DirectBRDFSpecular(brdfData, normalWS, light.direction, viewDirectionWS);

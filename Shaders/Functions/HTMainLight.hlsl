@@ -44,7 +44,7 @@ half3 HTMainLightSpecular(
         {
             half NdotL = saturate(dot(normalWS, mainLight.direction));
             mainLightSpecular = DirectBRDFSpecular(brdfData, normalWS, mainLight.direction, viewDirectionWS);
-            mainLightSpecular *= NdotL * brdfData.specular * mainLight.color * _MainLightSpecularIntensity;
+            mainLightSpecular *= NdotL * brdfData.specular * mainLight.color * mainLight.shadowAttenuation * _MainLightSpecularIntensity;
         }
 #endif
 
