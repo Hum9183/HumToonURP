@@ -3,7 +3,7 @@
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
 
-half3 HTCalcMainLightDiffuse(
+half3 HTCalcMainLightColor(
     Light mainLight
 #if defined(_LIGHT_LAYERS)
     , uint meshRenderingLayers
