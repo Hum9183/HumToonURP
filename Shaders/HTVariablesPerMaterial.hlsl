@@ -47,6 +47,8 @@ half _MainLightUpperLimit;
 half _UseMainLightLowerLimit;
 half _MainLightLowerLimit;
 half _UseMainLightCookieAsShade;
+half _UseMainLightSpecular;
+half _MainLightSpecularIntensity;
 half _AdditionalLightsColorWeight;
 half _ReceiveGI;
 half _GIColorWeight;

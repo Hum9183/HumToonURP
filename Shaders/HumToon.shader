@@ -62,12 +62,13 @@ Shader "HumToonURP"
 
         // light
         _MainLightColorWeight("Main Light Color Weight", Range(0.0, 1.0)) = 1.0
-
         _UseMainLightUpperLimit("Use Main Light Upper Limit", Float) = 0.0
         _MainLightUpperLimit("Main Light Upper Limit", Range(0.0, 10.0)) = 1.0
         _UseMainLightLowerLimit("Use Main Light Lower Limit", Float) = 0.0
         _MainLightLowerLimit("Main Light Lower Limit", Range(0.0, 1.0)) = 0.05
         _UseMainLightCookieAsShade("Use Main Light Cookie As Shade", Float) = 0.0 // Only for keyword
+        _UseMainLightSpecular("Use Main Light Specular", Float) = 0.0 // Only for keyword
+        _MainLightSpecularIntensity("Main Light Specular Intensity", Range(0.0, 4.0)) = 1.0
 
         _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 4.0)) = 1.0
 

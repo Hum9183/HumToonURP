@@ -59,9 +59,17 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     half3 baseMapColorOnly;
     HTCalcBaseColor(uv0, surfaceData, baseColor, baseMapColorOnly);
 
-    // Main Light Color
-    half3 mainLightColor = HTCalcMainLightColor(
+    // Main Light Diffuse
+    half3 mainLightDiffuse = HTCalcMainLightDiffuse(
         mainLight
+    #if defined(_LIGHT_LAYERS)
+        , meshRenderingLayers
+    #endif
+    );
+
+    // Main Light Specular
+    half3 mainLightSpecular = HTMainLightSpecular(
+        brdfData, mainLight, inputData.normalWS, inputData.viewDirectionWS
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
@@ -69,7 +77,7 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 
     // Get others
 #if defined(_HT_USE_RIM_LIGHT)
-    half3 rimLightColor = HTCalcRimLightColor(uv0, inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
+    half3 rimLightColor = HTCalcRimLightColor(uv0, inputData.normalWS, inputData.viewDirectionWS, mainLightDiffuse);
 #endif
 
 #if defined(_HT_USE_EMISSION)
@@ -77,7 +85,7 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 #endif
 
 #if defined(_HT_USE_MAT_CAP)
-    half3 matCapColor = HTCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor
+    half3 matCapColor = HTCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightDiffuse
     #if defined(_HT_USE_MAT_CAP_MASK)
         , uv0
     #endif
@@ -123,8 +131,8 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     toonColor = HTOverrideEmissionColor(toonColor, emissionColor);
 #endif
 
-    // Mix Main Light Color
-    toonColor = HTMixMainLightColor(toonColor, mainLightColor);
+    // Mix Main Light
+    toonColor = HTMixMainLight(toonColor, mainLightDiffuse, mainLightSpecular);
 
 #if defined(_HT_USE_RIM_LIGHT)
     toonColor += rimLightColor;

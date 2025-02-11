@@ -32,7 +32,7 @@
     #include "Functions/HTMatCap.hlsl"
 #endif
 
-#include "Functions\HTMainLightColor.hlsl"
+#include "Functions\HTMainLight.hlsl"
 
 #include "Functions\HTGI.hlsl"
 
