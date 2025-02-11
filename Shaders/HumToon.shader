@@ -69,7 +69,7 @@ Shader "HumToonURP"
         _MainLightLowerLimit("Main Light Lower Limit", Range(0.0, 1.0)) = 0.05
         _UseMainLightCookieAsShade("Use Main Light Cookie As Shade", Float) = 0.0 // Only for keyword
 
-        _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 1.0)) = 1.0
+        _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 4.0)) = 1.0
 
         _ReceiveGI("Receive GI", Float) = 0.0 // Only for keyword
         _GIColorWeight("GI Color Weight", Range(0.0, 1.0)) = 1.0
