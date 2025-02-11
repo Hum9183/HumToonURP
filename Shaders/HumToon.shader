@@ -228,11 +228,11 @@ Shader "HumToonURP"
             #pragma instancing_options renderinglayer
             #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 
-            // HumToon
-            #include "HumToonKeywords.hlsl"
+            // HTToon
+            #include "HTKeywords.hlsl"
 
-            #include "HumToonInput.hlsl"
-            #include "HumToonForwardPass.hlsl"
+            #include "HTInput.hlsl"
+            #include "HTForwardPass.hlsl"
             ENDHLSL
         }
 
@@ -281,7 +281,7 @@ Shader "HumToonURP"
 
             // -------------------------------------
             // Includes
-            #include "HumToonInput.hlsl"
+            #include "HTInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
             ENDHLSL
         }
@@ -361,8 +361,8 @@ Shader "HumToonURP"
 
             // -------------------------------------
             // Includes
-            #include "HumToonInput.hlsl"
-            #include "LitGBufferPass.hlsl"
+            #include "HTInput.hlsl"
+            #include "HTLitGBufferPass.hlsl"
             ENDHLSL
         }
 
@@ -404,7 +404,7 @@ Shader "HumToonURP"
 
             // -------------------------------------
             // Includes
-            #include "HumToonInput.hlsl"
+            #include "HTInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
             ENDHLSL
         }
@@ -454,8 +454,8 @@ Shader "HumToonURP"
 
             // -------------------------------------
             // Includes
-            #include "HumToonInput.hlsl"
-            #include "LitDepthNormalsPass.hlsl"
+            #include "HTInput.hlsl"
+            #include "HTLitDepthNormalsPass.hlsl"
             ENDHLSL
         }
 
@@ -493,8 +493,8 @@ Shader "HumToonURP"
 
             // -------------------------------------
             // Includes
-            #include "HumToonInput.hlsl"
-            #include "LitMetaPass.hlsl"
+            #include "HTInput.hlsl"
+            #include "HTLitMetaPass.hlsl"
 
             ENDHLSL
         }
@@ -530,7 +530,7 @@ Shader "HumToonURP"
 
             // -------------------------------------
             // Includes
-            #include "HumToonInput.hlsl"
+            #include "HTInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/Utils/Universal2D.hlsl"
             ENDHLSL
         }
