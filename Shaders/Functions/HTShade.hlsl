@@ -43,6 +43,7 @@ half3 HTMixFirstShade(float2 uv, half3 baseColor, half halfLambert, half shadowA
     // Composite
     half3 finalFirstShadedColor = lerp(firstShadeColor, baseColor, firstShade);
 
+    // 影の中に入ったときにおかしくなるため一旦塞ぐ。　TODO: FakeSSSとして改めて実装し直す
 #if defined(_HT_USE_EX_FIRST_SHADE)
     // Ex
     half exFirstShade = HTCalcExShadeSmoothstep(halfLambert, _FirstShadeBorderPos, _FirstShadeBorderBlur, _ExFirstShadeWidth);
