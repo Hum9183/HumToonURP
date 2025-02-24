@@ -9,8 +9,6 @@
 // NOTE: テクスチャからAOを乗算できる機能を提供しても良いかもしれない
 AmbientOcclusionFactor HTGetSsao(InputData inputData, SurfaceData surfaceData)
 {
-
-
     AmbientOcclusionFactor aoFactor = (AmbientOcclusionFactor)DEFAULT_SSAO;
 #if defined(_HT_USE_SSAO)
     aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
