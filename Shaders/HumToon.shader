@@ -77,6 +77,9 @@ Shader "HumToonURP"
         _ReceiveGI("Receive GI", Float) = 0.0 // Only for keyword
         _GIColorWeight("GI Color Weight", Range(0.0, 1.0)) = 1.0
 
+        _UseSsao("Use SSAO", Float) = 0.0 // Only for keyword
+        _SsaoWeight("SSAO Weight", Range(0.0, 1.0)) = 1.0
+
         // Specular vs Metallic workflow
         _WorkflowMode("WorkflowMode", Float) = 1.0
 

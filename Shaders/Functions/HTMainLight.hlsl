@@ -53,6 +53,7 @@ half3 HTMainLightSpecular(
 
 half3 HTMixMainLight(half3 originalColor, half3 mainLightColor, half3 mainLightSpecular)
 {
+    // TODO: _MainLightColorWeightが0でも影が残っているのはおかしいと思う
     return lerp(
         originalColor,
         originalColor * mainLightColor + mainLightSpecular,

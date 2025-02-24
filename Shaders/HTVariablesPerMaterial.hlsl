@@ -54,5 +54,7 @@ half _UseAdditionalLightsSpecular;
 half _AdditionalLightsSpecularIntensity;
 half _ReceiveGI;
 half _GIColorWeight;
+half _UseSsao; // TODO: こういうKeywordのオンオフ用のParameterはなくても大丈夫か検証してみる
+half _SsaoWeight;
 
 #endif

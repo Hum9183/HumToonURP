@@ -10,7 +10,8 @@
 #endif
 
 // Features include
-#include "Functions\HTBase.hlsl"
+#include "Functions/HTBase.hlsl"
+#include "Functions/HTSsao.hlsl"
 
 #if defined(_HT_USE_FIRST_SHADE) || defined(_HT_USE_SECOND_SHADE) || defined(_HT_USE_RAMP_SHADE)
     #include "Functions/HTShade.hlsl"

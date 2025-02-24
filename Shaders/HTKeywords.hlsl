@@ -32,5 +32,6 @@
 #pragma shader_feature_local_fragment _HT_USE_MAIN_LIGHT_SPECULAR
 #pragma shader_feature_local_fragment _HT_USE_ADDITIONAL_LIGHTS_SPECULAR
 #pragma shader_feature_local_fragment _HT_RECEIVE_GI
+#pragma shader_feature_local_fragment _HT_USE_SSAO
 
 #endif
