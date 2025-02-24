@@ -40,21 +40,30 @@ half _MatCapStabilizeCameraZRotation;
 half _MatCapMaskIntensity;
 half _MatCapMainLightEffectiveness;
 
-// Light
-half _MainLightColorWeight;
-half _UseMainLightUpperLimit;
-half _MainLightUpperLimit;
-half _UseMainLightLowerLimit;
-half _MainLightLowerLimit;
-half _UseMainLightCookieAsShade;
-half _UseMainLightSpecular;
+// Direct Lighting
+half _DirectLightIntensity;
+
+half _MainLightIntensity;
+half _ReceiveMainLightDiffuse;
+half _MainLightDiffuseIntensity;
+half _ReceiveMainLightSpecular;
 half _MainLightSpecularIntensity;
-half _AdditionalLightsColorWeight;
-half _UseAdditionalLightsSpecular;
+
+half _AdditionalLightsIntensity;
+half _ReceiveAdditionalLightsDiffuse;
+half _AdditionalLightsDiffuseIntensity;
+half _ReceiveAdditionalLightsSpecular;
 half _AdditionalLightsSpecularIntensity;
-half _ReceiveGI;
-half _GIColorWeight;
-half _UseSsao; // TODO: こういうKeywordのオンオフ用のParameterはなくても大丈夫か検証してみる
-half _SsaoWeight;
+
+// Indirect Lighting(GI)
+half _IndirectLightIntensity;
+
+half _ReceiveIndirectDiffuse;
+half _IndirectDiffuseIntensity;
+half _ReceiveIndirectSpecular;
+half _IndirectSpecularIntensity;
+
+half _ReceiveSsao; // TODO: こういうKeywordのオンオフ用のParameterはなくても大丈夫か検証してみる
+half _SsaoIntensity;
 
 #endif

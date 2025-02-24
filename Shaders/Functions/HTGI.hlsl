@@ -1,7 +1,7 @@
 #ifndef HT_GI_INCLUDED
 #define HT_GI_INCLUDED
 
-half3 HTGlobalIllumination(
+half3 HTCalcIndirect(
     BRDFData brdfData, half3 bakedGI, half occlusion, float3 positionWS,
     half3 normalWS, half3 viewDirectionWS, float2 normalizedScreenSpaceUV)
 {
@@ -9,17 +9,26 @@ half3 HTGlobalIllumination(
     half NoV = saturate(dot(normalWS, viewDirectionWS));
     half fresnelTerm = Pow4(1.0 - NoV);
 
-    half3 indirectDiffuse = bakedGI;
-    half3 indirectSpecular = GlossyEnvironmentReflection(reflectionVector, positionWS, brdfData.perceptualRoughness, 1.0h, normalizedScreenSpaceUV);
+    half3 indirectDiffuse = 0;
+#if defined(_HT_RECEIVE_INDIRECT_DIFFUSE)
+    indirectDiffuse = bakedGI;
+    indirectDiffuse *= _IndirectDiffuseIntensity;
+#endif
 
-    half3 giColor = EnvironmentBRDF(brdfData, indirectDiffuse, indirectSpecular, fresnelTerm);
+    half3 indirectSpecular = 0;
+#if defined(_HT_RECEIVE_INDIRECT_SPECULAR)
+    indirectSpecular = GlossyEnvironmentReflection(reflectionVector, positionWS, brdfData.perceptualRoughness, 1.0h, normalizedScreenSpaceUV);
+    indirectSpecular *= _IndirectSpecularIntensity;
+#endif
+
+    half3 indirect = EnvironmentBRDF(brdfData, indirectDiffuse, indirectSpecular, fresnelTerm);
 
     if (IsOnlyAOLightingFeatureEnabled())
     {
-        giColor = half3(1,1,1); // "Base white" for AO debug lighting mode
+        indirect = half3(1,1,1); // "Base white" for AO debug lighting mode
     }
 
-    return giColor * occlusion * _GIColorWeight;
+    return indirect * occlusion * _IndirectLightIntensity;
 }
 
 #endif

@@ -138,7 +138,7 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
     outSurfaceData.specular = half3(0.0, 0.0, 0.0);
 #endif
 
-    outSurfaceData.smoothness = specGloss.a;
+    outSurfaceData.smoothness = 0.5; // original: specGloss.a
     outSurfaceData.normalTS = SampleNormal(uv, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap), _BumpScale);
     outSurfaceData.occlusion = HTSampleOcclusion(uv);
 #if defined(_HT_USE_EMISSION)

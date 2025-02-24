@@ -29,22 +29,18 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     AmbientOcclusionFactor aoFactor = HTGetSsao(inputData, surfaceData);
 
     // Main light
-#if defined(_LIGHT_COOKIES) && defined(_HT_USE_MAIN_LIGHT_COOKIE_AS_SHADE)
-    Light mainLight = HTGetMainLight(inputData, shadowMask, aoFactor);
-#else
+#if defined(_HT_RECEIVE_MAIN_LIGHT)
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
 #endif
 
     // Shadow attenuation
+#if defined(_HT_RECEIVE_MAIN_LIGHT)
     half shadowAttenuation = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
-#if defined(_LIGHT_COOKIES) && defined(_HT_USE_MAIN_LIGHT_COOKIE_AS_SHADE)
-    real3 cookieColor = SampleMainLightCookie(inputData.positionWS);
-    shadowAttenuation *= cookieColor.r; // NOTE: RGB Format is not supported.
 #endif
 
-    // Global illumination
-#if defined(_HT_RECEIVE_GI)
-    half3 giColor = HTGlobalIllumination(
+    // Indirect Lighting(GI)
+#if defined(_HT_RECEIVE_INDIRECT)
+    half3 indirect = HTCalcIndirect(
         brdfData, inputData.bakedGI, aoFactor.indirectAmbientOcclusion, inputData.positionWS,
         inputData.normalWS, inputData.viewDirectionWS, inputData.normalizedScreenSpaceUV);
 #endif
@@ -59,25 +55,31 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     half3 baseMapColorOnly;
     HTCalcBaseColor(uv0, surfaceData, baseColor, baseMapColorOnly);
 
-    // Main Light Color
-    half3 mainLightColor = HTCalcMainLightColor(
+    // Main Light Diffuse
+    half3 mainLightDiffuse = 0;
+#if defined(_HT_RECEIVE_MAIN_LIGHT_DIFFUSE)
+    mainLightDiffuse = HTCalcMainLightDiffuse(
         mainLight
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
     );
+#endif
 
     // Main Light Specular
-    half3 mainLightSpecular = HTMainLightSpecular(
+    half3 mainLightSpecular = 0;
+#if defined(_HT_RECEIVE_MAIN_LIGHT_SPECULAR)
+    mainLightSpecular = HTCalcMainLightSpecular(
         brdfData, mainLight, inputData.normalWS, inputData.viewDirectionWS
     #if defined(_LIGHT_LAYERS)
         , meshRenderingLayers
     #endif
     );
+#endif
 
     // Rim Light
 #if defined(_HT_USE_RIM_LIGHT)
-    half3 rimLightColor = HTCalcRimLightColor(uv0, inputData.normalWS, inputData.viewDirectionWS, mainLightColor);
+    half3 rimLightColor = HTCalcRimLightColor(uv0, inputData.normalWS, inputData.viewDirectionWS, mainLightDiffuse);
 #endif
 
     // Emission
@@ -87,7 +89,7 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 
     // Mat Cap
 #if defined(_HT_USE_MAT_CAP)
-    half3 matCapColor = HTCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightColor
+    half3 matCapColor = HTCalcMatCapColor(inputData.normalWS, inputData.viewDirectionWS, mainLightDiffuse
     #if defined(_HT_USE_MAT_CAP_MASK)
         , uv0
     #endif
@@ -95,26 +97,28 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 #endif
 
     // Additional Lights
-#if defined(_ADDITIONAL_LIGHTS)
-    half3 additionalLightsColor = HTCalcAdditionalLights(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
-    #if defined(_LIGHT_LAYERS)
-        , meshRenderingLayers
+#if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS)
+        // Additional Lights(Per Pixel)
+    #if defined(_ADDITIONAL_LIGHTS)
+        half3 additionalLightsColor = HTCalcAdditionalLights(uv0, baseColor.rgb, inputData, shadowMask, aoFactor
+        #if defined(_LIGHT_LAYERS)
+            , meshRenderingLayers
+        #endif
+        #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
+            , baseMapColorOnly
+        #endif
+        #if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
+            , brdfData
+            , inputData.viewDirectionWS
+        #endif
+        );
     #endif
-    #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-        , baseMapColorOnly
-    #endif
-    #if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
-        , brdfData
-        , inputData.viewDirectionWS
-    #endif
-    );
-#endif
 
-    // Additional Lights Vertex
-#if defined(_ADDITIONAL_LIGHTS_VERTEX)
-    half3 additionalLightsColorVertex = HTCalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
+        // Additional Lights Vertex
+    #if defined(_ADDITIONAL_LIGHTS_VERTEX)
+        half3 additionalLightsColorVertex = HTCalcAdditionalLightColorVertex(baseColor.rgb, inputData.vertexLighting);
+    #endif
 #endif
-
 
     // ********************** //
     // ****** Composite ***** //
@@ -123,16 +127,18 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     // *** Toon Color ***
     half3 toonColor = 0;
 
-#if defined(_HT_USE_FIRST_SHADE) || defined(_HT_USE_SECOND_SHADE) || defined(_HT_USE_RAMP_SHADE)
-    // Mix Base Color and Shade Color
-    toonColor = HTMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
-    #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-        , baseMapColorOnly
+#if defined(_HT_RECEIVE_MAIN_LIGHT)
+    #if defined(_HT_USE_FIRST_SHADE) || defined(_HT_USE_SECOND_SHADE) || defined(_HT_USE_RAMP_SHADE)
+        // Mix Base Color and Shade Color
+        toonColor = HTMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
+        #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
+            , baseMapColorOnly
+        #endif
+        );
+    #else
+        // Base Color
+        toonColor = baseColor;
     #endif
-    );
-#else
-    // Base Color
-    toonColor = baseColor;
 #endif
 
 #if defined(_HT_OVERRIDE_EMISSION_COLOR)
@@ -140,7 +146,9 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 #endif
 
     // Mix Main Light
-    toonColor = HTMixMainLight(toonColor, mainLightColor, mainLightSpecular);
+#if defined(_HT_RECEIVE_MAIN_LIGHT)
+    toonColor = HTMixMainLight(toonColor, mainLightDiffuse, mainLightSpecular);
+#endif
 
 #if defined(_HT_USE_RIM_LIGHT)
     toonColor += rimLightColor;
@@ -156,16 +164,18 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 
     lightingData.mainLightColor = toonColor;
 
-#if defined(_HT_RECEIVE_GI)
-    lightingData.giColor += giColor;
+#if defined(_HT_RECEIVE_INDIRECT)
+    lightingData.giColor += indirect;
 #endif
 
-#if defined(_ADDITIONAL_LIGHTS)
-    lightingData.additionalLightsColor += additionalLightsColor;
-#endif
+#if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS)
+    #if defined(_ADDITIONAL_LIGHTS)
+        lightingData.additionalLightsColor += additionalLightsColor;
+    #endif
 
-#if defined(_ADDITIONAL_LIGHTS_VERTEX)
-    lightingData.vertexLightingColor += additionalLightsColorVertex;
+    #if defined(_ADDITIONAL_LIGHTS_VERTEX)
+        lightingData.vertexLightingColor += additionalLightsColorVertex;
+    #endif
 #endif
 
 #if defined(_HT_USE_EMISSION)

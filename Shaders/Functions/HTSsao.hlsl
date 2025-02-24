@@ -10,10 +10,10 @@
 AmbientOcclusionFactor HTGetSsao(InputData inputData, SurfaceData surfaceData)
 {
     AmbientOcclusionFactor aoFactor = (AmbientOcclusionFactor)DEFAULT_SSAO;
-#if defined(_HT_USE_SSAO)
+#if defined(_HT_RECEIVE_SSAO)
     aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
-    aoFactor.indirectAmbientOcclusion = lerp(DEFAULT_SSAO, aoFactor.indirectAmbientOcclusion, _SsaoWeight);
-    aoFactor.directAmbientOcclusion = lerp(DEFAULT_SSAO, aoFactor.directAmbientOcclusion, _SsaoWeight);
+    aoFactor.indirectAmbientOcclusion = lerp(DEFAULT_SSAO, aoFactor.indirectAmbientOcclusion, _SsaoIntensity);
+    aoFactor.directAmbientOcclusion = lerp(DEFAULT_SSAO, aoFactor.directAmbientOcclusion, _SsaoIntensity);
 #endif
     return aoFactor;
 }

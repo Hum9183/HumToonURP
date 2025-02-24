@@ -14,7 +14,7 @@
 
 #pragma shader_feature_local_fragment _HT_USE_SHADE_CONTROL_MAP
 
-// RimLight
+// Rim Light
 #pragma shader_feature_local_fragment _HT_USE_RIM_LIGHT
 #pragma shader_feature_local_fragment _HT_USE_RIM_LIGHT_MAP
 
@@ -27,11 +27,15 @@
 #pragma shader_feature_local_fragment _HT_USE_MAT_CAP
 #pragma shader_feature_local_fragment _HT_USE_MAT_CAP_MASK
 
-// Light
-#pragma shader_feature_local_fragment _HT_USE_MAIN_LIGHT_COOKIE_AS_SHADE
-#pragma shader_feature_local_fragment _HT_USE_MAIN_LIGHT_SPECULAR
-#pragma shader_feature_local_fragment _HT_USE_ADDITIONAL_LIGHTS_SPECULAR
-#pragma shader_feature_local_fragment _HT_RECEIVE_GI
-#pragma shader_feature_local_fragment _HT_USE_SSAO
+// Direct Lighting
+#pragma shader_feature_local_fragment _HT_RECEIVE_MAIN_LIGHT_DIFFUSE
+#pragma shader_feature_local_fragment _HT_RECEIVE_MAIN_LIGHT_SPECULAR
+#pragma shader_feature_local_fragment _HT_RECEIVE_ADDITIONAL_LIGHTS_DIFFUSE
+#pragma shader_feature_local_fragment _HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR
+
+// Indirect Lighting(GI)
+#pragma shader_feature_local_fragment _HT_RECEIVE_INDIRECT_DIFFUSE
+#pragma shader_feature_local_fragment _HT_RECEIVE_INDIRECT_SPECULAR
+#pragma shader_feature_local_fragment _HT_RECEIVE_SSAO
 
 #endif

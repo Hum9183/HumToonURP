@@ -29,7 +29,7 @@ Shader "HumToonURP"
         _ShadeControlMap("Shade Control Map", 2D) = "white" {}
         _ShadeControlMapIntensity("Shade Control Map Intensity", Range(0.0, 1.0)) = 1.0
 
-        // RimLight
+        // Rim Light
         _UseRimLight("Use Rim Light", Float) = 0.0 // Only for keyword
         _RimLightMap("Rim Light Map", 2D) = "white" {}
         _RimLightColor("Rim Light Color", Color) = (0.5,0.9,1.0,1)
@@ -60,25 +60,30 @@ Shader "HumToonURP"
         _MatCapMaskIntensity("Mat Cap Mask Intensity", Range(0.0, 1.0)) = 1.0
         _MatCapMainLightEffectiveness("Mat Cap Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
-        // light
-        _MainLightColorWeight("Main Light Color Weight", Range(0.0, 1.0)) = 1.0
-        _UseMainLightUpperLimit("Use Main Light Upper Limit", Float) = 0.0
-        _MainLightUpperLimit("Main Light Upper Limit", Range(0.0, 10.0)) = 1.0
-        _UseMainLightLowerLimit("Use Main Light Lower Limit", Float) = 0.0
-        _MainLightLowerLimit("Main Light Lower Limit", Range(0.0, 1.0)) = 0.05
-        _UseMainLightCookieAsShade("Use Main Light Cookie As Shade", Float) = 0.0 // Only for keyword
-        _UseMainLightSpecular("Use Main Light Specular", Float) = 0.0 // Only for keyword
+        // Direct lighting
+        _DirectLightIntensity("DirectLightIntensity", Range(0.0, 1.0)) = 1.0
+
+        _MainLightIntensity("MainLightIntensity", Range(0.0, 1.0)) = 1.0
+        _ReceiveMainLightDiffuse("Receive Main Light Diffuse", Float) = 1.0 // Only for keyword
+        _MainLightDiffuseIntensity("Main Light Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _ReceiveMainLightSpecular("Receive Main Light Specular", Float) = 0.0 // Only for keyword
         _MainLightSpecularIntensity("Main Light Specular Intensity", Range(0.0, 4.0)) = 1.0
 
-        _AdditionalLightsColorWeight("Additional Lights Color Weight", Range(0.0, 4.0)) = 1.0
-        _UseAdditionalLightsSpecular("Use Additional Lights Specular", Float) = 0.0 // Only for keyword
+        _AdditionalLightsIntensity("AdditionalLightsIntensity", Range(0.0, 1.0)) = 1.0
+        _ReceiveAdditionalLightsDiffuse("Receive Additional Lights Diffuse", Float) = 1.0 // Only for keyword
+        _AdditionalLightsDiffuseIntensity("Additional Lights Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _ReceiveAdditionalLightsSpecular("Receive Additional Lights Specular", Float) = 0.0 // Only for keyword
         _AdditionalLightsSpecularIntensity("Additional Lights Specular Intensity", Range(0.0, 4.0)) = 1.0
 
-        _ReceiveGI("Receive GI", Float) = 0.0 // Only for keyword
-        _GIColorWeight("GI Color Weight", Range(0.0, 1.0)) = 1.0
+        // Indirect lighting(GI)
+        _IndirectLightIntensity("IndirectLightIntensity", Range(0.0, 1.0)) = 1.0
+        _ReceiveIndirectDiffuse("Receive Indirect Diffuse", Float) = 1.0 // Only for keyword
+        _IndirectDiffuseIntensity("Indirect Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _ReceiveIndirectSpecular("Receive Indirect Diffuse", Float) = 0.0 // Only for keyword
+        _IndirectSpecularIntensity("Indirect Diffuse Intensity", Range(0.0, 4.0)) = 1.0
 
-        _UseSsao("Use SSAO", Float) = 0.0 // Only for keyword
-        _SsaoWeight("SSAO Weight", Range(0.0, 1.0)) = 1.0
+        _ReceiveSsao("Use SSAO", Float) = 0.0 // Only for keyword
+        _SsaoIntensity("SSAO Weight", Range(0.0, 1.0)) = 1.0
 
         // Specular vs Metallic workflow
         _WorkflowMode("WorkflowMode", Float) = 1.0

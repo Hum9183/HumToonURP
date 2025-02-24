@@ -7,6 +7,8 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LightCookie/LightCookie.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Clustering.hlsl"
 
+// NOTE: もう使っていない
+
 // NOTE: LightCookiesのifdefを取り除いた版
 Light HTGetMainLight(float4 shadowCoord, float3 positionWS, half4 shadowMask)
 {

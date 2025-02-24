@@ -8,17 +8,22 @@
 
 half3 HTCalcAdditionalLightInternal(
     Light light, half3 baseColor, float3 normalWS
-#if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+#if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
     , BRDFData brdfData
     , half3 viewDirectionWS
 #endif
 )
 {
-    half3 additionalLightColor = baseColor;
+    half3 additionalLightColor = 0;
+
     half NdotL = saturate(dot(normalWS, light.direction));
     half3 radiance = light.color * light.distanceAttenuation * light.shadowAttenuation * NdotL;
 
-#if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+#if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_DIFFUSE)
+    additionalLightColor = baseColor * _AdditionalLightsDiffuseIntensity;
+#endif
+
+#if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
     half3 addtionalLightSpecular = DirectBRDFSpecular(brdfData, normalWS, light.direction, viewDirectionWS);
     additionalLightColor += addtionalLightSpecular * brdfData.specular * _AdditionalLightsSpecularIntensity;
 #endif
@@ -65,7 +70,7 @@ half3 HTCalcAdditionalLights(
 #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
     , half3 baseMapColorOnly
 #endif
-#if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+#if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
     , BRDFData brdfData
     , half3 viewDirectionWS
 #endif
@@ -119,7 +124,7 @@ half3 HTCalcAdditionalLights(
             {
                 additionalLightsColor += HTCalcAdditionalLightInternal(
                     light, baseColor, normalWS
-                    #if defined(_HT_USE_ADDITIONAL_LIGHTS_SPECULAR)
+                    #if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
                         , brdfData
                         , viewDirectionWS
                     #endif
@@ -128,12 +133,12 @@ half3 HTCalcAdditionalLights(
         }
     LIGHT_LOOP_END
 
-    return additionalLightsColor * _AdditionalLightsColorWeight;
+    return additionalLightsColor * _DirectLightIntensity * _AdditionalLightsIntensity;
 }
 
 half3 HTCalcAdditionalLightColorVertex(half3 originalColor, half3 vertexLighting)
 {
-    return originalColor * vertexLighting * _AdditionalLightsColorWeight;
+    return originalColor * vertexLighting * _DirectLightIntensity * _AdditionalLightsIntensity;
 }
 
 #endif
