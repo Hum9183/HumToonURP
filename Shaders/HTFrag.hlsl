@@ -35,6 +35,8 @@ void frag(
     // - normalのoverride(顔の法線を正面に向ける等)
     // - Varyings SurfaceData InputData BRDFDataの整理
     // - specular, roughnessなどの整備(TextureはLit合わせで作る)
+    // - ior
+    // - transmission
     // - inspectorでデフォルト値に戻せるようにする
     // - inspectorで不要なプロパティを削除できるようにする
 
