@@ -32,7 +32,6 @@ void frag(
     SETUP_DEBUG_TEXTURE_DATA(inputData, uv0, _BaseMap);
 
     // TODO:
-    // - SSAOのweight調整機能
     // - normalのoverride(顔の法線を正面に向ける等)
     // - Varyings SurfaceData InputData BRDFDataの整理
 
