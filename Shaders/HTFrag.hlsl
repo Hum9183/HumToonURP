@@ -18,7 +18,7 @@ void frag(
     const float2 uv0 = input.uv;
 
     // SurfaceData
-    SurfaceData surfaceData;
+    SurfaceData surfaceData = (SurfaceData)0;
     InitializeStandardLitSurfaceData(uv0, surfaceData);
 
     // LOD Fade
@@ -27,7 +27,7 @@ void frag(
 #endif
 
     // InputData
-    InputData inputData;
+    InputData inputData = (InputData)0;
     HTInitializeInputData(input, surfaceData.normalTS, inputData);
     SETUP_DEBUG_TEXTURE_DATA(inputData, uv0, _BaseMap);
 
