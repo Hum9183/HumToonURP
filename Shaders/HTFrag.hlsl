@@ -32,13 +32,20 @@ void frag(
     SETUP_DEBUG_TEXTURE_DATA(inputData, uv0, _BaseMap);
 
     // TODO:
+    // - openPBRをベースに処理を見直す
     // - normalのoverride(顔の法線を正面に向ける等)
+    // - 顔用シャドウマップ
     // - Varyings SurfaceData InputData BRDFDataの整理
-    // - specular, roughnessなどの整備(TextureはLit合わせで作る)
+    // - specular, roughness, metalnessなどの整備(TextureはLit合わせで作る)
     // - ior
     // - transmission
+    // - subsurface
+    // - sheen
+    // - thin film
     // - inspectorでデフォルト値に戻せるようにする
     // - inspectorで不要なプロパティを削除できるようにする
+    // - spotLightのSpecular計算がLitと違う気がする(Roughness違うから？)
+    // - specularHighlightなどのキーワードをLitとどこまで共通化するか検討する(マテリアルの切替時のscriptで変えるのもありだが、Lib内のキーワード分岐の恩恵を受けられなくなる)
 
 #ifdef _DBUFFER
     ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
