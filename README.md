@@ -1,23 +1,26 @@
 # HumToon
+PBR-based Toon Shader.<br>
 This project is under development.
+
+![image](https://github.com/user-attachments/assets/79a7a798-d6e4-4411-bb7a-d3e516f88b3a)
 
 > [!WARNING]
 > Dependencies
 > - https://github.com/Hum9183/HumToonCore
 
-## Supported languages
+# Supported languages
 - English
 - Japanese (partially)
 - Chinese (partially)
 
-## Development environment
+# Development environment
 - Unity2022.3.5f1
 - Universal RP
 
-## Render pipeline compatibility
+# Render pipeline compatibility
 - Universal RP
 
-## Main features
+# Main features
 - Basic features (Transparent, etc.)
 - Normal mapping
 - Toon shading (Ramp, etc.)
@@ -26,7 +29,7 @@ This project is under development.
 - Mat cap
 - Lighting control
 
-## Supported
+# Supported
 - Light layers
 - Forward plus
 - SRP batcher
@@ -35,5 +38,5 @@ This project is under development.
 - Rendering Debugger
 - DOTS (ECS)
 
-## Not supported
+# Not supported
 - Deferred rendering
