@@ -6,11 +6,11 @@ Shader "HumToonURP"
         // Shade
         _ShadeMode("Shade Mode", Float) = 0.0
 
-        _UseFirstShade("Use First Shade", Float) = 0.0 // Only for keyword
+        _UseFirstShade("Use First Shade", Float) = 1.0 // Only for keyword
         _FirstShadeMap("First Shade Map", 2D) = "white" {}
-        _FirstShadeColor("First Shade Color", Color) = (0.5,0.5,0.5,1)
+        _FirstShadeColor("First Shade Color", Color) = (0.0,0.0,0.0,1.0)
         _FirstShadeBorderPos("First Shade Border Pos", Range(0.0, 1.0)) = 0.5
-        _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.01
+        _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
         _UseExFirstShade("Use Ex First Shade", Float) = 0.0 // Only for keyword
         _ExFirstShadeColor("Ex First Shade Color", Color) = (1.0,0.0,0.0,1.0)
@@ -18,7 +18,7 @@ Shader "HumToonURP"
 
         _UseSecondShade("Use Second Shade", Float) = 0.0 // Only for keyword
         _SecondShadeMap("Second Shade Map", 2D) = "white" {}
-        _SecondShadeColor("Second Shade Color", Color) = (0.2,0.2,0.2,1)
+        _SecondShadeColor("Second Shade Color", Color) = (0.2,0.2,0.2,1.0)
         _SecondShadeBorderPos("Second Shade Border Pos", Range(0.0, 1.0)) = 0.2
         _SecondShadeBorderBlur("Second Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
@@ -79,7 +79,7 @@ Shader "HumToonURP"
         _IndirectLightIntensity("IndirectLightIntensity", Range(0.0, 1.0)) = 1.0
         _ReceiveIndirectDiffuse("Receive Indirect Diffuse", Float) = 1.0 // Only for keyword
         _IndirectDiffuseIntensity("Indirect Diffuse Intensity", Range(0.0, 4.0)) = 1.0
-        _ReceiveIndirectSpecular("Receive Indirect Diffuse", Float) = 0.0 // Only for keyword
+        _ReceiveIndirectSpecular("Receive Indirect Specular", Float) = 1.0 // Only for keyword
         _IndirectSpecularIntensity("Indirect Diffuse Intensity", Range(0.0, 4.0)) = 1.0
 
         _ReceiveSsao("Use SSAO", Float) = 0.0 // Only for keyword
