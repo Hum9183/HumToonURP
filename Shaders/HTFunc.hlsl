@@ -130,15 +130,15 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
     outSurfaceData.albedo = albedoAlpha.rgb * _BaseColor.rgb;
     outSurfaceData.albedo = AlphaModulate(outSurfaceData.albedo, outSurfaceData.alpha);
 
-#if _SPECULAR_SETUP
+#if _SPECULAR_SETUP // Specular Glossiness workflow
     outSurfaceData.metallic = half(1.0);
     outSurfaceData.specular = specGloss.rgb;
-#else
+#else // Metallic Roughness workflow
     outSurfaceData.metallic = specGloss.r;
     outSurfaceData.specular = half3(0.0, 0.0, 0.0);
 #endif
 
-    outSurfaceData.smoothness = 0.5; // original: specGloss.a
+    outSurfaceData.smoothness = specGloss.a;
     outSurfaceData.normalTS = SampleNormal(uv, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap), _BumpScale);
     outSurfaceData.occlusion = HTSampleOcclusion(uv);
 #if defined(_HT_USE_EMISSION)
