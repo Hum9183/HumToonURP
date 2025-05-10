@@ -23,7 +23,7 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
 #endif
 
     // Shadow
-    half4 shadowMask = CalculateShadowMask(inputData);
+    half4 shadowMask = HTCalculateShadowMask(inputData);
 
     // AO
     AmbientOcclusionFactor aoFactor = HTGetSsao(inputData, surfaceData);

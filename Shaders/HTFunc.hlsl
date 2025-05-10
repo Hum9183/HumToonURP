@@ -165,4 +165,26 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
 #endif
 }
 
+half4 HTCalculateShadowMask(InputData inputData)
+{
+    // NOTE: 元のソースコード
+    // // To ensure backward compatibility we have to avoid using shadowMask input, as it is not present in older shaders
+    // #if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
+    // half4 shadowMask = inputData.shadowMask;
+    // #elif !defined (LIGHTMAP_ON)
+    // half4 shadowMask = unity_ProbesOcclusion;
+    // #else
+    // half4 shadowMask = half4(1, 1, 1, 1);
+    // #endif
+
+    // NOTE: 元のソースコードはunity_ProbesOcclusionが返ってくることがありこれが0.5が入っているため暗くなることがあった。その問題を解消
+#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
+    half4 shadowMask = inputData.shadowMask;
+#else
+    half4 shadowMask = half4(1, 1, 1, 1);
+#endif
+
+    return shadowMask;
+}
+
 #endif
