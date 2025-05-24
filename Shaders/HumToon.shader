@@ -65,22 +65,22 @@ Shader "HumToonURP"
 
         _MainLightIntensity("MainLightIntensity", Range(0.0, 1.0)) = 1.0
         _ReceiveMainLightDiffuse("Receive Main Light Diffuse", Float) = 1.0 // Only for keyword
-        _MainLightDiffuseIntensity("Main Light Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _MainLightDiffuseIntensity("Main Light Diffuse Intensity", Range(0.0, 1.0)) = 1.0
         _ReceiveMainLightSpecular("Receive Main Light Specular", Float) = 0.0 // Only for keyword
-        _MainLightSpecularIntensity("Main Light Specular Intensity", Range(0.0, 4.0)) = 1.0
+        _MainLightSpecularIntensity("Main Light Specular Intensity", Range(0.0, 1.0)) = 1.0
 
         _AdditionalLightsIntensity("AdditionalLightsIntensity", Range(0.0, 1.0)) = 1.0
         _ReceiveAdditionalLightsDiffuse("Receive Additional Lights Diffuse", Float) = 1.0 // Only for keyword
-        _AdditionalLightsDiffuseIntensity("Additional Lights Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _AdditionalLightsDiffuseIntensity("Additional Lights Diffuse Intensity", Range(0.0, 1.0)) = 1.0
         _ReceiveAdditionalLightsSpecular("Receive Additional Lights Specular", Float) = 0.0 // Only for keyword
-        _AdditionalLightsSpecularIntensity("Additional Lights Specular Intensity", Range(0.0, 4.0)) = 1.0
+        _AdditionalLightsSpecularIntensity("Additional Lights Specular Intensity", Range(0.0, 1.0)) = 1.0
 
         // Indirect lighting(GI)
         _IndirectLightIntensity("IndirectLightIntensity", Range(0.0, 1.0)) = 1.0
         _ReceiveIndirectDiffuse("Receive Indirect Diffuse", Float) = 1.0 // Only for keyword
-        _IndirectDiffuseIntensity("Indirect Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _IndirectDiffuseIntensity("Indirect Diffuse Intensity", Range(0.0, 1.0)) = 1.0
         _ReceiveIndirectSpecular("Receive Indirect Specular", Float) = 1.0 // Only for keyword
-        _IndirectSpecularIntensity("Indirect Diffuse Intensity", Range(0.0, 4.0)) = 1.0
+        _IndirectSpecularIntensity("Indirect Diffuse Intensity", Range(0.0, 1.0)) = 1.0
 
         _ReceiveSsao("Use SSAO", Float) = 0.0 // Only for keyword
         _SsaoIntensity("SSAO Weight", Range(0.0, 1.0)) = 1.0
