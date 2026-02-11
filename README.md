@@ -2,11 +2,11 @@
 PBR-based Toon Shader.<br>
 This project is under development.
 
-![image](https://github.com/user-attachments/assets/79a7a798-d6e4-4411-bb7a-d3e516f88b3a)
-
 > [!WARNING]
 > Dependencies
 > - https://github.com/Hum9183/HumToonCore
+
+<img width="1783" height="932" alt="readme" src="https://github.com/user-attachments/assets/d8c24470-1556-461b-ae40-b6493e0d8d9a" />
 
 # Supported languages
 - English
