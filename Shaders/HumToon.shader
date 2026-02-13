@@ -239,7 +239,7 @@ Shader "HumToonURP"
             #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 
             // HTToon
-            #include "HTKeywords.hlsl"
+            #include_with_pragmas "HTKeywords.hlsl"
 
             #include "HTInput.hlsl"
             #include "HTForwardPass.hlsl"
