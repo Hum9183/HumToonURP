@@ -204,8 +204,7 @@ FragmentOutput LitGBufferPassFragment(Varyings input)
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
 
-    // URP内部デバッグマクロの変更対応（https://github.com/Unity-Technologies/Graphics/commit/64c1408）
-#ifdef SETUP_DEBUG_TEXTURE_DATA_FOR_TEX
+#if UNITY_VERSION >= 60000000 // URP内部デバッグマクロの変更対応 https://github.com/Unity-Technologies/Graphics/commit/64c1408
     SETUP_DEBUG_TEXTURE_DATA_FOR_TEX(inputData, input.uv, _BaseMap);
 #else
     SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
