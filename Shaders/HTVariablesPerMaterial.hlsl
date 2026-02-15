@@ -2,19 +2,8 @@
 #define HT_VARIABLES_PER_MATERIAL_INCLUDED
 
 // Shade
-half4 _FirstShadeColor;
-half _FirstShadeBorderPos;
-half _FirstShadeBorderBlur;
-
-half _UseExFirstShade;
-half4 _ExFirstShadeColor;
-half _ExFirstShadeWidth;
-
-half4 _SecondShadeColor;
-half _SecondShadeBorderPos;
-half _SecondShadeBorderBlur;
-
-half _ShadeControlMapIntensity;
+half _ShadeBorderPos;
+half _ShadeBorderBlur;
 
 // RimLight
 half4 _RimLightColor;

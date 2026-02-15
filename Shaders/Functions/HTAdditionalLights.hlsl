@@ -33,20 +33,14 @@ half3 HTCalcAdditionalLightInternal(
 
 // EXPERIMENTAL: AdditionalLightのDirectionalLightはShadeと同じ計算法を使用する
 // TODO: Specular
-half3 HTCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 normalWS, Light additionalDirectionalLight
-#ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-    , half3 baseMapColorOnly
-#endif
-)
+half3 HTCalcAdditionalDirectionalLight(float2 uv, half3 baseColor, float3 normalWS, Light additionalDirectionalLight)
 {
     // TODO: Textureなどはサンプルし直しになるため負荷がかかる。
     // structなどに保持することを検討する。
     half shadowAttenuation = additionalDirectionalLight.distanceAttenuation * additionalDirectionalLight.shadowAttenuation;
-    half3 shadedColor = HTMixShadeColor(uv, baseColor, normalWS, additionalDirectionalLight.direction, shadowAttenuation
-    #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-        , baseMapColorOnly
-    #endif
-    );
+
+    half3 shadedColor = baseColor;
+    shadedColor = HTMixShade(shadedColor, normalWS, additionalDirectionalLight.direction, shadowAttenuation);
 
     return shadedColor * additionalDirectionalLight.color;
 }
@@ -66,9 +60,6 @@ half3 HTCalcAdditionalLights(
     float2 uv, half3 baseColor, InputData inputData, half4 shadowMask, AmbientOcclusionFactor aoFactor
 #if defined(_LIGHT_LAYERS)
     , uint meshRenderingLayers
-#endif
-#ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-    , half3 baseMapColorOnly
 #endif
 #if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
     , BRDFData brdfData
@@ -95,12 +86,7 @@ half3 HTCalcAdditionalLights(
         if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
     #endif
         {
-            additionalLightsColor += HTCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light
-            #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-                , baseMapColorOnly
-            #endif
-            // TODO: Specular
-            );
+            additionalLightsColor += HTCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light);
         }
     }
 #endif
@@ -114,11 +100,7 @@ half3 HTCalcAdditionalLights(
             // TODO: おそらく重いため、もう少し最適化する
             if (HTIsDirectionalLight(lightIndex))
             {
-                additionalLightsColor += HTCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light
-                #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-                    , baseColor
-                #endif
-                );
+                additionalLightsColor += HTCalcAdditionalDirectionalLight(uv, baseColor, normalWS, light);
             }
             else
             {

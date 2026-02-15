@@ -5,17 +5,11 @@
 
 #include "HTPredefine.hlsl"
 
-#if NOT(defined(_HT_USE_FIRST_SHADE_MAP)) || NOT(defined(_HT_USE_SECOND_SHADE_MAP)) || defined(_HT_USE_EX_FIRST_SHADE)
-    #define _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-#endif
-
 // Features include
 #include "Functions/HTBase.hlsl"
 #include "Functions/HTSsao.hlsl"
 
-#if defined(_HT_USE_FIRST_SHADE) || defined(_HT_USE_SECOND_SHADE) || defined(_HT_USE_RAMP_SHADE)
-    #include "Functions/HTShade.hlsl"
-#endif
+#include "Functions/HTShade.hlsl"
 
 #if defined(_LIGHT_COOKIES) && defined(_HT_USE_MAIN_LIGHT_COOKIE_AS_SHADE)
     #include "../ShaderLibrary/HTRealtimeLights.hlsl"

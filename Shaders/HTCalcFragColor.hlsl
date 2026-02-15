@@ -104,9 +104,6 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
         #if defined(_LIGHT_LAYERS)
             , meshRenderingLayers
         #endif
-        #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-            , baseMapColorOnly
-        #endif
         #if defined(_HT_RECEIVE_ADDITIONAL_LIGHTS_SPECULAR)
             , brdfData
             , inputData.viewDirectionWS
@@ -128,17 +125,8 @@ half4 HTCalcFragColor(float2 uv0, InputData inputData, SurfaceData surfaceData)
     half3 toonColor = 0;
 
 #if defined(_HT_RECEIVE_MAIN_LIGHT)
-    #if defined(_HT_USE_FIRST_SHADE) || defined(_HT_USE_SECOND_SHADE) || defined(_HT_USE_RAMP_SHADE)
-        // Mix Base Color and Shade Color
-        toonColor = HTMixShadeColor(uv0, baseColor, inputData.normalWS, mainLight.direction, shadowAttenuation
-        #ifdef _HT_REQUIRES_BASE_MAP_COLOR_ONLY
-            , baseMapColorOnly
-        #endif
-        );
-    #else
-        // Base Color
-        toonColor = baseColor;
-    #endif
+    toonColor = baseColor.rgb;
+    toonColor = HTMixShade(toonColor, inputData.normalWS, mainLight.direction, shadowAttenuation);
 #endif
 
 #if defined(_HT_OVERRIDE_EMISSION_COLOR)

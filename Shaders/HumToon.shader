@@ -4,30 +4,8 @@ Shader "HumToonURP"
     {
         // HumToon
         // Shade
-        _ShadeMode("Shade Mode", Float) = 0.0
-
-        _UseFirstShade("Use First Shade", Float) = 1.0 // Only for keyword
-        _FirstShadeMap("First Shade Map", 2D) = "white" {}
-        _FirstShadeColor("First Shade Color", Color) = (0.0,0.0,0.0,1.0)
-        _FirstShadeBorderPos("First Shade Border Pos", Range(0.0, 1.0)) = 0.5
-        _FirstShadeBorderBlur("First Shade Border Blur", Range(0.0, 1.0)) = 0.1
-
-        _UseExFirstShade("Use Ex First Shade", Float) = 0.0 // Only for keyword
-        _ExFirstShadeColor("Ex First Shade Color", Color) = (1.0,0.0,0.0,1.0)
-        _ExFirstShadeWidth("Ex First Shade Width", Range(0.0, 1.0)) = 0.005
-
-        _UseSecondShade("Use Second Shade", Float) = 0.0 // Only for keyword
-        _SecondShadeMap("Second Shade Map", 2D) = "white" {}
-        _SecondShadeColor("Second Shade Color", Color) = (0.2,0.2,0.2,1.0)
-        _SecondShadeBorderPos("Second Shade Border Pos", Range(0.0, 1.0)) = 0.2
-        _SecondShadeBorderBlur("Second Shade Border Blur", Range(0.0, 1.0)) = 0.1
-
-        _UseRampShade("Use Ramp Shade", Float) = 0.0 // Only for keyword
-        _RampShadeMap("Ramp Shade Map", 2D) = "white" {}
-
-        _UseShadeControlMap("Use Shade Contro lMap", Float) = 0.0 // Only for keyword
-        _ShadeControlMap("Shade Control Map", 2D) = "white" {}
-        _ShadeControlMapIntensity("Shade Control Map Intensity", Range(0.0, 1.0)) = 1.0
+        _ShadeBorderPos("Shade Border Pos", Range(0.0, 1.0)) = 0.5
+        _ShadeBorderBlur("Shade Border Blur", Range(0.0, 1.0)) = 0.1
 
         // Rim Light
         _UseRimLight("Use Rim Light", Float) = 0.0 // Only for keyword
