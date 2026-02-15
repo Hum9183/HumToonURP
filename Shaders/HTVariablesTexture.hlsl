@@ -44,4 +44,9 @@
     SAMPLER(sampler_NormalOverrideMask);
 #endif
 
+// SSAO Mask
+#if defined(_HT_USE_SSAO_MASK)
+    TEXTURE2D(_SsaoMask);
+#endif
+
 #endif

@@ -91,6 +91,10 @@ Shader "HumToonURP"
         _ReceiveSsao("Use SSAO", Float) = 0.0 // Only for keyword
         _SsaoIntensity("SSAO Weight", Range(0.0, 1.0)) = 1.0
 
+        _UseSsaoMask("Use SSAO Mask", Float) = 0.0 // Only for keyword
+        _SsaoMask("SSAO Mask", 2D) = "white" {}
+        _SsaoMaskIntensity("SSAO Mask Intensity", Range(0.0, 1.0)) = 1.0
+
         // Specular vs Metallic workflow
         _WorkflowMode("WorkflowMode", Float) = 1.0
 

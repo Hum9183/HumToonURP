@@ -41,5 +41,6 @@
 #pragma shader_feature_local_fragment _HT_RECEIVE_INDIRECT_DIFFUSE
 #pragma shader_feature_local_fragment _HT_RECEIVE_INDIRECT_SPECULAR
 #pragma shader_feature_local_fragment _HT_RECEIVE_SSAO
+#pragma shader_feature_local_fragment _HT_USE_SSAO_MASK
 
 #endif

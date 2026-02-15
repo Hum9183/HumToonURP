@@ -67,7 +67,9 @@ half _IndirectDiffuseIntensity;
 half _ReceiveIndirectSpecular;
 half _IndirectSpecularIntensity;
 
-half _ReceiveSsao; // TODO: こういうKeywordのオンオフ用のParameterはなくても大丈夫か検証してみる
+half _ReceiveSsao;
 half _SsaoIntensity;
+half _UseSsaoMask;
+half _SsaoMaskIntensity;
 
 #endif
