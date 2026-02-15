@@ -5,6 +5,10 @@
 #include "HTAttributes.hlsl"
 #include "HTVaryings.hlsl"
 
+#if defined(_HT_USE_NORMAL_OVERRIDE)
+    #include "Functions/HTNormalOverride.hlsl"
+#endif
+
 // Used in Standard (Physically Based) shader
 Varyings vert(Attributes input)
 {
@@ -50,6 +54,12 @@ Varyings vert(Attributes input)
 #ifdef DYNAMICLIGHTMAP_ON
     output.dynamicLightmapUV = input.dynamicLightmapUV.xy * unity_DynamicLightmapST.xy + unity_DynamicLightmapST.zw;
 #endif
+
+#ifdef _HT_USE_NORMAL_OVERRIDE
+    // Apply Normal Override in vertex shader for correct GI calculation
+    output.normalWS = ApplyNormalOverrideVS(output.uv, output.normalWS);
+#endif
+
     OUTPUT_SH(output.normalWS.xyz, output.vertexSH);
 #ifdef _ADDITIONAL_LIGHTS_VERTEX
     output.fogFactorAndVertexLight = half4(fogFactor, vertexLight);

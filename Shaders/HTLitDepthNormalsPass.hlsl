@@ -2,6 +2,11 @@
 #define HT_UNIVERSAL_FORWARD_LIT_DEPTH_NORMALS_PASS_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+#if defined(_HT_USE_NORMAL_OVERRIDE)
+    #include "Functions/HTNormalOverride.hlsl"
+#endif
+
 #if defined(LOD_FADE_CROSSFADE)
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
 #endif
@@ -48,7 +53,6 @@ struct Varyings
     UNITY_VERTEX_OUTPUT_STEREO
 };
 
-
 Varyings DepthNormalsVertex(Attributes input)
 {
     Varyings output = (Varyings)0;
@@ -75,6 +79,11 @@ Varyings DepthNormalsVertex(Attributes input)
     #if defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR)
         half3 viewDirTS = GetViewDirectionTangentSpace(tangentWS, output.normalWS, viewDirWS);
         output.viewDirTS = viewDirTS;
+    #endif
+
+    #if defined(_HT_USE_NORMAL_OVERRIDE)
+        // Apply Normal Override in vertex shader for correct SSAO
+        output.normalWS = ApplyNormalOverrideVS(output.uv, output.normalWS);
     #endif
 
     return output;
@@ -129,7 +138,15 @@ void DepthNormalsFragment(
             float3 normalWS = input.normalWS;
         #endif
 
-        outNormalWS = half4(NormalizeNormalPerPixel(normalWS), 0.0);
+        normalWS = NormalizeNormalPerPixel(normalWS);
+
+        #if defined(_HT_USE_NORMAL_OVERRIDE)
+            // Override takes priority - blend to vertex shader override in masked areas
+            // TODO: Add SSAO mask to control override influence on ambient occlusion
+            normalWS = BlendNormalToVertexOverride(uv, normalWS, input.normalWS);
+        #endif
+
+        outNormalWS = half4(normalWS, 0.0);
     #endif
 
     #ifdef _WRITE_RENDERING_LAYERS

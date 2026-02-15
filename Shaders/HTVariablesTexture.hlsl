@@ -38,4 +38,10 @@
     TEXTURE2D(_MatCapMask);
 #endif
 
+// Normal Override
+#if defined(_HT_USE_NORMAL_OVERRIDE)
+    TEXTURE2D(_NormalOverrideMask);
+    SAMPLER(sampler_NormalOverrideMask);
+#endif
+
 #endif

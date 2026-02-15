@@ -4,6 +4,10 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/GlobalIllumination.hlsl"
 #include "HTVaryings.hlsl"
 
+#if defined(_HT_USE_NORMAL_OVERRIDE)
+    #include "Functions/HTNormalOverride.hlsl"
+#endif
+
 void HTInitializeInputData(Varyings input, half3 normalTS, out InputData inputData)
 {
     inputData = (InputData)0;
@@ -27,6 +31,12 @@ void HTInitializeInputData(Varyings input, half3 normalTS, out InputData inputDa
 #endif
 
     inputData.normalWS = NormalizeNormalPerPixel(inputData.normalWS);
+    
+#if defined(_HT_USE_NORMAL_OVERRIDE)
+    // Override takes priority - blend to vertex shader override in masked areas
+    inputData.normalWS = BlendNormalToVertexOverride(input.uv, inputData.normalWS, input.normalWS);
+#endif
+
     inputData.viewDirectionWS = viewDirWS;
 
 #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)

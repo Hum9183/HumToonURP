@@ -40,6 +40,10 @@ half _MatCapStabilizeCameraZRotation;
 half _MatCapMaskIntensity;
 half _MatCapMainLightEffectiveness;
 
+// Normal Override
+float4 _NormalOverrideDirection;
+half _NormalOverrideIntensity;
+
 // Direct Lighting
 half _DirectLightIntensity;
 

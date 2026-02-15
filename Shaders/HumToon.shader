@@ -60,6 +60,12 @@ Shader "HumToonURP"
         _MatCapMaskIntensity("Mat Cap Mask Intensity", Range(0.0, 1.0)) = 1.0
         _MatCapMainLightEffectiveness("Mat Cap Main Light Effectiveness", Range(0.0, 1.0)) = 1.0
 
+        // Normal Override
+        _UseNormalOverride("Use Normal Override", Float) = 0.0 // Only for keyword
+        _NormalOverrideMask("Normal Override Mask", 2D) = "black" {}
+        _NormalOverrideDirection("Normal Override Direction", Vector) = (0.0, 0.0, 1.0, 0.0)
+        _NormalOverrideIntensity("Normal Override Intensity", Range(0.0, 1.0)) = 1.0
+
         // Direct lighting
         _DirectLightIntensity("DirectLightIntensity", Range(0.0, 1.0)) = 1.0
 
@@ -448,6 +454,9 @@ Shader "HumToonURP"
             #pragma shader_feature_local _ _DETAIL_MULX2 _DETAIL_SCALED
             #pragma shader_feature_local_fragment _ALPHATEST_ON
             #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+
+            // HTToon Keywords
+            #pragma shader_feature_local _HT_USE_NORMAL_OVERRIDE
 
             // -------------------------------------
             // Unity defined keywords

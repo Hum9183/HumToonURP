@@ -27,6 +27,10 @@
 #pragma shader_feature_local_fragment _HT_USE_MAT_CAP
 #pragma shader_feature_local_fragment _HT_USE_MAT_CAP_MASK
 
+// Normal Override
+// Note: Not fragment-only because it needs to work in vertex shader for correct GI
+#pragma shader_feature_local _HT_USE_NORMAL_OVERRIDE
+
 // Direct Lighting
 #pragma shader_feature_local_fragment _HT_RECEIVE_MAIN_LIGHT_DIFFUSE
 #pragma shader_feature_local_fragment _HT_RECEIVE_MAIN_LIGHT_SPECULAR

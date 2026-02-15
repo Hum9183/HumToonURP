@@ -38,7 +38,6 @@ void frag(
 
     // TODO:
     // - openPBRをベースに処理を見直す
-    // - normalのoverride(顔の法線を正面に向ける等)
     // - 顔用シャドウマップ
     // - Varyings SurfaceData InputData BRDFDataの整理
     // - specular, roughness, metalnessなどの整備(TextureはLit合わせで作る)
