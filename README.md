@@ -6,7 +6,7 @@ This project is under development.
 > Dependencies
 > - https://github.com/Hum9183/HumToonCore
 
-<img width="1783" height="932" alt="readme" src="https://github.com/user-attachments/assets/d8c24470-1556-461b-ae40-b6493e0d8d9a" />
+<img width="1786" height="932" alt="humtoon_top1" src="https://github.com/user-attachments/assets/443eb014-d485-4f2c-8200-12e44015c519" />
 
 # Supported languages
 - English
